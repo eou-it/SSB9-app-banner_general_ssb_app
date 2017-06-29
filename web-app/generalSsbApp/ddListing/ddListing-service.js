@@ -49,6 +49,10 @@ generalSsbApp.service('ddListingService', ['directDepositService', '$resource', 
         return this.mainListingControllerScope.apAccount;
     };
 
+    this.hasMultipleApAccounts = function() {
+        return this.mainListingControllerScope.apAccountList.length > 1;
+    };
+
     this.checkIfTwoDecimalPlaces = function (num) {
         num = String(num);
 
