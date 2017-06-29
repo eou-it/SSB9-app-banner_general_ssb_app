@@ -645,19 +645,8 @@ li.listing > .radio-list {
     padding: 0px;
 }
 
-li.listing .radio-txt-input,
-li.listing percent-input > input.form-control,
-li.listing currency-input > input.form-control {
+li.listing .radio-txt-input {
     margin-top: 7px;
-}
-
-percent-input > input.form-control,
-currency-input > input.form-control {
-    /* form-spacing and semi-bold */
-    padding: 1em .75em;
-    line-height: 136%;
-    font-weight: bold;
-    height: initial;
 }
 
 /*  Check box  */
@@ -1069,6 +1058,11 @@ a.delete-account-link {
     border: 1px solid #4EC76A;
 }
 
+.status-inactive {
+    background: #FFDCDC;
+    border: 1px solid #F79B9B;
+}
+
 
 /*  Custom modal  */
 .modal.edit-account-modal.in .modal-dialog {
@@ -1300,7 +1294,7 @@ table tr td {
 
     .account-field {
         float: left;
-        margin-right: 90px;
+        width: 30%;
         margin-bottom: 15px;
     }
 

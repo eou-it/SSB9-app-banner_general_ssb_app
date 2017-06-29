@@ -46,4 +46,20 @@ class AccountListingControllerTests extends BaseIntegrationTestCase {
         assertNotNull data
     }
 
+    @Test
+    void testGetApAccountsForCurrentUserWithInactive(){
+        loginSSB 'GDP000001', '111111'
+
+        controller.request.contentType = "text/json"
+        controller.getApAccountsForCurrentUser()
+        def dataForNullCheck = controller.response.contentAsString
+        def data = JSON.parse( dataForNullCheck )
+        println data
+        assertNotNull data
+        assertEquals 3, data.size()
+        assertTrue data.bankAccountNum.contains('67674850')
+        assertTrue data.bankAccountNum.contains('67674852')
+        assertTrue data.bankAccountNum.contains('902837244')
+    }
+
 }
