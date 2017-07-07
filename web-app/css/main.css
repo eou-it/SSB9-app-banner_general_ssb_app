@@ -226,21 +226,24 @@ input:disabled {
         clear: both;
     }
 }
-
+.radio-txt-input::-webkit-input-placeholder,
 .text-input-field::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color: #869FB1;
     font-weight: bold;
 }
+.radio-txt-input:-moz-placeholder,
 .text-input-field:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
    color: #869FB1;
    font-weight: bold;
    opacity:  1;
 }
+.radio-txt-input::-moz-placeholder,
 .text-input-field::-moz-placeholder { /* Mozilla Firefox 19+ */
    color: #869FB1;
    font-weight: bold;
    opacity:  1;
 }
+.radio-txt-input:-ms-input-placeholder,
 .text-input-field:-ms-input-placeholder { /* Internet Explorer 10-11 */
    color: #869FB1;
    font-weight: bold;
@@ -340,7 +343,7 @@ input:disabled {
 }
 
 .text-input-field:focus,
-.radio-txt-input:focus, {
+.radio-txt-input:focus {
     border-style: solid;
     border-width: 1px;
     border-color: #206E9F;
