@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2017 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 generalSsbApp.service('ddListingService', ['directDepositService', '$resource', '$filter', '$timeout', 'notificationCenterService',
@@ -43,6 +43,13 @@ generalSsbApp.service('ddListingService', ['directDepositService', '$resource', 
     // set init to false to force the listing controller to reload
     this.doReload = function(){
         this.init = false;
+    };
+
+    this.firstTimeCtrlInitialized = true;
+    this.isFirstTimeCtrlInitialized = function(){
+        var result = this.firstTimeCtrlInitialized;
+        this.firstTimeCtrlInitialized = false;
+        return result;
     };
 
     this.getApAccount = function() {
