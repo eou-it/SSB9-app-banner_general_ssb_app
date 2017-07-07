@@ -152,6 +152,6 @@ generalSsbApp.config(['$httpProvider',
  *
  * For more info, see https://docs.angularjs.org/guide/production
  */
-directDepositApp.config(['$compileProvider', function ($compileProvider) {
+generalSsbApp.config(['$compileProvider', function ($compileProvider) {
     $compileProvider.debugInfoEnabled(false);
 }]);
