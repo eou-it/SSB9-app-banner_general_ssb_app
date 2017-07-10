@@ -51,8 +51,8 @@ class UpdateAccountControllerTests extends BaseIntegrationTestCase {
                 bankRoutingNum:"123478902",
             },
             amountType:"amount",
-            priority:"2",
-            newPosition:"2"
+            priority:2,
+            newPosition:2
         }'''
 
         controller.createAccount()
@@ -136,8 +136,8 @@ class UpdateAccountControllerTests extends BaseIntegrationTestCase {
                 bankRoutingNum:"123478902",
             },
             amountType:"amount",
-            priority:"2",
-            newPosition:"2"
+            priority:2,
+            newPosition:2
         }'''
 
         controller.createAccount()
