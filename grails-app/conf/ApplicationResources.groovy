@@ -1,5 +1,5 @@
 /*******************************************************************************
-Copyright 2015 Ellucian Company L.P. and its affiliates.
+Copyright 2015-2017 Ellucian Company L.P. and its affiliates.
 *******************************************************************************/
 
 modules = {
@@ -57,7 +57,6 @@ modules = {
 
        // Filters
        resource url:[file: 'generalSsbApp/common/filters/i18n-filter.js']
-       resource url:[file: 'generalSsbApp/common/filters/accountNumMask-filter.js']
 
        // Directives
        resource url:[file: 'generalSsbApp/ddListing/ddListing-directive.js']

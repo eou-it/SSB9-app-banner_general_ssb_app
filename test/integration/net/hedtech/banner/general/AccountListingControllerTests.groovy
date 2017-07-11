@@ -1,3 +1,7 @@
+/*******************************************************************************
+ Copyright 2015-2017 Ellucian Company L.P. and its affiliates.
+ *******************************************************************************/
+
 package net.hedtech.banner.general
 
 import grails.converters.JSON
@@ -57,9 +61,9 @@ class AccountListingControllerTests extends BaseIntegrationTestCase {
         println data
         assertNotNull data
         assertEquals 3, data.size()
-        assertTrue data.bankAccountNum.contains('67674850')
-        assertTrue data.bankAccountNum.contains('67674852')
-        assertTrue data.bankAccountNum.contains('902837244')
+        assertTrue data.bankAccountNum.contains('xxxx4850')
+        assertTrue data.bankAccountNum.contains('xxxx4852')
+        assertTrue data.bankAccountNum.contains('xxxxx7244')
     }
 
 }
