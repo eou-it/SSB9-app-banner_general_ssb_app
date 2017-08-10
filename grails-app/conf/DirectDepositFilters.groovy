@@ -1,3 +1,6 @@
+/********************************************************************************
+  Copyright 2016-2017 Ellucian Company L.P. and its affiliates.
+********************************************************************************/
 import net.hedtech.banner.general.DirectDepositUtility
 import org.apache.log4j.Logger
 
