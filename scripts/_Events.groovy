@@ -207,7 +207,7 @@ eventCreateWarStart = { warName, stagingDir ->
 
     ant.delete(file:"${stagingDir}/WEB-INF/lib/com.springsource.org.jasig.cas.client-3.1.8.jar")
     ant.delete(file:"${stagingDir}/WEB-INF/lib/bcprov-jdk15on-1.51.jar")
-    ant.delete(file:"${stagingDir}/WEB-INF/lib/bcprov-jdk14-1.38.jar")
+    ant.delete(file:"${stagingDir}/WEB-INF/lib/bcprov-jdk14-1.38.jar") 
     ant.delete(file:"${stagingDir}/WEB-INF/lib/bcprov-jdk14-138.jar")
 
     def grailsXmlFile = new File("${stagingDir}/WEB-INF/grails.xml")
