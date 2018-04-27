@@ -76,6 +76,16 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
     }
 
     @Test
+    void testDenied403(){
+        loginSSB 'GDP000005', '111111'
+
+        controller.request.contentType = "text/json"
+        controller.denied403()
+        def dataForNullCheck = controller.response.contentAsString
+        assertNotNull dataForNullCheck
+    }
+
+    @Test
     void testReturnFailureMessage(){
         loginSSB 'MYE000001', '111111'
 

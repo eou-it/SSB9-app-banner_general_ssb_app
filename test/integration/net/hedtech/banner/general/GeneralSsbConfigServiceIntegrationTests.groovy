@@ -23,6 +23,7 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
     @After
     public void tearDown() {
         super.tearDown()
+        super.logout()
     }
 
 
@@ -41,5 +42,19 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         def val = generalSsbConfigService.getParamFromSession(generalSsbConfigService.ENABLE_DIRECT_DEPOSIT, 'dummy_default_value')
 
         assertEquals 'Y', val
+    }
+
+    @Test
+    void testGetGeneralConfig() {
+        loginSSB 'GDP000005', '111111'
+
+        def personConfigInSession = [(generalSsbConfigService.getCacheName()): [(generalSsbConfigService.ENABLE_ACTION_ITEM): 'Y']]
+        PersonUtility.setPersonConfigInSession(personConfigInSession)
+
+        def config = generalSsbConfigService.getGeneralConfig()
+        assertFalse config.isActionItemEnabledAndAvailable
+        assertTrue config.isActionItemEnabled
+        assertTrue config.isDirectDepositEnabled
+        assertTrue config.isPersonalInformationEnabled
     }
 }
