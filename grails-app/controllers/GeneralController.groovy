@@ -15,7 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder
  */
 class GeneralController {
 
-    def log = Logger.getLogger( this.getClass() )
+    private static final log = Logger.getLogger( this.getClass() )
     static defaultAction = "landingPage"
 
     def generalSsbConfigService
