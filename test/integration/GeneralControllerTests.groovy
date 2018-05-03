@@ -1,6 +1,6 @@
 /********************************************************************************
   Copyright 2018 Ellucian Company L.P. and its affiliates.
-********************************************************************************/
+ ********************************************************************************/
 import grails.converters.JSON
 import net.hedtech.banner.exceptions.ApplicationException
 import org.junit.After
@@ -76,6 +76,16 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
     }
 
     @Test
+    void testDenied403(){
+        loginSSB 'GDP000005', '111111'
+
+        controller.request.contentType = "text/json"
+        controller.denied403()
+        def dataForNullCheck = controller.response.contentAsString
+        assertNotNull dataForNullCheck
+    }
+
+    @Test
     void testReturnFailureMessage(){
         loginSSB 'MYE000001', '111111'
 
@@ -84,38 +94,6 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
         assertNotNull data
         assertTrue(data.failure)
         assertEquals('some exception message', '' + data.message)
-    }
-
-    @Test
-    void testHasUserRole(){
-        loginSSB 'MYE000001', '111111'
-
-        controller.request.contentType = "text/json"
-        def data = controller.hasUserRole('STUDENT')
-        assertFalse data
-    }
-
-    @Test
-    void testFacultyUserCanLogin(){
-        loginSSB 'HOF00714', '111111'
-
-        controller.request.contentType = "text/json"
-        assertFalse(controller.hasUserRole('STUDENT'))
-        assertFalse(controller.hasUserRole('EMPLOYEE'))
-        assertTrue(controller.hasUserRole('FACULTY'))
-
-    }
-
-    @Test
-    void testWebTailorRoleOnlyUserCanLogin(){
-        loginSSB 'BCMADMIN', '111111'
-
-        controller.request.contentType = "text/json"
-        assertFalse(controller.hasUserRole('STUDENT'))
-        assertFalse(controller.hasUserRole('EMPLOYEE'))
-        assertFalse(controller.hasUserRole('FACULTY'))
-        assertTrue(controller.hasUserRole('COMMUNICATIONADMIN'))
-
     }
 
 
