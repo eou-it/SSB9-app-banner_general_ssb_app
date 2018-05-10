@@ -17,8 +17,6 @@ beans = {
     restfulServiceAdapter(PbBannerRestfulServiceAdapter)
 
     //Banner equivalent of bean above
-    //bannerRestfulApiServiceBaseAdapter(RestfulApiServiceBaseAdapter)
-
     restApiAuthenticationEntryPoint(RestApiAuthenticationEntryPoint) {
         realmName = 'Banner REST API Realm'
     }
@@ -42,7 +40,7 @@ beans = {
         bean.autowire = 'byName'
         bean.initMethod = 'init'
         asynchronousBannerAuthenticationSpoofer = ref('asynchronousBannerAuthenticationSpoofer')
-        monitorIntervalInSeconds =  Holders.config.aip?.aipPostMonitor?.monitorIntervalInSeconds ?: 10
+        monitorIntervalInSeconds =  Holders.config.aip?.actionItemPostMonitor?.monitorIntervalInSeconds ?: 40
     }
 
     actionItemPostWorkProcessingEngine (ActionItemAsynchronousTaskProcessingEngineImpl) { bean ->
