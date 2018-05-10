@@ -48,7 +48,7 @@ grails.config.locations.each {
 //
 // DO NOT EDIT THIS UUID UNLESS YOU ARE AUTHORIZED TO DO SO AND KNOW WHAT YOU ARE DOING
 //
-build.number.uuid = "f23ea34b-6469-4aa9-9778-e7efbba5de7b" // specific UUID for //TODO Need to regenerate
+build.number.uuid = "f23ea34b-6469-4aa9-9778-e7efbba5de7b" // specific UUID for
 build.number.base.url = "http://m039198.ellucian.com:8080/BuildNumberServer/buildNumber?method=getNextBuildNumber&uuid="
 
 grails.project.groupId = "net.hedtech" // used when deploying to a maven repo
@@ -610,7 +610,6 @@ restfulApiConfig = {
     // against the actual resource being queried, but using a different URL prefix (e.g., qapi)
     // so the request is routed to the 'list' method (versus the normal 'create' method).
     resource 'query-filters' config {
-                                        // TODO: Add support for 'application/x-www-form-urlencoded'
                                         representation {
                                             mediaTypes = ["application/json"]
                                             jsonExtractor {}
