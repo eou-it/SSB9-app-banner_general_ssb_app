@@ -74,3 +74,6 @@
 [submodule "plugins/banner_aip_gate_keeper.git"]
 	path = plugins/banner_aip_gate_keeper.git
 	url = https://git.ellucian.com/scm/banxeplug/banner_aip_gate_keeper.git
+[submodule "plugins/banner_general_proxy.git"]
+	path = plugins/banner_general_proxy.git
+	url = https://git.ellucian.com/scm/banxeplug/banner_general_proxy.git

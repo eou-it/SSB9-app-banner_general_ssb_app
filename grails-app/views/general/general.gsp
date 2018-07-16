@@ -19,25 +19,13 @@ Copyright 2017 Ellucian Company L.P. and its affiliates.
         <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no, user-scalable=0"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <g:set var="appName" value= ""/>
-        <g:set var="guestUser" value="${org.springframework.web.context.request.RequestContextHolder.currentRequestAttributes()?.request?.session?.getAttribute('guestUser')}"/>
 
-        <g:if test="${guestUser}">
-            <g:if test="${message(code: 'default.language.direction')  == 'rtl'}">
-                <r:require modules="proxyAppRTL"/>
-            </g:if>
-            <g:else>
-                <r:require modules="proxyAppLTR"/>
-            </g:else>
+        <g:if test="${message(code: 'default.language.direction')  == 'rtl'}">
+            <r:require modules="generalSsbAppRTL"/>
         </g:if>
         <g:else>
-            <g:if test="${message(code: 'default.language.direction')  == 'rtl'}">
-                <r:require modules="generalSsbAppRTL"/>
-            </g:if>
-            <g:else>
-                <r:require modules="generalSsbAppLTR"/>
-            </g:else>
+            <r:require modules="generalSsbAppLTR"/>
         </g:else>
-
     </g:applyLayout>
 
     <script type="text/javascript">

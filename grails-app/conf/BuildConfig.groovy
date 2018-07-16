@@ -20,6 +20,7 @@ grails.plugin.location.'banner-aip-ui'                      = "plugins/banner_ai
 grails.plugin.location.'banner-aip-gate-keeper'                      = "plugins/banner_aip_gate_keeper.git"
 grails.plugin.location.'banner-general-direct-deposit-ui' = "plugins/banner_general_direct_deposit_ui.git"
 grails.plugin.location.'banner-general-personal-information-ui' = "plugins/banner_general_personal_information_ui.git"
+grails.plugin.location.'banner-general-proxy' = "plugins/banner_general_proxy.git"
 
 grails.project.dependency.resolution = {
 
@@ -87,7 +88,6 @@ grails.war.resources = { stagingDir, args ->
 grails.war.copyToWebApp = { args ->
     fileset(dir:"web-app") {
         include(name: "generalSsbApp/**")
-        include(name: "proxyApp/**")
         include(name: "js/**")
         include(name: "css/**")
         include(name: "images/**")
