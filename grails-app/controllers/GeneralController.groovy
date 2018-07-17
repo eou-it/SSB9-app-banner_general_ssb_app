@@ -49,7 +49,7 @@ class GeneralController {
             render view: "/proxy/resetpin", model: [gidm : result.gidm]
         } else {
             flash.message = message( code:"proxy.actionpassword.invalid" )
-            render view: "/proxy/actionpassword", params: params, model: [token: params.p_token, gidm : result.gidm]
+            render view: "/proxy/actionpassword", params: params, model: [token: params.token, gidm : result.gidm]
         }
     }
 
@@ -61,7 +61,7 @@ class GeneralController {
             redirect (uri: "/login/auth")
         }else{
             flash.message = message( code: "proxy.pinmanagement.invalid." + result.error )
-            render view: "/proxy/resetpin"
+            render view: "/proxy/resetpin", model: [gidm : result.gidm]
         }
     }
 
