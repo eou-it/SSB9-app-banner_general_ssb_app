@@ -9,10 +9,6 @@ import org.apache.log4j.Logger
 import org.codehaus.groovy.grails.plugins.web.taglib.ValidationTagLib
 import org.springframework.security.core.context.SecurityContextHolder
 
-import grails.util.Holders
-import groovy.sql.GroovyRowResult
-import groovy.sql.Sql
-
 /**
  * Controller for General
  */
@@ -22,48 +18,6 @@ class GeneralController {
     static defaultAction = "landingPage"
 
     def generalSsbConfigService
-    def generalSsbProxyService
-
-
-    def proxy(){
-
-        def result = generalSsbProxyService.setProxy(params.p_token)
-
-        if (result.verify) {
-
-            render view: "/proxy/actionpassword", params: params, model: [token: params.p_token, gidm : result.gidm]
-
-        } else if (result.login || result.error){
-
-            flash.message = result.message
-            forward controller: "login", action: "auth", params: params
-        }
-    }
-
-    def submitActionPassword() {
-        flash.message = ""
-
-        def result = generalSsbProxyService.setProxyVerify(params.token, params.p_verify, params.gidm)
-
-        if (result.doPin) {
-            render view: "/proxy/resetpin", model: [gidm : result.gidm]
-        } else {
-            flash.message = message( code:"proxy.actionpassword.invalid" )
-            render view: "/proxy/actionpassword", params: params, model: [token: params.token, gidm : result.gidm]
-        }
-    }
-
-    def resetPinAction() {
-
-        def result = generalSsbProxyService.savePin(params."gidm", params.p_pin1, params.p_pin2, params.p_email, params.p_pin_orig)
-
-        if(!result.errorStatus) {
-            redirect (uri: "/login/auth")
-        }else{
-            flash.message = message( code: "proxy.pinmanagement.invalid." + result.error )
-            render view: "/proxy/resetpin", model: [gidm : result.gidm]
-        }
-    }
 
 
     def landingPage() {
