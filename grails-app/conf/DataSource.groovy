@@ -34,7 +34,8 @@ hibernate {
             "classpath:hibernate-banner-aip-gate-keeper.cfg.xml",
             "classpath:hibernate-banner-aip.cfg.xml",
             "classpath:hibernate-banner-general-utility.cfg.xml",
-            "classpath:hibernate-banner-sspb.cfg.xml"
+            "classpath:hibernate-banner-sspb.cfg.xml",
+            "classpath:hibernate-banner-student-history.cfg.xml"
     ]
 }
 
