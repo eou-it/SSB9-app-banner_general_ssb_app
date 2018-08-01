@@ -41,8 +41,6 @@ class BootStrap {
 
     def init = {servletContext ->
 
-        grailsApplication.config.guestAuthenticationEnabled = true
-
         // For IE 9 with help of es5-shim.js, the default date marshaller does not work.
         JSON.registerObjectMarshaller( Date ) {
             return it?.format( "yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone( 'UTC' ) )
