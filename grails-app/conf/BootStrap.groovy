@@ -76,7 +76,6 @@ class BootStrap {
             setValidationQuery( "select 1 from dual" )
         }*/
 
-        grailsApplication.config.proxySql = sqlFileLoadService.getSqlTextMap()
 
         if (Environment.current != Environment.TEST) {
             // println("Reading format from ${servletContext.getRealPath("/xml/application.navigation.conf.xml" )}")
