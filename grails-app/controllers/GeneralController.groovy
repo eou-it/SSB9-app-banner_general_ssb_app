@@ -5,6 +5,7 @@
 
 import grails.converters.JSON
 import net.hedtech.banner.exceptions.ApplicationException
+import net.hedtech.banner.general.overall.UserRoleService
 import org.apache.log4j.Logger
 import org.codehaus.groovy.grails.plugins.web.taglib.ValidationTagLib
 import org.springframework.security.core.context.SecurityContextHolder
@@ -14,10 +15,11 @@ import org.springframework.security.core.context.SecurityContextHolder
  */
 class GeneralController {
 
-    def log = Logger.getLogger( this.getClass() )
+    private static final log = Logger.getLogger( this.getClass() )
     static defaultAction = "landingPage"
 
     def generalSsbConfigService
+    def userRoleService
 
 
     def landingPage() {
@@ -37,12 +39,7 @@ class GeneralController {
     }
 
     def getRoles() {
-        def model = [:]
-        model.isStudent = hasUserRole( "STUDENT" )
-        model.isEmployee = hasUserRole( "EMPLOYEE" )
-        model.isAipAdmin = hasUserRole( "ACTIONITEMADMIN" )
-
-        render model as JSON
+        render userRoleService.getRoles() as JSON
     }
 
     /**
@@ -71,17 +68,6 @@ class GeneralController {
             log.error( ex )
             model.message = e.message
             return model
-        }
-    }
-
-    def hasUserRole( String role ) {
-        try {
-            def authorities = SecurityContextHolder?.context?.authentication?.principal?.authorities
-            return authorities.any {it.getAssignedSelfServiceRole().contains( role )}
-        } catch (MissingPropertyException it) {
-            log.error( "principal lacks authorities - may be unauthenticated or session expired. Principal: ${SecurityContextHolder?.context?.authentication?.principal}" )
-            log.error( it )
-            throw new ApplicationException( 'DirectDepositAccountCompositeService', it )
         }
     }
 
