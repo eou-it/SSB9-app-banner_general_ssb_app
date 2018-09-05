@@ -185,7 +185,8 @@ formControllerMap = [
         'visualpagemodelcomposer'   : ['GPBADMN'],
         'cssrender'                 : ['SELFSERVICE', 'GUAGMNU'],
         'custompage'                : ['SELFSERVICE', 'GPBADMN'],
-        'userpreference'            : ['SELFSERVICE']
+        'userpreference'            : ['SELFSERVICE'],
+        'shortcut'                  : ['SELFSERVICE']
 
 ]
 
@@ -304,7 +305,8 @@ grails.plugin.springsecurity.interceptUrlMap = [
         '/ssb/PersonalInformationDetails/**' : ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
         '/ssb/PersonalInformationPicture/**' : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
         '/ssb/PersonalInformationQA/**'      : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/userPreference/**'             : ['IS_AUTHENTICATED_ANONYMOUSLY']
+        '/ssb/userPreference/**'             : ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/ssb/shortcut/**'                   : ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
 
 // CodeNarc rulesets
