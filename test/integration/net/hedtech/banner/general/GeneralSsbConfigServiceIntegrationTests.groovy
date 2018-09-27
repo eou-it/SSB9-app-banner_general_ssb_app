@@ -3,6 +3,7 @@
  *******************************************************************************/
 package net.hedtech.banner.general
 
+import grails.util.Holders
 import net.hedtech.banner.general.person.PersonUtility
 import net.hedtech.banner.testing.BaseIntegrationTestCase
 import org.junit.After
@@ -52,9 +53,24 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         PersonUtility.setPersonConfigInSession(personConfigInSession)
 
         def config = generalSsbConfigService.getGeneralConfig()
-        assertFalse config.isActionItemEnabledAndAvailable
         assertTrue config.isActionItemEnabled
         assertTrue config.isDirectDepositEnabled
+        assertTrue config.isPersonalInformationEnabled
+    }
+
+    @Test
+    void testIsDirectDepositAuthorizedForUser() {
+        loginSSB 'GDP000005', '111111'
+
+        def personConfigInSession = [(generalSsbConfigService.getCacheName()): [(generalSsbConfigService.ENABLE_ACTION_ITEM): 'N']]
+        PersonUtility.setPersonConfigInSession(personConfigInSession)
+
+        // restrict access to non-employee and non-student role the user does not have
+        Holders.config.grails.plugin.springsecurity.interceptUrlMap.put('/ssb/directDeposit/**',['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M'])
+        def config = generalSsbConfigService.getGeneralConfig()
+
+        assertFalse config.isActionItemEnabled
+        assertFalse config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
     }
 }
