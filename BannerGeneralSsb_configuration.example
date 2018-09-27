@@ -360,9 +360,7 @@ grails.resources.adhoc.excludes = ['/WEB-INF/**']
  *                                                                              *
  *******************************************************************************/
 pageBuilder.enabled = true
-if (!pageBuilder.enabled) {
-  grails.plugin.springsecurity.securityConfigType = grails.plugin.springsecurity.SecurityConfigType.InterceptUrlMap
-}
+
 // initial load location on file system. Files located in "pb" directory. pb directory located at root of app as sibling to the config files
 pbRoot = "<UPDATE_ME>" // Example /temp/pb
 pageBuilder {
