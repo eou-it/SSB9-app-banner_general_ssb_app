@@ -39,7 +39,7 @@ grails.project.dependency.resolution = {
     plugins {
         compile ':zipped-resources:1.0'
         compile ':cached-resources:1.0'
-        compile ':yui-minify-resources:0.1.5'
+        compile ':yui-minify-resources:0.1.4'
         compile ':cache-headers:1.1.7'
         test ':code-coverage:2.0.3-3'
         runtime ":rendering:1.0.0"
