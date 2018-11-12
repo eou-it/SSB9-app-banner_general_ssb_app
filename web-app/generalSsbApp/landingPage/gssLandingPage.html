@@ -8,11 +8,7 @@
         <ng-include ng-if="piConfig.isProfilePicDisplayable" src="'../generalSsbApp/landingPage/gssLandingPagePicture.html'"></ng-include>
         <div class="greeting">
 
-            <div data-ng-show = "guestUser === true">
-                <div class="landingDesc break-long-words">You view this page as a Proxy User: {{guestUserName}}</div>
-            </div>
-
-            <div  data-ng-show = "guestUser == false">
+            <div>
                 <div class="break-long-words">{{'banner.generalssb.landingpage.greeting'|i18n:[firstName]}}</div>
                 <div class="landingDesc break-long-words">{{'banner.generalssb.landingpage.description'|i18n}}</div>
             </div>
@@ -25,11 +21,5 @@
 <div ng-class="['gen-home-content', isSingleTile ? 'single-tile' : null]">
     <div ng-repeat="tile in appTilesForRole">
         <landing-page-app-tile tile-data="tile"/>
-    </div>
-
-    <div data-ng-show = "guestUser === true">
-     <div ng-repeat="proxy in proxyTiles">
-        <landing-page-proxy-tile proxy-data="proxy"/>
-      </div>
     </div>
 </div>

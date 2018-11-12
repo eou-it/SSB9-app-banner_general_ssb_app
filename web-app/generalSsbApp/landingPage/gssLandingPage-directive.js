@@ -17,19 +17,3 @@ generalSsbAppDirectives.directive('landingPageAppTile', [ function () {
 
     };
 }]);
-
-generalSsbAppDirectives.directive('landingPageProxyTile', [function () {
-    return{
-        restrict: 'E',
-        templateUrl: '../generalSsbApp/landingPage/gssProxyTile.html',
-        scope: {
-            proxyData: '='
-        },
-        link: function(scope){
-            scope.goProxyApp = function(url) {
-                window.location.href = $('meta[name=applicationContextRoot]').attr("content") + url;
-            };
-        }
-
-    };
-}]);

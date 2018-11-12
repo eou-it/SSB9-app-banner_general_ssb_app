@@ -36,53 +36,15 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', 'gener
             init = function() {
                 $scope.piConfig = piConfigResolve;
 
-                if (CommonContext.guestUser){
-
-                    $scope.guestUser = true;
-                    $scope.guestUserName = CommonContext.user;
-
+                if(generalConfigResolve.isPersonalInformationEnabled) {
                     $scope.appTiles.push(
                         {
-                            title: 'banner.generalssb.landingpage.personal.title',
-                            desc: 'banner.generalssb.landingpage.personal.description',
-                            url: $scope.applicationContextRoot +'/ssb/proxy/proxypersonalinformation',
+                            title: 'banner.generalssb.landingpage.personalinfo.title',
+                            desc: 'banner.generalssb.landingpage.personalinfo.description',
+                            url: $scope.applicationContextRoot +'/ssb/personalInformation',
                             icon: '../images/personal_info.svg'
                         }
                     );
-
-
-                    $scope.proxyTiles.push(
-                        {
-                            title: 'banner.generalssb.landingpage.grades.title',
-                            desc: 'banner.generalssb.landingpage.grades.description',
-                            url: $scope.applicationContextRoot +'/ssb/proxy/grades',
-                            icon: '../images/personal_info.svg'
-                        }
-                    );
-
-                    $scope.proxyTiles.push(
-                        {
-                            title: 'banner.generalssb.landingpage.holds.title',
-                            desc: 'banner.generalssb.landingpage.holds.description',
-                            url: $scope.applicationContextRoot +'/ssb/proxy/holds',
-                            icon: '../images/personal_info.svg'
-                        }
-                    );
-
-                }else{
-
-                    $scope.guestUser = false;
-
-                    if(generalConfigResolve.isPersonalInformationEnabled) {
-                        $scope.appTiles.push(
-                            {
-                                title: 'banner.generalssb.landingpage.personalinfo.title',
-                                desc: 'banner.generalssb.landingpage.personalinfo.description',
-                                url: $scope.applicationContextRoot +'/ssb/personalInformation',
-                                icon: '../images/personal_info.svg'
-                            }
-                        );
-                    }
                 }
 
                 if(generalConfigResolve.isDirectDepositEnabled) {
