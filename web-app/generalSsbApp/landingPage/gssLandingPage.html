@@ -22,4 +22,19 @@
     <div ng-repeat="tile in appTilesForRole">
         <landing-page-app-tile tile-data="tile"/>
     </div>
+    <div ng-if="proxyMgmtTile">
+        <a href="{{proxyMgmtTile.url}}" target="genSsbWin" class="gen-app-tile" role="button">
+            <div class="tile-icon">
+                <img ng-src="{{proxyMgmtTile.icon}}"/>
+            </div>
+            <div class="tile-content">
+                <div class="tile-title">
+                    {{proxyMgmtTile.title|i18n}}
+                </div>
+                <div class="tile-desc">
+                    {{proxyMgmtTile.desc|i18n}}
+                </div>
+            </div>
+        </a>
+    </div>
 </div>

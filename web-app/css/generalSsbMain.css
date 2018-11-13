@@ -111,6 +111,7 @@ h2 {
 .gen-app-tile {
     float: left;
     margin-right: 15px;
+    margin-top: 10px;
     padding: 15px 15px 0;
     text-align: center;
     border: none;

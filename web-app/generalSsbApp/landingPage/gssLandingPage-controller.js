@@ -59,6 +59,16 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', 'gener
                     );
                 }
 
+                if(generalConfigResolve.isProxyManagementEnabled && generalConfigResolve.proxyManagementUrl !== -1) {
+                    $scope.proxyMgmtTile =
+                    {
+                        title: 'banner.generalssb.landingpage.proxyMgmt.title',
+                        desc: 'banner.generalssb.landingpage.proxyMgmt.description',
+                        url: generalConfigResolve.proxyManagementUrl,
+                        icon: '../images/TBD_proxy.svg'
+                    };
+                }
+
                 generalSsbService.getRoles().$promise.then(function (response) {
                     $scope.isStudent = response.isStudent;
                     $scope.isEmployee = response.isEmployee;
