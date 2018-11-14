@@ -56,6 +56,8 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         assertTrue config.isActionItemEnabled
         assertTrue config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
+        assertTrue config.isProxyManagementEnabled
+        assertEquals(-1, config.proxyManagementUrl)
     }
 
     @Test
@@ -66,11 +68,31 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         PersonUtility.setPersonConfigInSession(personConfigInSession)
 
         // restrict access to non-employee and non-student role the user does not have
+        def origUrlConf = Holders.config.grails.plugin.springsecurity.interceptUrlMap.get('/ssb/directDeposit/**')
         Holders.config.grails.plugin.springsecurity.interceptUrlMap.put('/ssb/directDeposit/**',['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M'])
         def config = generalSsbConfigService.getGeneralConfig()
+        Holders.config.grails.plugin.springsecurity.interceptUrlMap.put('/ssb/directDeposit/**', origUrlConf)
 
         assertFalse config.isActionItemEnabled
         assertFalse config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
+        assertTrue config.isProxyManagementEnabled
+        assertEquals(-1, config.proxyManagementUrl)
+    }
+
+    @Test
+    void testGet8xProxyManagmentUrl() {
+        loginSSB 'GDP000002', '111111'
+
+        def personConfigInSession = [(generalSsbConfigService.getCacheName()): [(generalSsbConfigService.ENABLE_PROXY_MANAGMENT): 'N']]
+        PersonUtility.setPersonConfigInSession(personConfigInSession)
+
+        def config = generalSsbConfigService.getGeneralConfig()
+
+        assertTrue config.isActionItemEnabled
+        assertFalse config.isDirectDepositEnabled
+        assertTrue config.isPersonalInformationEnabled
+        assertFalse config.isProxyManagementEnabled
+        assertEquals 'http://<host_name>:<port_number>/<banner8>/enUS/bwgkprxy.P_ManageProxy', config.proxyManagementUrl
     }
 }
