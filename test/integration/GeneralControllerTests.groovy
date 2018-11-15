@@ -71,6 +71,8 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
         assertNotNull data
         assertTrue(data.isDirectDepositEnabled)
         assertTrue(data.isPersonalInformationEnabled)
+        assertTrue(data.isProxyManagementEnabled)
+        assertEquals(-1, data.proxyManagementUrl)
         assertNotNull data.isActionItemEnabled
     }
 
