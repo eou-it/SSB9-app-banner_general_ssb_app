@@ -121,6 +121,13 @@ h2 {
     cursor: pointer;
 }
 
+a.gen-app-tile,
+a.gen-app-tile:hover,
+a.gen-app-tile:focus,
+a.gen-app-tile:active {
+    color: #333;
+}
+
 .tile-icon {
     float: left;
     width: 25%;

@@ -65,7 +65,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', 'gener
                         title: 'banner.generalssb.landingpage.proxyMgmt.title',
                         desc: 'banner.generalssb.landingpage.proxyMgmt.description',
                         url: generalConfigResolve.proxyManagementUrl,
-                        icon: '../images/TBD_proxy.svg'
+                        icon: '../images/Proxy_management1.png'
                     };
                 }
 
