@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2015-2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -249,8 +249,7 @@ def doCheckCopyrightXe(fixIt){
     println "Number unique files revised  in branches ${branch} is ${numberFiles}, number with incorrect copyright ${numberErrors}"
     println "Review report  ${output.toString()}"
     if (numberErrors > 0) {
-        //TODO: temporarily disabled to see Sonar Qube output in DevOps env
-        // System.exit(-1)
+        System.exit(-1)
     }
 }
 
