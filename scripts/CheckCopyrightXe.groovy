@@ -70,8 +70,9 @@ def doCheckCopyrightXe(fixIt){
         }
 
         def excludedFileExts = ["rst", "properties", "svg", "scss", "ttf", "woff", "woff2", "eot", "png", "gif", "map",
-                                "jar"]
-        def excludedFiles = "CheckCopyrightXe.groovy|.git|xe-ui-components|ckeditor|d3.min.js"
+                                "jar", "json", "txt"]
+        def excludedFiles = "CheckCopyrightXe.groovy|.git|xe-ui-components|ckeditor|d3.min.js|.travis.yml|grailsw" +
+                "|grailsw.bat|RELEASE-NOTES.md|fontawesome|fullcalendar|moment.min.js|ng-grid"
 
         changes.unique().each {
             def filename_dir_txt = directoryname.toString() + ln + it
@@ -326,6 +327,9 @@ def findPlugins(def directoryname, def pathSep, def appBranch) {
     plugins.eachDir { plugin ->
         if (plugin.isDirectory()) {
             def pluginName = plugin.toString().split(pathSep)[-1]
+            if(pluginName == 'restful-api.git') {
+                return
+            }
 
             def command2 = "git rev-parse --abbrev-ref HEAD"
             def proc2 = command2.execute(null, plugin)
