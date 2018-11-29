@@ -84,6 +84,22 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
     void testGet8xProxyManagmentUrl() {
         loginSSB 'GDP000002', '111111'
 
+        def personConfigInSession = [(generalSsbConfigService.getCacheName()): [(generalSsbConfigService.ENABLE_PROXY_MANAGMENT): 'Y']]
+        PersonUtility.setPersonConfigInSession(personConfigInSession)
+
+        def config = generalSsbConfigService.getGeneralConfig()
+
+        assertTrue config.isActionItemEnabled
+        assertFalse config.isDirectDepositEnabled
+        assertTrue config.isPersonalInformationEnabled
+        assertTrue config.isProxyManagementEnabled
+        assertEquals 'http://<host_name>:<port_number>/<banner8>/enUS/bwgkprxy.P_ManageProxy', config.proxyManagementUrl
+    }
+
+    @Test
+    void testGet8xProxyManagmentUrlDisabled() {
+        loginSSB 'GDP000002', '111111'
+
         def personConfigInSession = [(generalSsbConfigService.getCacheName()): [(generalSsbConfigService.ENABLE_PROXY_MANAGMENT): 'N']]
         PersonUtility.setPersonConfigInSession(personConfigInSession)
 
@@ -93,6 +109,23 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         assertFalse config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertFalse config.isProxyManagementEnabled
-        assertEquals 'http://<host_name>:<port_number>/<banner8>/enUS/bwgkprxy.P_ManageProxy', config.proxyManagementUrl
+        assertEquals(-1, config.proxyManagementUrl)
+    }
+
+    @Test
+    void testGet8xProxyManagmentUrlInfiniteLoop() {
+        // Alumni user, has access to self-referential Mailing List menu
+        loginSSB 'HOSP0001', '111111'
+
+        def personConfigInSession = [(generalSsbConfigService.getCacheName()): [(generalSsbConfigService.ENABLE_PROXY_MANAGMENT): 'Y']]
+        PersonUtility.setPersonConfigInSession(personConfigInSession)
+
+        def config = generalSsbConfigService.getGeneralConfig()
+
+        assertTrue config.isActionItemEnabled
+        assertTrue config.isDirectDepositEnabled
+        assertTrue config.isPersonalInformationEnabled
+        assertTrue config.isProxyManagementEnabled
+        assertEquals(-1, config.proxyManagementUrl)
     }
 }
