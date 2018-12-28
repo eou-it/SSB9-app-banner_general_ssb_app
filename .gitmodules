@@ -77,3 +77,6 @@
 [submodule "plugins/banner_general_proxy.git"]
 	path = plugins/banner_general_proxy.git
 	url = https://git.ellucian.com/scm/banxeplug/banner_general_proxy.git
+[submodule "plugins/banner_document_management.git"]
+	path = plugins/banner_document_management.git
+	url = https://git.ellucian.com/scm/banxeplug/banner_document_management.git

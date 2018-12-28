@@ -1,0 +1,292 @@
+{
+   "constantName": "PersonalnformationandEmergencycontactstemplate",
+   "extendsPage": null,
+   "fileTimestamp": "2018-12-26T13:12:39Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "PersonalData",
+            "resource": "virtualDomains.BannerPersonalData",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "PronounData",
+            "resource": "virtualDomains.BannerPronounData",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "GenderData",
+            "resource": "virtualDomains.BannerGenderIdentification",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "EmergencyContactsData",
+            "resource": "virtualDomains.BannerEmergencyContacts",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ActionItemStatus",
+            "resource": "virtualDomains.ActionItemStatus",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ActionItemUpdate",
+            "resource": "virtualDomains.ActionItemContent",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "allowDelete": false,
+                        "allowModify": true,
+                        "allowNew": false,
+                        "allowReload": false,
+                        "components": [
+                           {
+                              "label": "First name",
+                              "loadInitially": true,
+                              "model": "SPRIDEN_FIRST_NAME",
+                              "name": "FirstName",
+                              "onLoad": "",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "style": "",
+                              "type": "text",
+                              "validation": {},
+                              "value": "",
+                              "valueStyle": ""
+                           },
+                           {
+                              "label": "Middle name",
+                              "loadInitially": true,
+                              "model": "SPRIDEN_MI",
+                              "name": "MiddleName",
+                              "onLoad": "",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "label": "Last name",
+                              "loadInitially": true,
+                              "model": "SPRIDEN_LAST_NAME",
+                              "name": "LastName",
+                              "onLoad": "",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "label": "Preferred first name",
+                              "loadInitially": false,
+                              "model": "SPBPERS_PREF_FIRST_NAME",
+                              "name": "PreferredFirstName",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": true,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "label": "Date of birth",
+                              "loadInitially": true,
+                              "model": "SPBPERS_BIRTH_DATE",
+                              "name": "DateOfBirth",
+                              "onLoad": "",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": true,
+                              "type": "datetime",
+                              "validation": {}
+                           },
+                           {
+                              "label": "Preferred pronoun",
+                              "labelKey": "GTVPPRN_PPRN_DESC",
+                              "loadInitially": true,
+                              "model": "SPBPERS_PPRN_CODE",
+                              "name": "PreferredPronoun",
+                              "required": false,
+                              "sourceModel": "PronounData",
+                              "sourceParameters": {},
+                              "type": "select",
+                              "valueKey": "GTVPPRN_PPRN_CODE"
+                           },
+                           {
+                              "label": "Gender Identification",
+                              "labelKey": "GTVGNDR_GNDR_DESC",
+                              "loadInitially": true,
+                              "model": "SPBPERS_GNDR_CODE",
+                              "name": "GenderIdentification",
+                              "required": false,
+                              "sourceModel": "GenderData",
+                              "sourceParameters": {},
+                              "type": "select",
+                              "valueKey": "GTVGNDR_GNDR_CODE"
+                           }
+                        ],
+                        "label": "",
+                        "loadInitially": true,
+                        "model": "PersonalData",
+                        "name": "PersonalInfo",
+                        "onLoad": "$(\"#pbid-PersonalInfo-save-button\").hide()",
+                        "pageSize": 5,
+                        "parameters": {},
+                        "style": "",
+                        "type": "detail"
+                     }
+                  ],
+                  "label": "Your Personal Information",
+                  "name": "PersonalDetails",
+                  "nextButtonLabel": "Next",
+                  "showInitially": true,
+                  "style": "",
+                  "type": "form"
+               },
+               {
+                  "components": [
+                     {
+                        "allowDelete": false,
+                        "allowModify": false,
+                        "allowNew": false,
+                        "allowReload": false,
+                        "components": [
+                           {
+                              "asHtml": false,
+                              "loadInitially": true,
+                              "model": "EMERGENCY_NAME_DETAILS",
+                              "name": "EmergencyNameDetails",
+                              "type": "display"
+                           },
+                           {
+                              "asHtml": false,
+                              "loadInitially": true,
+                              "model": "EMERGENCY_RELATION_DESC",
+                              "name": "EmergencyRelationDetails",
+                              "type": "display"
+                           },
+                           {
+                              "asHtml": false,
+                              "loadInitially": true,
+                              "model": "EMERGENCY_PHONE_DETAILS",
+                              "name": "EmergencyPhoneDetails",
+                              "type": "display"
+                           },
+                           {
+                              "asHtml": false,
+                              "loadInitially": true,
+                              "model": "EMERGENCY_STREET_ADDRESS",
+                              "name": "EmergencyStreetAddressDetails",
+                              "type": "display"
+                           },
+                           {
+                              "asHtml": false,
+                              "loadInitially": true,
+                              "model": "EMERGENCY_ADDRESS_DETAILS",
+                              "name": "EmergencyAddressDetails",
+                              "type": "display"
+                           },
+                           {
+                              "booleanFalseValue": "\"FALSE\"",
+                              "booleanTrueValue": "\"TRUE\"",
+                              "label": "I confirm the above emergency contact is accurate",
+                              "loadInitially": true,
+                              "model": "EMERGENCY_STATUS_AGREE",
+                              "name": "EmergencyContactsAgree",
+                              "readonly": false,
+                              "type": "boolean",
+                              "value": "EMERGENCY_STATUS_AGREE"
+                           }
+                        ],
+                        "loadInitially": true,
+                        "model": "EmergencyContactsData",
+                        "name": "EmergencyContactsInfo",
+                        "pageSize": 5,
+                        "parameters": {},
+                        "type": "detail"
+                     }
+                  ],
+                  "label": "Your Emergency Contacts",
+                  "name": "EmergencyContactDetails",
+                  "nextButtonLabel": "Next",
+                  "showInitially": true,
+                  "type": "form"
+               },
+               {
+                  "name": "EmergencyContactsUpdate",
+                  "type": "literal",
+                  "value": "<div> <label >If your emergency contacts need updating,please <a href=\"http://149.24.34.221:8080/BannerGeneralSsb/\" target=\"_blank\">click here</a></label></div>"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "labelKey": "STATUS_RULE_LABEL_TEXT",
+                        "loadInitially": true,
+                        "model": "STATUS_RULE_ID",
+                        "name": "PersonalAndEmergencyContactsDetailsAgree",
+                        "onLoad": "$(\"#pbid-FirstName-0\").attr( \"disabled\", \"disabled\" )\n$(\"#pbid-MiddleName-0\").attr(\"disabled\",\"disabled\")\n$(\"#pbid-LastName-0\").attr(\"disabled\",\"disabled\")\n$(\"#PBContent\").css({'margin-bottom':'30px'})",
+                        "onUpdate": "$(\"#pbid-PersonalAndEmergencyDetailsSave\").removeClass(\"disabled\")",
+                        "required": false,
+                        "sourceModel": "ActionItemStatus",
+                        "sourceParameters": {
+                           "actionitemid": "$$params.actionItemId"
+                        },
+                        "type": "radio",
+                        "valueKey": "STATUS_RULE_ID"
+                     }
+                  ],
+                  "loadInitially": true,
+                  "model": "ActionItemUpdate",
+                  "name": "PersonalAndEmergencyContactsDetailsConfirmation",
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}",
+                  "onLoad": "",
+                  "onSave": "",
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                  "pageSize": 5,
+                  "parameters": {
+                     "actionitemid": "$$params.actionItemId",
+                     "pageid": "$$params.id"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "label": "Save",
+                  "name": "PersonalAndEmergencyDetailsSave",
+                  "onClick": "if(!$PersonalInfo.SPBPERS_BIRTH_DATE )\n{\nalert(\"Date of birth cannot be blank\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif ($PersonalDetails.\\$dirty) {\nif($PersonalInfo.SPBPERS_BIRTH_DATE> new Date()){\nalert(\"Date of birth cannot be greater than current date\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\n$PersonalInfo.$save();\n}\nif ($EmergencyContactDetails.\\$dirty) {\n$EmergencyContactsInfo.$save();\n}\n$PersonalAndEmergencyContactsDetailsConfirmation.$save();\n$(\"#pbid-PersonalAndEmergencyDetailsSave\").addClass(\"disabled\")",
+                  "style": "",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary pull-left disabled"
+               }
+            ],
+            "label": "Your Personal Information & Emergency  Contacts",
+            "name": "PersonalInformationAndEmergencyContacts",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "name": "PersonalnformationandEmergencycontactstemplate",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

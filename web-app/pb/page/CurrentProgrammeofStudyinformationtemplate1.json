@@ -1,0 +1,284 @@
+{
+   "constantName": "CurrentProgrammeofStudyinformationtemplate1",
+   "extendsPage": null,
+   "fileTimestamp": "2018-12-26T12:44:22Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "TermCodeData",
+            "resource": "virtualDomains.BannerTermCodeData",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ProgrammeData",
+            "resource": "virtualDomains.BannerProgrammeData",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "StudyPathData",
+            "resource": "virtualDomains.BannerStudyPathData",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ActionItemStatus",
+            "resource": "virtualDomains.ActionItemStatus",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ActionItemUpdate",
+            "resource": "virtualDomains.ActionItemContent",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "label": "Term",
+                  "labelKey": "SFBETRM_TERM_CODE",
+                  "loadInitially": true,
+                  "model": "",
+                  "name": "filterTerm",
+                  "onUpdate": "$ProgrammeRelated.$visible=true;\n$ProgrammeDetails.$load();\n$StudyPathRelated.$visible=true;\n$StudyPathDetails.$load();\n$CurrentProgrammeofStudyinformationConfirmation.$load();\n$CurrentProgrammeofStudyinformationConfirmationAgree.$load();\n$(\"#pbid-CurrentProgrammeofStudyinformationComplete\").removeClass(\"hide\");",
+                  "placeholder": "",
+                  "required": false,
+                  "sourceModel": "TermCodeData",
+                  "sourceParameters": {},
+                  "type": "select",
+                  "valueKey": "SFBETRM_TERM_CODE"
+               },
+               {
+                  "components": [
+                     {
+                        "allowDelete": false,
+                        "allowModify": false,
+                        "allowNew": false,
+                        "allowReload": false,
+                        "components": [
+                           {
+                              "label": "Programme",
+                              "loadInitially": false,
+                              "model": "SMRPRLE_PROGRAM_DESC",
+                              "name": "Programme",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {},
+                              "valueStyle": ""
+                           },
+                           {
+                              "label": "Major",
+                              "loadInitially": true,
+                              "model": "STVMAJR_DESC",
+                              "name": "Major",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "label": "Department",
+                              "loadInitially": true,
+                              "model": "STVDEPT_DESC",
+                              "name": "Department",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "label": "Level of study",
+                              "loadInitially": true,
+                              "model": "STVLEVL_DESC",
+                              "name": "LevelOfStudy",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "label": "Year of Admission",
+                              "loadInitially": true,
+                              "model": "SOVLCUR_TERM_CODE_ADMIT",
+                              "name": "YearOfAdmission",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           }
+                        ],
+                        "label": "",
+                        "loadInitially": false,
+                        "model": "ProgrammeData",
+                        "name": "ProgrammeDetails",
+                        "pageSize": 5,
+                        "parameters": {
+                           "p_seq_no": "1",
+                           "p_term_code": "$filterTerm"
+                        },
+                        "type": "detail"
+                     }
+                  ],
+                  "label": "Programme Related",
+                  "name": "ProgrammeRelated",
+                  "nextButtonLabel": "Next",
+                  "showInitially": false,
+                  "type": "form"
+               },
+               {
+                  "components": [
+                     {
+                        "allowDelete": false,
+                        "allowModify": false,
+                        "allowNew": false,
+                        "allowReload": false,
+                        "components": [
+                           {
+                              "label": "Term",
+                              "loadInitially": true,
+                              "model": "SGVSTSP_TERM_CODE_EFF",
+                              "name": "StudyPathTerm",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "label": "Sequence number",
+                              "loadInitially": true,
+                              "model": "SGVSTSP_KEY_SEQNO",
+                              "name": "SequenceNumber",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "label": "Name",
+                              "loadInitially": true,
+                              "model": "SGVSTSP_NAME",
+                              "name": "Name",
+                              "onLoad": "$(\"#pbid-Name-0\").width(\"600px\");",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {},
+                              "valueStyle": "width:150px"
+                           },
+                           {
+                              "label": "Status code",
+                              "loadInitially": true,
+                              "model": "SOVSPNM_STSP_DESCRIPTION",
+                              "name": "StatusCode",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "label": "Enrollment status",
+                              "loadInitially": true,
+                              "model": "STVESTS_DESC",
+                              "name": "EnrollmentStatus",
+                              "parameters": {},
+                              "readonly": true,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "name": "Message",
+                              "type": "literal",
+                              "value": "Please click on the Complete button  below to confirm that  these are correct.If these details are not correct it is important that you contact Student Services."
+                           }
+                        ],
+                        "label": "",
+                        "loadInitially": false,
+                        "model": "StudyPathData",
+                        "name": "StudyPathDetails",
+                        "pageSize": 5,
+                        "parameters": {
+                           "p_seq_no": "1",
+                           "p_term_code": "$filterTerm"
+                        },
+                        "type": "detail"
+                     }
+                  ],
+                  "label": "Study Path Related",
+                  "name": "StudyPathRelated",
+                  "nextButtonLabel": "",
+                  "showInitially": false,
+                  "type": "form"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "labelKey": "STATUS_RULE_LABEL_TEXT",
+                        "loadInitially": false,
+                        "model": "STATUS_RULE_ID",
+                        "name": "CurrentProgrammeofStudyinformationConfirmationAgree",
+                        "onLoad": "$(\"#PBContent\").css({'margin-bottom':'30px'})",
+                        "onUpdate": "$(\"#pbid-CurrentProgrammeofStudyinformationComplete\").removeClass(\"disabled\")",
+                        "required": false,
+                        "sourceModel": "ActionItemStatus",
+                        "sourceParameters": {
+                           "actionitemid": "$$params.actionItemId"
+                        },
+                        "type": "radio",
+                        "valueKey": "STATUS_RULE_ID"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "ActionItemUpdate",
+                  "name": "CurrentProgrammeofStudyinformationConfirmation",
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}",
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                  "pageSize": 5,
+                  "parameters": {
+                     "actionitemid": "$$params.actionItemId",
+                     "pageid": "$$params.id"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "label": "Complete",
+                  "name": "CurrentProgrammeofStudyinformationComplete",
+                  "onClick": "$CurrentProgrammeofStudyinformationConfirmation.$save();\n$(\"#pbid-CurrentProgrammeofStudyinformationComplete\").addClass(\"disabled\")",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary pull-left hide disabled"
+               }
+            ],
+            "label": "Current Programme  of Study Information",
+            "name": "CurrentProgrammeofStudyinformation",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "importCSS": "",
+      "label": "",
+      "name": "CurrentProgrammeofStudyinformationtemplate1",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

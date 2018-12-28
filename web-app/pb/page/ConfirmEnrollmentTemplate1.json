@@ -1,0 +1,151 @@
+{
+   "constantName": "ConfirmEnrollmentTemplate1",
+   "extendsPage": null,
+   "fileTimestamp": "2018-12-26T06:35:04Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "ActionItemStatus",
+            "resource": "virtualDomains.ActionItemStatus",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ActionItemUpdate",
+            "resource": "virtualDomains.ActionItemContent",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "GetResponseStatusName",
+            "resource": "virtualDomains.GetResponseStatusName",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "TermCodeData",
+            "resource": "virtualDomains.BannerTermCodeData",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "TermCodeStatusUpdate",
+            "resource": "virtualDomains.BannerTermStatusUpdate",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "label": "Term",
+                        "labelKey": "SFBETRM_TERM_CODE",
+                        "loadInitially": true,
+                        "model": "SFRENSP_TERM_CODE",
+                        "name": "filterTerm",
+                        "required": false,
+                        "sourceModel": "TermCodeData",
+                        "sourceParameters": {},
+                        "type": "select",
+                        "valueKey": "SFBETRM_TERM_CODE"
+                     }
+                  ],
+                  "loadInitially": true,
+                  "model": "TermCodeStatusUpdate",
+                  "name": "TermStatusUpdate",
+                  "onLoad": "",
+                  "onSaveSuccess": "",
+                  "pageSize": 5,
+                  "parameters": {
+                     "p_seq_no": "1"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "name": "ConfirmEnrollmentMessage",
+                  "type": "literal",
+                  "value": "Thank you for providing all of the data necessary  for completing your enrollment.\nPlease confirm that you agree to abide by the University regulations and its terms and conditions by selecting\nthe radio below and pressing the \"Confirm Enrollment\" button."
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [],
+                  "loadInitially": true,
+                  "model": "GetResponseStatusName",
+                  "name": "SelectedResponses",
+                  "onLoad": "$ConfirmEnrollmentConfirmation.$load();\n$ConfirmEnrollmentConfirmationAgree.$load();",
+                  "pageSize": 5,
+                  "parameters": {
+                     "actionitemid": "$$params.actionItemId",
+                     "groupid": "$$params.groupId"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "labelKey": "STATUS_RULE_LABEL_TEXT",
+                        "loadInitially": false,
+                        "model": "STATUS_RULE_ID",
+                        "name": "ConfirmEnrollmentConfirmationAgree",
+                        "onLoad": "$(\"#PBContent\").css({'margin-bottom':'30px'});",
+                        "onUpdate": "var responsesLength=$SelectedResponses.$data.length;\nvar count=0;\nfor (var k=0;k<responsesLength;k++)\n{\nif ($SelectedResponses.$data[k].STATUS_NAME ===  'Completed')\n{\ncount++;\n}\n}\nif (responsesLength===count){\n$(\"#pbid-ConfirmEnrollmentComplete\").removeClass(\"disabled\")\n}",
+                        "required": false,
+                        "sourceModel": "ActionItemStatus",
+                        "sourceParameters": {
+                           "actionitemid": "$$params.actionItemId"
+                        },
+                        "type": "radio",
+                        "valueKey": "STATUS_RULE_ID"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "ActionItemUpdate",
+                  "name": "ConfirmEnrollmentConfirmation",
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}",
+                  "onLoad": "$TermStatusUpdate.SFRENSP_TERM_CODE=$filterTerm",
+                  "onSave": "",
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                  "pageSize": 5,
+                  "parameters": {
+                     "actionitemid": "$$params.actionItemId",
+                     "pageid": "$$params.id"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "label": "Confirm Enrollment",
+                  "name": "ConfirmEnrollmentComplete",
+                  "onClick": "if(!$TermStatusUpdate.SFRENSP_TERM_CODE )\n{\nalert(\"Term cannot be blank\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\n$TermStatusUpdate.$save()\n$ConfirmEnrollmentConfirmation.$save()\n$(\"#pbid-ConfirmEnrollmentComplete\").addClass(\"disabled\")",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary pull-left  disabled"
+               }
+            ],
+            "label": "Confirm Enrollment",
+            "name": "ConfirmEnrollment",
+            "nextButtonLabel": "Next",
+            "showInitially": true,
+            "type": "form"
+         }
+      ],
+      "name": "ConfirmEnrollmentTemplate1",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

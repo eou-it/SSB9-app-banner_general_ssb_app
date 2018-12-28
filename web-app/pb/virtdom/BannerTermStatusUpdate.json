@@ -1,0 +1,18 @@
+{
+   "codePut": "UPDATE SFRENSP SET SFRENSP_ESTS_CODE = 'ES'\r\nWHERE SFRENSP_TERM_CODE=:SFRENSP_TERM_CODE\r\nAND SFRENSP_PIDM=:parm_user_pidm\r\nAND SFRENSP_KEY_SEQNO=:SFRENSP_KEY_SEQNO",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT SFRENSP_TERM_CODE as ID, SFRENSP_TERM_CODE ,SFRENSP_KEY_SEQNO FROM SFRENSP\r\nWHERE SFRENSP_PIDM=:parm_user_pidm\r\nAND SFRENSP_KEY_SEQNO=:p_seq_no",
+   "typeOfCode": "S",
+   "fileTimestamp": "2018-12-26T04:05:29Z",
+   "serviceName": "BannerTermStatusUpdate",
+   "codePost": null
+}
