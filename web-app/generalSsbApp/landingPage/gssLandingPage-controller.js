@@ -94,6 +94,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', 'gener
                 generalSsbService.getRoles().$promise.then(function (response) {
                     $scope.isStudent = response.isStudent;
                     $scope.isEmployee = response.isEmployee;
+                    $scope.isAipAdmin = response.isAipAdmin;
                     $scope.appTilesForRole = getAppTilesForRole($scope.appTiles);
                     $scope.isSingleTile = $scope.appTilesForRole.length === 1;
                 });
