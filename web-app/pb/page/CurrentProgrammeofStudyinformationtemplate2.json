@@ -1,7 +1,7 @@
 {
-   "constantName": "CurrentProgrammeofStudyinformationtemplate2",
+   "constantName": "CurrentProgrammeOfStudyInformationTemplate2",
    "extendsPage": null,
-   "fileTimestamp": "2018-12-26T12:44:22Z",
+   "fileTimestamp": "2018-12-29T07:49:46Z",
    "modelView": {
       "components": [
          {
@@ -260,14 +260,14 @@
                   "valueStyle": "btn btn-primary pull-left hide disabled"
                }
             ],
-            "label": "Current Programme  of Study Information",
+            "label": "Current Programme of Study Information",
             "name": "CurrentProgrammeofStudyinformation",
             "showInitially": true,
             "type": "block"
          }
       ],
       "label": "",
-      "name": "CurrentProgrammeofStudyinformationtemplate2",
+      "name": "CurrentProgrammeOfStudyInformationTemplate2",
       "type": "page"
    },
    "pageRoles": [

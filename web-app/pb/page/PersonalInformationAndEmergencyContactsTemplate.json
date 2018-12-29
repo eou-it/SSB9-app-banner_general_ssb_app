@@ -1,7 +1,7 @@
 {
-   "constantName": "PersonalnformationandEmergencycontactstemplate",
+   "constantName": "PersonalInformationAndEmergencyContactsTemplate",
    "extendsPage": null,
-   "fileTimestamp": "2018-12-26T13:12:39Z",
+   "fileTimestamp": "2018-12-29T07:45:01Z",
    "modelView": {
       "components": [
          {
@@ -280,7 +280,7 @@
             "type": "block"
          }
       ],
-      "name": "PersonalnformationandEmergencycontactstemplate",
+      "name": "PersonalInformationAndEmergencyContactsTemplate",
       "type": "page"
    },
    "pageRoles": [
