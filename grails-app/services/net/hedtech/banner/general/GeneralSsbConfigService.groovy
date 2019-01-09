@@ -46,7 +46,7 @@ class GeneralSsbConfigService extends BasePersonConfigService {
     def getGeneralConfig() {
         [isDirectDepositEnabled      : getParamFromSession( ENABLE_DIRECT_DEPOSIT, 'Y' ) == 'Y' && isDirectDepositAuthorizedForUser(),
          isPersonalInformationEnabled: getParamFromSession( ENABLE_PERSONAL_INFORMATION, 'Y' ) == 'Y',
-         //isActionItemEnabledAndAvailable         : getParamFromSession( ENABLE_ACTION_ITEM, 'Y' ) == 'Y' && actionItemProcessingConfigService.isActionItemPresentForUser(),
+         isActionItemEnabledAndAvailable         : getParamFromSession( ENABLE_ACTION_ITEM, 'Y' ) == 'Y' && actionItemProcessingConfigService.isActionItemPresentForUser(),
          isActionItemEnabled :  getParamFromSession( ENABLE_ACTION_ITEM, 'Y' ) == 'Y',
          isProxyManagementEnabled : getParamFromSession( ENABLE_PROXY_MANAGMENT, 'Y' ) == 'Y',
          proxyManagementUrl : getParamFromSession( ENABLE_PROXY_MANAGMENT, 'Y' ) == 'Y' ? get8xProxyManagementUrl() : PROXY_MGMT_NOT_FOUND]

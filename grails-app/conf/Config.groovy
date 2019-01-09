@@ -165,7 +165,9 @@ formControllerMap = [
         'personalinformationqa'     : ['SELFSERVICE'],
         //AIP//
         'aip'                       : ['SELFSERVICE'],
+        'aipdocumentmanagement'     : ['SELFSERVICE'],
         'aipadmin'                  : ['SELFSERVICE-ACTIONITEMADMIN'],
+        'aipreview'                 : ['SELFSERVICE-ACTIONITEMREVIEWER'],
         'aipactionitemposting'      : ['SELFSERVICE-ACTIONITEMADMIN'],
         'aippagebuilder'            : ['SELFSERVICE'],
         'bcm'                       : ['SELFSERVICE-ACTIONITEMADMIN',
@@ -253,9 +255,11 @@ grails.plugin.springsecurity.interceptUrlMap = [
 
         //AIP
         '/ssb/aipAdmin/**'                   : ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M'],
+        '/ssb/aipReview/**'                  : ['ROLE_SELFSERVICE-ACTIONITEMREVIEWER_BAN_DEFAULT_M'],
         '/ssb/BCM/**'                        : ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M'],
         '/ssb/aipActionItemPosting/**'       : ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M'],
         '/ssb/aip/**'                        : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
+        '/ssb/aipDocumentManagement/**'      : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
         '/ssb/aipPageBuilder/**'             : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
 
         //Page Builder

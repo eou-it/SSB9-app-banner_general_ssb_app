@@ -27,7 +27,7 @@ svg.hide-svg {
 
 .gen-home-main-view {
     height: 100%;
-    background: #EFF4F8;
+    background: #F8F8F8;
 }
 
 h2 {
@@ -59,7 +59,7 @@ h2 {
 
 .gen-home-heading .title {
     font-size: 28px;
-    color: #888D91;
+    color: #484849;
     padding-bottom: 25px;
 }
 
@@ -86,7 +86,7 @@ h2 {
 
 .gen-home-heading .greeting {
     font-size: 16px;
-    color: #888D91;
+    color: #484849;
     margin-top: 10px;
 }
 

@@ -1,7 +1,7 @@
 {
-   "constantName": "AIPMasterTemplateSystemRequired",
+   "constantName": "AIPMasterTemplateForDocUpload",
    "extendsPage": null,
-   "fileTimestamp": "2018-12-24T11:14:01Z",
+   "fileTimestamp": "2018-12-27T14:07:09Z",
    "modelView": {
       "components": [
          {
@@ -19,6 +19,12 @@
          {
             "name": "ActionItemReviewStatus",
             "resource": "virtualDomains.ActionItemReviewStatus",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "UserActionItem",
+            "resource": "virtualDomains.UserActionItem",
             "staticData": [],
             "type": "resource"
          },
@@ -65,6 +71,20 @@
             "value": "ACTION_ITEM_ID"
          },
          {
+            "loadInitially": true,
+            "model": "UserActionItem",
+            "name": "UserActionItemId",
+            "parameters": {
+               "actionitemid": "$$params.actionItemId"
+            },
+            "readonly": false,
+            "required": false,
+            "style": "hidden",
+            "type": "text",
+            "validation": {},
+            "value": "gcraact_surrogate_id"
+         },
+         {
             "components": [
                {
                   "allowDelete": false,
@@ -91,7 +111,8 @@
                         "loadInitially": false,
                         "model": "STATUS_RULE_ID",
                         "name": "ActionItemStatusAgree",
-                        "onLoad": "setTimeout( function(){ \n   var isCheckbox =  $ActionItemContentDetail.STATUS_COUNT === 1? true:false\n   if ( isCheckbox) {\n         // console.log(\"need checkbox\");\n\tvar radio = document.getElementById(\"pbid-ActionItemStatusAgree-radio-0-0\");\n\tradio.type = \"checkbox\"; \n    }\n   var isResponseReviewRequired = false;\n    if (typeof $ReviewStatus !==  'undefined' ){\n        isResponseReviewRequired = true;\n        if ( isCheckbox) {\n             $(\"input[type='checkbox']\").prop({disabled: isResponseReviewRequired });\n          } else{\n             $(\"input[type='radio']\").prop({disabled: isResponseReviewRequired });\n        }\n    } else{\n       $(\"#pbid-ActionItemContentDetail-save-button\").click(function(){\n       var selectedResponse = isCheckbox ? \"pbid-ActionItemStatusAgree-radio-0-0\" : $(\"input[type='radio']:checked\")[0].id;\n          var responseElementId  = selectedResponse .split(\"pbid-ActionItemStatusAgree-radio-0-\");\n          isResponseReviewRequired  = data[parseInt(responseElementId  [1])].STATUS_REV_REQ_IND === 'Y'? true:false\n         if(isResponseReviewRequired){\n                if ( isCheckbox) {\n                         $(\"input[type='checkbox']\").prop({disabled: isResponseReviewRequired });\n                 } else{\n                         $(\"input[type='radio']\").prop({disabled: isResponseReviewRequired });\n                 }\n                $(\"#pbid-ActionItemContentDetail-save-button\").prop({disabled: isResponseReviewRequired });\n         }\n        });\n    }\n},300);",
+                        "onLoad": "setTimeout( function(){\n\tvar userActionItemId = $UserActionItemId.GCRAACT_SURROGATE_ID;\n\tvar isCheckbox =  $ActionItemContentDetail.STATUS_COUNT === 1? true:false;\n\tvar selectedResponse = null;\n\tif (isCheckbox) {\n\t\tvar radio = document.getElementById(\"pbid-ActionItemStatusAgree-radio-0-0\");\n\t\tradio.type = \"checkbox\"; \n    } \n\tvar isResponseReviewRequired = false;\n    if (typeof $ReviewStatus !==  'undefined' ){\n        isResponseReviewRequired = true;\n\t\t$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop({disabled: isResponseReviewRequired });\n    } else{\n       $(\"#pbid-ActionItemContentDetail-save-button\").click(function(){\n\t\t\tselectedResponse = $(\"input[id^='pbid-ActionItemStatusAgree-radio']:checked\")[0].id;\n\t\t\tvar responseElementId = selectedResponse.split(\"pbid-ActionItemStatusAgree-radio-0-\");\n\t\t\tisResponseReviewRequired = data[parseInt(responseElementId[1])].STATUS_REV_REQ_IND === 'Y'? true:false;\n\t\t\tif(isResponseReviewRequired){\n\t\t\t\t$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop({disabled: isResponseReviewRequired });\n\t\t\t\t$(\"#pbid-ActionItemContentDetail-save-button\").prop({disabled: isResponseReviewRequired });\n\t\t\t\twindow.params.isResponseLocked = true;\n\t\t\t}\n        });\n    }\n\t\n\tfor(var elementId = 0; elementId < data.length; elementId++){\n\t\tvar responseElementId = \"#pbid-ActionItemStatusAgree-label-0-\"+elementId;\n\t\tvar paperClipId = \"pbid-ActionItemStatusAgree-paper-clip-0-\"+elementId;\n\t\tvar responseElement = $('#pbid-ActionItemStatusAgree-0').find(responseElementId);\n\t\tvar allowedAttachments = data[elementId].STATUS_ALLOWED_ATTACHMENT;\n\t\tvar responseId = data[elementId].STATUS_RULE_ID;\n\t\tif(allowedAttachments  > 0){\t\n\t                AIP.ListItemPageCtrl.prototype.documentUploader (userActionItemId, paperClipId, responseElement, allowedAttachments , responseId, isResponseReviewRequired);\n\t\t}\t\t\n\t}\n\tselectedResponse = $(\"input[id^='pbid-ActionItemStatusAgree-radio']:checked\");\n\tif(selectedResponse.length>0){\n\t\tvar selResElementId = selectedResponse[0].id;\n\t\tvar index = selResElementId.split(\"pbid-ActionItemStatusAgree-radio-0-\")[1];\n\t\tif($(\"#pbid-ActionItemStatusAgree-paper-clip-0-\"+index).length >0){ \n\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-\"+index)[0].setAttribute(\"src\", \"../images/attach_icon_default.svg\");\n\t\t}\t\t\n\t}\n\t\n\tif (isCheckbox) {\n\t\t$('input[type=\"checkbox\"]').click( function(){ \n\t\tif( $(\"#pbid-ActionItemStatusAgree-paper-clip-0-0\").length >0){\n\t\t\tif($(\"input[type='checkbox']:checked\").length ===1){\n\t\t\t\t$(\"#pbid-ActionItemContentDetail-save-button\").removeAttr(\"disabled\");\n\t\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-0\")[0].setAttribute(\"src\", \"../images/attach_icon_default.svg\"); \n\t\t\t} else {\n\t\t\t\t$(\"#pbid-ActionItemContentDetail-save-button\").attr(\"disabled\", \"disabled\");\n\t\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-0\")[0].setAttribute(\"src\", \"../images/attach_icon_disabled.svg\");  \n\t\t\t}\n\t\t}\n\t});\n\t} else{\n\t$('input[type=\"radio\"]').click( function(){\n\t\t$('#pbid-ActionItemStatusAgree-0').find('input[type=\"image\"]').attr(\"src\",\"../images/attach_icon_disabled.svg\");\n\t\tvar id = $(\"input[type='radio']:checked\")[0].id;\n\t\tid= id.split(\"pbid-ActionItemStatusAgree-radio-0-\");\n\t\tif($(\"#pbid-ActionItemStatusAgree-paper-clip-0-\"+id[1]).length >0){ \n\t\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-\"+id[1])[0].setAttribute(\"src\", \"../images/attach_icon_default.svg\");\n\t\t}\n\t}); \n\t}\n},300);",
+                        "onUpdate": "",
                         "required": false,
                         "sourceModel": "ActionItemStatus",
                         "sourceParameters": {
@@ -128,7 +149,7 @@
          }
       ],
       "label": "",
-      "name": "AIPMasterTemplateSystemRequired",
+      "name": "AIPMasterTemplateForDocUpload",
       "type": "page"
    },
    "pageRoles": [

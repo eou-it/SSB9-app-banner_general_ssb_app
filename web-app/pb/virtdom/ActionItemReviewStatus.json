@@ -1,0 +1,18 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": "2018-12-18T10:43:08Z",
+   "codeDelete": null,
+   "codeGet": "SELECT\r\n    gcraact_rvst_code\r\nFROM\r\n    gcraact\r\nWHERE\r\n    gcraact_gcbactm_id =:actionitemid\r\n    AND   gcraact_pidm =:parm_user_pidm\r\n    AND   trunc(current_date) BETWEEN trunc(gcraact_display_start_date) AND trunc(gcraact_display_end_date)\r\n    AND   gcraact_rvst_code IS NOT NULL\r\n    AND   gcraact_rvst_code = (\r\n        SELECT\r\n            gcrrvst_rvst_code\r\n        FROM\r\n            gcrrvst\r\n        WHERE\r\n            gcrrvst_review_ongoing_ind = 'Y'\r\n            AND   gcrrvst_rvst_code = gcraact_rvst_code\r\n        GROUP BY\r\n            gcrrvst_rvst_code\r\n    )",
+   "typeOfCode": "S",
+   "serviceName": "ActionItemReviewStatus"
+}

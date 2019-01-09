@@ -58,6 +58,28 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', 'gener
                         }
                     );
                 }
+                if(generalConfigResolve.isActionItemEnabledAndAvailable) {
+                    $scope.appTiles.push(
+                        {
+                            title: 'banner.generalssb.landingpage.actionsitem.title',
+                            desc: 'banner.generalssb.landingpage.actionsitem.description',
+                            url: $scope.applicationContextRoot +'/ssb/aip/#/list',
+                            icon: '../images/action_items_icon.svg'
+                        }
+                    );
+                }
+                if(generalConfigResolve.isActionItemEnabled){
+                    $scope.appTiles.push(
+                        {
+                            title: 'banner.generalssb.landingpage.actionitemadmin.title',
+                            desc: 'banner.generalssb.landingpage.actionitemadmin.description',
+                            url: $scope.applicationContextRoot +'/ssb/aipAdmin/#/landing',
+                            icon: '../images/action_items_icon.svg',
+                            roles: [AIPADMIN]
+                        }
+                    );
+                }
+
 
                 if(generalConfigResolve.isProxyManagementEnabled && generalConfigResolve.proxyManagementUrl !== -1) {
                     $scope.proxyMgmtTile =
@@ -72,6 +94,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', 'gener
                 generalSsbService.getRoles().$promise.then(function (response) {
                     $scope.isStudent = response.isStudent;
                     $scope.isEmployee = response.isEmployee;
+                    $scope.isAipAdmin = response.isAipAdmin;
                     $scope.appTilesForRole = getAppTilesForRole($scope.appTiles);
                     $scope.isSingleTile = $scope.appTilesForRole.length === 1;
                 });

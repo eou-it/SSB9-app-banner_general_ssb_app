@@ -387,7 +387,34 @@ BANNER_AIP_BLOCK_PROCESS_PERSONA= ['EVERYONE', 'STUDENT', 'REGISTRAR', 'FACULTYI
 BANNER_AIP_EXCLUDE_LIST='aipActionItemPosting|aipAdmin|aip|aipPageBuilder|BCM|about|cssManager|cssRender|error|excelExportBase|dateConverter|keepAlive|login|logout|resetPassword|securityQa|selfServiceMenu|survey|test|theme|themeEditor|userAgreement|userPreference'// No change in this.
 // in case of new controller which needs to be ignored, can be added here.
 GENERALLOCATION='http://<HOST_NAME>:<PORT>/BannerGeneralSsb' // Example localhost:8080/BannerGeneralSsb
-ssconfig.app.seeddata.keys = [['BCMLOCATION'], ['BANNER_AIP_BLOCK_PROCESS_PERSONA']]
+
+/*****************************************************************************************************/
+ // AIP Configuration for restricted attachment type,allowed attachment size and file storage location
+/*****************************************************************************************************/
+aip.restricted.attachment.type=['EXE','MP3']
+aip.allowed.attachment.max.size='26214400'
+aip.attachment.file.storage.location='AIP'
+
+
+/** *****************************************************************************
+ *                  BDM Configurations                                          *
+ ***************************************************************************** **/
+  bdm.enabled = true
+  bdmserver {
+    AXWebServicesUrl = 'http://149.24.38.80/AppXtenderServices/axservicesinterface.asmx'
+   /** URL of BDM sever ax service interface */
+   AXWebAccessURL = 'http://149.24.38.80/appxtender/' /** URL of BDM sever */
+   Username = 'BGAIP' /**SYSOP  User Name on BDM sever */
+   Password = '0BFC1D30B9514FDAC24831EB14AEB53A'/** xscm ''  User Password on BDM sever */
+   BdmDataSource = 'B80H' /** Data source */
+   AppName = 'B-G-DOCS' /** Application Name */
+   file.location = '/u02/Tomcat7/BDM_DOCUMENTS_FOLDER'/** Location of BDM Document folder. Example C:/BDM_DOCUMENTS_FOLDER/ on Windows or /u02/Tomcat7/BDM_DOCUMENTS_FOLDER in Linux: */
+   defaultFileSize =3
+   defaultfile.ext=['EXE']
+  }
+
+ssconfig.app.seeddata.keys = [['BCMLOCATION'], ['BANNER_AIP_BLOCK_PROCESS_PERSONA'],['aip.restricted.attachment.type'],['aip.allowed.attachment.max.size'],['aip.attachment.file.storage.location'],['bdmserver.AXWebServicesUrl'],['bdmserver.AXWebAccessURL'],['bdmserver.Username'],['bdmserver.BdmDataSource'],['bdmserver.AppName'],['bdmserver.file.location'],['bdmserver.defaultFileSize'],['bdmserver.defaultfile.ext'],['bdm.enabled']]
+
 
 /*******************************************************************************
  *                                                                             *
