@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2009-2018 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2019 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 import grails.util.Environment
@@ -261,6 +261,15 @@ if (Environment.current == Environment.PRODUCTION) {
             }
         }
 
+        root.appendNode {
+            'resource-ref'{
+                'description'('BannerCommmgr Datasource')
+                'res-ref-name'('jdbc/bannerCommmgrDataSource')
+                'res-type'('javax.sql.DataSource')
+                'res-auth'('Container')
+            }
+        }
+        
         webXmlFile.text = new StreamingMarkupBuilder().bind {
             mkp.declareNamespace("": "http://java.sun.com/xml/ns/javaee")
             mkp.yield(root)
