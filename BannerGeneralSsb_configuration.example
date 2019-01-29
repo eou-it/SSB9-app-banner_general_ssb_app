@@ -375,6 +375,16 @@ pageBuilder {
     // debugRoles = "ROLE_GPBADMN_BAN_DEFAULT_PAGEBUILDER_M"
 }
 
+/** *****************************************************************************
+ *                                                                              *
+ *               Configuration for Payment Gateway                              *
+ *                                                                              *
+ ***************************************************************************** **/
+proxy.payment.gateway = [
+                PAYVEND_URL : 'https://<Payment_Gateway_URL>',
+                PAYVEND_VENDOR : '<Payment_Vendor_Name>'
+                ]
+
 
 /** *****************************************************************************
  *                                                                              *
