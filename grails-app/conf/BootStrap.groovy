@@ -149,7 +149,7 @@ class BootStrap {
         log.info( "Executing Bootstrap.destroy" )
         actionItemPostMonitor.shutdown()
         actionItemPostWorkProcessingEngine.stopRunning()
-        actionItemPostJobProcessingEngine.stopRunning()
+        actionItemJobProcessingEngine.stopRunning()
     }
 
 
