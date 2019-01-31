@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2019 Ellucian Company L.P. and its affiliates.
  *********************************************************************************/
 
 /** ****************************************************************************
@@ -188,7 +188,16 @@ ssbPassword.reset.enabled = true //true  - allow Pidm users to reset their passw
 //false - throws functionality disabled error message
 
 // In CAS and SAML modes, set to true to allow API calls to bypass single sign-on authentication
+// Set to true if enabling the Proxy application
 guestAuthenticationEnabled = false
+
+/** ****************************************************************************
+ *                                                                             *
+ *              Commmgr User DataSource Configuration                          *
+ *                                                                             *
+ *******************************************************************************/
+commmgrDataSourceEnabled = false  //Set this to true if using the bannerCommmgrDataSource
+
 
 // Product and application name to refer to this app for name display rules
 productName = "General"
@@ -337,7 +346,7 @@ grails.plugin.springsecurity.homePageUrl = 'http://HOST:PORT/'
 banner.theme.url = '<UPDATE_ME>' //Required only if theme server is remote.
 //References the URL to the application hosting the Theme Server Example : http://hostname:port/BannerGeneralSsb/ssb/theme
 banner.theme.name = '<UPDATE_ME>' // This is the desired theme name to use. In a MEP environment, the application uses the MEP code as the theme name instead of the banner.theme.name . A theme by this name must be created in the Theme Editor on the server specified by banner.theme.url
-banner.theme.template = 'BannerGeneralSsb' // This is the name of the scss file containing the theme settings in war file.
+banner.theme.template = 'BannerGeneralSsb-9_3' // This is the name of the scss file containing the theme settings in war file.
 banner.theme.cacheTimeOut = 120 // seconds, required only if the app is theme server. The value indicates how long the CSS file that was generated using the template and the theme is cached.
 
 /******************************************************************************
@@ -455,6 +464,9 @@ configJob.delay = 60000
 configJob.interval = 120000
 configJob.actualCount = -1
 
+/** *****************************************************************************
+ *                  Action Item processing Configurations                       *
+ ***************************************************************************** **/
 aip {
     weblogicDeployment = false
 
