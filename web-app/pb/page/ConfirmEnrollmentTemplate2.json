@@ -1,7 +1,7 @@
 {
    "constantName": "ConfirmEnrollmentTemplate2",
    "extendsPage": null,
-   "fileTimestamp": "2018-12-26T06:35:18Z",
+   "fileTimestamp": "2019-01-31T21:55:33Z",
    "modelView": {
       "components": [
          {
@@ -48,6 +48,7 @@
                         "loadInitially": true,
                         "model": "SFRENSP_TERM_CODE",
                         "name": "filterTerm",
+                        "onUpdate": "params.isResponseModified = true;",
                         "required": false,
                         "sourceModel": "TermCodeData",
                         "sourceParameters": {},
@@ -98,7 +99,7 @@
                         "model": "STATUS_RULE_ID",
                         "name": "ConfirmEnrollmentConfirmationAgree",
                         "onLoad": "$(\"#PBContent\").css({'margin-bottom':'30px'});",
-                        "onUpdate": "var responsesLength=$SelectedResponses.$data.length;\nvar count=0;\nfor (var k=0;k<responsesLength;k++)\n{\nif ($SelectedResponses.$data[k].STATUS_NAME ===  'Completed')\n{\ncount++;\n}\n}\nif (responsesLength===count){\n$(\"#pbid-ConfirmEnrollmentComplete\").removeClass(\"disabled\")\n}",
+                        "onUpdate": "var responsesLength=$SelectedResponses.$data.length;\nvar count=0;\nfor (var k=0;k<responsesLength;k++)\n{\nif ($SelectedResponses.$data[k].STATUS_NAME ===  'Completed')\n{\ncount++;\n}\n}\nif (responsesLength===count){\n$(\"#pbid-ConfirmEnrollmentComplete\").removeClass(\"disabled\");\n}\nparams.isResponseModified = true;",
                         "required": false,
                         "sourceModel": "ActionItemStatus",
                         "sourceParameters": {
