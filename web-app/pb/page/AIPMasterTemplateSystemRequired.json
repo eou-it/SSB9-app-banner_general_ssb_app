@@ -1,7 +1,7 @@
 {
    "constantName": "AIPMasterTemplateSystemRequired",
    "extendsPage": null,
-   "fileTimestamp": "2018-12-24T11:14:01Z",
+   "fileTimestamp": "2019-02-01T04:48:33Z",
    "modelView": {
       "components": [
          {
@@ -109,7 +109,7 @@
                   "model": "ActionItemContent",
                   "name": "ActionItemContentDetail",
                   "newRecordLabel": "",
-                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}",
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}\n$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop('disabled', false);",
                   "onLoad": "setTimeout( function(){ \n    console.log(\"status count \" + $ActionItemContentDetail.STATUS_COUNT);\n    $ActionItemStatusAgree.$load();\n}, \n300);",
                   "onSave": "",
                   "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true});\nwindow.params.saved=true;",
