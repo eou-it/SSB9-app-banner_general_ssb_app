@@ -1,7 +1,7 @@
 {
    "constantName": "CurrentProgrammeOfStudyInformationTemplate2",
    "extendsPage": null,
-   "fileTimestamp": "2018-12-29T07:49:46Z",
+   "fileTimestamp": "2019-01-31T21:55:33Z",
    "modelView": {
       "components": [
          {
@@ -42,7 +42,7 @@
                   "loadInitially": true,
                   "model": "",
                   "name": "filterTerm",
-                  "onUpdate": "$ProgrammeRelated.$visible=true;\n$ProgrammeDetails.$load();\n$StudyPathRelated.$visible=true;\n$StudyPathDetails.$load();\n$CurrentProgrammeofStudyinformationConfirmation.$load();\n$CurrentProgrammeofStudyinformationConfirmationAgree.$load();\n$(\"#pbid-CurrentProgrammeofStudyinformationComplete\").removeClass(\"hide\");",
+                  "onUpdate": "$ProgrammeRelated.$visible=true;\n$ProgrammeDetails.$load();\n$StudyPathRelated.$visible=true;\n$StudyPathDetails.$load();\n$CurrentProgrammeofStudyinformationConfirmation.$load();\n$CurrentProgrammeofStudyinformationConfirmationAgree.$load();\n$(\"#pbid-CurrentProgrammeofStudyinformationComplete\").removeClass(\"hide\");\nparams.isResponseModified = true;",
                   "required": false,
                   "sourceModel": "TermCodeData",
                   "sourceParameters": {},
@@ -230,7 +230,7 @@
                         "model": "STATUS_RULE_ID",
                         "name": "CurrentProgrammeofStudyinformationConfirmationAgree",
                         "onLoad": "$(\"#PBContent\").css({'margin-bottom':'30px'})",
-                        "onUpdate": "$(\"#pbid-CurrentProgrammeofStudyinformationComplete\").removeClass(\"disabled\")",
+                        "onUpdate": "$(\"#pbid-CurrentProgrammeofStudyinformationComplete\").removeClass(\"disabled\");\nparams.isResponseModified = true;",
                         "required": false,
                         "sourceModel": "ActionItemStatus",
                         "sourceParameters": {

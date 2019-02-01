@@ -1,7 +1,7 @@
 {
    "constantName": "AIPMasterTemplateSystemRequired",
    "extendsPage": null,
-   "fileTimestamp": "2018-12-24T11:14:01Z",
+   "fileTimestamp": "2019-02-01T04:48:33Z",
    "modelView": {
       "components": [
          {
@@ -92,6 +92,7 @@
                         "model": "STATUS_RULE_ID",
                         "name": "ActionItemStatusAgree",
                         "onLoad": "setTimeout( function(){ \n   var isCheckbox =  $ActionItemContentDetail.STATUS_COUNT === 1? true:false\n   if ( isCheckbox) {\n         // console.log(\"need checkbox\");\n\tvar radio = document.getElementById(\"pbid-ActionItemStatusAgree-radio-0-0\");\n\tradio.type = \"checkbox\"; \n    }\n   var isResponseReviewRequired = false;\n    if (typeof $ReviewStatus !==  'undefined' ){\n        isResponseReviewRequired = true;\n        if ( isCheckbox) {\n             $(\"input[type='checkbox']\").prop({disabled: isResponseReviewRequired });\n          } else{\n             $(\"input[type='radio']\").prop({disabled: isResponseReviewRequired });\n        }\n    } else{\n       $(\"#pbid-ActionItemContentDetail-save-button\").click(function(){\n       var selectedResponse = isCheckbox ? \"pbid-ActionItemStatusAgree-radio-0-0\" : $(\"input[type='radio']:checked\")[0].id;\n          var responseElementId  = selectedResponse .split(\"pbid-ActionItemStatusAgree-radio-0-\");\n          isResponseReviewRequired  = data[parseInt(responseElementId  [1])].STATUS_REV_REQ_IND === 'Y'? true:false\n         if(isResponseReviewRequired){\n                if ( isCheckbox) {\n                         $(\"input[type='checkbox']\").prop({disabled: isResponseReviewRequired });\n                 } else{\n                         $(\"input[type='radio']\").prop({disabled: isResponseReviewRequired });\n                 }\n                $(\"#pbid-ActionItemContentDetail-save-button\").prop({disabled: isResponseReviewRequired });\n         }\n        });\n    }\n},300);",
+                        "onUpdate": "params.isResponseModified = true;",
                         "required": false,
                         "sourceModel": "ActionItemStatus",
                         "sourceParameters": {
@@ -109,7 +110,7 @@
                   "model": "ActionItemContent",
                   "name": "ActionItemContentDetail",
                   "newRecordLabel": "",
-                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}",
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}\n$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop('disabled', false);",
                   "onLoad": "setTimeout( function(){ \n    console.log(\"status count \" + $ActionItemContentDetail.STATUS_COUNT);\n    $ActionItemStatusAgree.$load();\n}, \n300);",
                   "onSave": "",
                   "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true});\nwindow.params.saved=true;",
