@@ -399,7 +399,7 @@ aip.attachment.file.storage.location='AIP'	/* File storage location. Possible va
 /** *****************************************************************************
  *                  BDM Configurations                                          *
  ***************************************************************************** **/
-  bdm.enabled = true
+  bdm.enabled = false
   bdmserver {
 	AXWebServicesUrl = 'http://<APPXTENDER_HOST_IP>/AppXtenderServices/axservicesinterface.asmx'
 	/* URL of ApplicationXtender Web Services */
@@ -415,10 +415,32 @@ aip.attachment.file.storage.location='AIP'	/* File storage location. Possible va
    *                  ClamAV Antivirus Scanner Configurations                     *
    ***************************************************************************** **/
    clamav.enabled = false
-   clamav.host = <CLAMD_HOST_IP> 		/*Host IP address where the ClamAV daemon ( clamd ) is running. Default is '127.0.0.1' */
-   clamav.port = <CLAMD_PORT>				/* Port on which clamd process is listening. Default is 3310*/
-   clamav.connectionTimeout = <TIME_IN_MILLISECONDS> 	/* Connection timeout to connect to clamd process.Time in milliseconds. Default is 5000*/
+   clamav.host = '127.0.0.1' 		/*Host IP address where the ClamAV daemon ( clamd ) is running. Default is '127.0.0.1' */
+   clamav.port = 3310				/* Port on which clamd process is listening. Default is 3310*/
+   clamav.connectionTimeout = 5000 	/* Connection timeout to connect to clamd process.Time in milliseconds. Default is 5000*/
+   
+/* Here are 3 patterns to use to configure the keys
 
+Pattern 1 - With key and value
+Syntax:
+ssconfig.app.seeddata.keys = [
+['<Key1>': <Boolean value>], ['<Key2>': <Boolean Value2>], ['<Key3>': '<String Value>'], ['<Key4>':<Numeric value>]
+]
+
+Pattern 2 - With key only (value derived from configuration files)
+Syntax:
+ssconfig.app.seeddata.keys = [
+['<Key1>'], ['<Key2>'], ['<Key3>'], ['<Key4>']
+]
+
+Pattern 3 - Combination of Pattern 1 and 2 - With key only and key/value pairs.
+Syntax:
+ssconfig.app.seeddata.keys = [
+['<Key1>': <Boolean value>], ['<Key2>'], ['<Key3>': '<String Value>'], ['<Key4>']
+]
+
+*/
+//Below are keys configured using pattern 2
 ssconfig.app.seeddata.keys = [
 	['BCMLOCATION'],
 	['BANNER_AIP_BLOCK_PROCESS_PERSONA'],
