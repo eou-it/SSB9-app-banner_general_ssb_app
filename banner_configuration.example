@@ -108,7 +108,7 @@ bannerSsbDataSource {
     //elvyx.url    = "jdbc:elvyx://localhost:4448/?elvyx.real_driver=${bannerSsbDataSource.driver}&elvyx.real_jdbc=${bannerSsbDataSource.url}&user=${bannerSsbDataSource.username}&password=${bannerSsbDataSource.password}"
 }
 
-****************************************************************************
+/****************************************************************************
  *                                                                             *
  *              Commmgr User DataSource Configuration                          *
  *                                                                             *
@@ -123,7 +123,7 @@ bannerCommmgrDataSource {
 
     username = "commmgr"
     password = "PASSWORD"
-    driver   = "oracle.jdbc.OracleDriver"Local configuration for use in 'development' and 'test' environments
+    driver   = "oracle.jdbc.OracleDriver"
 
 
     // Local configuration for using elvyx to view SQL statements that are bound. To enable this driver, simply uncomment the

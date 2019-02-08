@@ -106,7 +106,7 @@ log4j = {
                 error 'appLog'
                 additivity = true
             }
-            debug 'net.hedtech.banner.aip.filter.GateKeepingFilters'
+            error 'net.hedtech.banner.aip.filter.GateKeepingFilters'
             error 'grails.app.service'
             error 'grails.app.controller'
             info 'net.hedtech.banner.representations'
