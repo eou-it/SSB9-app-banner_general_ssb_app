@@ -411,7 +411,7 @@ GENERALLOCATION='http://<HOST_NAME>:<PORT>/BannerGeneralSsb' // Example localhos
 /*****************************************************************************************************/
  // AIP Configuration for restricted attachment type, allowed attachment size and file storage location
 /*****************************************************************************************************/
-    aip.restricted.attachment.type=['EXE','MP3']/* AIP restricted file types*/
+    aip.restricted.attachment.type=['EXE']/* AIP restricted file types*/
     aip.allowed.attachment.max.size='26214400' 	/* AIP file size in KB*/
     aip.attachment.file.storage.location='AIP'	/* File storage location. Possible values are 'AIP' and 'BDM'. Default is 'AIP'*/
 
@@ -419,22 +419,23 @@ GENERALLOCATION='http://<HOST_NAME>:<PORT>/BannerGeneralSsb' // Example localhos
 /** *****************************************************************************
  *                  BDM Configurations                                          *
  ***************************************************************************** **/
-    bdm.enabled = false
-    bdmserver {
-        AXWebServicesUrl = 'http://<APPXTENDER_HOST_IP>/AppXtenderServices/axservicesinterface.asmx'
-        /* URL of ApplicationXtender Web Services */
-        AXWebAccessURL = 'http://<APPXTENDER_HOST_IP>/appxtender/' /* URL of ApplicationXtender Web Access */
-        Username = '<UPDATE ME>'         /* Name of AX Application User */
-        BdmDataSource = '<UPDATE ME>'     /* Data source of AX Application */
-        AppName = 'B-G-DOCS'             / *Name of AX Application. Use 'B-G-DOCS' for documents related to Banner General Self Service Application*/
-        file.location = '<UPDATE ME>'    /* Location of BDM Document folder. Example C:/BDM_DOCUMENTS_FOLDER/ on Windows or /u02/Tomcat7/BDM_DOCUMENTS_FOLDER in Linux: */
-        defaultFileSize = 3                / *BDM file size in MB.*/
-        defaultfile.ext=['EXE']            /* BDM restricted file types */
+  bdm.enabled = false
+  bdmserver {
+	AXWebServicesUrl = 'http://<APPXTENDER_HOST_IP>/AppXtenderServices/axservicesinterface.asmx'
+	/* URL of ApplicationXtender Web Services */
+	AXWebAccessURL = 'http://<APPXTENDER_HOST_IP>/appxtender/' /* URL of ApplicationXtender Web Access */
+	Username = '<UPDATE ME>' 		/* Name of AX Application User */
+	BdmDataSource = '<UPDATE ME>' 	/* Data source of AX Application */
+	AppName = 'B-G-DOCS' 			/* Name of AX Application. Use 'B-G-DOCS' for documents related to Banner General Self Service Application*/
+	file.location = '<UPDATE ME>'	/* Location of BDM Document folder. Example C:/BDM_DOCUMENTS_FOLDER/ on Windows or /u02/Tomcat7/BDM_DOCUMENTS_FOLDER in Linux: */
+	defaultFileSize = 3				/* BDM file size in MB.*/
+	defaultfile.ext=['EXE']			/* BDM restricted file types */
   }
   /** *****************************************************************************
    *                  ClamAV Antivirus Scanner Configurations                     *
    ***************************************************************************** **/
    clamav.enabled = false
+
    clamav.host = '<CLAMD_HOST_IP>' 	  /*Host IP address where the ClamAV daemon ( clamd ) is running. Default is '127.0.0.1' */
    clamav.port = '<CLAMD_PORT>'		  /* Port on which clamd process is listening. Default is 3310*/
    clamav.connectionTimeout = 5000 	  /* Connection timeout to connect to clamd process.Time in milliseconds. Default is 5000*/
@@ -473,9 +474,9 @@ ssconfig.app.seeddata.keys = [
 ['<Key1>': <Boolean value>], ['<Key2>'], ['<Key3>': '<String Value>'], ['<Key4>']
 ]
 
-**************************************************************************************/
+*/
+//Below are keys configured using pattern 2
 ssconfig.app.seeddata.keys = [
-
 	['BCMLOCATION'],
     ['GENERALLOCATION'],
 	['BANNER_AIP_BLOCK_PROCESS_PERSONA'],

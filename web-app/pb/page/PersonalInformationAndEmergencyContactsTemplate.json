@@ -1,7 +1,7 @@
 {
    "constantName": "PersonalInformationAndEmergencyContactsTemplate",
    "extendsPage": null,
-   "fileTimestamp": "2018-12-29T07:45:01Z",
+   "fileTimestamp": "2019-01-31T21:55:33Z",
    "modelView": {
       "components": [
          {
@@ -94,6 +94,7 @@
                               "loadInitially": false,
                               "model": "SPBPERS_PREF_FIRST_NAME",
                               "name": "PreferredFirstName",
+                              "onUpdate": "params.isResponseModified = true;",
                               "parameters": {},
                               "readonly": false,
                               "required": true,
@@ -106,6 +107,7 @@
                               "model": "SPBPERS_BIRTH_DATE",
                               "name": "DateOfBirth",
                               "onLoad": "",
+                              "onUpdate": "params.isResponseModified = true;",
                               "parameters": {},
                               "readonly": false,
                               "required": true,
@@ -118,6 +120,7 @@
                               "loadInitially": true,
                               "model": "SPBPERS_PPRN_CODE",
                               "name": "PreferredPronoun",
+                              "onUpdate": "params.isResponseModified = true;",
                               "required": false,
                               "sourceModel": "PronounData",
                               "sourceParameters": {},
@@ -130,6 +133,7 @@
                               "loadInitially": true,
                               "model": "SPBPERS_GNDR_CODE",
                               "name": "GenderIdentification",
+                              "onUpdate": "params.isResponseModified = true;",
                               "required": false,
                               "sourceModel": "GenderData",
                               "sourceParameters": {},
@@ -205,6 +209,7 @@
                               "loadInitially": true,
                               "model": "EMERGENCY_STATUS_AGREE",
                               "name": "EmergencyContactsAgree",
+                              "onUpdate": "params.isResponseModified = true;",
                               "readonly": false,
                               "type": "boolean",
                               "value": "EMERGENCY_STATUS_AGREE"
@@ -241,7 +246,7 @@
                         "model": "STATUS_RULE_ID",
                         "name": "PersonalAndEmergencyContactsDetailsAgree",
                         "onLoad": "$(\"#pbid-FirstName-0\").attr( \"disabled\", \"disabled\" )\n$(\"#pbid-MiddleName-0\").attr(\"disabled\",\"disabled\")\n$(\"#pbid-LastName-0\").attr(\"disabled\",\"disabled\")\n$(\"#PBContent\").css({'margin-bottom':'30px'})",
-                        "onUpdate": "$(\"#pbid-PersonalAndEmergencyDetailsSave\").removeClass(\"disabled\")",
+                        "onUpdate": "$(\"#pbid-PersonalAndEmergencyDetailsSave\").removeClass(\"disabled\");\nparams.isResponseModified = true;",
                         "required": false,
                         "sourceModel": "ActionItemStatus",
                         "sourceParameters": {
