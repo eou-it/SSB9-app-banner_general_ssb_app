@@ -26,7 +26,6 @@ class BootStrap {
 
     private static final log = Logger.getLogger( BootStrap.class)
     def dateConverterService
-    def sqlFileLoadService
 
     def localizer = {mapToLocalize ->
         new ValidationTagLib().message( mapToLocalize )
