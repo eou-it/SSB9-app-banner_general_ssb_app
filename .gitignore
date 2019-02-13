@@ -35,5 +35,5 @@ grails-app/i18n/messages_en_PS.properties
 bannerTransform.jar
 .slcache/
 *.imp
-web-app/css/theme/BannerGeneralSsb.scss
+web-app/css/theme/BannerGeneralSsb-9_3.scss
 

@@ -278,8 +278,6 @@ grails.plugin.springsecurity.interceptUrlMap = [
         '/cssManager/**'                     : [pageBuilder.adminRoles],
         '/admin/i18n/**'                     : [pageBuilder.adminRoles],
         '/cssRender/**'                      : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        //Restict access to newly created pages, it will be overriden once role is assigned
-        '/customPage/page/**'                : ['IS_AUTHENTICATED_FULLY'],
         //Page Builder master template included to allow for users to pass in without needing role applied in requestmap table in extz app.
         '/customPage/page/AIPMasterTemplateSystemRequired/**'   : ['IS_AUTHENTICATED_FULLY'],
         //For now use a page builder dummy page for cas aut
