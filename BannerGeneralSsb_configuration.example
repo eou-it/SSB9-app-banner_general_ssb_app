@@ -414,7 +414,7 @@ GENERALLOCATION='http://<HOST_NAME>:<PORT>/BannerGeneralSsb' // Example localhos
     aip.restricted.attachment.type=['EXE']/* AIP restricted file types*/
     aip.allowed.attachment.max.size='26214400' 	/* AIP file size in KB*/
     aip.attachment.file.storage.location='AIP'	/* File storage location. Possible values are 'AIP' and 'BDM'. Default is 'AIP'*/
-
+    aip.institution.maximum.attachment.number=10      /* Maximum number of attachments for each response that can be uploaded for an action item*/
 
 /** *****************************************************************************
  *                  BDM Configurations                                          *
@@ -482,6 +482,7 @@ ssconfig.app.seeddata.keys = [
 	['BANNER_AIP_BLOCK_PROCESS_PERSONA'],
 	['aip.restricted.attachment.type'],
 	['aip.allowed.attachment.max.size'],
+	['aip.institution.maximum.attachment.number'],
 	['aip.attachment.file.storage.location'],
 	['bdmserver.AXWebServicesUrl'],
 	['bdmserver.AXWebAccessURL'],
