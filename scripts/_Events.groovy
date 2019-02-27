@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2009-2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2019 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 import grails.util.Environment
@@ -81,6 +81,14 @@ eventCreateWarStart = { warName, stagingDir ->
 
     preparePlugin("banner-general-personal-information-ui") { name, version, pluginDirectory ->
         println "Copying i18n files from banner-general-personal-information-ui plugin"
+
+        Ant.copy(todir: "${stagingDir}/WEB-INF/plugins/$name-$version/grails-app/i18n") {
+            fileset(dir: "${pluginDirectory}/grails-app/i18n")
+        }
+    }
+
+    preparePlugin("banner-general-proxy") { name, version, pluginDirectory ->
+        println "Copying i18n files from banner-general-proxy plugin"
 
         Ant.copy(todir: "${stagingDir}/WEB-INF/plugins/$name-$version/grails-app/i18n") {
             fileset(dir: "${pluginDirectory}/grails-app/i18n")
@@ -189,6 +197,7 @@ eventCreateWarStart = { warName, stagingDir ->
     ant.delete(file:"${stagingDir}/WEB-INF/lib/xml-apis-1.3.04.jar")
     ant.delete(file:"${stagingDir}/WEB-INF/lib/xercesImpl-2.10.0.jar")
     ant.delete(file:"${stagingDir}/WEB-INF/lib/xercesImpl-2.11.0.jar")
+    ant.delete(file:"${stagingDir}/WEB-INF/lib/stax-api-1.0.1.jar")
 
     ant.delete(dir: "${stagingDir}/WEB-INF/classes/functionaltestplugin")
     ant.delete(dir: "${stagingDir}/plugins/functional-test-2.0.0")
@@ -206,6 +215,9 @@ eventCreateWarStart = { warName, stagingDir ->
     ant.delete(dir: "${stagingDir}/WEB-INF/plugins/tomcat*")
 
     ant.delete(file:"${stagingDir}/WEB-INF/lib/com.springsource.org.jasig.cas.client-3.1.8.jar")
+    ant.delete(file:"${stagingDir}/WEB-INF/lib/bcprov-jdk15on-1.51.jar") 
+    ant.delete(file:"${stagingDir}/WEB-INF/lib/bcprov-jdk14-1.38.jar")
+    ant.delete(file:"${stagingDir}/WEB-INF/lib/bcprov-jdk14-138.jar")
 
     def grailsXmlFile = new File("${stagingDir}/WEB-INF/grails.xml")
     if (grailsXmlFile.exists()) {
@@ -250,6 +262,15 @@ if (Environment.current == Environment.PRODUCTION) {
             }
         }
 
+        root.appendNode {
+            'resource-ref'{
+                'description'('BannerCommmgr Datasource')
+                'res-ref-name'('jdbc/bannerCommmgrDataSource')
+                'res-type'('javax.sql.DataSource')
+                'res-auth'('Container')
+            }
+        }
+        
         webXmlFile.text = new StreamingMarkupBuilder().bind {
             mkp.declareNamespace("": "http://java.sun.com/xml/ns/javaee")
             mkp.yield(root)

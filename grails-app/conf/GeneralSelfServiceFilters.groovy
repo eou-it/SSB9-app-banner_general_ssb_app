@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2017-2019 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
 
 import net.hedtech.banner.general.GeneralSsbConfigService
@@ -30,7 +30,7 @@ class GeneralSelfServiceFilters {
             }
         }
 
-        controlAccessToActionIteam( controller: 'aip', action: '*', actionExclude: 'admin' ) {
+        controlAccessToActionIteam( controller: 'aip|aipAdmin|aipReview|aipActionItemPosting|aipDocumentManagement|BCM|aipPageBuilder',action:'*' ) {
             before = {
                 if (generalSsbConfigService.getParamFromSession( GeneralSsbConfigService.ENABLE_ACTION_ITEM, 'Y' ) != 'Y') {
                     redirect( controller: "error", action: "accessForbidden" )

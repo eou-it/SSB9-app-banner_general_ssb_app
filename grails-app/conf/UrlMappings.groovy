@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2013-2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2013-2018 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 
@@ -172,6 +172,11 @@ class UrlMappings {
         "/resetPassword/logout/timeout" {
             controller = "logout"
             action = "timeout"
+        }
+
+        "/resetPinAction" {
+            controller = "general"
+            action = "resetPinAction"
         }
 
         // ------------------- RESTful API end points - BEGIN --------------------

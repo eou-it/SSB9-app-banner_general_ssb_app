@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2013-2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2013-2018 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 // Support Hibernate annotations
@@ -34,7 +34,8 @@ hibernate {
             "classpath:hibernate-banner-aip-gate-keeper.cfg.xml",
             "classpath:hibernate-banner-aip.cfg.xml",
             "classpath:hibernate-banner-general-utility.cfg.xml",
-            "classpath:hibernate-banner-sspb.cfg.xml"
+            "classpath:hibernate-banner-sspb.cfg.xml",
+            "classpath:hibernate-banner-student-history.cfg.xml"
     ]
 }
 

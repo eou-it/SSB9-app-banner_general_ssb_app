@@ -73,11 +73,22 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', 'gener
                         {
                             title: 'banner.generalssb.landingpage.actionitemadmin.title',
                             desc: 'banner.generalssb.landingpage.actionitemadmin.description',
-                            url: $scope.applicationContextRoot +'/ssb/aip/#/landing',
+                            url: $scope.applicationContextRoot +'/ssb/aipAdmin/#/landing',
                             icon: '../images/action_items_icon.svg',
                             roles: [AIPADMIN]
                         }
                     );
+                }
+
+
+                if(generalConfigResolve.isProxyManagementEnabled && generalConfigResolve.proxyManagementUrl !== -1) {
+                    $scope.proxyMgmtTile =
+                    {
+                        title: 'banner.generalssb.landingpage.proxyMgmt.title',
+                        desc: 'banner.generalssb.landingpage.proxyMgmt.description',
+                        url: generalConfigResolve.proxyManagementUrl,
+                        icon: '../images/Proxy_management1.png'
+                    };
                 }
 
                 generalSsbService.getRoles().$promise.then(function (response) {
@@ -88,22 +99,6 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', 'gener
                     $scope.isSingleTile = $scope.appTilesForRole.length === 1;
                 });
 
-                // Get user name for display
-                generalSsbService.getFromPersonalInfo('PersonalDetails').$promise.then(function (response) {
-                    var firstName = response && response.preferenceFirstName;
-
-                    if (firstName) {
-                        $scope.firstName = firstName;
-                    } else {
-                        generalSsbService.getFromPersonalInfo('UserName').$promise.then(function (response) {
-                            firstName = response && response.firstName;
-
-                            if (firstName) {
-                                $scope.firstName = firstName;
-                            }
-                        });
-                    }
-                });
 
                 generalSsbService.getFromPersonalInfo('BannerId').$promise.then(function (response) {
                     $scope.bannerId = response.bannerId;
@@ -116,6 +111,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', 'gener
         // --------------------
         $scope.piConfig = {};
         $scope.appTiles = [];
+        $scope.proxyTiles = [];
         $scope.isStudent;
         $scope.isEmployee;
         $scope.appTilesForRole;

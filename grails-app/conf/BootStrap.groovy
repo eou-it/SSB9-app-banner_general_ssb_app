@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2013-2018 Ellucian Company L.P. and its affiliates.
+ Copyright 2013-2019 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 import grails.converters.JSON
@@ -24,7 +24,7 @@ import org.codehaus.groovy.grails.web.converters.configuration.DefaultConverterC
  * */
 class BootStrap {
 
-    def log = Logger.getLogger( this.getClass() )
+    private static final log = Logger.getLogger( BootStrap.class)
     def dateConverterService
 
     def localizer = {mapToLocalize ->
@@ -74,6 +74,7 @@ class BootStrap {
             setTestOnReturn( false )
             setValidationQuery( "select 1 from dual" )
         }*/
+
 
         if (Environment.current != Environment.TEST) {
             // println("Reading format from ${servletContext.getRealPath("/xml/application.navigation.conf.xml" )}")

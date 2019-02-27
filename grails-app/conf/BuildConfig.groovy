@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2015-2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 grails.project.dependency.resolver = "maven"
@@ -20,6 +20,7 @@ grails.plugin.location.'banner-aip-ui'                      = "plugins/banner_ai
 grails.plugin.location.'banner-aip-gate-keeper'                      = "plugins/banner_aip_gate_keeper.git"
 grails.plugin.location.'banner-general-direct-deposit-ui' = "plugins/banner_general_direct_deposit_ui.git"
 grails.plugin.location.'banner-general-personal-information-ui' = "plugins/banner_general_personal_information_ui.git"
+grails.plugin.location.'banner-general-proxy' = "plugins/banner_general_proxy.git"
 
 grails.project.dependency.resolution = {
 
@@ -38,12 +39,13 @@ grails.project.dependency.resolution = {
     plugins {
         compile ':zipped-resources:1.0'
         compile ':cached-resources:1.0'
-        compile ':yui-minify-resources:0.1.5'
+        compile ':yui-minify-resources:0.1.4'
         compile ':cache-headers:1.1.7'
         test ':code-coverage:2.0.3-3'
         runtime ":rendering:1.0.0"
         compile ':csv:0.3.1'
         compile ':feeds:1.5'
+        compile ":functional-test:2.0.0"
     }
 
     dependencies {

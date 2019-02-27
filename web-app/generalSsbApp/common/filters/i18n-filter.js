@@ -1,3 +1,6 @@
+/********************************************************************************
+  Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
+********************************************************************************/
 angular.module('I18n', []).
     filter('i18n', function () {
         return function (key, data) {
@@ -8,6 +11,6 @@ angular.module('I18n', []).
                     value = value.replace(regexp, data[i] !== undefined ? data[i] : '' );
                 }
             }
-            return value
+            return value;
         };
     });

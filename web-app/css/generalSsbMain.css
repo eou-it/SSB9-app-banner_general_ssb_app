@@ -1,5 +1,5 @@
 /********************************************************************************
-  Copyright 2017 Ellucian Company L.P. and its affiliates.
+  Copyright 2017-2018 Ellucian Company L.P. and its affiliates.
 ********************************************************************************/
 /* General Styles */
 body {
@@ -27,7 +27,7 @@ svg.hide-svg {
 
 .gen-home-main-view {
     height: 100%;
-    background: #EFF4F8;
+    background: #F8F8F8;
 }
 
 h2 {
@@ -59,7 +59,7 @@ h2 {
 
 .gen-home-heading .title {
     font-size: 28px;
-    color: #888D91;
+    color: #484849;
     padding-bottom: 25px;
 }
 
@@ -86,7 +86,7 @@ h2 {
 
 .gen-home-heading .greeting {
     font-size: 16px;
-    color: #888D91;
+    color: #484849;
     margin-top: 10px;
 }
 
@@ -111,6 +111,7 @@ h2 {
 .gen-app-tile {
     float: left;
     margin-right: 15px;
+    margin-top: 10px;
     padding: 15px 15px 0;
     text-align: center;
     border: none;
@@ -118,6 +119,13 @@ h2 {
     overflow: hidden;
     background: white;
     cursor: pointer;
+}
+
+a.gen-app-tile,
+a.gen-app-tile:hover,
+a.gen-app-tile:focus,
+a.gen-app-tile:active {
+    color: #333;
 }
 
 .tile-icon {
@@ -170,3 +178,10 @@ a.breadcrumbButton.leaf-breadcrumb {
     text-decoration: none;
     cursor: default;
 }
+
+.actionpassword {
+    clear: both;
+    font-size: 0.50em;
+    text-align: left;
+}
+

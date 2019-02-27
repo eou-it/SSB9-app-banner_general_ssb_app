@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%--
 /*******************************************************************************
-Copyright 2017 Ellucian Company L.P. and its affiliates.
+Copyright 2017-2018 Ellucian Company L.P. and its affiliates.
 *******************************************************************************/
 --%>
 <!--[if IE 9 ]>    <html xmlns:ng="http://angularjs.org" ng-app="generalSsbApp" id="ng-app" class="ie9"> <![endif]-->
@@ -26,7 +26,6 @@ Copyright 2017 Ellucian Company L.P. and its affiliates.
         <g:else>
             <r:require modules="generalSsbAppLTR"/>
         </g:else>
-
     </g:applyLayout>
 
     <script type="text/javascript">
@@ -65,7 +64,6 @@ Copyright 2017 Ellucian Company L.P. and its affiliates.
 </head>
 
 <body>
-
 
 <div id="content" ng-app="generalSsbApp" class="container-fluid" aria-relevant="additions" role="main">
     <div ui-view class="gen-home-main-view"></div>

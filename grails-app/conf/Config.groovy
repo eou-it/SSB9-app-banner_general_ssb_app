@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2013-2018 Ellucian Company L.P. and its affiliates.
+ Copyright 2013-2019 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 import net.hedtech.banner.configuration.ApplicationConfigurationUtils as ConfigFinder
@@ -48,7 +48,7 @@ grails.config.locations.each {
 //
 // DO NOT EDIT THIS UUID UNLESS YOU ARE AUTHORIZED TO DO SO AND KNOW WHAT YOU ARE DOING
 //
-build.number.uuid = "f23ea34b-6469-4aa9-9778-e7efbba5de7b" // specific UUID for //TODO Need to regenerate
+build.number.uuid = "f23ea34b-6469-4aa9-9778-e7efbba5de7b" // specific UUID for
 build.number.base.url = "http://m039198.ellucian.com:8080/BuildNumberServer/buildNumber?method=getNextBuildNumber&uuid="
 
 grails.project.groupId = "net.hedtech" // used when deploying to a maven repo
@@ -151,6 +151,7 @@ formControllerMap = [
         'useragreement'             : ['SELFSERVICE'],
         'securityqa'                : ['SELFSERVICE'],
         'general'                   : ['SELFSERVICE'],
+        'proxy'                     : ['SELFSERVICE'],
         'theme'                     : ['SELFSERVICE'],
         'themeeditor'               : ['SELFSERVICE'],
         'directdeposit'             : ['SELFSERVICE-STUDENT', 'SELFSERVICE-EMPLOYEE'],
@@ -164,7 +165,9 @@ formControllerMap = [
         'personalinformationqa'     : ['SELFSERVICE'],
         //AIP//
         'aip'                       : ['SELFSERVICE'],
+        'aipdocumentmanagement'     : ['SELFSERVICE'],
         'aipadmin'                  : ['SELFSERVICE-ACTIONITEMADMIN'],
+        'aipreview'                 : ['SELFSERVICE-ACTIONITEMREVIEWER'],
         'aipactionitemposting'      : ['SELFSERVICE-ACTIONITEMADMIN'],
         'aippagebuilder'            : ['SELFSERVICE'],
         'bcm'                       : ['SELFSERVICE-ACTIONITEMADMIN',
@@ -184,7 +187,8 @@ formControllerMap = [
         'visualpagemodelcomposer'   : ['GPBADMN'],
         'cssrender'                 : ['SELFSERVICE', 'GUAGMNU'],
         'custompage'                : ['SELFSERVICE', 'GPBADMN'],
-        'userpreference'            : ['SELFSERVICE']
+        'userpreference'            : ['SELFSERVICE'],
+        'shortcut'                  : ['SELFSERVICE']
 
 ]
 
@@ -192,7 +196,7 @@ formControllerMap = [
 grails.plugin.springsecurity.useRequestMapDomainClass = false
 //grails.plugin.springsecurity.rejectIfNoRule = true
 
-grails.plugin.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
+grails.plugin.springsecurity.securityConfigType = SecurityConfigType.Requestmap
 
 grails.plugin.springsecurity.filterChain.chainMap = [
         '/api/**' : 'basicAuthenticationFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,basicExceptionTranslationFilter,filterInvocationInterceptor',
@@ -211,6 +215,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
         '/'                                  : ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/directDepositApp/**'               : ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/personalInformationApp/**'         : ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/proxyApp/**'                       : ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/resetPassword/**'                  : ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/login/**'                          : ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/index**'                           : ['IS_AUTHENTICATED_ANONYMOUSLY'],
@@ -250,9 +255,11 @@ grails.plugin.springsecurity.interceptUrlMap = [
 
         //AIP
         '/ssb/aipAdmin/**'                   : ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M'],
+        '/ssb/aipReview/**'                  : ['ROLE_SELFSERVICE-ACTIONITEMREVIEWER_BAN_DEFAULT_M'],
         '/ssb/BCM/**'                        : ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M'],
         '/ssb/aipActionItemPosting/**'       : ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M'],
         '/ssb/aip/**'                        : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
+        '/ssb/aipDocumentManagement/**'      : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
         '/ssb/aipPageBuilder/**'             : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
 
         //Page Builder
@@ -271,8 +278,6 @@ grails.plugin.springsecurity.interceptUrlMap = [
         '/cssManager/**'                     : [pageBuilder.adminRoles],
         '/admin/i18n/**'                     : [pageBuilder.adminRoles],
         '/cssRender/**'                      : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        //Restict access to newly created pages, it will be overriden once role is assigned
-        '/customPage/page/**'                : ['IS_AUTHENTICATED_FULLY'],
         //Page Builder master template included to allow for users to pass in without needing role applied in requestmap table in extz app.
         '/customPage/page/AIPMasterTemplateSystemRequired/**'   : ['IS_AUTHENTICATED_FULLY'],
         //For now use a page builder dummy page for cas aut
@@ -289,16 +294,21 @@ grails.plugin.springsecurity.interceptUrlMap = [
         '/ssb/securityQA/**'                 : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
         '/ssb/survey/**'                     : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
         '/ssb/userAgreement/**'              : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/general/**'                    : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
+        '/ssb/proxy/proxyAction/**':['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/ssb/proxy/submitActionPassword/**':['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/ssb/proxy/resetPinAction/**':['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/ssb/proxy/**'                      : ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
+        '/ssb/general/**'                    : ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
         '/ssb/directDeposit/**'              : ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M'],
         '/ssb/UpdateAccount/**'              : ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M'],
         '/ssb/accountListing/**'             : ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M'],
         '/ssb/DirectDepositConfiguration/**' : ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M'],
         '/ssb/personalInformation/**'        : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/PersonalInformationDetails/**' : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
+        '/ssb/PersonalInformationDetails/**' : ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
         '/ssb/PersonalInformationPicture/**' : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
         '/ssb/PersonalInformationQA/**'      : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/userPreference/**'             : ['IS_AUTHENTICATED_ANONYMOUSLY']
+        '/ssb/userPreference/**'             : ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/ssb/shortcut/**'                   : ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
 
 // CodeNarc rulesets
@@ -610,7 +620,6 @@ restfulApiConfig = {
     // against the actual resource being queried, but using a different URL prefix (e.g., qapi)
     // so the request is routed to the 'list' method (versus the normal 'create' method).
     resource 'query-filters' config {
-                                        // TODO: Add support for 'application/x-www-form-urlencoded'
                                         representation {
                                             mediaTypes = ["application/json"]
                                             jsonExtractor {}

@@ -1,12 +1,12 @@
 /*
  * component-library
- *
+ * 
 
- * Version: 0.0.1 - 2018-02-21
- * License: ISC
+ * Version: 9.0.0 - 2018-05-10
+ * License: Copyright 2018 Ellucian Company L.P. and its affiliates.
  */
-angular.module("xe-ui-components", ['badge','button','checkbox','dropdown','label','radiobutton','simpleTextbox','statusLabel','switch','textarea','textbox','ui.select','xeUISelect','external-resouces','utils','columnFilter','pagination','search','dataTableModule','aboutModal','pieChartModule','popupModal','tabnav','xe-ui-components-tpls']);
-angular.module('xe-ui-components-tpls', ['templates/badge.html', 'templates/button.html', 'templates/checkbox.html', 'templates/dropdown.html', 'templates/label.html', 'templates/radio-button.html', 'templates/simple-textbox.html', 'templates/statusLabel.html', 'templates/switch.html', 'templates/text-area-counter.html', 'templates/text-area.html', 'templates/text-box-char-limit.html', 'templates/text-box-password.html', 'templates/text-box.html', 'templates/column-filter.html', 'templates/pagination.html', 'templates/search.html', 'templates/dataTable.html', 'templates/dialog.html', 'templates/dialog_default.html', 'templates/modal.html', 'templates/tabNav.html', 'templates/tabPanel.html']);
+angular.module("xe-ui-components", ['badge','button','checkbox','dropdown','label','radiobutton','simpleTextbox','statusLabel','switch','textarea','textbox','ui.select','xeUISelect','external-resouces','utils','columnFilter','pagination','search','dataTableModule','aboutModal','pieChartModule','popupModal','tabnav','timePicker','xe-ui-components-tpls']);
+angular.module('xe-ui-components-tpls', ['templates/badge.html', 'templates/button.html', 'templates/checkbox.html', 'templates/dropdown.html', 'templates/label.html', 'templates/radio-button.html', 'templates/simple-textbox.html', 'templates/statusLabel.html', 'templates/switch.html', 'templates/text-area-counter.html', 'templates/text-area.html', 'templates/text-box-char-limit.html', 'templates/text-box-password.html', 'templates/text-box.html', 'templates/column-filter.html', 'templates/pagination.html', 'templates/search.html', 'templates/dataTable.html', 'templates/dialog.html', 'templates/dialog_default.html', 'templates/modal.html', 'templates/tabNav.html', 'templates/tabPanel.html', 'templates/timePicker.html', 'templates/timePicker_rtl.html']);
 
 angular.module("templates/badge.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/badge.html",
@@ -93,7 +93,7 @@ angular.module("templates/pagination.html", []).run(["$templateCache", function 
 
 angular.module("templates/search.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/search.html",
-    "<form name=\"form\" class=\"search-container\"><xe-simple-text-box input-field=\"{{searchConfig.id}}\" xe-class=\"search\" value=\"value\" place-holder=\"placeHolder\" disabled on-keydown=\"searchKeydown(data, id, event)\" on-keypress=\"searchKeypress(data, id, event)\" on-focus=\"onFocus(event)\" on-blur=\"onBlur(event)\" aria-label=\"{{::ariaLabel}}\"></xe-simple-text-box></form>");
+    "<form name=\"form\" class=\"search-container\"><xe-simple-text-box input-field=\"{{searchConfig.id}}\" xe-class=\"search\" value=\"value\" place-holder=\"{{searchConfig.placeholder}}\" on-keydown=\"searchKeydown(data, id, event)\" on-keypress=\"searchKeypress(data, id, event)\" on-focus=\"onFocus(event)\" on-blur=\"onBlur(event)\" aria-label=\"{{::ariaLabel}}\"></xe-simple-text-box></form>");
 }]);
 
 angular.module("templates/dataTable.html", []).run(["$templateCache", function ($templateCache) {
@@ -124,6 +124,16 @@ angular.module("templates/tabNav.html", []).run(["$templateCache", function ($te
 angular.module("templates/tabPanel.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/tabPanel.html",
     "<div class=\"xe-tab-container\" role=\"presentation\"><div id=\"{{ 'xe-tab-panel'+ tabIndex}}\" class=\"xe-tab-panel\" ng-show=\"active\" ng-class=\"{active: active }\" role=\"tabpanel\" aria-labelledby=\"{{'xe-tab'+ tabIndex}}\" content=\"\" aria-hidden=\"{{ !active }}\"></div></div>");
+}]);
+
+angular.module("templates/timePicker.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("templates/timePicker.html",
+    "<div class=\"xe-time-container\" role=\"presentation\"><div class=\"input-outerContainer\"><div class=\"input-container\"><input class=\"input-field xeTimePickerTextField\" name=\"{{xeName}}\" ng-model=\"displayModel\" placeholder=\"{{xeTimePlaceholder}}\" id=\"{{xeId}}\" title=\"{{'js.input.timepicker.info' | xei18n}}\" aria-label=\"{{'timepicker.textbox.aria.label' | xei18n}} {{'default.time.format' | xei18n}}\"> <button type=\"button\" class=\"inputicon\" tabindex=\"-1\"></button></div><div class=\"timepickerContainer\" ng-show=\"toggleContainer\"><div id=\"article\" class=\"mainContainer\"><div class=\"wrappingDiv hrsContainer\" ng-class=\"timeObject.is24Hrformat ? 'LTRpadding24hrs' : 'LTRpadding12hrs'\"><div class=\"itemContainer previousDiv\"></div><ul role=\"listbox\" class=\"dropdown ulContainer hrsFocus\"><li class=\"hrs_{{$index}}\" role=\"option\" data-ng-repeat=\"hr in timeObject.hours\" value=\"{{hr}}\" data-ng-bind=\"hr\"></li></ul><div class=\"itemContainer nextDiv\"></div></div><div class=\"wrappingDiv minContainer\"><div class=\"itemContainer previousDiv\"></div><ul class=\"dropdown ulContainer minFocus\" role=\"listbox\"><li role=\"option\" class=\"mins_{{$index}}\" tabindex=\"0\" data-ng-repeat=\"mins in timeObject.minutes\" value=\"{{mins}}\" data-ng-bind=\"mins\"></li></ul><div class=\"itemContainer nextDiv\" data-ng-bind=\"timeObject.configstep\"></div></div><div role=\"listbox\" class=\"wrappingDiv meridianContainer\" ng-if=\"!timeObject.is24Hrformat\" aria-label=\"{{'timepicker.am.pm.aria.label' | xei18n}}\"><div class=\"itemContainer\"></div><div role=\"option\" aria-live=\"assertive\" class=\"tickerContainer pushmeBorder meridianFocus\" tabindex=\"0\" ng-bind=\"'default.time.am' | xei18n\"></div><div aria-label=\"{{'default.time.pm' | xei18n}}\" class=\"tickerContainer meridianPm\" ng-bind=\"'default.time.pm' | xei18n\"></div></div></div><footer class=\"timerFooter\"><xe-button class=\"footerButton footercancelButton\" xe-type=\"secondary\" xe-label=\"{{'js.timepicker.cancel' | xei18n}}\" aria-label=\"{{'js.timepicker.cancel' | xei18n}}\"></xe-button><xe-button class=\"footerButton\" xe-type=\"primary\" xe-label=\"{{'js.timepicker.set' | xei18n}}\" aria-label=\"{{'js.timepicker.set' | xei18n}}\"></xe-button><div class=\"extraDiv\" tabindex=\"0\"></div></footer></div></div></div>");
+}]);
+
+angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("templates/timePicker_rtl.html",
+    "<div class=\"xe-time-container\" role=\"presentation\"><div class=\"input-outerContainer\"><div class=\"input-container\"><input class=\"input-field xeTimePickerTextField\" name=\"{{xeName}}\" ng-model=\"displayModel\" placeholder=\"{{xeTimePlaceholder}}\" id=\"{{xeId}}\" title=\"{{'js.input.timepicker.info' | xei18n}}\" aria-label=\"{{'timepicker.textbox.aria.label' | xei18n}} {{'default.time.format' | xei18n}}\"> <button type=\"button\" class=\"inputicon\" tabindex=\"-1\"></button></div><div class=\"timepickerContainer\" ng-show=\"toggleContainer\"><div id=\"article\" class=\"mainContainer\"><div role=\"listbox\" class=\"wrappingDiv meridianContainer rtl12hrsPadding\" ng-if=\"!timeObject.is24Hrformat\" aria-label=\"{{'timepicker.am.pm.aria.label' | xei18n}}\"><div id=\"prevampmDiv\" class=\"itemContainer\"></div><div role=\"option\" aria-live=\"assertive\" class=\"tickerContainer pushmeBorder meridianFocus\" tabindex=\"0\" ng-bind=\"'default.time.am' | xei18n\"></div><div aria-label=\"{{'default.time.pm' | xei18n}}\" class=\"tickerContainer meridianPm\" ng-bind=\"'default.time.pm' | xei18n\"></div></div><div class=\"wrappingDiv hrsContainer\" ng-class=\"timeObject.is24Hrformat ? 'rtl24hrsPadding' : 'rtlhrsPadding'\"><div id=\"prevHrDiv\" class=\"itemContainer previousDiv\"></div><ul id=\"nav\" role=\"listbox\" class=\"dropdown ulContainer hrsFocus\"><li class=\"hrs_{{$index}}\" role=\"option\" data-ng-repeat=\"hr in timeObject.hours\" value=\"{{hr}}\" data-ng-bind=\"hr\"></li></ul><div class=\"itemContainer nextDiv\"></div></div><div class=\"wrappingDiv minContainer\"><div class=\"itemContainer previousDiv\"></div><ul class=\"dropdown ulContainer minFocus\"><li class=\"mins_{{$index}}\" tabindex=\"0\" data-ng-repeat=\"mins in timeObject.minutes\" value=\"{{mins}}\" data-ng-bind=\"mins\"></li></ul><div class=\"itemContainer nextDiv\" data-ng-bind=\"timeObject.configstep\"></div></div></div><footer class=\"timerFooter\"><xe-button class=\"footerButton footercancelButton\" xe-type=\"secondary\" xe-label=\"{{'js.timepicker.cancel' | xei18n}}\" aria-label=\"{{'js.timepicker.cancel' | xei18n}}\"></xe-button><xe-button class=\"footerButton\" xe-type=\"primary\" xe-label=\"{{'js.timepicker.set' | xei18n}}\" aria-label=\"{{'js.timepicker.set' | xei18n}}\"></xe-button><div class=\"extraDiv\" tabindex=\"0\"></div></footer></div></div></div>");
 }]);
 
 (function () {
@@ -292,7 +302,7 @@ angular.module("templates/tabPanel.html", []).run(["$templateCache", function ($
                 inputField: '@',
                 xeClass: '@',
                 value: '=',
-                placeHolder: '=',
+                placeHolder: '@',
                 disabled: '=',
                 onChange: '&',
                 onKeydown: '&',
@@ -3008,16 +3018,6 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
             $translate.use(getlocale.getUserLocale());
         }]);
 }());
-/*
- File is used to provide i18n support for components.
- */
-(function () {
-    'use strict';
-    var translations = {};
-
-    angular.module("xe-ui-components")
-        .config(['$translateProvider', function ($translateProvider) {}]);
-}());
 (function () {
     'use strict';
     angular.module('utils', ['ngResource'])
@@ -3026,7 +3026,7 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
                 require: 'ngModel',
                 link: function (scope, element, attrs, modelCtrl) {
                     modelCtrl.$parsers.push(function (inputValue) {
-                        // It is necessary for when using ng-required on your input.
+                        // It is necessary for when using ng-required on your input. 
                         // In such cases, when a letter is typed first, this parser will be called
                         // again, and the 2nd time, the value will be undefined
                         if (inputValue === undefined) {
@@ -3196,7 +3196,7 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
             }
 
             function applyKeyboardNavForTable(table, scrollableParent) {
-                var tempTargetIndex; // Variable to remember previous column position,
+                var tempTargetIndex; // Variable to remember previous column position, 
                                      // used while traversing across columns inside rows
 
                 $document.off('keydown', globalKeydownHandler).on('keydown', {"table": table, "parent": scrollableParent}, globalKeydownHandler);
@@ -3285,10 +3285,10 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
                 element.select().focus()
                     .on('focusout', function(event) {
                         var element = angular.element(event.target);
-
+                        
                         element.closest('th').removeClass('focus-ring');
                         element.closest('td').removeClass('active focus-ring');
-                        element.off('focusout');
+                        element.off('focusout');         
                     });
                 element.closest('tr th').addClass('focus-ring');
                 element.closest('tr td').addClass('active focus-ring');
@@ -3344,7 +3344,7 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
 
             function getActionableSiblings (element, parentTag, rootTag) {
                 var siblings;
-
+                
                 if (parentTag && element.is('th')) {
                     siblings = element.siblings('.sortable').add(element);
                     siblings = siblings.add(element.siblings(':not(.sortable)').has("a:not(:hidden), :input:enabled:not([readonly]), [tabindex=0]").not(':hidden, .disabled'));
@@ -3355,7 +3355,7 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
                 } else {
                     siblings = element.siblings("a, :input:enabled:not([readonly]), [tabindex=0]").not(':hidden, .disabled').add(element);
                 }
-
+                
                 return siblings;
             }
 
@@ -3544,15 +3544,15 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
 angular.module('pagination', [])
 .directive('xePagination', ["$http", "$q", function($http, $q) {
     var fetch = function(query) {
-        var deferred = $q.defer();
-
+        var deferred = $q.defer();          
+        
         url = query.endPoint + "?"
             + "searchString=" + (query.searchString ? query.searchString : "")
             + "&sortColumnName=" + (query.sortColumnName ? query.sortColumnName : "")
             + "&ascending=" + query.ascending
             + "&offset=" + (query.offset ? query.offset : "")
             + "&max=" + (query.max ? query.max : "");
-
+        
         $http.get(url)
             .success(function(data) {
                 deferred.resolve(data);
@@ -3576,7 +3576,7 @@ angular.module('pagination', [])
         replace: true,
         require: "?^xeTableGrid",
         scope: {
-            model: "=",
+            model: "=",         
             endPoint: "=?",
             paginationConfig: "=?",
             resultsFound: "=",
@@ -3586,8 +3586,8 @@ angular.module('pagination', [])
         },
         templateUrl: "templates/pagination.html",
         controller: ['$scope', '$attrs', "$timeout", function($scope, $attrs, $timeout) {
-            var oldPageValue = 1;
-
+            var oldPageValue = 1;   
+            
             $scope.firstPrev = false;
             $scope.nextLast = false;
             $scope.onPage = 1;
@@ -3608,14 +3608,14 @@ angular.module('pagination', [])
                 $scope.pageOffsets.push($scope.offset);
                 $scope.pageOffsets.sort(function(a, b){ return a-b; });
             }
-
-            $scope.offsetChanged = function(doFetch) {
+            
+            $scope.offsetChanged = function(doFetch) {                              
                 calculateNumberOfPages();
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 if (doFetch) {
                     $scope.fetchData($scope.onPage, $scope.offset);
                 }
-            };
+            };      
 
             $scope.first = function() {
                 if ($scope.firstPrev) {
@@ -3623,7 +3623,7 @@ angular.module('pagination', [])
                 }
 
                 setPageValue(1);
-
+                
                 $scope.fetchData($scope.onPage, $scope.offset);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 focusPageInput();
@@ -3637,7 +3637,7 @@ angular.module('pagination', [])
                 var onPage = parseInt($scope.onPage);
                 onPage--;
                 setPageValue(onPage);
-
+                
                 $scope.fetchData($scope.onPage, $scope.offset, append);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 if ($scope.firstPrev) {
@@ -3645,15 +3645,15 @@ angular.module('pagination', [])
                 }
             };
 
-            $scope.next = function(append) {
+            $scope.next = function(append) {    
                 if ($scope.nextLast) {
                     return;
-                }
+                }   
 
                 var onPage = parseInt($scope.onPage);
                 onPage++;
                 setPageValue(onPage);
-
+                
                 $scope.fetchData($scope.onPage, $scope.offset, append);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 if ($scope.nextLast) {
@@ -3667,7 +3667,7 @@ angular.module('pagination', [])
                 }
 
                 setPageValue($scope.numberOfPages);
-
+                
                 $scope.fetchData($scope.onPage, $scope.offset);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 focusPageInput();
@@ -3693,7 +3693,7 @@ angular.module('pagination', [])
                 angular.element(event.target).val(oldPageValue);
             };
 
-            $scope.$watch("resultsFound", function(newValue, oldValue) {
+            $scope.$watch("resultsFound", function(newValue, oldValue) {              
                 $timeout(function() {
                     if (newValue === 0) {
                         setPageValue(0);
@@ -3703,7 +3703,7 @@ angular.module('pagination', [])
 
                     calculateNumberOfPages();
                     disableButtons($scope.onPage, $scope.numberOfPages);
-                });
+                });             
             });
 
             // Private functions
@@ -3721,14 +3721,14 @@ angular.module('pagination', [])
 
             var calculateNumberOfPages = function() {
                 $scope.numberOfPages = Math.ceil($scope.resultsFound / $scope.offset);
-                $scope.numberOfPages = $scope.numberOfPages < 1 ? 0 : $scope.numberOfPages;
+                $scope.numberOfPages = $scope.numberOfPages < 1 ? 0 : $scope.numberOfPages;             
 
                 if ($scope.onPage > $scope.numberOfPages) {
-                    setPageValue($scope.numberOfPages);
+                    setPageValue($scope.numberOfPages);              
                 }
             };
 
-            var disableButtons = function(pageNumber, numberOfPages) {
+            var disableButtons = function(pageNumber, numberOfPages) {              
                 pageNumber = parseInt(pageNumber);
                 numberOfPages = parseInt(numberOfPages);
                 var reminder = numberOfPages / pageNumber;
@@ -3744,27 +3744,27 @@ angular.module('pagination', [])
                     $scope.nextLast = false;
                 } else if(pageNumber <= 0 || (pageNumber > numberOfPages)) { // Out of range
                     $scope.firstPrev = true;
-                    $scope.nextLast = true;
+                    $scope.nextLast = true;                 
                 } else { // Between first and last page
                     $scope.nextLast = false;
                     $scope.firstPrev = false;
-                }
+                }               
             };
 
             /*
                 boolean append variable is used to check if we need append to the result set or not.
-                This is because on tablet we will not show the pagination but it components can still use pagination
+                This is because on tablet we will not show the pagination but it components can still use pagination 
                 code to make the continuous scroll happen.
             */
             $scope.fetchData = function(onPage, offset, append) {
-                if (!angular.isNumber(onPage)) {
+                if (!angular.isNumber(onPage)) {            
                     onPage = parseInt(onPage);
                 }
 
                 setPageValue(onPage);
 
                 var range = reassignRange(onPage, offset),
-                    query = {
+                    query = {                       
                         searchString: $scope.searchString,
                         sortColumnName: $scope.sortColumnName,
                         ascending: $scope.ascending,
@@ -3772,7 +3772,7 @@ angular.module('pagination', [])
                         max: range.max,
                         endPoint: $scope.endPoint,
                         onPage: onPage,
-                        pageSize:offset
+                        pageSize:offset             
                     };
 
                 // Show Load indicator
@@ -3782,11 +3782,11 @@ angular.module('pagination', [])
                     // Call clients fetch method
                     $scope.fetch({query: query}).then(
                         /* Success */
-                        function(data) {
-                            $scope.postFetch({response: data, oldResult: $scope.model});
+                        function(data) {    
+                            $scope.postFetch({response: data, oldResult: $scope.model});                        
                             $scope.model = append ? $scope.model.concat(data.result) : data.result;
                             $scope.resultsFound = data.length;
-
+                            
                             $scope.loading(false);
                             $scope.addExtensionColumns($scope.header, data);
                         },
@@ -3796,7 +3796,7 @@ angular.module('pagination', [])
                             $scope.postFetch({response: data, oldResult: $scope.model});
                             $scope.loading(false);
                         }
-                    );
+                    );                  
                 } else {
                     fetch(query).then(
                         /* Success */
@@ -3815,10 +3815,10 @@ angular.module('pagination', [])
                             $scope.loading(false);
                         }
                     );
-                }
+                }               
             };
-
-            $scope.offsetChanged(false);
+            
+            $scope.offsetChanged(false);            
         }],
         link: function(scope, elem, attributes, parentController) {
             // Assigning values from parentCOntroller to be used later in paginations controller.
@@ -3857,7 +3857,7 @@ angular.module('pagination', [])
 
             parentController.sort = function(sortColumnName, order) {
                 scope.sortColumnName = sortColumnName;
-                scope.ascending = order;
+                scope.ascending = order;        
                 scope.fetchData(scope.onPage, scope.offset);
             };
         }
@@ -3870,7 +3870,7 @@ angular.module('pagination', [])
             restrict: 'E',
             scope: {
                 value: '=',
-                placeHolder: '@',
+                placeholder: '@',
                 onChange: '&',
                 onFocus : '&',
                 onBlur : '&',
@@ -5317,7 +5317,7 @@ angular.module('pagination', [])
                     elem.bind('keydown', function (e) {
                         var code = e.keyCode || e.which;
                         if (!editableMode) {
-                          if (e.target.id !== 'undefined' && e.target.id === 'dataTableSearch') {
+                          if (e.target.id !== 'undefined' && e.target.classList.contains('search')) {
                                 switch (code) {
                                     case keys.tab:
                                         if (e.shiftKey) {
@@ -5402,7 +5402,8 @@ angular.module('pagination', [])
                                             if ($(e.target).is('th') || $(e.target).is('td') ) {
                                                 clearFocus(e);
                                                 $('tr.active-row').removeClass(ACTIVEROW);
-                                                angular.element("#dataTableSearch").select().focus();
+                                                //angular.element("#dataTableSearch").select().focus();
+                                                angular.element('#'+$scope.searchConfig.id).select().focus();
                                             }
                                         }
                                         else {
@@ -6382,7 +6383,7 @@ clearFocus = function (e) {
                             startAngle: 0,
                             endAngle: 2 * Math.PI
                         })
-                        .style('fill', '#e3e3e3')
+                        .style('fill', '#DBDBDD')
                         .attr('d', subArc)
                         .on('click', toggle)
                         .on('touchstart', toggle);
@@ -6630,32 +6631,27 @@ clearFocus = function (e) {
 
                 color = d3.scale.ordinal()
                     .range([
-                        '#783084',
-                        '#810c33',
-                        '#8073ce',
-                        '#c28041',
-                        '#008241',
-                        '#f39fba',
-                        '#6bafa6'
+                        '#BA46A6',
+                        '#5353d1',
+                        '#51ABFF',
+                        '#1ABF96',
+                        '#95D162',
+                        '#F5DB75',
+                        '#FFB581'
                     ]);
 
                 subColor = d3.scale.ordinal()
                     .range([
-                        '#eef6f5',
-                        '#ddedeb',
-                        '#bcdbd7',
-                        '#9ac9c3',
-                        '#67aea5',
-                        '#56a59b',
-                        '#4d948b',
-                        '#45847d',
-                        '#3c746d',
-                        '#33635d',
-                        '#2b524d',
-                        '#23423e',
-                        '#1a312e',
-                        '#11201f',
-                        '#07100f'
+                        '#FFF4EB',
+                        '#FFDFC8',
+                        '#FFCAA4',
+                        '#FFB581',
+                        '#FFA15D',
+                        '#FF8C3A',
+                        '#FF7513',
+                        '#FE6A00',
+                        '#EB6200',
+                        '#C35100'
                     ]);
 
                 if (subdata.length > 7) {
@@ -7069,5 +7065,1387 @@ clearFocus = function (e) {
                 }
             };
         }]);
+}());
+/*jslint browser: true*/
+(function () {
+    'use strict';
+
+    angular.module('timePicker', ['xe-ui-components', 'ngMessages','dateParser'])
+        .directive('xeTimePicker', ['$timeout', '$filter', '$window', '$document', 'Language', 'keyCodes', '$dateParser','dateFilter', function ($timeout, $filter, $window, $document, Language, keyCodes, $dateParser,$timeFilter) {
+            return {
+                restrict: 'E',
+                scope: {
+                    displayFormat: '@?',
+                    xeConfigstep: '@?',
+                    xeId: '@',
+                    xeName: '@',
+                    xePlaceholder: '@?',
+                    modelScope: '=?xeModel',
+                    returnFormat: '@?',
+                    returnTranslatedMeridian:'@?',
+                    xeWidth: '@?'
+                },
+                replace: true, // Replace with the template below
+                templateUrl: Language.isRtl() ? 'templates/timePicker_rtl.html' : 'templates/timePicker.html',
+                controller: ['$scope', function ($scope) {
+                    $scope.timeObject = {};
+                    $scope.toggleContainer = false;
+                    $scope.hours = [];
+                    $scope.minutes = [];
+                    if (!$scope.displayFormat) {
+                        $scope.displayFormat = $filter('xei18n')('default.time.format');
+                        if ('default.time.watermark.format' != $filter('xei18n')('default.time.watermark.format')) {
+                            $scope.xeTimePlaceholder = $filter('xei18n')('default.time.watermark.format');
+                        }
+                    } else {
+                        $scope.xeTimePlaceholder = $scope.xePlaceholder;
+                        //$scope.displayModel = $scope.modelScope;
+                    }
+                    if ($scope.modelScope === undefined || $scope.modelScope === null ){
+                        $scope.modelScope="";
+                    }
+                    $scope.displayModel = $scope.modelScope;
+                    $scope.minFocusElem = "";
+                    $scope.hrsFocusElem = "";
+                    $scope.showError = false;
+                    $scope._12hrFormat = 'hh:mm a';
+                    $scope._24hrFormat = 'HH:mm';
+
+                    $scope.formatNumberTwoDecimal = function (num) {
+                        if (num != "") {
+                            num = new Intl.NumberFormat('en-US', {minimumIntegerDigits: 2}).format(num);
+                        }
+                        return num;
+                    };
+
+                    $scope.formatTimeTo12Hours = function (inputValue) {
+                        var formattedValue;
+                        if (inputValue) {
+                            var timeArray = inputValue.split(":");
+                            var meridian;
+                            var formatedHour = $scope.formatNumberTwoDecimal(timeArray[0]);
+                            if (timeArray[1]) {
+                                var formatedMinutes = timeArray[1].split(" ")[0];
+                                formatedMinutes = $scope.formatNumberTwoDecimal(formatedMinutes);
+                                meridian = timeArray[1].split(" ")[1];
+                            }
+                            if (meridian === $scope.meridiansList[1]) {
+                                meridian = "PM";
+                            } else if (meridian === $scope.meridiansList[0]) {
+                                meridian = "AM";
+                            } else {
+                                formattedValue = formatedHour + ":" + timeArray[1];
+                            }
+                            formattedValue = formatedHour + ":" + formatedMinutes + " " + meridian;
+                        }
+                        return formattedValue;
+                    };
+
+                    $scope.formatEnteredTime = function (timeData, inputformat, returnformat) {
+                        var formattedDate = $dateParser(timeData, inputformat);
+                        return $timeFilter(formattedDate, returnformat);
+                    };
+
+
+                    var userAgent = $window.navigator.userAgent;
+                    var browsers = {
+                        chrome: /chrome/i,
+                        safari: /safari/i,
+                        firefox: /firefox/i,
+                        ie: /internet explorer/i
+                    };
+
+                    $scope.getBrowser = function () {
+                        for (var key in browsers) {
+                            if (browsers[key].test(userAgent)) {
+                                return key;
+                            }
+                        }
+                    };
+
+                    if (!$scope.xeConfigstep) {
+                        var num = new Intl.NumberFormat('en-US', {minimumIntegerDigits: 2}).format(1);
+                        $scope.xeConfigstep = num;
+                    }
+                    function timepickerConstructor() {
+                        $scope.timeObject.hours = [];
+                        $scope.timeObject.minutes = [];
+                        $scope.timeObject.configstep;
+                        $scope.timeObject.is24Hrformat;
+                        $scope.timeObject.returnFormat;
+                    }
+
+                    $scope.timeObject = new timepickerConstructor();
+                    $scope.timeObject.displayFormat = $scope.displayFormat;
+                    $scope.timeObject.returnFormat = $scope.returnFormat;
+
+
+                    if (null != $scope.timeObject.displayFormat && "undefined" != $scope.timeObject.displayFormat) {
+                        var lengthOfFormat = $scope.timeObject.displayFormat.split(" ").length;
+                        if (lengthOfFormat === 2) {
+                            console.log("innn");
+                            //12 hours format
+                            $scope.maxHrs = 12;
+                            $scope.minHr = 1;
+                           /* var timeNow =$scope.formatEnteredTime($scope.modelScope,$scope.returnFormat,$scope._12hrFormat);
+                            $scope.displayModel=timeNow;*/
+                            $scope.timeObject.is24Hrformat = false;
+                        } else {
+                            //24 hours format
+                            $scope.maxHrs = 23;
+                            $scope.minHr = 0;
+                          /*  var timeNow =$scope.formatEnteredTime($scope.modelScope,$scope.returnFormat,$scope._24hrFormat);
+                            $scope.displayModel=timeNow;*/
+                            //$scope.modelScope=timeNow;
+                            $scope.timeObject.is24Hrformat = true;
+                        }
+                        $scope.maxMinutes = 59;
+                        $scope.timeObject.configstep = $scope.xeConfigstep;
+                        populateTimeObject();
+                    }
+
+                    if (null != $scope.returnFormat && "undefined" != $scope.returnFormat) {
+                        var lengthOfFormat = $scope.returnFormat.split(" ").length;
+                        if($scope.returnFormat !== $scope.timeObject.displayFormat){
+                            if (lengthOfFormat === 2) {
+                                //12 hours format
+                                $scope.timeObject.returnFormat = 12;
+                            } else {
+                                //24 hours format
+                                $scope.timeObject.returnFormat = 24;
+                            }
+                        }else{
+                            $scope.timeObject.returnFormat=null;
+                        }
+                    }
+
+                    if (null != $scope.displayModel && "undefined" != $scope.displayModel) {
+                        var formatLength = $scope.displayModel.split(" ").length;
+                        if (formatLength === 2) {
+                            //12 hours format
+                            $scope.timeObject.format12 = "Y";
+                        } else {
+                            $scope.timeObject.format12 = "N";
+                            //24 hours format
+                        }
+                    } else {
+                        $scope.timeObject.format12 = null;
+                    }
+
+                    if($scope.timeObject.is24Hrformat==false && $scope.timeObject.format12 == 'Y'){
+                        $scope.timeObject.format12 = null;
+                    }else if($scope.timeObject.is24Hrformat==true && $scope.timeObject.format12 == 'N'){
+                        $scope.timeObject.format12 = null;
+                    }
+
+                    function populateTimeObject() {
+                        var defaultHoursConfigStep = 1;
+                        $scope.timeObject.hours = creatingTimeData($scope.maxHrs, defaultHoursConfigStep);
+                        $scope.timeObject.minutes = creatingTimeData($scope.maxMinutes, $scope.timeObject.configstep);
+                    }
+
+                    function creatingTimeData(maxcount, configstep) {
+                        var listofItems = [];
+                        var maxElement = parseInt(0);
+                        configstep = parseInt(configstep);
+                        if (maxcount === 12) {
+                            maxElement = 1;
+                        }
+                        if (configstep) {
+                            if (configstep > 60 || configstep < 0) {
+                                configstep = 1
+                            }
+                        } else {
+                            configstep = 1;
+                        }
+                        while (maxElement <= maxcount) {
+                            var num = new Intl.NumberFormat('en-US', {minimumIntegerDigits: 2}).format(maxElement);
+                            listofItems.push(num);
+                            maxElement = maxElement + configstep;
+                        }
+                        return listofItems;
+                    }
+
+                    $scope.meridiansList = [$filter('xei18n')('default.time.am'), $filter('xei18n')('default.time.pm')];
+
+                    $scope.commonIncrement = function (currentIndex, currentObj, isHours) {
+                        if (!isHours) {
+                            if (parseInt(currentIndex) === 0 || parseInt(currentIndex) === -1) {
+                                nextCommonIncrement(currentIndex, currentObj, $scope.timeObject.minutes, isHours);
+                                setPreviousValues(currentIndex, currentObj);
+                            } else if (parseInt(currentIndex) > 0 && parseInt(currentIndex) < $scope.timeObject.minutes.length - 2) {
+                                nextCommonIncrement(currentIndex, currentObj, $scope.timeObject.minutes, isHours);
+                                setPreviousValues(currentIndex, currentObj)
+                            } else if (parseInt(currentIndex) > $scope.timeObject.minutes.length - 2 || parseInt(currentIndex) === $scope.timeObject.minutes.length - 2) {
+                                nextCommonIncrement(currentIndex, currentObj, $scope.timeObject.minutes, isHours);
+                                var prevElementInDiv = parseInt(currentIndex); //doesn't go below scope.hours[0]
+                                if (parseInt(currentIndex) !== $scope.timeObject.minutes.length - 1) {
+                                    var prevMinUL = angular.element(currentObj).closest('ul');
+                                    var prevContent = angular.element(prevMinUL).find('li')[prevElementInDiv].innerText;
+                                    var wrapDiv = angular.element(currentObj).closest('div');
+                                    angular.element(wrapDiv).find('div.previousDiv').text("");
+                                    angular.element(wrapDiv).find('div.previousDiv').text(prevContent);
+                                }
+
+                            }
+                        } else {
+                            if (parseInt(currentIndex) === 0 || parseInt(currentIndex) === -1) {
+                                nextCommonIncrement(currentIndex, currentObj, $scope.timeObject.hours, isHours);
+                                setPreviousValues(currentIndex, currentObj);
+                            } else if (parseInt(currentIndex) > 0 && parseInt(currentIndex) < $scope.timeObject.hours.length - 2) {
+                                nextCommonIncrement(currentIndex, currentObj, $scope.timeObject.hours, isHours);
+                                setPreviousValues(currentIndex, currentObj);
+                            } else if (parseInt(currentIndex) > $scope.timeObject.hours.length - 2 || parseInt(currentIndex) === $scope.timeObject.hours.length - 2) {
+                                nextCommonIncrement(currentIndex, currentObj, $scope.timeObject.hours, isHours);
+                                var prevElementInDiv = parseInt(currentIndex); //doesn't go below scope.hours[0]
+                                if (parseInt(currentIndex) !== $scope.timeObject.hours.length - 1) {
+                                    var prevHRUL = angular.element(currentObj).closest('ul');
+                                    var prevContent = angular.element(prevHRUL).find('li')[prevElementInDiv].innerText;
+                                    var wrapDiv = angular.element(currentObj).closest('div');
+                                    angular.element(wrapDiv).find('div.previousDiv').text("");
+                                    angular.element(wrapDiv).find('div.previousDiv').text(prevContent);
+                                }
+                            }
+                        }
+                    };
+
+                    function nextCommonIncrement(currentIndex, currentObj, arrayList, isHours) {
+                        // nextElementFocus shouldn't exceed 24 or 12 that is length of the scope.hours.
+                        var nextElementFocus = parseInt(currentIndex) + 1;
+                        if (nextElementFocus < arrayList.length) {
+                            var nextHRUL = angular.element(currentObj).closest('ul');
+                            angular.element(nextHRUL).find('li').each(function (ind, eachLi) {
+                                $(eachLi).attr('tabindex', -1);
+                            });
+                            angular.element(nextHRUL).find('li').siblings().removeClass('active-timepicker');
+                            var setTabToFocus = angular.element(nextHRUL).find('li')[nextElementFocus];
+                            if (isHours) {
+                                $scope.hrsFocusElem = setTabToFocus;
+                            } else {
+                                $scope.minFocusElem = setTabToFocus;
+                            }
+                            angular.element(setTabToFocus).addClass('active-timepicker');
+                            angular.element(setTabToFocus).attr('tabindex', 0);
+                            angular.element(setTabToFocus).focus();
+                        }
+                        var nextElementInDiv = parseInt(nextElementFocus) + 1;
+                        var wrapDiv = angular.element(currentObj).closest('div');
+                        angular.element(wrapDiv).find('div.nextDiv').text("");
+                        if (parseInt(currentIndex) > arrayList.length - 2 || parseInt(currentIndex) === arrayList.length - 2) {
+                            angular.element(wrapDiv).find('div.nextDiv').text("");
+                        } else {
+                            var nextHRUL = angular.element(currentObj).closest('ul');
+                            angular.element(wrapDiv).find('div.nextDiv').text("");
+                            if (angular.element(nextHRUL).find('li')) {
+                                var nextContent = angular.element(nextHRUL).find('li')[nextElementInDiv].innerText;
+                                angular.element(wrapDiv).find('div.nextDiv').text(nextContent);
+                            }
+                        }
+                    }
+
+                    $scope.commonDecrement = function (currentIndex, currentObj, isHours) {
+                        var focusIndex = currentIndex - 1;
+                        var wrapDiv = angular.element(currentObj).closest('div');
+                        if (parseInt(focusIndex) < 0) {
+                            //retain the focus
+                        } else {
+                            var prevHRUL = angular.element(currentObj).closest('ul');
+                            var setTabToFocus = angular.element(prevHRUL).find('li')[focusIndex];
+                            if (isHours) {
+                                $scope.hrsFocusElem = angular.element(prevHRUL).find('li')[focusIndex];
+                            } else {
+                                $scope.minFocusElem = angular.element(prevHRUL).find('li')[focusIndex];
+                            }
+                            angular.element(prevHRUL).find('li').each(function (ind, eachLi) {
+                                $(eachLi).attr('tabindex', -1);
+                            });
+                            angular.element(prevHRUL).find('li').siblings().removeClass('active-timepicker');
+                            angular.element(setTabToFocus).addClass('active-timepicker');
+                            angular.element(setTabToFocus).attr('tabindex', 0);
+                            angular.element(setTabToFocus).focus();
+                            angular.element(wrapDiv).find('div.nextDiv').text("");
+                            if (isHours) {
+                                var incValue = $scope.timeObject.hours[focusIndex + 1];
+                            } else {
+                                var incValue = $scope.timeObject.minutes[focusIndex + 1];
+                            }
+                            angular.element(wrapDiv).find('div.nextDiv').text(incValue);
+                            if (focusIndex < 1 || focusIndex === 0) {
+                                angular.element(wrapDiv).find('div.previousDiv').text("");
+                            } else {
+                                angular.element(wrapDiv).find('div.previousDiv').text("");
+                                if (isHours) {
+                                    var decValue = $scope.timeObject.hours[focusIndex - 1];
+                                } else {
+                                    var decValue = $scope.timeObject.minutes[focusIndex - 1];
+                                }
+                                angular.element(wrapDiv).find('div.previousDiv').text(decValue);
+                            }
+
+                        }
+                    };
+
+                    function setPreviousValues(currentIndex, currentObj) {
+                        var prevElementInDiv = parseInt(currentIndex); //doesn't go below scope.hours[0]
+                        var prevHRUL = angular.element(currentObj).closest('ul');
+                        var wrapDiv = angular.element(currentObj).closest('div');
+                        if (angular.element(prevHRUL).find('li')[prevElementInDiv] !== undefined) {
+                            var prevContent = angular.element(prevHRUL).find('li')[prevElementInDiv].innerText;
+                            angular.element(wrapDiv).find('div.previousDiv').text(prevContent);
+                        } else {
+                            angular.element(wrapDiv).find('div.previousDiv').text("");
+                        }
+                    };
+
+                    $scope.disableInput = function (ele) {
+                        ele.find('input.input-field').attr('disabled', 'disabled');
+                        ele.find('input.input-field').attr('readonly', 'readonly');
+                        ele.find('input.input-field').addClass('xeTimePickerTextField-readonly');
+                        ele.find('input.input-field').attr('tabindex', -1);
+                    };
+
+                    $scope.enableInput = function (ele) {
+                        ele.find('input.input-field').removeAttr('readonly');
+                        ele.find('input.input-field').removeAttr('disabled');
+                        ele.find('input.input-field').removeClass('xeTimePickerTextField-readonly');
+                        ele.find('input.input-field').attr('tabindex', 0);
+                    };
+                }],
+
+                link: function (scope, ele) {
+
+                    $document.bind('click', function (event) {
+                        var isClickedElementChildOfPopup = ele
+                                .find(event.target)
+                                .length > 0;
+                        if (!isClickedElementChildOfPopup) {
+                            scope.toggleContainer = false;
+                            scope.enableInput(ele);
+                            scope.$digest();
+                        }
+                    });
+
+                    // Keyboard Navigation
+                    $timeout(function () {
+                        var elem = ele.find('.input-outerContainer');
+                        elem.css('width', scope.xeWidth);
+                        angular.element(ele.find('div.timepickerContainer')).on('keydown', function (event) {
+                            if (event.keyCode === keyCodes.F9) {
+                                scope.toggleContainer = false;
+                                scope.$digest();
+                                scope.enableInput(ele);
+                                ele.find('div.input-container input.input-field').focus();
+                                removeMinsAndHoursAriaLabel();
+                            }
+                        });
+
+                        angular.element(ele.find('div.input-container input.input-field')).on('focus',function (event){
+                            ele.find('div.input-container input.input-field').next().addClass('inputIconFocussed');
+                            ele.find('div.input-container input.input-field').next().removeClass('inputicon');
+                        }) ;
+
+                        angular.element(ele.find('div.input-container input.input-field')).on('blur',function (event){
+                            ele.find('div.input-container input.input-field').next().addClass('inputicon');
+                            ele.find('div.input-container input.input-field').next().removeClass('inputIconFocussed');
+                        }) ;
+
+
+
+                        function stopEventsDefault(event) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            event.cancelBubble = true;
+                        };
+
+                        //Time Conversion based on flags on loading the component 12 to 24 or vice versa if required to be done
+                        if (scope.timeObject.format12 != null) {
+                            if (scope.timeObject.is24Hrformat) {
+                                var convertedvalue = scope.formatEnteredTime(scope.displayModel, scope._12hrFormat, scope._24hrFormat);
+                                if (!convertedvalue) {
+                                    scope.displayModel = convertedvalue;
+                                    var converted24 = scope.formatEnteredTime(scope.displayModel, scope._12hrFormat, scope.returnFormat);
+                                    scope.modelScope = converted24;
+                                } else {
+                                    scope.displayModel = convertedvalue;
+                                }
+                            } else {
+                                var convertedvalue = scope.formatEnteredTime(scope.displayModel, scope.returnFormat, scope._12hrFormat);
+                                if (convertedvalue) {
+                                    var meridian = convertedvalue.split(" ")[1];
+                                    if (meridian === "PM") {
+                                        meridian = scope.meridiansList[1];
+                                    } else if (meridian === "AM") {
+                                        meridian = scope.meridiansList[0];
+                                    }
+                                    convertedvalue = convertedvalue.split(" ")[0] + " " + meridian;
+                                }
+                                scope.displayModel = convertedvalue;
+                            }
+                        }
+
+                        var browser = scope.getBrowser();
+                        var eventtype;
+                        if (browser == "chrome") {
+                            eventtype = "wheel"
+                        } else if (browser == "firefox") {
+                            eventtype = "DOMMouseScroll"
+                        } else {
+                            eventtype = "mousewheel"
+                        }
+
+                        ele.find('div.extraDiv').on('focus', function () {
+                            //var closeImage = ele.find('span.xe-popup-close');
+                            angular.element(scope.hrsFocusElem).focus();
+                            scope.focusPrevElement = ele.find('.hrsFocus');
+                            angular.element(scope.focusPrevElement).addClass('active-timepickerFocus');
+                        });
+                        var timerButton = ele.find('div.input-container .inputicon');
+
+                        angular.element(timerButton).on('click', function (event) {
+                            removeallFocus();
+                            scope.focusHrsElement = ele.find('.hrsFocus');
+                            angular.element(scope.focusHrsElement).addClass('active-timepickerFocus');
+                            scope.showError = false;
+                            scope.toggleContainer = scope.toggleContainer ? false : true;
+                            if (scope.toggleContainer) {
+                                scope.disableInput(ele);
+                            } else {
+                                scope.enableInput(ele);
+                            }
+                            var enteredContent = ele.find('input.input-field').val();
+
+                            validateEnteredContent(enteredContent);
+                            scope.$digest();
+                            if (!scope.showError) {
+                                if (scope.timeObject.is24Hrformat) {
+                                    //24 hours
+                                    var hrPreSelected = enteredContent.split(":")[0];
+                                    var minPreSelected = enteredContent.split(":")[1];
+                                    hrPreSelected = parseInt(hrPreSelected);
+                                    minPreSelected = parseInt(minPreSelected);
+                                    populateTimePicker(hrPreSelected, minPreSelected, ele);
+                                } else {
+                                    //12 hours
+                                    var hrPreSelected = enteredContent.split(":")[0];
+                                    hrPreSelected = parseInt(hrPreSelected) - 1;
+                                    var minPreSelected = enteredContent.split(":")[1];
+                                    if (minPreSelected !== undefined) {
+                                        var minPreSelected1 = minPreSelected.split(" ")[0];
+                                        var meridianEntered, nextDivMeridian;
+                                        populateTimePicker(hrPreSelected, minPreSelected1, ele);
+                                        var meridian = minPreSelected.split(" ")[1];
+                                        if (meridian.toLocaleLowerCase() === $filter('xei18n')('default.time.am').toLocaleLowerCase()) {
+                                            meridianEntered = scope.meridiansList[0];
+                                            nextDivMeridian = scope.meridiansList[1];
+                                        } else if (meridian.toLocaleLowerCase() === $filter('xei18n')('default.time.pm').toLocaleLowerCase()) {
+                                            meridianEntered = scope.meridiansList[1];
+                                            nextDivMeridian = scope.meridiansList[0];
+                                        }
+                                        ele.find('div.pushmeBorder').text(meridianEntered);
+                                        ele.find('div.meridianPm').text(nextDivMeridian);
+                                    } else {
+                                        populateTimePicker(hrPreSelected, 0, ele, 1);
+                                    }
+                                }
+                            } else {
+                                var minutesUL = ele.find('ul:last li')[0];
+                                var hourUL = ele.find('ul:first li')[0];
+                                scope.commonDecrement(1, minutesUL, false);
+                                scope.commonDecrement(1, hourUL, true);
+                                ele.find('ul:first li')[0].focus();
+                                angular.element(ele).find('input.input-field').val("");
+                                scope.displayModel="";
+                                scope.modelScope = "";
+                                scope.$apply();
+                            }
+                            stopEventsDefault(event);
+                        });
+
+                        //close popup on escape key
+                        var excapeKeyContainer = ele.find('div.timepickerContainer');
+
+                        angular.element(excapeKeyContainer).on('keydown', function (event) {
+                            if (event.keyCode === keyCodes.ESC) {
+                                removeallFocus();
+                                scope.enableInput(ele);
+                                scope.showError = false;
+                                scope.toggleContainer = false;
+                                scope.$digest();
+                                ele.find('div.input-container input.input-field').focus();
+                                stopEventsDefault(event);
+                            }
+                        });
+
+                        //open timepicker on f9 shortcut press
+                        var shortcutElement = ele.find('div.input-container input.input-field');
+
+                        angular.element(shortcutElement).on('focusout', function (event) {
+                            var enteredContent = ele.find('input.input-field').val();
+                            scope.enableInput(ele);
+                            validateEnteredContent(enteredContent);
+                            stopEventsDefault(event);
+                            if (scope.showError) {
+                                ele.find('input.input-field').val("");
+                                scope.displayModel = "";
+                                scope.modelScope = "";
+                            } else {
+                                enteredContent = formatTimeEntered(enteredContent);
+                                timeFormatConvertor(enteredContent);
+                            }
+                            scope.$apply();
+                        });
+
+                        angular.element(shortcutElement).on('keydown', function (event) {
+                            if (event.keyCode === keyCodes.F9) {
+                                removeallFocus();
+                                var hrsFocusElem = ele.find('.hrsFocus');
+                                angular.element(hrsFocusElem).addClass('active-timepickerFocus');
+                                scope.showError = false;
+                                var enteredContent = angular.element(ele).find('input.input-field').val();
+                                scope.toggleContainer = true;
+                                validateEnteredContent(enteredContent);
+                                scope.$digest();
+                                scope.disableInput(ele);
+                                removeMinsAndHoursAriaLabel();
+                                addHoursAriaLabel();
+                                if (!scope.showError) {
+                                    var decrementCount;
+                                    if (scope.timeObject.is24Hrformat) {
+                                        //24 hours
+                                        var hrPreSelected = enteredContent.split(":")[0];
+                                        var minPreSelected = enteredContent.split(":")[1];
+                                        hrPreSelected = parseInt(hrPreSelected);
+                                        minPreSelected = parseInt(minPreSelected);
+                                        decrementCount = 1;
+                                        populateTimePicker(hrPreSelected, minPreSelected, ele, decrementCount);
+                                    } else {
+                                        //12 hours
+                                        var hrPreSelected = enteredContent.split(":")[0];
+                                        hrPreSelected = parseInt(hrPreSelected) - 1;
+                                        var minPreSelected = enteredContent.split(":")[1];
+                                        if (minPreSelected !== undefined) {
+                                            decrementCount = 0;
+                                            var minPreSelected1 = minPreSelected.split(" ")[0];
+                                            var meridianEntered;
+                                            var nextDivMeridian = scope.meridiansList[1];
+                                            populateTimePicker(hrPreSelected, minPreSelected1, ele, decrementCount);
+                                            var meridian = minPreSelected.split(" ")[1];
+                                            if (meridian !== undefined) {
+                                                if (meridian.toLocaleLowerCase() === $filter('xei18n')('default.time.am').toLocaleLowerCase()) {
+                                                    meridianEntered = scope.meridiansList[0];
+                                                    nextDivMeridian = scope.meridiansList[1];
+                                                } else if (meridian.toLocaleLowerCase() === $filter('xei18n')('default.time.pm').toLocaleLowerCase()) {
+                                                    meridianEntered = scope.meridiansList[1];
+                                                    nextDivMeridian = scope.meridiansList[0];
+                                                }
+                                                ele.find('div.pushmeBorder').text(meridianEntered);
+                                                ele.find('div.meridianPm').text(nextDivMeridian);
+                                            }
+                                        } else {
+                                            populateTimePicker(hrPreSelected, 0, ele, 1);
+                                        }
+                                    }
+                                } else {
+                                    var minutesUL = ele.find('ul:last li')[0];
+                                    var hourUL = ele.find('ul:first li')[0];
+                                    scope.commonDecrement(1, minutesUL, false);
+                                    scope.commonDecrement(1, hourUL, true);
+                                    ele.find('ul:first li')[0].focus();
+                                    angular.element(ele).find('input.input-field').val("");
+                                }
+                                stopEventsDefault(event);
+                            }
+                            if (event.keyCode === keyCodes.TAB) {
+                                validateEnteredContent(this.value);
+                                enteredContent = formatTimeEntered(this.value);
+                                timeFormatConvertor(enteredContent);
+                                scope.$apply();
+                                return true;
+                            }
+                        });
+
+                        function populateTimePicker(hrPreSelected, minPreSelected, ele) {
+                            var hrcurrent;
+                            var mincurrent;
+                            var setToFirstElement = parseInt(-1);
+                            var isHours = true;
+                            if (scope.timeObject.is24Hrformat) {
+                                hrcurrent = scope.timeObject.hours[parseInt(hrPreSelected)];
+                                var minIndex;
+                                scope.timeObject.minutes.map(function (elementInArray, index) {
+                                    if (elementInArray == minPreSelected) {
+                                        minIndex = index;
+                                    }
+                                });
+                                minPreSelected = minIndex;
+                                mincurrent = scope.timeObject.minutes[parseInt(minPreSelected)];
+                            } else {
+                                hrcurrent = scope.timeObject.hours[parseInt(hrPreSelected) - 1];
+                                var minIndex;
+                                scope.timeObject.minutes.map(function (elementInArray, index) {
+                                    if (elementInArray == minPreSelected) {
+                                        minIndex = index;
+                                    }
+                                });
+                                minPreSelected = minIndex;
+                                mincurrent = scope.timeObject.minutes[parseInt(minPreSelected) - 1];
+                            }
+                            var minutesUL = ele.find('ul:last li')[parseInt(minPreSelected)];
+                            var hourUL = ele.find('ul:first li')[parseInt(hrPreSelected)];
+                            if (mincurrent && hrcurrent) {
+                                ele.find('ul:last li')[parseInt(minPreSelected)].focus();
+                                scope.commonIncrement(parseInt(minPreSelected) - 1, minutesUL, !isHours);
+                                scope.commonIncrement(parseInt(hrPreSelected) - 1, hourUL, isHours);
+                                ele.find('ul:first li')[parseInt(hrPreSelected)].focus();
+                            } else if (hrPreSelected === 0 && hrcurrent === undefined && mincurrent !== undefined) {
+                                ele.find('ul:last li')[parseInt(minPreSelected)].focus();
+                                scope.commonIncrement(parseInt(minPreSelected) - 1, minutesUL, !isHours);
+                                scope.commonIncrement(setToFirstElement, hourUL, true);
+                            } else if (mincurrent === undefined && hrcurrent !== undefined) {
+                                minutesUL = ele.find('ul:last li')[0];
+                                scope.commonIncrement(setToFirstElement, minutesUL, !isHours);
+                                scope.commonIncrement(parseInt(hrPreSelected - 1), hourUL, isHours);
+                            } else {
+                                minutesUL = ele.find('ul:last li')[0];
+                                hourUL = ele.find('ul:first li')[0];
+                                scope.commonIncrement(setToFirstElement, minutesUL, !isHours);
+                                scope.commonIncrement(setToFirstElement, hourUL, isHours);
+                            }
+                        };
+
+                        function validateEnteredContent(enteredContent) {
+                            scope.showError = false;
+                            var isInvalidTime = false;
+                            if (null != enteredContent && "" != enteredContent) {
+                                isInvalidTime = validateTimeWithFormat(enteredContent);
+                            }
+                            if (isInvalidTime) {
+                                scope.showError = true;
+                                scope.$emit('time-picker-error', $filter('xei18n')('timepicker.error.format.validation'), scope.xeId);
+                            }
+                        }
+
+                        function validateTimeWithFormat(timeData) {
+                            var formattedTime = "";
+                            var isInvalidTime = false;
+                            formattedTime = formatTimeEntered(timeData);
+                            if (!formattedTime) {
+                                isInvalidTime = true;
+                            }
+                            return isInvalidTime
+                        }
+
+                        function formatTimeEntered(timeData) {
+                            var formattedTime;
+                            if (scope.timeObject.is24Hrformat) {
+                                var timeArray = splitInputData(timeData);
+                                var hours = scope.formatNumberTwoDecimal(timeArray[0]);
+                                var minutes = scope.formatNumberTwoDecimal(timeArray[1]);
+                                var formattedValue = hours + ":" + minutes;
+                                //formattedTime = scope.formatEnteredTime(formattedValue, locale-format, scope.timeObject.returnFormat);
+                                //formattedTime = scope.formatEnteredTime(formattedValue, scope._24hrFormat, 'HH:mm');
+                                formattedTime = scope.formatEnteredTime(formattedValue, scope._24hrFormat, scope.timeObject.displayFormat);
+                            } else {
+                                if(timeData){
+                                    var format12WithMeridian = scope.formatTimeTo12Hours(timeData);
+                                    formattedTime = scope.formatEnteredTime(format12WithMeridian, scope._12hrFormat, scope._12hrFormat);
+                                }
+
+                            }
+                            return formattedTime;
+                        }
+
+                        function splitInputData(inputData){
+                            return inputData.split(":");
+                        }
+
+                        var cancelElement = ele.find('footer.timerFooter .footercancelButton');
+                        ele.find('footer.timerFooter .footercancelButton').on('click', function (event) {
+                            removeallFocus();
+                            scope.showError = false;
+                            scope.enableInput(ele);
+                            scope.toggleContainer = false;
+                            scope.$digest();
+                            ele.find('div.input-container input.input-field').focus();
+                            stopEventsDefault(event);
+                        });
+
+                        ele.find('footer.timerFooter .footercancelButton').on('keydown', function (event) {
+                            if (event.shiftKey && event.keyCode === keyCodes.TAB) {
+                                removeMinsAndHoursAriaLabel();
+                                if (scope.timeObject.is24Hrformat) {
+                                    addMinutesAriaLabel();
+                                    removeallFocus();
+                                    var minFocus = ele.find('ul.minFocus');
+                                    toggleFocus(minFocus);
+                                } else {
+                                    removeallFocus();
+                                    var meridianFocus = ele.find('div.meridianFocus');
+                                    toggleFocus(meridianFocus);
+                                }
+                            }
+                            return true;
+                        });
+
+                        ele.find('footer.timerFooter xe-button button.primary').on('keydown, click', function (event) {
+                            setTimePickerValue();
+                            stopEventsDefault(event);
+                        });
+
+
+                        ele.find('footer.timerFooter xe-button button.primary').on('keydown', function (event) {
+                            if ((!event.shiftKey) && event.keyCode === keyCodes.TAB) {
+                                removeMinsAndHoursAriaLabel();
+                                addHoursAriaLabel();
+                            }
+                        });
+
+                        function setTimePickerValue() {
+                            var parentDiv = angular.element("#" + scope.xeId).closest('div').next();
+                            scope.toggleContainer = false;
+                            var hrLiSelected = angular.element(parentDiv).find('ul:first li.active-timepicker').text();
+                            var minLiSelected = angular.element(parentDiv).find('ul:last li.active-timepicker').text();
+                            var meridianValue = angular.element(parentDiv).find('div.pushmeBorder').text();
+                            var timeFormatValueSelect = hrLiSelected + ":" + minLiSelected;
+                            var v = !scope.timeObject.is24Hrformat ? timeFormatValueSelect + " " + meridianValue : timeFormatValueSelect;
+                            timeFormatConvertor(v);
+                            scope.enableInput(ele);
+                            ele.find('input.input-field').focus();
+                            scope.displayModel = v;
+                            scope.$apply();
+                        }
+
+
+                        function timeFormatConvertor(timeToConvert) {
+                            var convertedvalue;
+                            if (scope.timeObject.returnFormat === 24 && scope.timeObject.format12 === "N") {
+                                var formattedvalue = scope.formatTimeTo12Hours(timeToConvert);
+                                convertedvalue = scope.formatEnteredTime(formattedvalue, scope._12hrFormat, scope.returnFormat);
+                                scope.modelScope = convertedvalue;
+                                //24 to 12
+                            } else if (scope.timeObject.returnFormat === 12 && scope.timeObject.format12 === "Y") {
+                                //12 to 24
+                                convertedvalue = scope.formatEnteredTime(timeToConvert, scope._24hrFormat, scope._12hrFormat);
+                                if (convertedvalue && scope.returnTranslatedMeridian === 'Y') {
+                                    var meridian = convertedvalue.split(" ")[1];
+                                    if (meridian === "PM") {
+                                        meridian = scope.meridiansList[1];
+                                    } else if (meridian === "AM") {
+                                        meridian = scope.meridiansList[0];
+                                    }
+                                    convertedvalue = convertedvalue.split(" ")[0] + " " + meridian;
+                                }
+                                scope.modelScope = convertedvalue;
+                            } else if (scope.timeObject.is24Hrformat) {
+                                convertedvalue = scope.formatEnteredTime(timeToConvert, 'HH:mm', scope.returnFormat);
+                                scope.modelScope = convertedvalue;
+                            } else {
+                                scope.modelScope = timeToConvert;
+                            }
+                        }
+
+                        function ChangeAMPM(result) {
+                            var amMeridian = $filter('xei18n')('default.time.am');
+                            var pmMeridian = $filter('xei18n')('default.time.pm');
+                            $(result).text(function (i, v) {
+                                return v === amMeridian ? pmMeridian : amMeridian
+                            });
+                            $(result).next().text(function (i, v) {
+                                return v === amMeridian ? pmMeridian : amMeridian
+                            });
+                        }
+
+                        //Meridian Button add on 12 hrs format
+                        if (!scope.timeObject.is24Hrformat) {
+                            var tickerContainer = ele.find('div.timepickerContainer .mainContainer .tickerContainer')[0].classList[1];
+                            var meridianElement = ele.find('div.timepickerContainer .mainContainer .pushmeBorder')[0];
+                            var meridianFocus = ele.find('.meridianFocus');
+                            $("." + tickerContainer).on(eventtype, function (event) {
+                                removeallFocus();
+                                toggleFocus(meridianFocus);
+                                ChangeAMPM(meridianElement);
+                            });
+                            $("." + tickerContainer).on('click', function (event) {
+                                removeallFocus();
+                                toggleFocus(meridianFocus);
+
+                            });
+                            $("." + tickerContainer).on('keydown', function (event) {
+                                if (event.keyCode === keyCodes.UP || event.keyCode === keyCodes.DOWN) {
+                                    ChangeAMPM(meridianElement);
+                                }
+                                if (event.shiftKey && event.keyCode === keyCodes.TAB) {
+                                    removeMinsAndHoursAriaLabel();
+                                    addMinutesAriaLabel();
+                                }
+
+                                if ((!event.shiftKey) && event.keyCode === keyCodes.TAB) {
+                                    removeMinsAndHoursAriaLabel();
+                                }
+                            });
+                            $("." + tickerContainer).on("touchend", function (event) {
+                                removeallFocus();
+                                toggleFocus(meridianFocus);
+                                ChangeAMPM(meridianElement);
+                            });
+                        }
+
+                        scope.hrsFocusElem = ele.find('ul:first li')[0];
+                        scope.minFocusElem = ele.find('ul:last li')[0];
+                        var hrsElement = ele.find('ul:first li');
+                        var firstElem = hrsElement[0];
+                        var wrapHRDiv = angular.element(firstElem).closest('div');
+                        var nextHRUL = angular.element(firstElem).closest('ul');
+                        var nextContent = angular.element(nextHRUL).find('li')[1].innerText;
+                        angular.element(wrapHRDiv).find('div.nextDiv').text(nextContent);
+                        angular.element(firstElem).attr('tabindex', 0);
+
+
+                        $(nextHRUL).on('click', function () {
+                            removeallFocus();
+                            toggleFocus(nextHRUL);
+                        });
+
+                        angular.element(wrapHRDiv).find('div.nextDiv').on(eventtype, function (event) {
+                            var isHours = true;
+                            var mouseEvt = event.originalEvent;
+                            var currentElement = this;
+                            var activeLi = $(currentElement.parentElement).find('ul li.active-timepicker');
+                            removeallFocus();
+                            var setHrsElement = ele.find('.hrsFocus');
+                            toggleFocus(setHrsElement);
+                            var currentIndex = parseInt(activeLi[0].classList[0].split("_")[1]);
+                            scrollFunctionality(mouseEvt, currentIndex, activeLi, isHours);
+                            stopEventsDefault(event);
+                            return false;
+                        });
+
+                        angular.element(wrapHRDiv).find('div.previousDiv').on(eventtype, function (event) {
+                            var isHours = true;
+                            var mouseEvt = event.originalEvent;
+                            var currentElement = this;
+                            var activeLi = $(currentElement.parentElement).find('ul li.active-timepicker');
+                            removeallFocus();
+                            var setHrsElement = ele.find('.hrsFocus');
+                            toggleFocus(setHrsElement);
+                            var currentIndex = parseInt(activeLi[0].classList[0].split("_")[1]);
+                            scrollFunctionality(mouseEvt, currentIndex, activeLi, isHours);
+                            stopEventsDefault(event);
+                            return false;
+                        });
+
+                        function scrollFunctionality(evt, currentIndex, currentObj, isHours) {
+                            var delta = Math.max(-1, Math.min(1, (evt.wheelDelta || -evt.detail)));
+                            if (delta < 0) {
+                                scope.commonIncrement(currentIndex, currentObj, isHours);
+                                return false;
+                            } else if (delta > 0) {
+                                scope.commonDecrement(currentIndex, currentObj, isHours);
+                            }
+                        }
+
+                        function toggleFocus(setfocus) {
+                            angular.element(setfocus).addClass('active-timepickerFocus');
+                        }
+
+                        hrsElement.on('keydown', function (event) {
+                            var currentIndex = parseInt(this.classList[0].split("_")[1]);
+                            var currentElement = this;
+                            var isHours = true;
+                            scope.focusPrevElement = ele.find('.minFocus');
+                            //scope.focusNextElement = ele.find('.minFocus');
+                            scope.focusCurrentElement = ele.find('.hrsFocus');
+                            hrsElement.each(function (ind, eachLi) {
+                                $(eachLi).attr('tabindex', -1);
+                            });
+                            angular.element("." + this.classList[0]).attr('tabindex', 0);
+                            if (event.keyCode === keyCodes.DOWN) {
+                                scope.commonIncrement(currentIndex, currentElement, isHours);
+                                removeMinsAndHoursAriaLabel();
+                                stopEventsDefault(event);
+                                return false;
+                            }
+                            if (event.keyCode === keyCodes.UP) {
+                                scope.commonDecrement(currentIndex, currentElement, isHours);
+                                removeMinsAndHoursAriaLabel();
+                                stopEventsDefault(event);
+                                return false;
+                            }
+                            if (event.keyCode === keyCodes.RIGHT) {
+                                angular.element(scope.minFocusElem).focus();
+                                removeallFocus();
+                                toggleFocus(scope.focusPrevElement);
+                                removeMinsAndHoursAriaLabel();
+                                addMinutesAriaLabel();
+                                angular.element(scope.minFocusElem).focus();
+                                stopEventsDefault(event);
+                                return false;
+                            }
+
+                            if (event.keyCode === keyCodes.ENTER) {
+                                removeMinsAndHoursAriaLabel();
+                                setTimePickerValue();
+                                stopEventsDefault(event);
+                                return false;
+                            }
+
+                            if (!event.shiftKey && event.keyCode === keyCodes.TAB) {
+                                angular.element(scope.minFocusElem).focus();
+                                removeallFocus();
+                                toggleFocus(scope.focusPrevElement);
+                                removeMinsAndHoursAriaLabel();
+                                addMinutesAriaLabel();
+                                angular.element(scope.minFocusElem).focus();
+                                stopEventsDefault(event);
+                                return false;
+                            }
+
+                            if (event.shiftKey && event.keyCode === keyCodes.TAB) {
+                                var setButton = ele.find('footer.timerFooter xe-button button.primary');
+                                angular.element(setButton).focus();
+                                removeallFocus();
+                                toggleFocus(setButton);
+                                removeMinsAndHoursAriaLabel();
+                                stopEventsDefault(event);
+                                return false;
+                            }
+                            return true;
+                        });
+
+
+                        hrsElement.on(eventtype, function (event) {
+                            var mouseEvt = event.originalEvent;
+                            var _this = $(this).closest('ul');
+                            var currentElement = $(_this).find('li.active-timepicker');
+                            var currentIndex = parseInt(currentElement[0].classList[0].split("_")[1]);
+                            var isHours = true;
+                            removeallFocus();
+                            var setHrsElement = ele.find('.hrsFocus');
+                            toggleFocus(setHrsElement);
+                            scrollFunctionality(mouseEvt, currentIndex, currentElement, isHours);
+                            stopEventsDefault(event);
+                            return false;
+
+                        });
+
+                        var minElements = ele.find('ul:last li');
+                        var firstMinElem = minElements[0];
+                        var wrapMinDiv = angular.element(firstMinElem).closest('div');
+                        var nextMinUL = angular.element(firstMinElem).closest('ul');
+                        var nextContent = angular.element(nextMinUL).find('li')[1].innerText;
+                        angular.element(firstMinElem).attr('tabindex', 0);
+                        angular.element(wrapMinDiv).find('div.nextDiv').text(nextContent);
+
+                        $(nextMinUL).on('click', function () {
+                            removeallFocus();
+                            toggleFocus(nextMinUL);
+                        });
+
+                        angular.element(wrapMinDiv).find('div.nextDiv').on(eventtype, function (event) {
+                            var isHours = false;
+                            var mouseEvt = event.originalEvent;
+                            var activeLi = $(this.parentElement).find('ul li.active-timepicker');
+                            removeallFocus();
+                            var minFocus = ele.find('.minFocus');
+                            toggleFocus(minFocus);
+                            var currentIndex = parseInt(activeLi[0].classList[0].split("_")[1]);
+                            scrollFunctionality(mouseEvt, currentIndex, activeLi, isHours);
+                            stopEventsDefault(event);
+                            return false;
+                        });
+
+                        angular.element(wrapMinDiv).find('div.previousDiv').on(eventtype, function (event) {
+                            var isHours = false;
+                            var mouseEvt = event.originalEvent;
+                            var activeLi = $(this.parentElement).find('ul li.active-timepicker');
+                            removeallFocus();
+                            var minFocus = ele.find('.minFocus');
+                            toggleFocus(minFocus);
+                            var currentIndex = parseInt(activeLi[0].classList[0].split("_")[1]);
+                            scrollFunctionality(mouseEvt, currentIndex, activeLi, isHours);
+                            stopEventsDefault(event);
+                            return false;
+                        });
+
+
+                        addHoursAriaLabel();
+
+                        minElements.on('keydown', function (event) {
+                            var currentIndex = parseInt(this.classList[0].split("_")[1]);
+                            var currentElement = this;
+                            var isHours = false;
+                            scope.focusPrevElement = ele.find('.hrsFocus');
+                            scope.focusNextElement = ele.find('.meridianFocus');
+                            scope.focusCurrentElement = ele.find('.minFocus');
+                            minElements.each(function (ind, eachLi) {
+                                $(eachLi).attr('tabindex', -1);
+                            });
+                            angular.element("." + this.classList[0]).attr('tabindex', 0);
+                            if (event.keyCode === keyCodes.DOWN) {
+                                removeMinsAndHoursAriaLabel();
+                                scope.commonIncrement(currentIndex, currentElement, isHours);
+                                stopEventsDefault(event);
+                                return false;
+                            }
+                            if (event.keyCode === keyCodes.UP) {
+                                removeMinsAndHoursAriaLabel();
+                                scope.commonDecrement(currentIndex, currentElement, isHours);
+                                stopEventsDefault(event);
+                                return false;
+                            }
+                            if (event.keyCode === keyCodes.LEFT) {
+                                removeMinsAndHoursAriaLabel();
+                                addHoursAriaLabel();
+                                angular.element(scope.hrsFocusElem).attr('tabindex', 0);
+                                angular.element(scope.hrsFocusElem).focus();
+                                removeallFocus();
+                                toggleFocus(scope.focusPrevElement);
+                                stopEventsDefault(event);
+                                return false;
+                            }
+                            if (event.keyCode === keyCodes.RIGHT) {
+                                removeMinsAndHoursAriaLabel();
+                                scope.ampmEle = ele.find('div.pushmeBorder');
+                                angular.element(scope.ampmEle).attr('tabindex', 0);
+                                angular.element(scope.ampmEle).focus();
+                                if (!scope.timeObject.is24Hrformat) {
+                                    var meridianFocus = ele.find('div.meridianFocus');
+                                    var minFocus = ele.find('.minFocus');
+                                    removeallFocus();
+                                    toggleFocus(meridianFocus);
+                                    //$('.meridianFocus').addClass('active-timepickerFocus');
+                                }
+                                stopEventsDefault(event);
+                                return false;
+                            }
+
+                            if (event.keyCode === keyCodes.ENTER) {
+                                removeMinsAndHoursAriaLabel();
+                                setTimePickerValue();
+                                stopEventsDefault(event);
+                                return false;
+                            }
+
+                            if ((!event.shiftKey) && event.keyCode === keyCodes.TAB) {
+                                /*if(Language.isRtl()){
+                                 //add if condition for tabbing in arabic
+
+                                 }*/
+
+                                var cancelfocus = ele.find('.footercancelButton');
+                                var minfocus = ele.find('.minFocus');
+                                var meridianFocus = ele.find('.meridianFocus')
+                                if (Language.isRtl()) {
+                                    angular.element(cancelfocus).addClass('active-timepickerFocus');
+                                    angular.element(minfocus).removeClass('active-timepickerFocus');
+                                    //toggleFocus(scope.focusCurrentElement,scope.focusNextElement);
+                                } else {
+                                    if (!scope.timeObject.is24Hrformat) {
+                                        removeallFocus();
+                                        toggleFocus(meridianFocus);
+
+                                    } else {
+                                        removeallFocus();
+                                    }
+                                }
+                                //removeallFocus();
+                                angular.element(cancelfocus).removeClass('active-timepickerFocus');
+                                removeMinsAndHoursAriaLabel();
+                            }
+                            if (event.shiftKey && event.keyCode === keyCodes.TAB) {
+                                angular.element(scope.hrsFocusElem).attr('tabindex', 0);
+                                angular.element(scope.hrsFocusElem).focus();
+                                removeallFocus();
+                                toggleFocus(scope.focusPrevElement);
+                                removeMinsAndHoursAriaLabel();
+                                addHoursAriaLabel();
+                                angular.element(scope.hrsFocusElem).focus();
+                                stopEventsDefault(event);
+                                return false;
+                            }
+
+                            return true;
+                        });
+
+                        var meridianElem = ele.find('div.mainContainer .pushmeBorder');
+                        meridianElem.on('keydown', function (event) {
+                            //scope.focusPrevElement = ele.find('.hrsFocus');
+                            scope.focusCurrentElement = ele.find('.meridianFocus');
+                            scope.focusPrevElement = ele.find('.minFocus');
+                            if (event.keyCode === keyCodes.LEFT) {
+                                angular.element(scope.minFocusElem).focus();
+                                removeallFocus();
+                                toggleFocus(scope.focusPrevElement);
+                                removeMinsAndHoursAriaLabel();
+                                addMinutesAriaLabel();
+                                angular.element(scope.minFocusElem).focus();
+                                stopEventsDefault(event);
+                                return false;
+                            }
+
+                            if (event.keyCode === keyCodes.RIGHT) {
+                                return false;
+                            }
+
+                            if (event.keyCode === keyCodes.ENTER) {
+                                removeMinsAndHoursAriaLabel();
+                                setTimePickerValue();
+                                stopEventsDefault(event);
+                                return false;
+                            }
+                            if ((!event.shiftKey) && event.keyCode === keyCodes.TAB) {
+                                removeallFocus();
+                            }
+                            if (event.shiftKey && event.keyCode === keyCodes.TAB) {
+                                removeallFocus();
+                                toggleFocus(scope.focusPrevElement);
+                                $('.meridianFocus').removeClass('active-timepickerFocus');
+                            }
+
+                        });
+
+                        function removeMinsAndHoursAriaLabel() {
+                            angular.element(scope.hrsFocusElem).parent().removeAttr('aria-label');
+                            angular.element(scope.minFocusElem).parent().removeAttr('aria-label');
+                        }
+
+                        function removeallFocus() {
+                            var minFocus = ele.find('.minFocus');
+                            var hrsFocus = ele.find('.hrsFocus');
+                            var meridianFocus = ele.find('.meridianFocus');
+                            var cancelFocus = ele.find('.footercancelButton')
+                            angular.element(meridianFocus).removeClass('active-timepickerFocus');
+                            angular.element(minFocus).removeClass('active-timepickerFocus');
+                            angular.element(hrsFocus).removeClass('active-timepickerFocus');
+                            angular.element(cancelFocus).removeClass('active-timepickerFocus');
+                        }
+
+                        function addHoursAriaLabel() {
+                            angular.element(scope.hrsFocusElem).parent().attr('aria-label', $filter('xei18n')('timepicker.hour.aria.label') + " " + $filter('xei18n')('timepicker.shortcuts.aria.label'));
+                        }
+
+                        function addMinutesAriaLabel() {
+                            if (!scope.timeObject.is24Hrformat)
+                                angular.element(scope.minFocusElem).parent().attr('aria-label', $filter('xei18n')('timepicker.min.aria.label') + " " + $filter('xei18n')('timepicker.shortcuts.aria.label'));
+                            else
+                                angular.element(scope.minFocusElem).parent().attr('aria-label', $filter('xei18n')('timepicker.min.aria.24hrs.label') + " " + $filter('xei18n')('timepicker.shortcuts.aria.label'));
+                        }
+
+                        minElements.on(eventtype, function (event) {
+                            var mouseEvt = event.originalEvent;
+                            var isHours = false;
+                            var _this = $(this).closest('ul');
+                            var currentElement = $(_this).find('li.active-timepicker');
+                            var currentIndex = parseInt(currentElement[0].classList[0].split("_")[1]);
+                            removeallFocus();
+                            var minFocus = ele.find('.minFocus');
+                            toggleFocus(minFocus);
+                            scrollFunctionality(mouseEvt, currentIndex, currentElement, isHours);
+                            stopEventsDefault(event);
+                            return false;
+                        });
+
+                        var start = {};
+                        var stop = {};
+
+                        function touchmove(event) {
+                            if (!start) {
+                                return;
+                            }
+
+                            var data = event.originalEvent.touches ?
+                                event.originalEvent.touches[0] :
+                                event;
+                            stop = {
+                                time: (new Date).getTime(),
+                                coords: [data.pageX, data.pageY]
+                            };
+
+                            // prevent scrolling
+                            if (Math.abs(start.coords[1] - stop.coords[1]) > 10) {
+                                stopEventsDefault(event);
+                            }
+
+                        }
+
+                        //Drag Feature in Desktop for Hrs Container
+                        var yDown;
+                        var yUp;
+                        angular.element(wrapHRDiv).on("mousedown", function (e) {
+                            yDown = e.pageY;
+                        }).on('mouseup', function (e) {
+                            removeallFocus();
+                            var setHrsElement = ele.find('.hrsFocus');
+                            angular.element(setHrsElement).addClass('active-timepickerFocus');
+                            var isHours = true;
+                            var activeLi = $(this.parentElement).find('.hrsContainer  ul li.active-timepicker');
+                            var currentIndex = parseInt(activeLi[0].classList[0].split("_")[1]);
+                            yUp = e.pageY;
+                            if (yDown < yUp) {
+                                scope.commonDecrement(currentIndex, activeLi, isHours);
+                            }
+                            else if (yDown > yUp) {
+                                scope.commonIncrement(currentIndex, activeLi, isHours);
+                            }
+                            stopEventsDefault(e);
+                            return false;
+                        });
+
+                        //Drag Feature in Desktop for Mins Container
+                        var yMinDown;
+                        var yMinUp;
+                        angular.element(wrapMinDiv).on("mousedown", function (e) {
+                            yMinDown = e.pageY;
+                        }).on('mouseup', function (e) {
+                            removeallFocus();
+                            var setHrsElement = ele.find('.minFocus');
+                            angular.element(setHrsElement).addClass('active-timepickerFocus');
+                            var isHours = false;
+                            var activeLi = $(this.parentElement).find('.minContainer  ul li.active-timepicker');
+                            var currentIndex = parseInt(activeLi[0].classList[0].split("_")[1]);
+                            yMinUp = e.pageY;
+                            if (yMinDown < yMinUp) {
+                                scope.commonDecrement(currentIndex, activeLi, isHours);
+                            }
+                            else if (yMinDown > yMinUp) {
+                                scope.commonIncrement(currentIndex, activeLi, isHours);
+                            }
+                            stopEventsDefault(e);
+                            return false;
+                        });
+
+                        function touchStart(touchEvent, elementClass) {
+                            removeallFocus();
+                            var setElement = ele.find('.' + elementClass);
+                            angular.element(setElement).addClass('active-timepickerFocus');
+                            var touches = touchEvent.originalEvent.touches ? touchEvent.originalEvent.touches[0] : touchEvent;
+                            start = {
+                                time: (new Date).getTime(),
+                                coords: [touches.pageX, touches.pageY],
+                                origin: $(touchEvent.target)
+                            }
+                        }
+
+                        function touchEnd(currentIndex, ulElement, isHours, evt) {
+                            if (start && stop) {
+                                if (stop.time - start.time < 1000 &&
+                                    Math.abs(start.coords[1] - stop.coords[1]) > 30 &&
+                                    Math.abs(start.coords[0] - stop.coords[0]) < 75) {
+                                    if (start.coords[1] > stop.coords[1]) {
+                                        scope.commonIncrement(parseInt(currentIndex), ulElement, isHours);
+                                    } else {
+                                        scope.commonDecrement(parseInt(currentIndex), ulElement, isHours);
+                                    }
+                                    start = stop = undefined;
+                                    stopEventsDefault(evt);
+                                    return false;
+                                }
+                            }
+                        }
+
+                        $(wrapHRDiv).find('div.nextDiv').on({
+                            'touchstart': function (event) {
+                                var elementClass = "hrsFocus";
+                                touchStart(event, elementClass);
+                                $(this).on('touchmove', touchmove);
+                                event.preventDefault();
+                            },
+                            'touchend': function (event) {
+                                $(this).off('touchmove');
+                                var isHours = true;
+                                var wrapDiv = this.closest('div');
+                                var ulElement = $(wrapDiv).prev();
+                                var currentIndex = $(ulElement).find('li.active-timepicker').val();
+                                touchEnd(currentIndex, ulElement, isHours, event);
+                            }
+                        });
+
+
+                        $(wrapHRDiv).find('div.previousDiv').on({
+                            'touchstart': function (event) {
+                                var elementClass = "hrsFocus";
+                                touchStart(event, elementClass);
+                                $(this).on('touchmove', touchmove);
+                                event.preventDefault();
+                            },
+                            'touchend': function (event) {
+                                $(this).off('touchmove');
+                                var isHours = true;
+                                var wrapDiv = this.closest('div');
+                                var ulElement = $(wrapDiv).next();
+                                var currentIndex = $(ulElement).find('li.active-timepicker').val();
+                                touchEnd(currentIndex, ulElement, isHours, event);
+                            }
+                        });
+
+                        $(hrsElement).on({
+                            'touchstart': function (event) {
+                                var elementClass = "hrsFocus";
+                                touchStart(event, elementClass);
+                                $(this).on('touchmove', touchmove);
+                                event.preventDefault();
+                            },
+                            'touchend': function (event) {
+                                $(this).off('touchmove');
+                                var isHours = true;
+                                var currentIndex = (this.classList[0]).split("_")[1];
+                                var ulElement = this;
+                                touchEnd(currentIndex, ulElement, isHours, event);
+                            }
+                        });
+
+                        $(minElements).on({
+                            'touchstart': function (event) {
+                                var elementClass = "minFocus";
+                                touchStart(event, elementClass);
+                                $(this).on('touchmove', touchmove);
+                                stopEventsDefault(event);
+                            },
+                            'touchend': function (event) {
+                                $(this).off('touchmove');
+                                var isHours = false;
+                                var ulElement = this;
+                                var currentIndex = (this.classList[0]).split("_")[1];
+                                touchEnd(currentIndex, ulElement, isHours, event);
+                            }
+                        });
+
+                        $(wrapMinDiv).find('div.previousDiv').on({
+                            'touchstart': function (event) {
+                                var elementClass = "minFocus";
+                                touchStart(event, elementClass);
+                                $(this).on('touchmove', touchmove);
+                                event.preventDefault();
+                            },
+                            'touchend': function (event) {
+                                $(this).off('touchmove');
+                                var isHours = false;
+                                var wrapDiv = this.closest('div');
+                                var ulElement = $(this.closest('div')).next();
+                                var currentIndex = $(ulElement).find('li.active-timepicker')[0].classList[0].split("_")[1];
+                                touchEnd(currentIndex, ulElement, isHours, event);
+                            }
+                        });
+
+                        $(wrapMinDiv).find('div.nextDiv').on({
+                            'touchstart': function (event) {
+                                var elementClass = "minFocus";
+                                touchStart(event, elementClass);
+                                $(this).on('touchmove', touchmove);
+                                event.preventDefault();
+                            },
+                            'touchend': function (event) {
+                                $(this).off('touchmove');
+                                var isHours = false;
+                                var wrapDiv = this.closest('div');
+                                var ulElement = $(this.closest('div')).prev();
+                                var currentIndex = $(ulElement).find('li.active-timepicker')[0].classList[0].split("_")[1];
+                                touchEnd(currentIndex, ulElement, isHours, event);
+                            }
+                        });
+                    },10);
+                }
+            };
+        }])
 }());
 //# sourceMappingURL=xe-ui-components.js.map
