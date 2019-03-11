@@ -197,6 +197,7 @@ eventCreateWarStart = { warName, stagingDir ->
     ant.delete(file:"${stagingDir}/WEB-INF/lib/xml-apis-1.3.04.jar")
     ant.delete(file:"${stagingDir}/WEB-INF/lib/xercesImpl-2.10.0.jar")
     ant.delete(file:"${stagingDir}/WEB-INF/lib/xercesImpl-2.11.0.jar")
+    ant.delete(file:"${stagingDir}/WEB-INF/lib/stax-api-1.0.1.jar")
 
     ant.delete(dir: "${stagingDir}/WEB-INF/classes/functionaltestplugin")
     ant.delete(dir: "${stagingDir}/plugins/functional-test-2.0.0")

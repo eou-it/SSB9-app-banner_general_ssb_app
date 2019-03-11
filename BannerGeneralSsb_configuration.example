@@ -131,8 +131,8 @@ log4j = {
     off 'net.hedtech.banner.aip.post.job.ActionItemJobTaskManagerService'
     off 'net.hedtech.banner.aip.post.job.ActionItemJobService'
     off 'net.hedtech.banner.aip.post.grouppost.ActionItemPostMonitor'
-    off 'net.hedtech.banner.aip.post.grouppost.ActionItemPostCompositeService'    
-    
+    off 'net.hedtech.banner.aip.post.grouppost.ActionItemPostCompositeService'
+
     // ******** Grails framework classes *********
     off 'org.codehaus.groovy.grails.web.servlet'        // controllers
     off 'org.codehaus.groovy.grails.web.pages'          // GSP
@@ -385,6 +385,18 @@ pageBuilder {
     // debugRoles = "ROLE_GPBADMN_BAN_DEFAULT_PAGEBUILDER_M"
 }
 
+/* Temp fix for AIP to avoid conflicts with Banner Extensibility app Requestmap and enabled uploadProperties in API app.*/
+def extensibilityFormMap = [
+    '/theme/**'                     : ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/themeEditor/**'               : ['ROLE_SELFSERVICE-WTAILORADMIN_BAN_DEFAULT_M'],
+    '/ssb/uploadProperties/**'      : ['ROLE_SELFSERVICE-WTAILORADMIN_BAN_DEFAULT_M'],
+    '/**/logout'                    : ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/**/login/auth'                : ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/customPage/page/**'           : ['ROLE_DENY_ALL']
+]
+grails.plugin.springsecurity.interceptUrlMap << extensibilityFormMap
+
+
 /** *****************************************************************************
  *                                                                              *
  *               Configuration for Payment Gateway                              *
@@ -412,7 +424,7 @@ GENERALLOCATION='http://<HOST_NAME>:<PORT>/BannerGeneralSsb' // Example localhos
  // AIP Configuration for restricted attachment type, allowed attachment size and file storage location
 /*****************************************************************************************************/
     aip.restricted.attachment.type=['EXE']/* AIP restricted file types*/
-    aip.allowed.attachment.max.size='26214400' 	/* AIP file size in KB*/
+    aip.allowed.attachment.max.size='26214400' 	/* AIP file size in Bytes*/
     aip.attachment.file.storage.location='AIP'	/* File storage location. Possible values are 'AIP' and 'BDM'. Default is 'AIP'*/
     aip.institution.maximum.attachment.number=10      /* Maximum number of attachments for each response that can be uploaded for an action item*/
 

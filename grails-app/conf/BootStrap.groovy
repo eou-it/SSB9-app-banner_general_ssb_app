@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2013-2018 Ellucian Company L.P. and its affiliates.
+ Copyright 2013-2019 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 import grails.converters.JSON
@@ -26,7 +26,6 @@ class BootStrap {
 
     private static final log = Logger.getLogger( BootStrap.class)
     def dateConverterService
-    def sqlFileLoadService
 
     def localizer = {mapToLocalize ->
         new ValidationTagLib().message( mapToLocalize )
