@@ -275,7 +275,7 @@ grails {
                 }
             }
             logout {
-                afterLogoutUrl = 'https://cas-server/logout?url=http://myportal/main_page.html'
+                afterLogoutUrl = '/'   // 'https://cas-server/logout?url=http://myportal/main_page.html'
             }
         }
     }
