@@ -1,0 +1,67 @@
+rootProject.name = 'BannerGeneralSsb'
+
+include ':banner-ui-ss'
+project(':banner-ui-ss').projectDir = new File('plugins/banner_ui_ss.git')
+
+include ':banner-general-common-ui-ss'
+project(':banner-general-common-ui-ss').projectDir = new File('plugins/banner_general_common_ui_ss.git')
+
+include ':banner-document-management'
+project(':banner-document-management').projectDir = new File('plugins/banner_document_management.git')
+
+include ':sghe-aurora'
+project(':sghe-aurora').projectDir = new File('plugins/sghe_aurora.git')
+
+include ':web-app-extensibility'
+project(':web-app-extensibility').projectDir = new File('plugins/web-app-extensibility.git')
+
+include ':domain-extension'
+project(':domain-extension').projectDir = new File('plugins/domain_extension.git')
+
+include ':banner-packaging'
+project(':banner-packaging').projectDir = new File('plugins/banner_packaging.git')
+
+include ':banner-general-common'
+project(':banner-general-common').projectDir = new File('plugins/banner_general_common.git')
+
+include ':banner-general-person'
+project(':banner-general-person').projectDir = new File('plugins/banner_general_person.git')
+
+include ':banner-general-validation-common'
+project(':banner-general-validation-common').projectDir = new File('plugins/banner_general_validation_common.git')
+
+include ':banner-general-utility'
+project(':banner-general-utility').projectDir = new File('plugins/banner_general_utility.git')
+
+include ':banner-core'
+project(':banner-core').projectDir = new File('plugins/banner_core.git')
+
+include ':banner-codenarc'
+project(':banner-codenarc').projectDir = new File('plugins/banner_codenarc.git')
+
+include ':i18n-core'
+project(':i18n-core').projectDir = new File('plugins/i18n_core.git')
+
+include ':grails-constraints'
+project(':grails-constraints').projectDir = new File('plugins/grails_constraints.git')
+
+include ':banner-aip'
+project(':banner-aip').projectDir = new File('plugins/banner-aip.git')
+
+include ':banner-aip-ui'
+project(':banner-aip-ui').projectDir = new File('plugins/banner-aip-ui.git')
+
+include ':banner-aip-gate-keeper'
+project(':banner-aip-gate-keeper').projectDir = new File('plugins/banner-aip-gate-keeper.git')
+
+include ':banner-general-direct-deposit-ui'
+project(':banner-general-direct-deposit-ui').projectDir = new File('plugins/banner-general-direct-deposit-ui.git')
+
+include ':banner-general-personal-information-ui'
+project(':banner-general-personal-information-ui').projectDir = new File('plugins/banner-general-personal-information-ui.git')
+
+include ':banner-general-proxy'
+project(':banner-general-proxy').projectDir = new File('plugins/banner-general-proxy.git')
+
+include ':banner-sspb'
+project(':banner-sspb').projectDir = new File('plugins/banner-sspb.git')
