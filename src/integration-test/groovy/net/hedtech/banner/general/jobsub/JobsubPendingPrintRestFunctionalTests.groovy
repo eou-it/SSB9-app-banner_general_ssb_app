@@ -7,7 +7,7 @@ package net.hedtech.banner.general.jobsub
 import grails.converters.JSON
 import net.hedtech.banner.testing.BaseFunctionalSpec
 import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
-import org.codehaus.groovy.grails.plugins.codecs.Base64Codec
+//TODO import org.codehaus.groovy.grails.plugins.codecs.Base64Codec
 import spock.lang.Stepwise
 
 import static org.codehaus.groovy.grails.plugins.GrailsPluginUtils.*

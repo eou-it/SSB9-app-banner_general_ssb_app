@@ -141,9 +141,9 @@ grails {
 
   //      compile project(':banner-aip-ui')
   //      compile project(':banner-aip-gate-keeper')
-  //      compile project(':banner-general-direct-deposit-ui')
-  //      compile project(':banner-general-personal-information-ui')
-  //      compile project(':banner-general-proxy')
+        compile project(':banner-general-direct-deposit-ui')
+        compile project(':banner-general-personal-information-ui')
+        compile project(':banner-general-proxy')
 
     }
 }

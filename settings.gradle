@@ -45,26 +45,26 @@ project(':i18n-core').projectDir = new File('plugins/i18n_core.git')
 include ':grails-constraints'
 project(':grails-constraints').projectDir = new File('plugins/grails_constraints.git')
 
-include ':banner-aip'
-project(':banner-aip').projectDir = new File('plugins/banner-aip.git')
+//include ':banner-aip'
+//project(':banner-aip').projectDir = new File('plugins/banner_aip.git')
 
-include ':banner-aip-ui'
-project(':banner-aip-ui').projectDir = new File('plugins/banner-aip-ui.git')
+//include ':banner-aip-ui'
+//project(':banner-aip-ui').projectDir = new File('plugins/banner_aip_ui.git')
 
-include ':banner-aip-gate-keeper'
-project(':banner-aip-gate-keeper').projectDir = new File('plugins/banner-aip-gate-keeper.git')
+//include ':banner-aip-gate-keeper'
+//project(':banner-aip-gate-keeper').projectDir = new File('plugins/banner_aip_gate_keeper.git')
 
 include ':banner-general-direct-deposit-ui'
-project(':banner-general-direct-deposit-ui').projectDir = new File('plugins/banner-general-direct-deposit-ui.git')
+project(':banner-general-direct-deposit-ui').projectDir = new File('plugins/banner_general_direct_deposit_ui.git')
 
 include ':banner-general-personal-information-ui'
-project(':banner-general-personal-information-ui').projectDir = new File('plugins/banner-general-personal-information-ui.git')
+project(':banner-general-personal-information-ui').projectDir = new File('plugins/banner_general_personal_information_ui.git')
 
 include ':banner-general-proxy'
-project(':banner-general-proxy').projectDir = new File('plugins/banner-general-proxy.git')
+project(':banner-general-proxy').projectDir = new File('plugins/banner_general_proxy.git')
 
-include ':banner-sspb'
-project(':banner-sspb').projectDir = new File('plugins/banner-sspb.git')
+//include ':banner-sspb'
+//project(':banner-sspb').projectDir = new File('plugins/banner-sspb.git')
 
 include ':restful-api'
 project(':restful-api').projectDir= new File('plugins/restful-api.git')

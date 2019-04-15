@@ -9,7 +9,7 @@ import net.hedtech.restfulapi.spock.RestSpecification
 
 import grails.util.Holders
 
-import org.codehaus.groovy.grails.plugins.codecs.Base64Codec
+//TODO import org.codehaus.groovy.grails.plugins.codecs.Base64Codec
 import org.grails.web.util.GrailsApplicationAttributes
 import org.grails.web.servlet.mvc.GrailsWebRequest
 

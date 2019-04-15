@@ -24,7 +24,7 @@ import org.grails.web.converters.configuration.DefaultConverterConfiguration
  * */
 class BootStrap {
 
-    private static final log = Logger.getLogger( BootStrap.class)
+    private static final logfile = Logger.getLogger( BootStrap.class)
     def dateConverterService
 
     def localizer = {mapToLocalize ->
@@ -95,7 +95,7 @@ class BootStrap {
 
 
         grailsApplication.controllerClasses.each {
-            log.info "adding log property to controller: $it"
+            logfile.info "adding log property to controller: $it"
             // Note: weblogic throws an error if we try to inject the method if it is already present
             if (!it.metaClass.methods.find {m -> m.name.matches( "getLog" )}) {
                 def name = it.name // needed as this 'it' is not visible within the below closure...
@@ -109,7 +109,7 @@ class BootStrap {
 
         grailsApplication.allClasses.each {
             if (it.name?.contains( "plugin.resource" )) {
-                log.info "adding log property to plugin.resource: $it"
+                logfile.info "adding log property to plugin.resource: $it"
 
                 // Note: weblogic throws an error if we try to inject the method if it is already present
                 if (!it.metaClass.methods.find {m -> m.name.matches( "getLog" )}) {
@@ -145,7 +145,7 @@ class BootStrap {
     }
 
     def destroy = {
-        log.info( "Executing Bootstrap.destroy" )
+        logfile.info( "Executing Bootstrap.destroy" )
         actionItemPostMonitor.shutdown()
         actionItemPostWorkProcessingEngine.stopRunning()
         actionItemJobProcessingEngine.stopRunning()
