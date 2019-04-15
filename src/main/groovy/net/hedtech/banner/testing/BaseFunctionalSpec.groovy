@@ -10,8 +10,8 @@ import net.hedtech.restfulapi.spock.RestSpecification
 import grails.util.Holders
 
 import org.codehaus.groovy.grails.plugins.codecs.Base64Codec
-import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes
-import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest
+import org.grails.web.util.GrailsApplicationAttributes
+import org.grails.web.servlet.mvc.GrailsWebRequest
 
 import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse

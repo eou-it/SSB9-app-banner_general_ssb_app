@@ -7,7 +7,7 @@ import grails.converters.JSON
 import net.hedtech.banner.exceptions.ApplicationException
 import net.hedtech.banner.general.overall.UserRoleService
 import org.apache.log4j.Logger
-import org.codehaus.groovy.grails.plugins.web.taglib.ValidationTagLib
+import org.grails.plugins.web.taglib.ValidationTagLib
 import org.springframework.security.core.context.SecurityContextHolder
 
 /**

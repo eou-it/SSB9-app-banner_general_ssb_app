@@ -14,7 +14,6 @@
 // 3. Load the configuration file if its location was specified as a system environment variable
 //
 // Map [ environment variable or -D command line argument name : file path ]
-import net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor
 
 grails.config.locations = [
                 BANNER_APP_CONFIG           : "banner_configuration.groovy",
@@ -425,6 +424,7 @@ restfulApi.marshallers.removeEmptyCollections = true
 // ******************************************************************************
 //                       RESTful API Endpoint Configuration
 // ******************************************************************************
+/*
 restfulApiConfig = {
     // Resources for web_app_extensibility plugin
     marshallerGroups {
@@ -699,5 +699,6 @@ restfulApiConfig = {
                                 }
     // End Resources for web_app_extensibility plugin
 }
+*/
 grails.plugin.springsecurity.cas.active = false
 grails.plugin.springsecurity.saml.active = false

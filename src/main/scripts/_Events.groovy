@@ -4,7 +4,7 @@
 
 import grails.util.Environment
 import groovy.xml.StreamingMarkupBuilder
-import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
+
 
 // Ensures logging is visible when using 'grails run-app', by adding a valve to the embedded tomcat.
 // Note we need to load dynamically, as _Events is loaded when running scripts where this class may not always available.

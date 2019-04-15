@@ -8,15 +8,14 @@ import grails.util.Environment
 import grails.util.Holders
 import net.hedtech.banner.converters.json.JSONBeanMarshaller
 import net.hedtech.banner.converters.json.JSONDomainMarshaller
-import net.hedtech.banner.aip.ActionItemGroupAssignReadOnly
 import net.hedtech.banner.i18n.LocalizeUtil
 import org.apache.commons.logging.LogFactory
 import org.apache.log4j.Logger
-import org.codehaus.groovy.grails.commons.ApplicationAttributes
-import org.codehaus.groovy.grails.plugins.web.taglib.ValidationTagLib
-import org.codehaus.groovy.grails.web.converters.configuration.ConverterConfiguration
-import org.codehaus.groovy.grails.web.converters.configuration.ConvertersConfigurationHolder
-import org.codehaus.groovy.grails.web.converters.configuration.DefaultConverterConfiguration
+import grails.core.ApplicationAttributes
+import org.grails.plugins.web.taglib.ValidationTagLib
+import org.grails.web.converters.configuration.ConverterConfiguration
+import org.grails.web.converters.configuration.ConvertersConfigurationHolder
+import org.grails.web.converters.configuration.DefaultConverterConfiguration
 
 /**
  * Executes arbitrary code at bootstrap time.
