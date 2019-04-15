@@ -68,9 +68,6 @@
     	path = plugins/banner_aip_ui.git
     	url = https://git.ellucian.com/scm/banxeplug/banner_aip_ui.git
 
-[submodule "plugins/restful-api.git"]
-	path = plugins/restful-api.git
-	url = https://github.com/restfulapi/restful-api.git
 [submodule "plugins/banner_aip_gate_keeper.git"]
 	path = plugins/banner_aip_gate_keeper.git
 	url = https://git.ellucian.com/scm/banxeplug/banner_aip_gate_keeper.git
@@ -80,3 +77,6 @@
 [submodule "plugins/banner_document_management.git"]
 	path = plugins/banner_document_management.git
 	url = https://git.ellucian.com/scm/banxeplug/banner_document_management.git
+[submodule "plugins/restful-api.git"]
+	path = plugins/restful-api.git
+	url = https://git.ellucian.com/scm/banxeframe/restful-api.git

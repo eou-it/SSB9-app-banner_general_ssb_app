@@ -14,6 +14,7 @@
 // 3. Load the configuration file if its location was specified as a system environment variable
 //
 // Map [ environment variable or -D command line argument name : file path ]
+import net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor
 
 grails.config.locations = [
                 BANNER_APP_CONFIG           : "banner_configuration.groovy",
@@ -35,7 +36,7 @@ hibernate {
     flush.mode = AUTO
     cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
     show_sql = false
-    packagesToScan = "net.hedtech.**.*"    
+    packagesToScan = "net.hedtech.**.*, com.sungardhe.*"
     // naming_strategy = "org.hibernate.cfg.ImprovedNamingStrategy"
     dialect = "org.hibernate.dialect.Oracle10gDialect"
     config.location = [
@@ -46,7 +47,8 @@ hibernate {
             "classpath:hibernate-banner-aip-gate-keeper.cfg.xml",
             "classpath:hibernate-banner-aip.cfg.xml",
             "classpath:hibernate-banner-general-utility.cfg.xml",
-            "classpath:hibernate-banner-sspb.cfg.xml"
+            "classpath:hibernate-banner-sspb.cfg.xml",
+            "classpath:hibernate-restful-api.cfg.xml"
     ]
 }
 
@@ -428,14 +430,14 @@ restfulApiConfig = {
     marshallerGroups {
         group 'json_date' marshallers {
                                           marshaller {
-                                              instance = new org.codehaus.groovy.grails.web.converters.marshaller.ClosureObjectMarshaller<grails.converters.JSON>(
+                                              instance = new org.grails.web.converters.marshaller.ClosureObjectMarshaller<grails.converters.JSON>(
                                                       java.util.Date, {return it?.format( "yyyy-MM-dd" )} )
                                           }
                                       }
 
         group 'xml_date' marshallers {
                                          marshaller {
-                                             instance = new org.codehaus.groovy.grails.web.converters.marshaller.ClosureObjectMarshaller<grails.converters.XML>(
+                                             instance = new org.grails.web.converters.marshaller.ClosureObjectMarshaller<grails.converters.XML>(
                                                      java.util.Date, {return it?.format( "yyyy-MM-dd" )} )
                                          }
                                      }

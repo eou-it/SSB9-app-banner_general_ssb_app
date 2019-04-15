@@ -135,6 +135,7 @@ grails {
         compile project(':web-app-extensibility')
         compile project(':sghe-aurora')
         compile project(':banner-ui-ss')
+        compile project(':restful-api')
         compile project(':banner-general-common-ui-ss')
 
 

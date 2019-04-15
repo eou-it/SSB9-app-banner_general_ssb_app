@@ -65,3 +65,8 @@ project(':banner-general-proxy').projectDir = new File('plugins/banner-general-p
 
 include ':banner-sspb'
 project(':banner-sspb').projectDir = new File('plugins/banner-sspb.git')
+
+include ':restful-api'
+project(':restful-api').projectDir = new File('plugins/restful-api.git')
+rootProject.name = 'banner_general_ssb_app'
+
