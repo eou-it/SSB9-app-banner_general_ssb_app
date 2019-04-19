@@ -2,65 +2,24 @@
  Copyright 2013-2019 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
-// ******************************************************************************
-//
-//                       +++ EXTERNALIZED CONFIGURATION +++
-//
-// ******************************************************************************
-//
-// Config locations should be added to the map used below. They will be loaded based upon this search order:
-// 1. Load the configuration file if its location was specified on the command line using -DmyEnvName=myConfigLocation
-// 2. Load the configuration file if it exists within the user's .grails directory (i.e., convenient for developers)
-// 3. Load the configuration file if its location was specified as a system environment variable
-//
-// Map [ environment variable or -D command line argument name : file path ]
+//import net.hedtech.banner.configuration.ApplicationConfigurationUtils as ConfigFinder
+//import grails.plugin.springsecurity.SecurityConfigType
+
+// locations to search for config files that get merged into the main config
+// config files can either be Java properties files or ConfigSlurper scripts
+
+//grails.config.locations = [] // leave this initialized to an empty list, and add your locations in the map below.
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '*.png', '/plugins/*']
+
 
 grails.config.locations = [
-                BANNER_APP_CONFIG           : "banner_configuration.groovy",
-                BANNER_GENERAL_SSB_CONFIG   : "BannerGeneralSsb_configuration.groovy",
-                WEB_APP_EXTENSIBILITY_CONFIG: "WebAppExtensibilityConfig.class"
-] 
+        BANNER_APP_CONFIG           : "banner_configuration.groovy"
+        //BANNER_GENERAL_SSB_CONFIG   : "BannerGeneralSsb_configuration.groovy",
+        //WEB_APP_EXTENSIBILITY_CONFIG: "WebAppExtensibilityConfig.class"
+]
 
-dataSource {
-
-    dialect = "org.hibernate.dialect.Oracle10gDialect"
-
-
-}
-
-
-hibernate {
-    cache.use_second_level_cache = true
-    cache.use_query_cache = true
-    flush.mode = AUTO
-    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
-    show_sql = false
-    packagesToScan = "net.hedtech.**.*, com.sungardhe.*"
-    // naming_strategy = "org.hibernate.cfg.ImprovedNamingStrategy"
-    dialect = "org.hibernate.dialect.Oracle10gDialect"
-    config.location = [
-            "classpath:hibernate-banner-core.cfg.xml",
-            "classpath:hibernate-banner-general-person.cfg.xml",
-            "classpath:hibernate-banner-general-validation-common.cfg.xml",
-            "classpath:hibernate-banner-general-common.cfg.xml",
-            "classpath:hibernate-banner-aip-gate-keeper.cfg.xml",
-            "classpath:hibernate-banner-aip.cfg.xml",
-            "classpath:hibernate-banner-general-utility.cfg.xml",
-            "classpath:hibernate-banner-sspb.cfg.xml",
-            "classpath:hibernate-restful-api.cfg.xml"
-    ]
-}
-
-/** ******************************************************************************
- *                                                                                *
- *                       +++ NAME DISPLAY CONFIGURATION +++                       *
- *                                                                                *
- * ****************************************************************************** **/
-
-
-app.appId="GENERAL_SS"
-app.name="GeneralSelfService"
-// ******************************************************************************
+grails.databinding.useSpringBinder=true
+/// ******************************************************************************
 //
 //                       +++ BUILD NUMBER SEQUENCE UUID +++
 //
@@ -77,8 +36,17 @@ app.name="GeneralSelfService"
 //
 // DO NOT EDIT THIS UUID UNLESS YOU ARE AUTHORIZED TO DO SO AND KNOW WHAT YOU ARE DOING
 //
-build.number.uuid = "f23ea34b-6469-4aa9-9778-e7efbba5de7b" // specific UUID for
+build.number.uuid = "7f8235d8-2a51-4f2f-8516-47d913caf346" // specific UUID for Advisor solution
 build.number.base.url = "http://m039198.ellucian.com:8080/BuildNumberServer/buildNumber?method=getNextBuildNumber&uuid="
+app.name="GeneralSelfService"
+app.appId="GENERAL_SS"
+
+
+
+server.'contextPath' = '/BannerGeneralSsb'
+server.port=8090
+spring.jmx.enabled=false
+
 
 grails.project.groupId = "net.hedtech" // used when deploying to a maven repo
 grails.databinding.useSpringBinder = true
@@ -97,12 +65,12 @@ grails.mime.types = [
         json         : ['application/json', 'text/json'],
         form         : 'application/x-www-form-urlencoded',
         multipartForm: 'multipart/form-data',
-        jpg          : 'image/jpeg',
-        png          : 'image/png',
-        gif          : 'image/gif',
-        bmp          : 'image/bmp',
-        svg: 'image/svg+xml',
-        svgz: 'image/svg+xml',
+        jpg: 'image/jpeg',
+        png: 'image/png',
+        gif: 'image/gif',
+        bmp: 'image/bmp',
+        svg:'image/svg+xml',
+        svgz:'image/svg+xml'
 ]
 
 // The default codec used to encode data with ${}
@@ -110,6 +78,7 @@ grails.views.default.codec = "html" // none, html, base64  **** note: Setting th
 grails.views.gsp.encoding = "UTF-8"
 grails.converters.encoding = "UTF-8"
 grails.plugin.springsecurity.logout.afterLogoutUrl = "/"
+grails.plugin.springsecurity.logout.mepErrorLogoutUrl='/logout/logoutPage'
 grails.converters.domain.include.version = true
 //grails.converters.json.date = "default"
 
@@ -121,19 +90,16 @@ grails.enable.native2ascii = false
 
 // enable GSP preprocessing: replace head -> g:captureHead, title -> g:captureTitle, meta -> g:captureMeta, body -> g:captureBody
 grails.views.gsp.sitemesh.preprocess = true
+//grails.resources.rewrite.css = false
+grails.resources.adhoc.excludes = ['/**/*-custom.css']
 
-grails.resources.mappers.yuicssminify.includes = ['**/*.css']
-grails.resources.mappers.yuijsminify.includes = ['**/*.js']
-grails.resources.mappers.yuicssminify.excludes = ['**/*.min.css']
-grails.resources.mappers.yuijsminify.excludes = ['**/*.min.js']
 
-// set per-environment serverURL stem for creating absolute links
 environments {
     development {
-        grails.resources.debug = true;
+        grails.resources.debug = true
     }
-
 }
+
 
 // ******************************************************************************
 //
@@ -159,6 +125,7 @@ dataOrigin = "Banner"
 // logged in user navigates to the 'medicalInformation' controller, when a database
 // connection is attained and the user has the necessary role, the role is enabled
 // for that user and Banner object.
+
 formControllerMap = [
         'selfservicemenu'           : ['SELFSERVICE', 'GUAGMNU'],
         'survey'                    : ['SELFSERVICE'],
@@ -208,497 +175,214 @@ formControllerMap = [
 ]
 
 
-grails.plugin.springsecurity.useRequestMapDomainClass = false
+
+grails.plugin.springsecurity.logout.afterLogoutUrl = "/"
+//grails.plugin.springsecurity.useRequestMapDomainClass = false
 //grails.plugin.springsecurity.rejectIfNoRule = true
-
-grails.plugin.springsecurity.securityConfigType = SecurityConfigType.Requestmap
-
+/*grails.plugin.springsecurity.filterChain.chainMap = [
+        [pattern:'/api/**', filters: 'authenticationProcessingFilter,basicAuthenticationFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,basicExceptionTranslationFilter,filterInvocationInterceptor'],
+        [pattern:'/**'    , filters: 'securityContextPersistenceFilter,logoutFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor']
+]*/
 grails.plugin.springsecurity.filterChain.chainMap = [
-        '/api/**' : 'basicAuthenticationFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,basicExceptionTranslationFilter,filterInvocationInterceptor',
-        '/qapi/**': 'basicAuthenticationFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,basicExceptionTranslationFilter,filterInvocationInterceptor',
-        '/**'     : 'securityContextPersistenceFilter,logoutFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor'
+        [pattern: '/api/**', filters: 'authenticationProcessingFilter,basicAuthenticationFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,basicExceptionTranslationFilter,filterInvocationInterceptor'],
+        [pattern:  '/**'  ,  filters: 'securityContextPersistenceFilter,logoutFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor']
 ]
+
+grails.plugin.springsecurity.securityConfigType = grails.plugin.springsecurity.SecurityConfigType.Requestmap
+grails.plugin.springsecurity.cas.active = false
+grails.plugin.springsecurity.saml.active = false
+
 
 // ******************************************************************************
 //
 //                       +++ INTERCEPT-URL MAP +++
 //
 // ******************************************************************************
-pageBuilder.adminRoles = 'ROLE_GPBADMN_BAN_DEFAULT_PAGEBUILDER_M'
 
+/*
 grails.plugin.springsecurity.interceptUrlMap = [
-        '/'                                  : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/directDepositApp/**'               : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/personalInformationApp/**'         : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/proxyApp/**'                       : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/resetPassword/**'                  : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/login/**'                          : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/index**'                           : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/logout/**'                         : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/logout/**'                     : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/menu'                          : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/js/**'                             : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/css/**'                            : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/images/**'                         : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/fonts/**'                          : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/plugins/**'                        : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/errors/**'                         : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/help/**'                           : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/i18n/**'                           : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/selfServiceMenu/**'                : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/selfServiceMenu/**'            : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/menu**'                        : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/about/**'                      : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/generalSsbApp/**'                  : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/keepAlive/data**'              : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/dateConverter/**'                  : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/dateConverter/**'              : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        // ALL URIs specified with the BannerAccessDecisionVoter.ROLE_DETERMINED_DYNAMICALLY
-        // 'role' (it's not a real role) will result in authorization being determined based
-        // upon a user's role assignments to the corresponding form (see 'formControllerMap' above).
-        // Note: This 'dynamic form-based authorization' is performed by the BannerAccessDecisionVoter
-        // registered as the 'roleVoter' within Spring Security.
-        //
-        // Only '/name_used_in_formControllerMap/' and '/api/name_used_in_formControllerMap/'
-        // URL formats are supported.  That is, the name_used_in_formControllerMap must be first, or
-        // immediately after 'api' -- but it cannot be otherwise nested. URIs may be protected
-        // by explicitly specifying true roles instead -- as long as ROLE_DETERMINED_DYNAMICALLY
-        // is NOT specified.
-        //
-        // '/**': [ 'ROLE_DETERMINED_DYNAMICALLY' ]
-        //'/**': [ 'ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M' ]
+        [pattern:'/' ,                            access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/directDepositApp/**',          access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/personalInformationApp/**',    access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/proxyApp/**',                  access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/resetPassword/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/login/**',                     access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/index**',                      access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/logout/**',                    access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/logout/**',                access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/menu',                     access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/js/**',                        access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/css/**',                       access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/images/**',                    access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/fonts/**',                     access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/plugins/**',                   access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/errors/**',                    access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/help/**',                      access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/i18n/**',                      access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/selfServiceMenu/**',           access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/selfServiceMenu/**',       access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/menu**',                   access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/about/**',                 access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/generalSsbApp/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/keepAlive/data**',         access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/dateConverter/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/dateConverter/**',         access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
 
         //AIP
-        '/ssb/aipAdmin/**'                   : ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M'],
-        '/ssb/aipReview/**'                  : ['ROLE_SELFSERVICE-ACTIONITEMREVIEWER_BAN_DEFAULT_M'],
-        '/ssb/BCM/**'                        : ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M'],
-        '/ssb/aipActionItemPosting/**'       : ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M'],
-        '/ssb/aip/**'                        : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/aipDocumentManagement/**'      : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/aipPageBuilder/**'             : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
+        [pattern:'/ssb/aipAdmin/**',              access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aipReview/**',             access: ['ROLE_SELFSERVICE-ACTIONITEMREVIEWER_BAN_DEFAULT_M']],
+        [pattern:'/ssb/BCM/**',                   access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aipActionItemPosting/**',  access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aip/**',                   access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aipDocumentManagement/**', access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aipPageBuilder/**',        access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
 
         //Page Builder
-        '/internalPb/virtualDomains.*/**'    : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/adminPb/virtualDomains.*/**'       : [pageBuilder.adminRoles],
-        '/internalPb/pages/**'               : [pageBuilder.adminRoles],
-        '/internalPb/csses/**'               : [pageBuilder.adminRoles],
-        '/internalPb/virtualdomains/**'      : [pageBuilder.adminRoles],
-        '/internalPb/pagesecurity/**'        : [pageBuilder.adminRoles],
-        '/internalPb/pageexports/**'         : [pageBuilder.adminRoles],
-        '/internalPb/virtualdomainexports/**': [pageBuilder.adminRoles],
-        '/internalPb/cssexports/**'          : [pageBuilder.adminRoles],
-        '/internalPb/admintasks/**'          : [pageBuilder.adminRoles],
-        '/virtualDomainComposer/**'          : [pageBuilder.adminRoles],
-        '/visualPageModelComposer/**'        : [pageBuilder.adminRoles],
-        '/cssManager/**'                     : [pageBuilder.adminRoles],
-        '/admin/i18n/**'                     : [pageBuilder.adminRoles],
-        '/cssRender/**'                      : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        //Page Builder master template included to allow for users to pass in without needing role applied in requestmap table in extz app.
-        '/customPage/page/AIPMasterTemplateSystemRequired/**'   : ['IS_AUTHENTICATED_FULLY'],
-        //For now use a page builder dummy page for cas aut
-        '/customPage/page/pbadm.ssoauth/**'  : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', pageBuilder.adminRoles],
+        //TODO
         //Theming specific
-        '/ssb/theme/**'                       : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/themeEditor/**'                : ['ROLE_SELFSERVICE-WTAILORADMIN_BAN_DEFAULT_M'],
-        '/uploadProperties/**'               : ['ROLE_SELFSERVICE-WTAILORADMIN_BAN_DEFAULT_M'],
+        [pattern:'/ssb/theme/**',                      access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/themeEditor/**',                access: ['ROLE_SELFSERVICE-WTAILORADMIN_BAN_DEFAULT_M']],
+        [pattern:'/uploadProperties/**',               access: ['ROLE_SELFSERVICE-WTAILORADMIN_BAN_DEFAULT_M']],
 
-        '/api/**'                            : ['ROLE_DETERMINED_DYNAMICALLY'],
-        '/qapi/**'                           : ['ROLE_DETERMINED_DYNAMICALLY'],
-        '/api/about'                         : ['IS_AUTHENTICATED_FULLY'],
-        '/api/healthcheck'                   : ['IS_AUTHENTICATED_FULLY'],
-        '/ssb/securityQA/**'                 : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/survey/**'                     : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/userAgreement/**'              : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/proxy/proxyAction/**':['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/proxy/submitActionPassword/**':['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/proxy/resetPinAction/**':['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/proxy/**'                      : ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/general/**'                    : ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/directDeposit/**'              : ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M'],
-        '/ssb/UpdateAccount/**'              : ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M'],
-        '/ssb/accountListing/**'             : ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M'],
-        '/ssb/DirectDepositConfiguration/**' : ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M'],
-        '/ssb/personalInformation/**'        : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/PersonalInformationDetails/**' : ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/PersonalInformationPicture/**' : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/PersonalInformationQA/**'      : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M'],
-        '/ssb/userPreference/**'             : ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/ssb/shortcut/**'                   : ['IS_AUTHENTICATED_ANONYMOUSLY']
+        [pattern:'/api/**',                            access: ['ROLE_DETERMINED_DYNAMICALLY']],
+        [pattern:'/qapi/**',                           access: ['ROLE_DETERMINED_DYNAMICALLY']],
+        [pattern:'/api/about',                         access: ['IS_AUTHENTICATED_FULLY']],
+        [pattern:'/api/healthcheck',                   access: ['IS_AUTHENTICATED_FULLY']],
+        [pattern:'/ssb/securityQA/**',                 access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/survey/**',                     access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/userAgreement/**',              access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/proxy/proxyAction/**',          access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/proxy/submitActionPassword/**', access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/proxy/resetPinAction/**',       access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/proxy/**' ,                     access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/general/**' ,                   access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/directDeposit/**',              access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
+        [pattern:'/ssb/UpdateAccount/**',              access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
+        [pattern:'/ssb/accountListing/**',             access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
+        [pattern:'/ssb/DirectDepositConfiguration/**', access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
+        [pattern:'/ssb/personalInformation/**',        access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/PersonalInformationDetails/**', access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/PersonalInformationPicture/**', access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/PersonalInformationQA/**',      access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/userPreference/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/shortcut/**',                   access: ['IS_AUTHENTICATED_ANONYMOUSLY']]
 ]
-
-// CodeNarc rulesets
-codenarc.ruleSetFiles = "rulesets/banner.groovy"
-codenarc.reportName = "target/CodeNarcReport.html"
-codenarc.propertiesFile = "grails-app/conf/codenarc.properties"
-codenarc.extraIncludeDirs = ["grails-app/composers"]
-
-
-
-// placeholder for real configuration
-// base.dir is probably not defined for .war file deployments
-//banner.picturesPath=System.getProperty('base.dir') + '/test/images'
-
-markdown = [
-        removeHtml: true
-]
-
-grails.resources.adhoc.excludes = ['/**/*-custom.css']
-
-// Uncomment and edit the following lines to start using Grails encoding & escaping improvements
-
-/* remove this line
-// GSP settings
-grails {
-    views {
-        gsp {
-            encoding = 'UTF-8'
-            htmlcodec = 'xml' // use xml escaping instead of HTML4 escaping
-            codecs {
-                expression = 'html' // escapes values inside null
-                scriptlet = 'none' // escapes output from scriptlets in GSPs
-                taglib = 'none' // escapes output from taglibs
-                staticparts = 'none' // escapes output from static template parts
-            }
-        }
-        // escapes all not-encoded output at final stage of outputting
-        filteringCodecForContentType {
-            //'text/html' = 'html'
-        }
-    }
-}
-remove this line */
-// ******************************************************************************
-// DB Connection Caching Configuration
-// ******************************************************************************
-// Note: The BannerDS will cache database connections for administrative users,
-// however for RESTful APIs we do not want this behavior (even when
-// authenticated as an 'administrative' user). RESTful APIs should be stateless.
-//
-// IMPORTANT:
-// When exposing RESTful endpoints, exclude database caching for those URLs.
-// Also, if using a prefix other than 'api' and 'qapi' you will need to ensure
-// the spring security filter chain is configured to avoid creating a session.
-//
-avoidSessionsFor = ['api', 'qapi']
-
-// ******************************************************************************
-//                           RESTful API MEP Support
-// ******************************************************************************
-// Note: The BannerDS will use 'setSsbMep' even when getting an
-//       administrative connection if the web request is an 'api'
-//       request. Specify the 'api' prefixes using apiUrlPrefixes.
-//
-apiUrlPrefixes = ['api', 'qapi', 'rest', 'ui']
-
-// ******************************************************************************
-//                  RESTful API Authentication Entry Configuration
-// ******************************************************************************
-// Note: Specifies whether a 'restApiAuthenticationEntryPoint' bean should be used.
-//       Note the 'restApiAuthenticationEntryPoint' bean *must* be registered
-//       within your resources.groovy if this configuration is set to true.
-//
-useRestApiAuthenticationEntryPoint = true
-
-// ******************************************************************************
-//             RESTful API Custom Response Header Name Configuration
-// ******************************************************************************
-//
-restfulApi.header.pageOffset = 'X-hedtech-pageOffset'
-restfulApi.header.pageMaxSize = 'X-hedtech-pageMaxSize'
-restfulApi.header.message = 'X-hedtech-message'
-restfulApi.header.mediaType = 'X-Media-Type'
-restfulApi.header.totalCount = 'X-Total-Count'
-restfulApi.header.contentRestricted = 'X-Content-Restricted'
-
-// ******************************************************************************
-//             RESTful API 'Paging' Query Parameter Name Configuration
-// ******************************************************************************
-//
-restfulApi.page.max = 'limit'
-restfulApi.page.offset = 'offset'
-
-// Force all marshallers to remove null fields and empty collections
-restfulApi.marshallers.removeNullFields = true
-restfulApi.marshallers.removeEmptyCollections = true
-
-// ******************************************************************************
-//                       RESTful API Endpoint Configuration
-// ******************************************************************************
-/*
-restfulApiConfig = {
-    // Resources for web_app_extensibility plugin
-    marshallerGroups {
-        group 'json_date' marshallers {
-                                          marshaller {
-                                              instance = new org.grails.web.converters.marshaller.ClosureObjectMarshaller<grails.converters.JSON>(
-                                                      java.util.Date, {return it?.format( "yyyy-MM-dd" )} )
-                                          }
-                                      }
-
-        group 'xml_date' marshallers {
-                                         marshaller {
-                                             instance = new org.grails.web.converters.marshaller.ClosureObjectMarshaller<grails.converters.XML>(
-                                                     java.util.Date, {return it?.format( "yyyy-MM-dd" )} )
-                                         }
-                                     }
-    }
-    // Begin - Query-with-POST
-    resource 'query-filters' config {
-                                        representation {
-                                            mediaTypes = ["application/json"]
-                                            jsonExtractor {}
-                                        }
-                                        representation {
-                                            mediaTypes = ["application/xml"]
-                                            xmlExtractor {}
-                                        }
-                                    }
-
-
-    resource 'jobsub-pending-print' config {
-                                               serviceName = 'jobsubOutputCompositeService'
-                                               methods = ['list', 'show', 'update']
-                                               representation {
-                                                   mediaTypes = ["application/json"]
-                                                   marshallers {
-                                                       marshallerGroup 'json_date'             //for date related fields
-                                                       jsonBeanMarshaller {
-                                                           supports net.hedtech.banner.general.jobsub.JobsubExternalPrinter
-                                                           includesFields {
-                                                               field 'id'
-                                                               field 'version'
-                                                               field 'job'
-                                                               field 'oneUpNo'
-                                                               field 'fileName'
-                                                               field 'printer'
-                                                               field 'printForm'
-                                                               field 'printDate'
-                                                               field 'creatorId'
-                                                               field 'printerCommand'
-                                                               field 'mime'
-                                                           }
-                                                       }
-                                                       jsonBeanMarshaller {
-                                                           supports net.hedtech.banner.general.jobsub.JobsubSavedOutput
-                                                           includesFields {
-                                                               field 'id'
-                                                               field 'version'
-                                                               field 'job'
-                                                               field 'fileName'
-                                                               field 'printer'
-                                                               field 'printForm'
-                                                               field 'printDate'
-                                                               field 'jobsubOutput'
-                                                           }
-                                                       }
-                                                   }
-                                                   jsonExtractor {
-                                                       property 'job' name 'job'
-                                                       property 'id' name 'id'
-                                                       property 'printer' name 'printer'
-                                                       property 'jobsubOutput' name 'jobsubOutput'
-                                                   }
-                                               }
-                                               representation {
-                                                   mediaTypes = ["application/octet-stream"]
-                                                   marshallerFramework = 'jobsubOutputMarshaller'
-                                               }
-                                           }
-
-    // Pagebuilder resources
-
-
-    anyResource {
-        serviceName = 'virtualDomainResourceService'
-        representation {
-            mediaTypes = ["application/json"]
-            marshallers {
-                marshaller {
-                    instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                    priority = 100
-                }
-            }
-            extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-        }
-    }
-
-    resource 'pagesecurity' config {
-                                       serviceName = 'pageSecurityService'
-                                       representation {
-                                           mediaTypes = ["application/json"]
-                                           marshallers {
-                                               marshaller {
-                                                   instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                                                   priority = 100
-                                               }
-                                           }
-                                           extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-                                       }
-                                   }
-
-    resource 'pages' config {
-                                representation {
-                                    mediaTypes = ["application/json"]
-                                    marshallers {
-                                        jsonDomainMarshaller {
-                                            priority = 101
-                                        }
-                                        jsonBeanMarshaller {
-                                            priority = 100
-                                        }
-                                    }
-                                    jsonExtractor {}
-                                }
-                            }
-
-    resource 'csses' config {
-                                representation {
-                                    mediaTypes = ["application/json"]
-                                    marshallers {
-                                        marshaller {
-                                            instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                                            priority = 100
-                                        }
-                                    }
-                                    extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-                                }
-                            }
-
-    resource 'virtualdomains' config {
-                                         serviceName = 'virtualDomainService'
-                                         representation {
-                                             mediaTypes = ["application/json"]
-                                             marshallers {
-                                                 marshaller {
-                                                     instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                                                     priority = 100
-                                                 }
-                                             }
-                                             extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-                                         }
-                                     }
-
-    resource 'pageexports' config {
-                                      serviceName = 'pageExportService'
-                                      representation {
-                                          mediaTypes = ["application/json"]
-                                          marshallers {
-                                              marshaller {
-                                                  instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                                                  priority = 100
-                                              }
-                                          }
-                                          extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-                                      }
-                                  }
-
-    resource 'virtualdomainexports' config {
-                                               serviceName = 'virtualDomainExportService'
-                                               representation {
-                                                   mediaTypes = ["application/json"]
-                                                   marshallers {
-                                                       marshaller {
-                                                           instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                                                           priority = 100
-                                                       }
-                                                   }
-                                                   extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-                                               }
-                                           }
-    resource 'cssexports' config {
-                                     serviceName = 'cssExportService'
-                                     representation {
-                                         mediaTypes = ["application/json"]
-                                         marshallers {
-                                             marshaller {
-                                                 instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                                                 priority = 100
-                                             }
-                                         }
-                                         extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-                                     }
-                                 }
-
-    resource 'admintasks' config {
-                                     serviceName = 'adminTaskService'
-                                     representation {
-                                         mediaTypes = ["application/json"]
-                                         marshallers {
-                                             marshaller {
-                                                 instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                                                 priority = 100
-                                             }
-                                         }
-                                         extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-                                     }
-                                 }
-    // This pseudo resource is used when issuing a query using a POST. Such a POST is made
-    // against the actual resource being queried, but using a different URL prefix (e.g., qapi)
-    // so the request is routed to the 'list' method (versus the normal 'create' method).
-    resource 'query-filters' config {
-                                        representation {
-                                            mediaTypes = ["application/json"]
-                                            jsonExtractor {}
-                                        }
-                                    }
-
-    // 2 demo resources
-    resource 'todos' config {
-                                representation {
-                                    mediaTypes = ["application/json"]
-                                    marshallers {
-                                        marshaller {
-                                            instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                                            priority = 100
-                                        }
-                                    }
-                                    extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-                                }
-                            }
-
-    resource 'projects' config {
-                                   representation {
-                                       mediaTypes = ["application/json"]
-                                       marshallers {
-                                           marshaller {
-                                               instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                                               priority = 100
-                                           }
-                                       }
-                                       extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-                                   }
-                               }
-    //END of pagebuilder configuration
-    resource 'extensions' config {
-                                     serviceName = 'webAppExtensibilityExtensionService'
-                                     // In some cases the service name has to be prepended with the plugin name
-                                     representation {
-                                         mediaTypes = ["application/json"]
-                                         marshallers {
-                                             marshaller {
-                                                 instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                                                 priority = 100
-                                             }
-                                         }
-                                         extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-                                     }
-                                 }
-    resource 'resources' config {
-                                    serviceName = 'webAppExtensibilityResourceService'
-                                    // In some cases the service name has to be prepended with the plugin name
-                                    representation {
-                                        mediaTypes = ["application/json"]
-                                        marshallers {
-                                            marshaller {
-                                                instance = new net.hedtech.restfulapi.marshallers.json.BasicDomainClassMarshaller( app: grailsApplication )
-                                                priority = 100
-                                            }
-                                        }
-                                        extractor = new net.hedtech.restfulapi.extractors.json.DefaultJSONExtractor()
-                                    }
-                                }
-    // End Resources for web_app_extensibility plugin
-}
 */
-grails.plugin.springsecurity.cas.active = false
-grails.plugin.springsecurity.saml.active = false
+
+grails.plugin.springsecurity.interceptUrlMap = [
+        [pattern:'/ssb/proxy/**' ,                      access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/proxy/proxyAction/**',          access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/proxy/submitActionPassword/**', access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/proxy/resetPinAction/**',       access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/proxy/**' ,                     access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/general/**' ,                   access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/directDeposit/**',              access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
+        [pattern:'/ssb/UpdateAccount/**',              access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
+        [pattern:'/ssb/accountListing/**',             access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
+        [pattern:'/ssb/DirectDepositConfiguration/**', access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
+        [pattern:'/ssb/personalInformation/**',        access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/PersonalInformationDetails/**', access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/PersonalInformationPicture/**', access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/PersonalInformationQA/**',      access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/selfServiceMenu/**',           access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/selfServiceMenu/**',       access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/menu**',                   access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/about/**',                 access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/generalSsbApp/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/keepAlive/data**',         access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/dateConverter/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/dateConverter/**',         access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/',									access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/login/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/index**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/logout/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern: '/assets/**',                        access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/resetPassword/**',					access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/js/**',								access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/css/**',								access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/images/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/plugins/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/errors/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/help/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/static/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ext/**',								access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/i18n/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/api/**',								access:['ROLE_DETERMINED_DYNAMICALLY']],
+        [pattern:'/qapi/**',							access:['ROLE_DETERMINED_DYNAMICALLY']],
+        [pattern:'/ssb/survey/**',		                access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M','ROLE_SELFSERVICE_BAN_DEFAULT_M']],
+        [pattern:'/ssb/userAgreement/**',				access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/securityQA/**',					access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/selfServiceMenu/**',			access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/common/**',						access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/menu/**',						access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/menu',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/classListApp/**',				access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-CLASSLISTADMINISTRATOR_BAN_DEFAULT_M']],
+        [pattern:'/ssb/classListApp/terms',			access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-CLASSLISTADMINISTRATOR_BAN_DEFAULT_M']],
+        [pattern:'/ssb/dropRoster/**',					access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-DROPROSTERADMINISTRATOR_BAN_DEFAULT_M']],
+        [pattern:'/ssb/theme/**',						access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/themeEditor/**',				access:['ROLE_SELFSERVICE-WTAILORADMIN_BAN_DEFAULT_M']],
+        [pattern:'/ssb/keepAlive/data**',				access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/userPreference/**',				access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/studentAttendanceTracking/**',	access:['ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
+        [pattern:'/ssb/studentCommonDashboard/**',		access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
+        [pattern: '/**',								access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-CLASSLISTADMINISTRATOR_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']]
+]
+
+
+
+dataSource {
+    // configClass = GrailsAnnotationConfiguration.class
+    dialect = "org.hibernate.dialect.Oracle10gDialect"
+    loggingSql = false
+}
+
+hibernate {
+    cache.provider_class = 'net.sf.ehcache.hibernate.EhCacheProvider'
+    cache.region_prefix = ''
+    //net.sf.ehcache.configurationResourceName = 'financeSSBAppEhCache.xml'
+    cache.region.factory_class = 'org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory'
+    show_sql = false
+    dialect = "org.hibernate.dialect.Oracle10gDialect"
+    packagesToScan="net.hedtech"
+    config.location = [
+            "classpath:hibernate-banner-core.cfg.xml",
+            "classpath:hibernate-banner-general-person.cfg.xml",
+            "classpath:hibernate-banner-general-validation-common.cfg.xml",
+            "classpath:hibernate-banner-general-common.cfg.xml",
+            "classpath:hibernate-banner-aip-gate-keeper.cfg.xml",
+            "classpath:hibernate-banner-aip.cfg.xml",
+            "classpath:hibernate-banner-general-utility.cfg.xml",
+            "classpath:hibernate-banner-sspb.cfg.xml",
+            "classpath:hibernate-restful-api.cfg.xml"
+    ]
+}
+
+/*
+environments {
+    development {
+        dataSource {
+            url = "jdbc:oracle:thin:@localhost:1521:BAN83"
+            driverClassName = "oracle.jdbc.OracleDriver"
+            username = "ban_ss_user"
+            password = "u_pick_it"
+
+        }
+    }
+    test {
+        dataSource {
+            url = "jdbc:oracle:thin:@localhost:1521:BAN83"
+            driverClassName = "oracle.jdbc.OracleDriver"
+            username = "ban_ss_user"
+            password = "u_pick_it"
+
+        }
+    }
+    production {
+        dataSource {
+            url = "jdbc:oracle:thin:@localhost:1521:BAN83"
+            driverClassName = "oracle.jdbc.OracleDriver"
+            username = "ban_ss_user"
+            password = "u_pick_it"
+        }
+    }
+}*/

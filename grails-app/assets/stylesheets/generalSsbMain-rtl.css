@@ -1,0 +1,186 @@
+/********************************************************************************
+  Copyright 2017-2018 Ellucian Company L.P. and its affiliates.
+********************************************************************************/
+/* General Styles */
+body  {
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#333;
+    font-size:14px;
+}
+
+#content  {
+    height:100%;
+}
+
+.break-long-words  {
+    overflow-wrap:break-word;
+    word-wrap:break-word;
+    -ms-word-break:break-all;
+    word-break:break-all;
+    word-break:break-word;
+}
+
+svg.hide-svg  {
+    height:0;
+}
+
+.gen-home-main-view  {
+    height:100%;
+    background:#f8f8f8;
+}
+
+h2  {
+    font-size:24px;
+}
+
+.gen-home-heading,
+.gen-home-content  {
+    position:absolute;
+    display:inline-block;
+    margin-right:auto;
+    margin-left:auto;
+    left:0;
+    right:0;
+}
+
+.gen-home-heading  {
+    top:25px;
+}
+
+.gen-home-heading-spacer  {
+    display:none;
+}
+
+.gen-home-content  {
+    top:220px;
+    height:500px;
+}
+
+.gen-home-heading .title  {
+    font-size:28px;
+    color:#484849;
+    padding-bottom:25px;
+}
+
+.gen-home-heading .greeting-wrapper  {
+    clear:both;
+    padding-top:15px;
+}
+
+.gen-home-heading .avatar  {
+    width:66px;
+    height:80px;
+    margin-left:25px;
+    float:right;
+}
+
+.gen-home-heading .avatar svg  {
+    width:66px;
+    height:80px;
+}
+
+.gen-home-heading .avatar-spacer  {
+    display:none;
+}
+
+.gen-home-heading .greeting  {
+    font-size:16px;
+    color:#484849;
+    margin-top:10px;
+}
+
+.gen-home-heading .greeting .landingDesc  {
+    height:55px;
+    overflow-y:auto;
+}
+
+.gen-home-title-divider  {
+    width:30px;
+    height:2px;
+}
+
+.gen-home-title-divider span  {
+    border-bottom:2px solid #989DA2;
+    width:100%;
+    float:right;
+    margin-top:1.0em;
+    margin-bottom:0.675em;
+}
+
+.gen-app-tile  {
+    float:right;
+    margin-left:15px;
+    margin-top:10px;
+    padding:15px 15px 0;
+    text-align:center;
+    border:none;
+    border-bottom:4px solid #ddd;
+    overflow:hidden;
+    background:white;
+    cursor:pointer;
+}
+
+a.gen-app-tile,
+a.gen-app-tile:hover,
+a.gen-app-tile:focus,
+a.gen-app-tile:active  {
+    color:#333;
+}
+
+.tile-icon  {
+    float:right;
+    width:25%;
+}
+
+.gen-app-tile img  {
+    margin:-10px -10px 0 0;
+}
+
+.tile-content  {
+    float:right;
+    width:75%;
+}
+
+.tile-title  {
+    text-align:right;
+    font-size:16px;
+    font-weight:bold;
+    padding-bottom:10px;
+}
+
+.tile-desc  {
+    text-align:right;
+    font-size:14px;
+}
+
+/* Accessibility */
+.audible-message  {
+    position:absolute;
+    top:0;
+    right:-500px;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    color:transparent;
+}
+.audible-message-hidden  {
+    display:none;
+    visibility:hidden;
+}
+.audible-message-visible  {
+    display:block;
+    visibility:visible;
+}
+
+/* Breadcrumbs */
+a.breadcrumbButton.leaf-breadcrumb  {
+    text-decoration:none;
+    cursor:default;
+}
+
+.actionpassword  {
+    clear:both;
+    font-size:0.50em;
+    text-align:right;
+}

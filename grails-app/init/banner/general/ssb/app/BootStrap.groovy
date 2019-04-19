@@ -9,8 +9,6 @@ import grails.util.Holders
 import net.hedtech.banner.converters.json.JSONBeanMarshaller
 import net.hedtech.banner.converters.json.JSONDomainMarshaller
 import net.hedtech.banner.i18n.LocalizeUtil
-import org.apache.commons.logging.LogFactory
-import org.apache.log4j.Logger
 import grails.core.ApplicationAttributes
 import org.grails.plugins.web.taglib.ValidationTagLib
 import org.grails.web.converters.configuration.ConverterConfiguration
@@ -24,7 +22,6 @@ import org.grails.web.converters.configuration.DefaultConverterConfiguration
  * */
 class BootStrap {
 
-    private static final logfile = Logger.getLogger( BootStrap.class)
     def dateConverterService
 
     def localizer = {mapToLocalize ->
@@ -95,7 +92,7 @@ class BootStrap {
 
 
         grailsApplication.controllerClasses.each {
-            logfile.info "adding log property to controller: $it"
+            log.info "adding log property to controller: $it"
             // Note: weblogic throws an error if we try to inject the method if it is already present
             if (!it.metaClass.methods.find {m -> m.name.matches( "getLog" )}) {
                 def name = it.name // needed as this 'it' is not visible within the below closure...
@@ -109,7 +106,7 @@ class BootStrap {
 
         grailsApplication.allClasses.each {
             if (it.name?.contains( "plugin.resource" )) {
-                logfile.info "adding log property to plugin.resource: $it"
+                log.info "adding log property to plugin.resource: $it"
 
                 // Note: weblogic throws an error if we try to inject the method if it is already present
                 if (!it.metaClass.methods.find {m -> m.name.matches( "getLog" )}) {
@@ -126,7 +123,7 @@ class BootStrap {
         // Register the JSON Marshallers for format conversion and XSS protection
         registerJSONMarshallers()
 
-        resourceService.reloadAll()
+        //resourceService.reloadAll()
 
 
         List.metaClass.sortAndPaginate = {max, offset = 0, sortColumn, sortDirection = "asc" ->
@@ -145,7 +142,7 @@ class BootStrap {
     }
 
     def destroy = {
-        logfile.info( "Executing Bootstrap.destroy" )
+        log.info( "Executing Bootstrap.destroy" )
         actionItemPostMonitor.shutdown()
         actionItemPostWorkProcessingEngine.stopRunning()
         actionItemJobProcessingEngine.stopRunning()
