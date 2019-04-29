@@ -13,8 +13,8 @@ grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '*.png', '/pl
 
 
 grails.config.locations = [
-        BANNER_APP_CONFIG           : "banner_configuration.groovy"
-        //BANNER_GENERAL_SSB_CONFIG   : "BannerGeneralSsb_configuration.groovy",
+        BANNER_APP_CONFIG           : "banner_configuration.groovy",
+        BANNER_GENERAL_SSB_CONFIG   : "BannerGeneralSsb_configuration.groovy"
         //WEB_APP_EXTENSIBILITY_CONFIG: "WebAppExtensibilityConfig.class"
 ]
 
