@@ -72,5 +72,4 @@ project(':restful-api').projectDir= new File('plugins/restful-api.git')
 include ':banner-restful-api-support'
 project(':banner-restful-api-support').projectDir= new File('plugins/banner-restful-api-support.git')
 
-rootProject.name = 'banner_general_ssb_app'
 
