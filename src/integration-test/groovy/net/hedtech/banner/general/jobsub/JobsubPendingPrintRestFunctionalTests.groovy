@@ -6,11 +6,11 @@ package net.hedtech.banner.general.jobsub
 
 import grails.converters.JSON
 import net.hedtech.banner.testing.BaseFunctionalSpec
-import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
+//import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
 //TODO import org.codehaus.groovy.grails.plugins.codecs.Base64Codec
 import spock.lang.Stepwise
 
-import static org.codehaus.groovy.grails.plugins.GrailsPluginUtils.*
+//import static org.codehaus.groovy.grails.plugins.GrailsPluginUtils.*
 
 @Stepwise
 class JobsubPendingPrintRestFunctionalTests extends BaseFunctionalSpec {
@@ -26,15 +26,15 @@ class JobsubPendingPrintRestFunctionalTests extends BaseFunctionalSpec {
     public static String authHeader() {
         def username = 'PRINTID'
         def password = 'u_pick_it'
-        def authString = Base64Codec.encode("$username:$password")
-        "Basic ${authString}" as String
+        //def authString = Base64Codec.encode("$username:$password")
+        //"Basic ${authString}" as String
     }
 
     public static String badAuthHeader() {
         def username = 'GRAILS'
         def password = 'u_pick_it'
-        def authString = Base64Codec.encode("$username:$password")
-        "Basic ${authString}" as String
+        //def authString = Base64Codec.encode("$username:$password")
+        //"Basic ${authString}" as String
     }
 
 
@@ -289,8 +289,8 @@ class JobsubPendingPrintRestFunctionalTests extends BaseFunctionalSpec {
             def inputFile = new File(inputData.xmlFile)
             if (!inputFile.exists())
                 inputData.xmlFile = "${basedir}${xmlFileName.value}"
-            def seedDataLoader = new net.hedtech.banner.seeddata.SeedDataLoader(inputData)
-            seedDataLoader.execute()
+            //def seedDataLoader = new net.hedtech.banner.seeddata.SeedDataLoader(inputData)
+            //seedDataLoader.execute()
         }
     }
 
