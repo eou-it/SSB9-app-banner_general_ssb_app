@@ -44,7 +44,6 @@ app.appId="GENERAL_SS"
 
 
 server.'contextPath' = '/BannerGeneralSsb'
-server.port=8090
 spring.jmx.enabled=false
 
 
