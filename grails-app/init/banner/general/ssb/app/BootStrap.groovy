@@ -143,9 +143,10 @@ class BootStrap {
 
     def destroy = {
         log.info( "Executing Bootstrap.destroy" )
-        actionItemPostMonitor.shutdown()
-        actionItemPostWorkProcessingEngine.stopRunning()
-        actionItemJobProcessingEngine.stopRunning()
+        //TODO
+        //actionItemPostMonitor.shutdown()
+        //actionItemPostWorkProcessingEngine.stopRunning()
+        //actionItemJobProcessingEngine.stopRunning()
     }
 
 

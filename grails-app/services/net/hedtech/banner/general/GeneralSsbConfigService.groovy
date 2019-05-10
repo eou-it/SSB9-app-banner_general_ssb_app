@@ -46,7 +46,7 @@ class GeneralSsbConfigService extends BasePersonConfigService {
     def getGeneralConfig() {
         [isDirectDepositEnabled      : getParamFromSession( ENABLE_DIRECT_DEPOSIT, 'Y' ) == 'Y' && isDirectDepositAuthorizedForUser(),
          isPersonalInformationEnabled: getParamFromSession( ENABLE_PERSONAL_INFORMATION, 'Y' ) == 'Y',
-         isActionItemEnabledAndAvailable         : getParamFromSession( ENABLE_ACTION_ITEM, 'Y' ) == 'Y' && actionItemProcessingConfigService.isActionItemPresentForUser(),
+         isActionItemEnabledAndAvailable         : getParamFromSession( ENABLE_ACTION_ITEM, 'Y' ) == 'Y' && actionItemProcessingConfigService?.isActionItemPresentForUser(),
          isActionItemEnabled :  getParamFromSession( ENABLE_ACTION_ITEM, 'Y' ) == 'Y',
          isProxyManagementEnabled : getParamFromSession( ENABLE_PROXY_MANAGMENT, 'Y' ) == 'Y',
          proxyManagementUrl : getParamFromSession( ENABLE_PROXY_MANAGMENT, 'Y' ) == 'Y' ? get8xProxyManagementUrl() : PROXY_MGMT_NOT_FOUND]
@@ -54,17 +54,28 @@ class GeneralSsbConfigService extends BasePersonConfigService {
 
     private boolean isDirectDepositAuthorizedForUser() {
         def urlMap = Holders.config.grails.plugin.springsecurity.interceptUrlMap
-        String baseUrl = '/ssb/directDeposit/**'
+        String baseUrl = "/ssb/directDeposit/\\**"
         def baseList = []
-        urlMap.get(baseUrl).each {
-            // role config items should act like a ConfigAttribute
+
+        def pageRolesDirDep
+        def pageRolesAcct
+
+        pageRolesDirDep = urlMap.find {
+            it.pattern =~ baseUrl
+        }?.configAttributes
+
+        pageRolesDirDep.each{
             baseList << [attribute: it]
         }
 
-        String viewUrl = '/ssb/accountListing/**'
+        String viewUrl = "/ssb/accountListing/\\**"
         def viewList = []
-        urlMap.get(viewUrl).each {
-            // role config items should act like a ConfigAttribute
+
+        pageRolesAcct = urlMap.find {
+            it.pattern =~ viewUrl
+        }?.configAttributes
+
+        pageRolesAcct.each{
             viewList << [attribute: it]
         }
 
