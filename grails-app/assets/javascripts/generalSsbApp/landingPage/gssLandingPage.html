@@ -1,0 +1,40 @@
+<!--*******************************************************************************
+  Copyright 2017-2018 Ellucian Company L.P. and its affiliates.
+*******************************************************************************-->
+<div class="gen-home-heading">
+    <div class="title">{{'banner.generalssb.landingpage.title'|i18n}}</div>
+    <div class="gen-home-title-divider"><span></span></div>
+    <div class="greeting-wrapper">
+        <ng-include ng-if="piConfig.isProfilePicDisplayable" src="'../assets/generalSsbApp/landingPage/gssLandingPagePicture.html'"></ng-include>
+        <div class="greeting">
+
+            <div>
+                <div class="break-long-words">{{firstName}}</div>
+                <div class="landingDesc break-long-words">{{'banner.generalssb.landingpage.description'|i18n}}</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div ng-if="piConfig.isProfilePicDisplayable" class="avatar-spacer mobile"></div>
+<div class="gen-home-heading-spacer"></div>
+<div ng-class="['gen-home-content', isSingleTile ? 'single-tile' : null]">
+    <div ng-repeat="tile in appTilesForRole">
+        <landing-page-app-tile tile-data="tile"/>
+    </div>
+    <div ng-if="proxyMgmtTile">
+        <a href="{{proxyMgmtTile.url}}" target="genSsbWin" class="gen-app-tile" role="button">
+            <div class="tile-icon">
+                <img ng-src="{{proxyMgmtTile.icon}}"/>
+            </div>
+            <div class="tile-content">
+                <div class="tile-title">
+                    {{proxyMgmtTile.title|i18n}}
+                </div>
+                <div class="tile-desc">
+                    {{proxyMgmtTile.desc|i18n}}
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
