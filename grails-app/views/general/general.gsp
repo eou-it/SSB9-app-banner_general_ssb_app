@@ -20,8 +20,14 @@ Copyright 2017-2018 Ellucian Company L.P. and its affiliates.
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <g:set var="appName" value= ""/>
 
+        <g:if test="${message(code: 'default.language.direction')  == 'rtl'}">
+            <asset:stylesheet src="modules/gss-applicationRTL-mf.css"/>
+        </g:if>
+        <g:else>
+            <asset:stylesheet src="modules/gss-applicationLTR-mf.css"/>
+        </g:else>
+
         <asset:javascript src="modules/gss-application-mf.js"/>
-        <asset:stylesheet src="modules/gss-applicationLTR-mf.css"/>
     </g:applyLayout>
 
     <script type="text/javascript">
