@@ -21,11 +21,13 @@ Copyright 2017-2018 Ellucian Company L.P. and its affiliates.
         <g:set var="appName" value= ""/>
 
         <g:if test="${message(code: 'default.language.direction')  == 'rtl'}">
-            <r:require modules="generalSsbAppRTL"/>
+            <asset:stylesheet src="modules/gss-applicationRTL-mf.css"/>
         </g:if>
         <g:else>
-            <r:require modules="generalSsbAppLTR"/>
+            <asset:stylesheet src="modules/gss-applicationLTR-mf.css"/>
         </g:else>
+
+        <asset:javascript src="modules/gss-application-mf.js"/>
     </g:applyLayout>
 
     <script type="text/javascript">

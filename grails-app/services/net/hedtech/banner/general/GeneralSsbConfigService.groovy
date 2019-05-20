@@ -65,7 +65,7 @@ class GeneralSsbConfigService extends BasePersonConfigService {
         }?.configAttributes
 
         pageRolesDirDep.each{
-            baseList << [attribute: it]
+            baseList << it
         }
 
         String viewUrl = "/ssb/accountListing/\\**"
@@ -76,12 +76,13 @@ class GeneralSsbConfigService extends BasePersonConfigService {
         }?.configAttributes
 
         pageRolesAcct.each{
-            viewList << [attribute: it]
+            viewList << it
         }
 
         def voter = new BannerAccessDecisionVoter()
-        return AccessDecisionVoter.ACCESS_GRANTED == voter.vote(SecurityContextHolder?.context?.authentication, baseUrl, baseList) &&
-                AccessDecisionVoter.ACCESS_GRANTED == voter.vote(SecurityContextHolder?.context?.authentication, viewUrl, viewList)
+
+        return AccessDecisionVoter.ACCESS_GRANTED == voter.vote(SecurityContextHolder?.context?.authentication, '/ssb/directDeposit/**', baseList) &&
+                AccessDecisionVoter.ACCESS_GRANTED == voter.vote(SecurityContextHolder?.context?.authentication, '/ssb/accountListing/**', viewList)
     }
 
     private def get8xProxyManagementUrl() {

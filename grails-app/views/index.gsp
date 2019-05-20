@@ -7,6 +7,9 @@
     <g:set var="hideSSBHeaderComps" value="${params?.hideSSBHeaderComps}" />
     <g:set var="applicationName" value= "${grails.util.Metadata.current.getApplicationName()}"/>
     <g:set var="appName" value= "${System.properties['BANNERXE_APP_NAME']}"/>
+
+    <asset:javascript src="modules/gss-application-mf.js"/>
+
     <g:if test="${appName.equals('DirectDeposit')}">
         <g:set var="url" value="${'ssb/directDeposit'}"/>
     </g:if>
@@ -56,6 +59,9 @@
     </script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta HTTP-EQUIV="REFRESH" content="0; url=${url}">
+
+    <asset:javascript src="modules/gs-application-mf.js"/>
+    <asset:stylesheet src="modules/gs-applicationLTR-mf.css"/>
 </head>
 <body>
 </body>
