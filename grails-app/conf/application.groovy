@@ -178,10 +178,6 @@ formControllerMap = [
 grails.plugin.springsecurity.logout.afterLogoutUrl = "/"
 //grails.plugin.springsecurity.useRequestMapDomainClass = false
 //grails.plugin.springsecurity.rejectIfNoRule = true
-/*grails.plugin.springsecurity.filterChain.chainMap = [
-        [pattern:'/api/**', filters: 'authenticationProcessingFilter,basicAuthenticationFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,basicExceptionTranslationFilter,filterInvocationInterceptor'],
-        [pattern:'/**'    , filters: 'securityContextPersistenceFilter,logoutFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor']
-]*/
 grails.plugin.springsecurity.filterChain.chainMap = [
         [pattern: '/api/**', filters: 'authenticationProcessingFilter,basicAuthenticationFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,basicExceptionTranslationFilter,filterInvocationInterceptor'],
         [pattern:  '/**'  ,  filters: 'securityContextPersistenceFilter,logoutFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor']
@@ -197,76 +193,6 @@ grails.plugin.springsecurity.saml.active = false
 //                       +++ INTERCEPT-URL MAP +++
 //
 // ******************************************************************************
-
-/*
-grails.plugin.springsecurity.interceptUrlMap = [
-        [pattern:'/' ,                            access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/directDepositApp/**',          access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/personalInformationApp/**',    access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/proxyApp/**',                  access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/resetPassword/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/login/**',                     access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/index**',                      access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/logout/**',                    access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/logout/**',                access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/menu',                     access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/js/**',                        access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/css/**',                       access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/images/**',                    access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/fonts/**',                     access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/plugins/**',                   access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/errors/**',                    access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/help/**',                      access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/i18n/**',                      access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/selfServiceMenu/**',           access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/selfServiceMenu/**',       access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/menu**',                   access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/about/**',                 access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/generalSsbApp/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/keepAlive/data**',         access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/dateConverter/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/dateConverter/**',         access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-
-        //AIP
-        [pattern:'/ssb/aipAdmin/**',              access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
-        [pattern:'/ssb/aipReview/**',             access: ['ROLE_SELFSERVICE-ACTIONITEMREVIEWER_BAN_DEFAULT_M']],
-        [pattern:'/ssb/BCM/**',                   access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
-        [pattern:'/ssb/aipActionItemPosting/**',  access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
-        [pattern:'/ssb/aip/**',                   access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/aipDocumentManagement/**', access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/aipPageBuilder/**',        access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-
-        //Page Builder
-        //TODO
-        //Theming specific
-        [pattern:'/ssb/theme/**',                      access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/themeEditor/**',                access: ['ROLE_SELFSERVICE-WTAILORADMIN_BAN_DEFAULT_M']],
-        [pattern:'/uploadProperties/**',               access: ['ROLE_SELFSERVICE-WTAILORADMIN_BAN_DEFAULT_M']],
-
-        [pattern:'/api/**',                            access: ['ROLE_DETERMINED_DYNAMICALLY']],
-        [pattern:'/qapi/**',                           access: ['ROLE_DETERMINED_DYNAMICALLY']],
-        [pattern:'/api/about',                         access: ['IS_AUTHENTICATED_FULLY']],
-        [pattern:'/api/healthcheck',                   access: ['IS_AUTHENTICATED_FULLY']],
-        [pattern:'/ssb/securityQA/**',                 access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/survey/**',                     access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/userAgreement/**',              access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/proxy/proxyAction/**',          access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/proxy/submitActionPassword/**', access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/proxy/resetPinAction/**',       access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/proxy/**' ,                     access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/general/**' ,                   access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/directDeposit/**',              access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
-        [pattern:'/ssb/UpdateAccount/**',              access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
-        [pattern:'/ssb/accountListing/**',             access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
-        [pattern:'/ssb/DirectDepositConfiguration/**', access: ['ROLE_SELFSERVICE-EMPLOYEE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
-        [pattern:'/ssb/personalInformation/**',        access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/PersonalInformationDetails/**', access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/PersonalInformationPicture/**', access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/PersonalInformationQA/**',      access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/userPreference/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/shortcut/**',                   access: ['IS_AUTHENTICATED_ANONYMOUSLY']]
-]
-*/
 
 grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/ssb/proxy/**' ,                      access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
@@ -357,32 +283,3 @@ hibernate {
     ]
 }
 
-/*
-environments {
-    development {
-        dataSource {
-            url = "jdbc:oracle:thin:@localhost:1521:BAN83"
-            driverClassName = "oracle.jdbc.OracleDriver"
-            username = "ban_ss_user"
-            password = "u_pick_it"
-
-        }
-    }
-    test {
-        dataSource {
-            url = "jdbc:oracle:thin:@localhost:1521:BAN83"
-            driverClassName = "oracle.jdbc.OracleDriver"
-            username = "ban_ss_user"
-            password = "u_pick_it"
-
-        }
-    }
-    production {
-        dataSource {
-            url = "jdbc:oracle:thin:@localhost:1521:BAN83"
-            driverClassName = "oracle.jdbc.OracleDriver"
-            username = "ban_ss_user"
-            password = "u_pick_it"
-        }
-    }
-}*/
