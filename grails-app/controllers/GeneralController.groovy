@@ -7,7 +7,7 @@ import grails.converters.JSON
 import net.hedtech.banner.exceptions.ApplicationException
 import net.hedtech.banner.general.overall.UserRoleService
 import org.apache.log4j.Logger
-import org.codehaus.groovy.grails.plugins.web.taglib.ValidationTagLib
+import org.grails.plugins.web.taglib.ValidationTagLib
 import org.springframework.security.core.context.SecurityContextHolder
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder
  */
 class GeneralController {
 
-    private static final log = Logger.getLogger( this.getClass() )
+    private static final logfile = Logger.getLogger( this.getClass() )
     static defaultAction = "landingPage"
 
     def generalSsbConfigService
@@ -60,12 +60,12 @@ class GeneralController {
     def returnFailureMessage( ApplicationException e ) {
         def model = [:]
         model.failure = true
-        log.error( e )
+        logfile.error( e )
         try {
             model.message = e.returnMap( {mapToLocalize -> new ValidationTagLib().message( mapToLocalize )} ).message
             return model
         } catch (ApplicationException ex) {
-            log.error( ex )
+            logfile.error( ex )
             model.message = e.message
             return model
         }

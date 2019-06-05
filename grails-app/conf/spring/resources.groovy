@@ -5,8 +5,8 @@ import grails.util.Holders
 import net.hedtech.api.security.RestApiAccessDeniedHandler
 import net.hedtech.api.security.RestApiAuthenticationEntryPoint
 import net.hedtech.banner.general.asynchronous.AsynchronousBannerAuthenticationSpoofer
-import net.hedtech.banner.aip.post.engine.ActionItemAsynchronousTaskProcessingEngineImpl
-import net.hedtech.banner.aip.post.grouppost.ActionItemPostMonitor
+//import net.hedtech.banner.aip.post.engine.ActionItemAsynchronousTaskProcessingEngineImpl
+//import net.hedtech.banner.aip.post.grouppost.ActionItemPostMonitor
 import net.hedtech.banner.PbBannerRestfulServiceAdapter
 
 // Place your Spring DSL code here
@@ -18,7 +18,7 @@ beans = {
 
     //Banner equivalent of bean above
     //bannerRestfulApiServiceBaseAdapter(RestfulApiServiceBaseAdapter)
-
+/*
     restApiAuthenticationEntryPoint(RestApiAuthenticationEntryPoint) {
         realmName = 'Banner REST API Realm'
     }
@@ -70,4 +70,6 @@ beans = {
         pollingInterval = Holders.config.aip?.actionItemJobProcessingEngine?.pollingInterval ?: 2000
         deleteSuccessfullyCompleted = Holders.config.aip?.actionItemJobProcessingEngine?.deleteSuccessfullyCompleted ?: false
     }
+
+ */
 }

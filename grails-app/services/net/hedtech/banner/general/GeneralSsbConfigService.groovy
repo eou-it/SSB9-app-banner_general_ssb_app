@@ -46,7 +46,7 @@ class GeneralSsbConfigService extends BasePersonConfigService {
     def getGeneralConfig() {
         [isDirectDepositEnabled      : getParamFromSession( ENABLE_DIRECT_DEPOSIT, 'Y' ) == 'Y' && isDirectDepositAuthorizedForUser(),
          isPersonalInformationEnabled: getParamFromSession( ENABLE_PERSONAL_INFORMATION, 'Y' ) == 'Y',
-         isActionItemEnabledAndAvailable         : getParamFromSession( ENABLE_ACTION_ITEM, 'Y' ) == 'Y' && actionItemProcessingConfigService.isActionItemPresentForUser(),
+         isActionItemEnabledAndAvailable         : getParamFromSession( ENABLE_ACTION_ITEM, 'Y' ) == 'Y' && actionItemProcessingConfigService?.isActionItemPresentForUser(),
          isActionItemEnabled :  getParamFromSession( ENABLE_ACTION_ITEM, 'Y' ) == 'Y',
          isProxyManagementEnabled : getParamFromSession( ENABLE_PROXY_MANAGMENT, 'Y' ) == 'Y',
          proxyManagementUrl : getParamFromSession( ENABLE_PROXY_MANAGMENT, 'Y' ) == 'Y' ? get8xProxyManagementUrl() : PROXY_MGMT_NOT_FOUND]
@@ -54,23 +54,35 @@ class GeneralSsbConfigService extends BasePersonConfigService {
 
     private boolean isDirectDepositAuthorizedForUser() {
         def urlMap = Holders.config.grails.plugin.springsecurity.interceptUrlMap
-        String baseUrl = '/ssb/directDeposit/**'
+        String baseUrl = "/ssb/directDeposit/\\**"
         def baseList = []
-        urlMap.get(baseUrl).each {
-            // role config items should act like a ConfigAttribute
-            baseList << [attribute: it]
+
+        def pageRolesDirDep
+        def pageRolesAcct
+
+        pageRolesDirDep = urlMap.find {
+            it.pattern =~ baseUrl
+        }?.configAttributes
+
+        pageRolesDirDep.each{
+            baseList << it
         }
 
-        String viewUrl = '/ssb/accountListing/**'
+        String viewUrl = "/ssb/accountListing/\\**"
         def viewList = []
-        urlMap.get(viewUrl).each {
-            // role config items should act like a ConfigAttribute
-            viewList << [attribute: it]
+
+        pageRolesAcct = urlMap.find {
+            it.pattern =~ viewUrl
+        }?.configAttributes
+
+        pageRolesAcct.each{
+            viewList << it
         }
 
         def voter = new BannerAccessDecisionVoter()
-        return AccessDecisionVoter.ACCESS_GRANTED == voter.vote(SecurityContextHolder?.context?.authentication, baseUrl, baseList) &&
-                AccessDecisionVoter.ACCESS_GRANTED == voter.vote(SecurityContextHolder?.context?.authentication, viewUrl, viewList)
+
+        return AccessDecisionVoter.ACCESS_GRANTED == voter.vote(SecurityContextHolder?.context?.authentication, '/ssb/directDeposit/**', baseList) &&
+                AccessDecisionVoter.ACCESS_GRANTED == voter.vote(SecurityContextHolder?.context?.authentication, '/ssb/accountListing/**', viewList)
     }
 
     private def get8xProxyManagementUrl() {
