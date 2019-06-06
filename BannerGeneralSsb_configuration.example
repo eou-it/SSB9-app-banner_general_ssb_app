@@ -192,6 +192,17 @@ ssbPassword.reset.enabled = true //true  - allow Pidm users to reset their passw
 // Set to true if enabling the Proxy application
 guestAuthenticationEnabled = false
 
+/** *****************************************************************************
+ *                                                                              *
+ *               Configuration for Payment Gateway                              *
+ *                                                                              *
+ ***************************************************************************** **/
+
+proxy.payment.gateway.PAYVEND_URL = 'https://<Payment_Gateway_URL>'
+proxy.payment.gateway.PAYVEND_VENDOR = '<Payment_Vendor_Name>'
+proxy.payment.gateway.PAYVEND_ENABLED = true
+proxy.payment.gateway.token.expiresIn = 30 //default=30 sec
+
 /** ****************************************************************************
  *                                                                             *
  *              Commmgr User DataSource Configuration                          *
