@@ -87,6 +87,7 @@ generalSsbApp.config(function ($stateProvider, $urlRouterProvider) {
 generalSsbApp.config(['$locationProvider',
     function ($locationProvider) {
         $locationProvider.html5Mode(false);
+        $locationProvider.hashPrefix('');
     }
 ]);
 
