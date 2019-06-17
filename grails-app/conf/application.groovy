@@ -133,7 +133,7 @@ formControllerMap = [
         'securityqa'                : ['SELFSERVICE'],
         'general'                   : ['SELFSERVICE'],
         'proxy'                     : ['SELFSERVICE'],
-        'proxymanagement'           : ['SELFSERVICE'],
+        'proxymanagement'           : ['SELFSERVICE-STUDENT', 'SELFSERVICE-EMPLOYEE'],
         'theme'                     : ['SELFSERVICE'],
         'themeeditor'               : ['SELFSERVICE'],
         'directdeposit'             : ['SELFSERVICE-STUDENT', 'SELFSERVICE-EMPLOYEE'],
