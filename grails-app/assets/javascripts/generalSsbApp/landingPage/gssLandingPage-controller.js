@@ -82,6 +82,9 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                 }
 
 
+                // TODO: remove this temporary shim to set URL once configuration has been updated to deliver the 9.x URL
+                generalConfigResolve.proxyManagementUrl = $scope.applicationContextRoot +'/ssb/proxyManagement';
+                // END temporary shim
                 if(generalConfigResolve.isProxyManagementEnabled && generalConfigResolve.proxyManagementUrl !== -1) {
                     $scope.proxyMgmtTile =
                     {
