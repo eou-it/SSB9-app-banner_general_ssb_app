@@ -59,6 +59,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                         }
                     );
                 }
+
                 if(generalConfigResolve.isActionItemEnabledAndAvailable) {
                     $scope.appTiles.push(
                         {
@@ -69,6 +70,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                         }
                     );
                 }
+
                 if(generalConfigResolve.isActionItemEnabled){
                     $scope.appTiles.push(
                         {
@@ -81,18 +83,18 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                     );
                 }
 
-
                 // TODO: remove this temporary shim to set URL once configuration has been updated to deliver the 9.x URL
                 generalConfigResolve.proxyManagementUrl = $scope.applicationContextRoot +'/ssb/proxyManagement';
                 // END temporary shim
                 if(generalConfigResolve.isProxyManagementEnabled && generalConfigResolve.proxyManagementUrl !== -1) {
-                    $scope.proxyMgmtTile =
-                    {
-                        title: 'banner.generalssb.landingpage.proxyMgmt.title',
-                        desc: 'banner.generalssb.landingpage.proxyMgmt.description',
-                        url: generalConfigResolve.proxyManagementUrl,
-                        icon: '../assets/Proxy_management1.png'
-                    };
+                    $scope.appTiles.push(
+                        {
+                            title: 'banner.generalssb.landingpage.proxyMgmt.title',
+                            desc: 'banner.generalssb.landingpage.proxyMgmt.description',
+                            url: generalConfigResolve.proxyManagementUrl,
+                            icon: '../assets/Proxy_management1.png'
+                        }
+                    );
                 }
 
                 generalSsbService.getRoles().$promise.then(function (response) {
