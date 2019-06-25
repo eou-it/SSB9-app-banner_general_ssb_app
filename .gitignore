@@ -12,3 +12,6 @@ out/
 .classpath
 *.rtl*
 *.scss
+*rtl.css
+
+
