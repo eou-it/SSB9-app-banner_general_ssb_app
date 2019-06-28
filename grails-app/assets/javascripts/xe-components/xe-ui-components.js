@@ -2,7 +2,7 @@
  * component-library
  * 
 
- * Version: 11.0.0 - 2019-04-24
+ * Version: 11.0.0 - 2019-06-28
  * License: Copyright 2018 Ellucian Company L.P. and its affiliates.
  */
 angular.module("xe-ui-components", ['badge','button','checkbox','dropdown','label','radiobutton','simpleTextbox','statusLabel','switch','textarea','textbox','ui.select','xeUISelect','external-resouces','utils','columnFilter','pagination','search','xebarmodule','dataTableModule','aboutModal','pieChartModule','popupModal','tabnav','timePicker','xe-ui-components-tpls']);
@@ -20,7 +20,7 @@ angular.module("templates/button.html", []).run(["$templateCache", function ($te
 
 angular.module("templates/checkbox.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/checkbox.html",
-    "<div><label class=\"xe-container\"><span data-ng-if=\"!xeLabelHidden\">{{::xeLabel}}</span> <input id=\"{{::'ckbox-' + xeId}}\" type=\"checkbox\" aria-checked=\"{{xeModel}}\" ng-click=\"cbClicked($event)\" ng-checked=\"xeModel\" aria-live=\"assertive\" aria-disabled=\"{{xeDisabled? true:false}}\" ng-disabled=\"xeDisabled == true\" name=\"{{xeName}}\" tabindex=\"{{!xeDisabled ? 0 : -1}}\"> <span class=\"xe-checkmark\" tabindex=\"-1\"></span></label></div>");
+    "<div xe-section=\"{{::xeId}}\"><label class=\"xe-container\"><span data-ng-if=\"!xeLabelHidden\">{{::xeLabel}}</span> <input id=\"{{::'ckbox-' + xeId}}\" type=\"checkbox\" aria-checked=\"{{xeModel}}\" ng-click=\"cbClicked($event)\" ng-checked=\"xeModel\" aria-live=\"assertive\" aria-disabled=\"{{xeDisabled? true:false}}\" ng-disabled=\"xeDisabled == true\" name=\"{{xeName}}\" tabindex=\"{{!xeDisabled ? 0 : -1}}\"> <span class=\"xe-checkmark\" tabindex=\"-1\"></span></label></div>");
 }]);
 
 angular.module("templates/dropdown.html", []).run(["$templateCache", function ($templateCache) {
@@ -83,7 +83,7 @@ angular.module("templates/text-box.html", []).run(["$templateCache", function ($
 
 angular.module("templates/column-filter.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/column-filter.html",
-    "<span><div class=\"column-filter-container\" ng-if=\"::!nocolumnFilterMenu\"><button type=\"button\" class=\"column-filter-button\" ng-click=\"bindClickEvent($event)\" aria-haspopup=\"true\" aria-labelledby=\"columnFilter\" xe-field=\"columnFilterMenu\"><span id=\"columnFilter\" class=\"placeholder\" ng-bind=\"'dataTable.columnFilter.label' | xei18n\"></span><div class=\"dropdown-icon\">&nbsp;</div></button><ul class=\"column-setting-menu\" ng-hide=\"hideColumnSettingMenu\" role=\"menu\" aria-labelledby=\"columnFilter\"><li role=\"presentation\"><xe-checkbox xe-label=\"{{::'dataTable.columnFilter.selectAll' | xei18n}}\" xe-model=\"selectAll.visible\" xe-on-click=\"onSelectAll(header, event)\" xe-id=\"0\" data-name=\"all\" aria-role=\"menuitemcheckbox\" aria-live=\"assertive\"></xe-checkbox></li><li ng-repeat=\"heading in header\" ng-class=\"{'disabled': heading.options.disable}\" ng-if=\"heading.options.columnShowHide !== false\" data-name=\"{{heading.name}}\" role=\"presentation\"><xe-checkbox xe-id=\"{{heading.name}}\" xe-value=\"{{$index+1}}\" xe-label=\"{{heading.title}}\" xe-model=\"heading.options.visible\" xe-on-click=\"hideUnhideColumn(heading, event)\" xe-disabled=\"heading.options.disable\" aria-role=\"menuitemcheckbox\" aria-live=\"assertive\"></xe-checkbox></li></ul></div></span>");
+    "<span><div class=\"column-filter-container\" ng-if=\"::!nocolumnFilterMenu\"><button type=\"button\" class=\"column-filter-button\" ng-click=\"bindClickEvent($event)\" aria-haspopup=\"true\" aria-labelledby=\"columnFilter\" xe-field=\"columnFilterMenu\"><span id=\"columnFilter\" class=\"placeholder\" ng-bind=\"'dataTable.columnFilter.label' | xei18n\"></span><div class=\"dropdown-icon\">&nbsp;</div></button><ul class=\"column-setting-menu\" ng-hide=\"hideColumnSettingMenu\" role=\"list\" aria-labelledby=\"columnFilter\"><li role=\"presentation\"><xe-checkbox xe-label=\"{{::'dataTable.columnFilter.selectAll' | xei18n}}\" xe-model=\"selectAll.visible\" xe-on-click=\"onSelectAll(header, event)\" xe-id=\"0\" data-name=\"all\" aria-role=\"listitem\" aria-live=\"assertive\"></xe-checkbox></li><li ng-repeat=\"heading in header\" ng-class=\"{'disabled': heading.options.disable}\" ng-if=\"heading.options.columnShowHide !== false\" data-name=\"{{heading.name}}\" role=\"presentation\"><xe-checkbox xe-id=\"{{heading.name}}\" xe-value=\"{{$index+1}}\" xe-label=\"{{heading.title}}\" xe-model=\"heading.options.visible\" xe-on-click=\"hideUnhideColumn(heading, event)\" xe-disabled=\"heading.options.disable\" aria-role=\"listitem\" aria-live=\"assertive\"></xe-checkbox></li></ul></div></span>");
 }]);
 
 angular.module("templates/pagination.html", []).run(["$templateCache", function ($templateCache) {
@@ -98,7 +98,7 @@ angular.module("templates/search.html", []).run(["$templateCache", function ($te
 
 angular.module("templates/dataTable.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/dataTable.html",
-    "<div id=\"{{tableId}}\" class=\"table-container\" ng-class=\"{'fixed-height': !!height, 'noToolbar': noCaptionAndToolbar, 'no-data': !resultsFound, 'empty': emptyTableMsg}\" browser-detect role=\"grid\" aria-labelledby=\"gridCaption\" ng-cloak><div class=\"caption\" ng-if=\"::!noCaptionBar\" xe-section=\"{{xeSection + 'CaptionBar'}}\"><table class=\"data-table datatable_spacing\" role=\"presentaion\"><caption ng-class=\"{'search-opened': hideContainer}\"><span id=\"gridCaption\" class=\"caption-container font-semibold\" ng-if=\"::!nocaption\" ng-bind=\"::caption\" xe-field=\"caption\"></span><div class=\"toolbar\" ng-if=\"toolbar\"><xe-toolbar></xe-toolbar><xe-column-filter header=\"header\"></xe-column-filter><span role=\"search\" title=\"{{'search.title' | xei18n}}\" ng-if=\"::!nosearch\"><xe-search value=\"searchConfig.searchString\" place-holder=\"{{'search.label' | xei18n}}\" on-change=\"fetchSpecial(query)\" on-focus=\"onSearchFocus({event: event})\" on-blur=\"onSearchBlur({event: event})\" search-config=\"searchConfig\" xe-focus loading-data=\"loadingData\"></xe-search></span></div></caption></table></div><div class=\"hr-scrollable-content\"><div class=\"thead\"><table class=\"data-table\" ng-style=\"headerPadding\" role=\"presentaion\"><thead role=\"rowgroup\"><tr role=\"row\"><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" ng-click=\"onSort({heading: heading}); sortOnHeading(heading, $index);\" role=\"columnheader\" aria-sort=\"{{sortArray[heading.name].ascending ? ('dataTable.sort.ascending.label' | xei18n) : (sortArray[heading.name].decending ? ('dataTable.sort.descending.label' | xei18n) : 'none')}}\" aria-describedby=\"{{'headingAria' + $index}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name}}\" xe-heading-injector xe-focus xe-click-grid><div class=\"data\" title=\"{{heading.label}}\"><span ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"::heading.title\"></span><label id=\"${{'headingAria' + $index}}\" class=\"sr-only\" ng-bind=\"heading.ariaLabel + (heading.options.sortable ? ('dataTable.sortable.label' | xei18n) : '')\"></label></div></th></tr></thead></table></div><div class=\"tbody\" ng-style=\"::{'height': height}\" continuous-scroll=\"nextPage()\" scroll-parent=\"{{::continuousScrollParent}}\" aria-labelledby=\"msg\" tabindex=\"{{(!resultsFound || emptyTableMsg) ? 0 : ''}}\" resize><div id=\"msg\" ng-bind=\"emptyTableMsg? emptyTableMsg : ((!resultsFound && !loadingData) ? noDataMsg : '')\"></div><table class=\"data-table\" ng-class=\"::mobileLayout ? 'mobileLayout' : 'noMobileLayout'\" role=\"presentaion\"><thead role=\"presentaion\" aria-hidden=\"true\"><tr><th class=\"font-semibold {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" xe-field=\"{{::heading.name}}\" xe-heading-injector tabindex=\"0\"><div class=\"data\"><span ng-show=\"::heading.options.titleVisible !== false\" ng-bind=\"::heading.title\"></span></div></th></tr></thead><tbody role=\"rowgroup\"><tr ng-repeat=\"row in content\" ng-click=\"onRowClick({data:row,index:$index})\" ng-dblclick=\"onRowDoubleClick({data:row,index:$index})\" xe-row-injector tabindex=\"-1\" role=\"row\"><td class=\"width-animate\" ng-repeat=\"heading in header\" ng-class=\"{'align-right': heading.options.actionOrStatus, 'sortable': heading.options.sortable}\" ng-if=\"heading.options.visible === true\" data-name=\"{{::heading.name}}\" data-title=\"{{::(heading.title && heading.options.titleVisible !== false) ? heading.title + ':' : ''}}\" attain-mobile-layout=\"{{mobileLayout[heading.name]}}\" xe-field=\"{{::heading.name}}\" xe-cell-injector xe-focus xe-click-grid role=\"gridcell\" ng-cloak><div ng-if=\"!isExtendedField(row, heading.name)\"><span ng-bind=\"getObjectValue(row, heading.name)\" tabindex=\"0\"></span></div><div ng-if=\"isExtendedField(row, heading.name)\"><div ng-if=\"isEditable\"><div ng-if=\"dataType === 'DATE'\"><input date-picker=\"\" value=\"{{::extensionValue}}\" class=\"datePicker\" aria-labelledby=\"\"></div><div ng-if=\"dataType === 'VARCHAR2'\"><xe-simple-text-box value=\"::extensionValue\"></xe-simple-text-box></div><div ng-if=\"dataType === 'NUMBER'\"><decimal-input ng-model=\"::extensionValue\" decimals=\"0\"></decimal-input></div></div><div ng-if=\"!isEditable\"><span ng-bind=\"::extensionValue\"></span></div></div></td></tr></tbody></table></div></div><div class=\"tfoot\" ng-transclude></div><xe-pagination model=\"content\" results-found=\"resultsFound\" ng-show=\"showPagination\" xe-grid-pagination-control search-string=\"searchConfig.searchString\"></xe-pagination><div ng-show=\"loadingData\" class=\"load-indicator\"><div class=\"spinner\"><div class=\"bounce1\"></div><div class=\"bounce2\"></div><div class=\"bounce3\"></div></div></div></div>");
+    "<div id=\"{{tableId}}\" class=\"table-container\" ng-class=\"{'fixed-height': !!height, 'noToolbar': noCaptionAndToolbar, 'no-data': !resultsFound, 'empty': emptyTableMsg}\" browser-detect role=\"grid\" aria-labelledby=\"gridCaption\" ng-cloak><div class=\"trMobile\" ng-if=\"totalRow && isMobileView  \"><div ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\"><span class=\"total-row\" total-label=\"{{heading.totalDisplayName}}\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></div><div class=\"caption\" ng-if=\"::!noCaptionBar\" xe-section=\"{{xeSection + 'CaptionBar'}}\"><table class=\"data-table datatable_spacing\" role=\"heading\" aria-level=\"1\"><caption ng-class=\"{'search-opened': hideContainer}\"><span id=\"gridCaption\" class=\"caption-container font-semibold\" ng-if=\"::!nocaption\" ng-bind=\"::caption\" xe-field=\"caption\"></span><div class=\"toolbar\" ng-if=\"toolbar\"><xe-toolbar></xe-toolbar><xe-column-filter header=\"header\"></xe-column-filter><span role=\"search\" title=\"{{'search.title' | xei18n}}\" ng-if=\"::!nosearch\"><xe-search value=\"searchConfig.searchString\" place-holder=\"{{'search.label' | xei18n}}\" on-change=\"fetchSpecial(query)\" on-focus=\"onSearchFocus({event: event})\" on-blur=\"onSearchBlur({event: event})\" search-config=\"searchConfig\" xe-focus loading-data=\"loadingData\"></xe-search></span></div></caption></table></div><div class=\"hr-scrollable-content\"><div class=\"thead\"><table class=\"data-table\" ng-style=\"headerPadding\" role=\"presentaion\"><thead role=\"rowgroup\"><tr role=\"row\"><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" ng-click=\"onSort({heading: heading}); sortOnHeading(heading, $index);\" role=\"columnheader\" aria-sort=\"{{sortArray[heading.name].ascending ? ('dataTable.sort.ascending.label' | xei18n) : (sortArray[heading.name].decending ? ('dataTable.sort.descending.label' | xei18n) : 'none')}}\" aria-describedby=\"{{'headingAria' + $index}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name}}\" xe-heading-injector xe-focus xe-click-grid><div class=\"data\" title=\"{{heading.label}}\"><span ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"::heading.title\"></span><label id=\"${{'headingAria' + $index}}\" class=\"sr-only\" ng-bind=\"heading.ariaLabel + (heading.options.sortable ? ('dataTable.sortable.label' | xei18n) : '')\"></label></div></th></tr></thead></table></div><div class=\"tbody\" ng-style=\"::{'height': height}\" continuous-scroll=\"nextPage()\" scroll-parent=\"{{::continuousScrollParent}}\" aria-labelledby=\"msg\" tabindex=\"{{(!resultsFound || emptyTableMsg) ? 0 : ''}}\" resize><div id=\"msg\" ng-bind=\"emptyTableMsg? emptyTableMsg : ((!resultsFound && !loadingData) ? noDataMsg : '')\"></div><table class=\"data-table\" ng-class=\"::mobileLayout ? 'mobileLayout' : 'noMobileLayout'\" role=\"presentaion\"><thead role=\"presentaion\" aria-hidden=\"true\"><tr><th class=\"font-semibold {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" xe-field=\"{{::heading.name}}\" xe-heading-injector tabindex=\"0\"><div class=\"data\"><span ng-show=\"::heading.options.titleVisible !== false\" ng-bind=\"::heading.title\"></span></div></th></tr></thead><tbody role=\"rowgroup\"><tr ng-repeat=\"row in content\" ng-click=\"onRowClick({data:row,index:$index})\" ng-dblclick=\"onRowDoubleClick({data:row,index:$index})\" xe-row-injector tabindex=\"-1\" role=\"row\"><td class=\"width-animate\" ng-repeat=\"heading in header\" ng-class=\"{'align-right': heading.options.actionOrStatus, 'sortable': heading.options.sortable}\" ng-if=\"heading.options.visible === true\" data-name=\"{{::heading.name}}\" data-title=\"{{::(heading.title && heading.options.titleVisible !== false) ? heading.title + ':' : ''}}\" attain-mobile-layout=\"{{mobileLayout[heading.name]}}\" xe-field=\"{{::heading.name}}\" xe-cell-injector xe-focus xe-click-grid role=\"gridcell\" ng-cloak><div ng-if=\"!isExtendedField(row, heading.name)\"><span ng-bind=\"getObjectValue(row, heading.name)\" tabindex=\"0\"></span></div><div ng-if=\"isExtendedField(row, heading.name)\"><div ng-if=\"isEditable\"><div ng-if=\"dataType === 'DATE'\"><input date-picker=\"\" value=\"{{::extensionValue}}\" class=\"datePicker\" aria-labelledby=\"\"></div><div ng-if=\"dataType === 'VARCHAR2'\"><xe-simple-text-box value=\"::extensionValue\"></xe-simple-text-box></div><div ng-if=\"dataType === 'NUMBER'\"><decimal-input ng-model=\"::extensionValue\" decimals=\"0\"></decimal-input></div></div><div ng-if=\"!isEditable\"><span ng-bind=\"::extensionValue\"></span></div></div></td></tr></tbody></table></div><div class=\"trDesktop\" ng-if=\"totalRow && !isMobileView\" xe-section=\"totalRow\"><table class=\"data-table\" ng-style=\"headerPadding\"><thead><tr><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name+'Total'}}\" xe-focus xe-click-grid><div class=\"aggregateRow data\" ng-class=\"{'align-right': heading.options.actionOrStatus}\" title=\"{{heading.label}}\"><label ng-if=\"heading.totalLabel\" id=\"{{::heading.name+'Total'}}\" for=\"{{::heading.name+'Total'}}\">{{getTotalValue(heading)}}</label><span ng-if=\"!heading.totalLabel\" class=\"total-display\" ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></th></tr></thead></table></div></div><div class=\"tfoot\" ng-transclude></div><xe-pagination model=\"content\" results-found=\"resultsFound\" ng-show=\"showPagination\" xe-grid-pagination-control search-string=\"searchConfig.searchString\"></xe-pagination><div ng-show=\"loadingData\" class=\"load-indicator\"><div class=\"spinner\"><div class=\"bounce1\"></div><div class=\"bounce2\"></div><div class=\"bounce3\"></div></div></div></div>");
 }]);
 
 angular.module("templates/dialog.html", []).run(["$templateCache", function ($templateCache) {
@@ -118,7 +118,7 @@ angular.module("templates/modal.html", []).run(["$templateCache", function ($tem
 
 angular.module("templates/tabNav.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/tabNav.html",
-    "<div class=\"xe-tab-container\" role=\"presentation\"><ul class=\"xe-tab-nav\" role=\"tablist\"><li ng-repeat=\"tab in tabnav.tabs\" ng-click=\"tabnav.activate(tab)\" ng-class=\"{active: tab.active}\" ng-repeat-complete role=\"tab\" aria-controls=\"{{'xe-tab-panel'+ ($index+1)}}\" aria-selected=\"{{tab.active}}\"><a ui-sref=\"{{ tab.state && tab.state || '#' }}\" href=\"#\" id=\"{{'xe-tab'+ ($index+1)}}\" title=\"{{tab.heading}}\" ng-if=\"tab.state\">{{tab.heading}} <span></span> </a><a href=\"#\" id=\"{{'xe-tab'+ ($index+1)}}\" title=\"{{tab.heading}}\" ng-if=\"!tab.state\">{{tab.heading}} <span></span></a></li></ul><div class=\"xe-tab-content\" role=\"presentation\"><ng-transclude></ng-transclude></div></div>");
+    "<div class=\"xe-tab-container\" role=\"presentation\"><ul class=\"xe-tab-nav\" role=\"tablist\"><li ng-repeat=\"tab in tabnav.tabs\" ng-click=\"tabnav.activate(tab)\" ng-class=\"{active: tab.active}\" ng-repeat-complete role=\"tab\" aria-controls=\"{{'xe-tab-panel'+ ($index+1)}}\" aria-selected=\"{{tab.active}}\"><a href=\"javascript:void(0);\" tabindex=\"0\" id=\"{{'xe-tab'+ ($index+1)}}\" title=\"{{tab.heading}}\" ng-if=\"tab.state\">{{tab.heading}} <span></span> </a><a href=\"#\" id=\"{{'xe-tab'+ ($index+1)}}\" title=\"{{tab.heading}}\" ng-if=\"!tab.state\">{{tab.heading}} <span></span></a></li></ul><div class=\"xe-tab-content\" role=\"presentation\"><ng-transclude></ng-transclude></div></div>");
 }]);
 
 angular.module("templates/tabPanel.html", []).run(["$templateCache", function ($templateCache) {
@@ -3628,7 +3628,8 @@ angular.module('pagination', [])
             resultsFound: "=",
             searchString: "=",
             fetch: "&?",
-            postFetch: "&"
+            postFetch: "&",
+            totalValue: "=?"
         },
         templateUrl: "templates/pagination.html",
         controller: ['$scope', '$attrs', "$timeout", function($scope, $attrs, $timeout) {
@@ -3833,6 +3834,9 @@ angular.module('pagination', [])
                         $scope.postFetch({response: data, oldResult: $scope.model});
                         $scope.model = append ? $scope.model.concat(data.result) : data.result;
                         $scope.resultsFound = data.length;
+                        if(angular.isDefined(data.totals) && Object.keys(data.totals).length !== 0){
+                            $scope.totalValue = data.totals;
+                        }
 
                         $scope.loading(false);
                         $scope.addExtensionColumns($scope.header, data);
@@ -3846,6 +3850,9 @@ angular.module('pagination', [])
                             $scope.postFetch({response: data, oldResult: $scope.model});
                             $scope.model = append ? $scope.model.concat(data.result) : data.result;
                             $scope.resultsFound = data.length;
+                            if(angular.isDefined(data.totals) && Object.keys(data.totals).length !== 0){
+                                $scope.totalValue = data.totals;
+                            }
 
                             $scope.loading(false);
                             $scope.addExtensionColumns($scope.header, data);
@@ -4602,6 +4609,7 @@ angular.module('pagination', [])
  draggable-column-names="draggableColumnNames"
  mobile-layout="mobileConfig"
  height="416px"
+ total-row="true"  //This is to enable total row
  refresh-grid="refreshGrid"
  >
 
@@ -4670,6 +4678,12 @@ angular.module('pagination', [])
 
             return deferred.promise;
         };
+
+ **** Total Row ****
+ While using total row we need to consider few things
+ 1. Need to configure a column to display label "total"
+ to enable a column for total row we need to remove that column from draggable columns list and showHideColumns list
+ 2. Add totals object in totals object in the grid response
 
 
  Output :
@@ -4896,7 +4910,8 @@ angular.module('pagination', [])
                     mobileLayout: '=?',
                     height: '@?',
                     refreshContent: '=?refreshGrid',
-                    xeSection: '@?'
+                    xeSection: '@?',
+                    totalRow: '@?'
                 },
                 controller : ['$scope', '$filter', '$attrs', "$http", "$sce", "$timeout", function ($scope, $filter, $attrs, $http, $sce, $timeout) {
                     var orderBy = $filter('orderBy'),
@@ -4912,6 +4927,8 @@ angular.module('pagination', [])
                     $scope.sortArray = [];
                     $scope.pagination = $scope.paginate;
                     $scope.showPagination = true;
+                    $scope.totalValue = {};
+                    $scope.isMobileView = $window.innerWidth <= mobileMaxWidth;
 
                     if (!$scope.tableId) {
                         console.error("Provide a unique id for table");
@@ -5086,11 +5103,11 @@ angular.module('pagination', [])
                     }
 
                     function updateColumnName(extensibleField,columnToChange){
-                        if(extensibleField.attributes && extensibleField.attributes.label && _.isString(extensibleField.attributes.label)){
+                        if(extensibleField.attributes && extensibleField.attributes.label && angular.isString(extensibleField.attributes.label)){
                             columnToChange.title = extensibleField.attributes.label;
                         }
-                        if(extensibleField.attributes && extensibleField.attributes.label && _.isObject(extensibleField.attributes.label) && extensibleField.attributes.label.key){
-                            columnToChange.title = $.i18n.prop(extensibleField.attributes.label.key);
+                        if(extensibleField.attributes && extensibleField.attributes.label && angular.isObject(extensibleField.attributes.label) && extensibleField.attributes.label.key){
+                            columnToChange.title = xe.i18n(extensibleField.attributes.label.key);
                         }
                     }
 
@@ -5327,6 +5344,9 @@ angular.module('pagination', [])
                                     _this.ascending
                                 );
                                 $scope.resultsFound = $scope.content.length;
+                                if(angular.isDefined($scope.content.totals) && Object.keys($scope.content.totals).length !== 0){
+                                    $scope.totalValue = $scope.content.totals;
+                                }
                                 _this.loadingDataIndicator(false);
                                 _this.addExtensionColumns($scope.header, data);
                             };
@@ -5340,6 +5360,9 @@ angular.module('pagination', [])
                                     $scope.postFetch({response: data, oldResult: $scope.content});
                                     $scope.content = data.result;
                                     $scope.resultsFound = $scope.content.length;
+                                    if(angular.isDefined($scope.content.totals) && Object.keys($scope.content.totals).length !== 0){
+                                        $scope.totalValue = $scope.content.totals;
+                                    }
                                     _this.loadingDataIndicator(false);
                                     _this.addExtensionColumns($scope.header, data);
                                 }).catch(function onError(data) {
@@ -5361,6 +5384,9 @@ angular.module('pagination', [])
                             }).then(function onSuccess(data) {
                                 $scope.postFetch({response: data, oldResult: $scope.content});
                                 $scope.content = data.result;
+                                if(angular.isDefined($scope.content.totals) && Object.keys($scope.content.totals).length !== 0){
+                                    $scope.totalValue = $scope.content.totals;
+                                }
                                 _this.loadingDataIndicator(false);
                             }).catch(function onError(data) {
                                 // Handle error
@@ -5394,6 +5420,9 @@ angular.module('pagination', [])
                                 promise.then(function onSuccess(data) {
                                     $scope.postFetch({response: data, oldResult: $scope.content});
                                     $scope.content = data.result;
+                                    if(angular.isDefined($scope.content.totals) && Object.keys($scope.content.totals).length !== 0){
+                                        $scope.totalValue = $scope.content.totals;
+                                    }
                                     _this.loadingDataIndicator(false);
                                 }).catch(function onError(data) {
                                     // Handle error
@@ -5474,6 +5503,20 @@ angular.module('pagination', [])
                             value = object[key];
                         }
                         return value;
+                    };
+
+                    $scope.getTotalValue = function (obj) {
+                        if (angular.isDefined(obj.totalLabel) && ($window.innerWidth > mobileMaxWidth)){
+                            return obj.totalLabel;
+                        }
+
+                        if (typeof $scope.totalValue === 'object' && $scope.totalValue !== null) {
+                            if (angular.isDefined($scope.totalValue['total'+obj.name])) {
+                                return $scope.totalValue['total'+obj.name];
+                            }
+
+                            return '';
+                        }
                     };
 
                     $scope.isExtendedField = function (row, fieldName) {
@@ -5578,6 +5621,8 @@ angular.module('pagination', [])
                         if (tAttrs.endPoint) {
                             paginationObject.attr('end-point', 'endPoint');
                         }
+
+                        paginationObject.attr('total-value', 'totalValue');
                     } else {
                         // Removing pagination if its not set to true, to avoid getting executed even when its not needed.
                         tElement.find("xe-pagination").remove();
@@ -5939,6 +5984,11 @@ angular.module('pagination', [])
                 link: function ($scope, elem, attrs) {
                     elem.bind('keydown', function (e) {
                         var code = e.keyCode || e.which;
+
+                        var parent = $(elem).closest('.table-container');
+                        var isPaginate = parent.attr('paginate');
+                        var isTotalEnabled = parent.attr('total-row');
+
                         if (!editableMode) {
                             if (e.target.id !== 'undefined' && e.target.classList.contains('search')) {
                                 switch (code) {
@@ -6032,10 +6082,16 @@ angular.module('pagination', [])
                                         else {
                                             clearFocus(e);
                                             $('tr.active-row').removeClass(ACTIVEROW);
-                                            var paginationControlDiv =$(elem).closest('.table-container').children().find('div.pagination-controls');
-                                            var moveFocusToFirstElement = $(paginationControlDiv).find('input, button , select').not(':disabled');
-                                            $(moveFocusToFirstElement[0]).focus();
-                                            paginationPreviousGridCell = e.currentTarget;
+
+                                            if(isPaginate) {
+                                                var paginationControlDiv = $(elem).closest('.table-container').children().find('div.pagination-controls');
+                                                var moveFocusToFirstElement = $(paginationControlDiv).find('input, button , select').not(':disabled');
+                                                $(moveFocusToFirstElement[0]).focus();
+                                                paginationPreviousGridCell = e.currentTarget;
+                                            } else {
+                                                var moveFocusToNextElement = $(elem).closest('.table-container').next("*[tabindex != '-1']:visible");
+                                                $(moveFocusToNextElement[0]).focus();
+                                            }
                                         }
                                         e.preventDefault();
                                         return false;
@@ -6051,16 +6107,27 @@ angular.module('pagination', [])
                                         break;
                                     case keys.PAGE_DOWN:
                                         clearFocus(e);
-                                        var currentIndex = $(elem).index();
-                                        var gridLasttRow = $(elem).closest('.table-container').find('.tbody tbody tr:last');
-                                        var selectedCell = $(gridLasttRow).children()[currentIndex];
-                                        $(selectedCell).focus();
-                                        $(selectedCell).addClass(FOCUSRING);
+                                        if(isTotalEnabled){
+                                            var currentIndex = $(elem).index();
+                                            var lastRow = $(elem).closest('.table-container').find('.trDesktop thead tr');
+                                            var selectedCell = $(lastRow).children()[currentIndex];
+                                            $(selectedCell).focus();
+                                            $(selectedCell).addClass(FOCUSRING);
+                                        } else {
+                                            var currentIndex = $(elem).index();
+                                            var gridLasttRow = $(elem).closest('.table-container').find('.tbody tbody tr:last');
+                                            var selectedCell = $(gridLasttRow).children()[currentIndex];
+                                            $(selectedCell).focus();
+                                            $(selectedCell).addClass(FOCUSRING);
+                                        }
                                         return false;
                                         break;
                                     case keys.HOME:
                                         clearFocus(e);
                                         var firstColumnCell = $(elem).parent().find('td:first');
+                                        if(firstColumnCell.length === 0){
+                                            firstColumnCell = $(elem).parent().find('th:first');
+                                        }
                                         $(firstColumnCell).focus();
                                         $(firstColumnCell).addClass(FOCUSRING);
                                         return false;
@@ -6068,6 +6135,9 @@ angular.module('pagination', [])
                                     case keys.END:
                                         clearFocus(e);
                                         var lastColumnCell = $(elem).parent().find('td:last');
+                                        if(lastColumnCell.length === 0){
+                                            lastColumnCell = $(elem).parent().find('th:last');
+                                        }
                                         $(lastColumnCell).focus();
                                         $(lastColumnCell).addClass(FOCUSRING);
                                         return false;
@@ -6094,7 +6164,21 @@ angular.module('pagination', [])
                                                         $(nextColums[colIndex]).addClass(FOCUSRING);
                                                     }
                                                 } else {
-                                                    $(elem).addClass(FOCUSRING);
+                                                    // Check if there is any total row in the gridclearFocus(e);
+                                                    if(isTotalEnabled){
+                                                        clearFocus(e);
+                                                        $('tr.active-row').removeClass(ACTIVEROW);
+                                                        $(elem).removeClass(FOCUSRING);
+                                                        var colIndex = $(elem).index();
+                                                        var totalRowFirstRow = $(elem).closest('.table-container').find('.trDesktop thead tr:first');
+                                                        var totalRowCols = $(totalRowFirstRow).find('th');
+                                                        $(totalRowFirstRow).addClass(ACTIVEROW);
+                                                        $(totalRowCols[colIndex]).focus();
+                                                        $(totalRowCols[colIndex]).addClass(FOCUSRING);
+                                                        paginationPreviousGridCell = e.currentTarget;
+                                                    } else {
+                                                        $(elem).addClass(FOCUSRING);
+                                                    }
                                                 }
                                             }
                                             e.preventDefault();
@@ -6140,15 +6224,30 @@ angular.module('pagination', [])
                                             e.preventDefault();
                                             return false;
                                         } else if ($(elem).closest('tr').index() === 0) {
-                                            $('tr.active-row').removeClass(ACTIVEROW);
-                                            $('td.focus-ring').removeClass(FOCUSRING);
-                                            var trPosition = $(elem).closest('tr').index();
-                                            var tdPosition = $(elem).closest('td').index();
-                                            if (tdPosition !== -1) {
-                                                var headArr = $(elem).closest('.table-container').find('thead');
-                                                $(headArr[0]).find('tr').find('th')[tdPosition].focus();
-                                                var newtd = $(headArr[0]).find('tr').find('th')[tdPosition];
-                                                $(newtd).addClass(FOCUSRING);
+                                            // Check if there is any total row in the gridclearFocus(e);
+                                            var isTotal = $(elem).closest('.tbody').length === 0 && $(elem).closest('.thead').length === 0;
+                                            if(isTotalEnabled && isTotal){
+                                                $('td.focus-ring').removeClass(FOCUSRING);
+                                                var tdPosition = $(elem).closest('th').index();
+                                                if (tdPosition !== -1) {
+                                                    $('th.focus-ring').removeClass(FOCUSRING);
+                                                    var bodyArr = $(elem).closest('.table-container').find('tbody');
+                                                    $(bodyArr[0]).find('tr:last').find('td')[tdPosition].focus();
+                                                    var newtd = $(bodyArr[0]).find('tr:last').find('td')[tdPosition];
+                                                    $(newtd).addClass(FOCUSRING);
+                                                }
+
+                                            } else {
+                                                $('tr.active-row').removeClass(ACTIVEROW);
+                                                $('td.focus-ring').removeClass(FOCUSRING);
+                                                var trPosition = $(elem).closest('tr').index();
+                                                var tdPosition = $(elem).closest('td').index();
+                                                if (tdPosition !== -1) {
+                                                    var headArr = $(elem).closest('.table-container').find('thead');
+                                                    $(headArr[0]).find('tr').find('th')[tdPosition].focus();
+                                                    var newtd = $(headArr[0]).find('tr').find('th')[tdPosition];
+                                                    $(newtd).addClass(FOCUSRING);
+                                                }
                                             }
                                             e.preventDefault();
                                             return false;
@@ -8628,6 +8727,8 @@ clearFocus = function (e) {
                             userMethod().then(function (data) {
                                 selectedTab.dynamicContent = data;
                                 selectedTab.dynamic(data);
+                            }, function(error){
+                                console.error(error);
                             });
                         }
                     };
@@ -8635,15 +8736,16 @@ clearFocus = function (e) {
                         self.currentActive.active = false;
                         selectedTab.active = true;
                         self.currentActive = selectedTab;
-                        self.loadDynamicContent(selectedTab.loadDataOnClick, selectedTab);
                         if (selectedTab.state) {
-                            $state.go(selectedTab.state);
+                            $state.go(selectedTab.state, selectedTab.stateParams);
+                        } else {
+                            self.loadDynamicContent(selectedTab.loadDataOnClick, selectedTab);
                         }
                     };
                 }]
             };
         })
-        .directive('xeTabPanel', ['$compile', function ($compile) {
+        .directive('xeTabPanel', ['$compile', '$state', function ($compile, $state) {
             return {
                 restrict: 'EA',
                 transclude: true,
@@ -8652,7 +8754,8 @@ clearFocus = function (e) {
                     state: '@',
                     loadDataOnClick: '&',
                     jsLazyLoad: '@',
-                    xeField: '@?'
+                    xeField: '@?',
+                    stateParams: '='
                 },
                 templateUrl: 'templates/tabPanel.html',
                 require: '^xeTabNav',
@@ -8665,37 +8768,23 @@ clearFocus = function (e) {
                         script.src = activeTab.jsLazyLoad;
                         document.head.appendChild(script);
                     };
-                    // Use closure to set tab scope property so transcluded content can use its default scope
-                    var setHasTranscludedContentTrue = function(){
-                        scope.hasTranscludedContent = true;
-                    };
-                    $transclude(function (clone, scope) {
+                    $transclude(scope, function (clone, scope) {
                         var elementTo;
                         if (clone.text().trim().length) {
-                            setHasTranscludedContentTrue();
+                            scope.hasTranscludedContent = true;
                             elementTo = angular.element(ele[0].querySelector('[content]'));
                             elementTo.append(clone);
                         }
                     });
-                    // NOTE: This "isDefaultActivationDisabled" flag was added locally by the Banner General XE SSB
-                    // team to support the Personal Information 9.1 application.  The default behavior of this
-                    // xeTabPanel directive is to automatically select the first tab if no tab is explicitly set to
-                    // active. The isDefaultActivationDisabled flag allows this behavior to be turned off. This is
-                    // useful when an <xe-tab-nav> directive contains a nested ng-repeat, in which case the first tab
-                    // is *always* selected, even if not appropriate.
-                    // The flag is employed as a "boolean attribute" on the xeTabPanel directive's HTML element, e.g.
-                    // <xe-tab-panel ... disable-default-tab-activation>
-                    var isDefaultActivationDisabled = 'disableDefaultTabActivation' in attr;
-                    if (attr.hasOwnProperty('active')) {
+                    if (attr.hasOwnProperty('active') || scope.state === $state.current.name) {
                         scope.active = true;
                         xeTabNavCtrl.currentActive = scope;
-                    } else if (ele.is(':last-child') && !xeTabNavCtrl.currentActive && !isDefaultActivationDisabled) {
+                        loadContent();
+                    } else if (ele.is(':last-child') && !xeTabNavCtrl.currentActive) {
                         xeTabNavCtrl.tabs[0].active = true;
                         xeTabNavCtrl.currentActive = xeTabNavCtrl.tabs[0];
                         xeTabNavCtrl.currentActive.element.attr('active', '');
-                    }
-                    if (xeTabNavCtrl.currentActive) {
-                        xeTabNavCtrl.loadDynamicContent(xeTabNavCtrl.currentActive.loadDataOnClick, xeTabNavCtrl.currentActive);
+                        loadContent();
                     }
                     scope.dynamic = function (data) {
                         var htmlTemplate, content, elementTo;
@@ -8707,6 +8796,14 @@ clearFocus = function (e) {
                             scope.lazyLoadJs(scope);
                         }
                     };
+
+                    function loadContent() {
+                        if (attr.loadDataOnClick) {
+                            xeTabNavCtrl.loadDynamicContent(xeTabNavCtrl.currentActive.loadDataOnClick, xeTabNavCtrl.currentActive);
+                        } else {
+                            xeTabNavCtrl.activate(xeTabNavCtrl.currentActive);
+                        }
+                    }
                 }
             };
         }]);

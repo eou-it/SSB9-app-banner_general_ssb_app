@@ -515,6 +515,7 @@ xe-button .secondary:active:not([disabled]) {
 /* Hide the browser's default checkbox */
 .xe-container input {
   opacity: 0;
+  width: unset;
   cursor: pointer; }
 
 /* Create a custom checkbox */
@@ -2026,6 +2027,40 @@ li.ui-select-choices-row {
         background-image: url("images/arrow-sort-up.svg");
         background-size: .7em .5em;
         background-position: left 10px center; }
+  .table-container .trMobile {
+    font-family: OpenSans-semibold;
+    font-size: 14px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.43;
+    letter-spacing: normal; }
+    .table-container .trMobile .total-row {
+      float: left;
+      color: #5b5e65; }
+    .table-container .trMobile .total-row[total-label]:before {
+      content: attr(total-label);
+      color: #151618; }
+  .table-container .trDesktop tr {
+    text-align: right; }
+  .table-container .trDesktop thead tr:hover td {
+    background-color: #F2F8FC; }
+  .table-container .trDesktop thead tr.active-row td {
+    background-color: #F8F8F8;
+    color: #151618 !important;
+    cursor: pointer; }
+  .table-container .trDesktop thead tr th {
+    color: #151618;
+    letter-spacing: -0.25px;
+    padding: 0.5em 1em 0.5em 1em;
+    font-size: .875em;
+    border-bottom: 1px solid #EEEEEF;
+    max-width: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: right; }
+    .table-container .trDesktop thead tr th.active {
+      background-color: #F8F8F8; }
   .table-container .tbody {
     overflow-y: auto;
     overflow-x: hidden; }
@@ -2059,6 +2094,8 @@ li.ui-select-choices-row {
       overflow: hidden; }
       .table-container .tbody tbody tr td.active {
         background-color: #F8F8F8; }
+      .table-container .tbody tbody tr td input[type="checkbox"] {
+        width: unset; }
       .table-container .tbody tbody tr td input {
         width: 100%; }
   .table-container .tfoot.pagination-container {
@@ -2795,17 +2832,11 @@ li.ui-select-choices-row {
   font-weight: bold; }
 
 footer {
-  /*position: absolute;
-  bottom: 2px;*/
   width: 100%; }
 
 .selectTime, .selectTime1 {
   display: inline;
   margin-left: 5%;
-  /* border-left: none;
-   border-right: none;
-   border-top: 1px solid gray;
-   border-bottom: 1px solid gray;*/
   border: none;
   width: 25%;
   height: 100px;
@@ -2876,20 +2907,9 @@ ul.ulContainer li {
   font-size: 1em;
   color: #D4D6D9; }
 
-/*.inputicon{
-  background: url(images/timepicker/Clock-focus.svg) no-repeat;
-  background-position: right;
-  width:25px;
-  top: 2px;
-  position: relative;
-  right: 0;
-}
+.itemContainer, .ulContainer, ul.ulContainer li {
+  overflow-y: hidden; }
 
-.input-container{
-  border: 1px solid #a9a9a9;
-  float: left;
-  position: absolute;
-}*/
 .inputicon {
   width: 1.438em;
   background: url(images/timepicker/Clock-normal.svg) right no-repeat;
@@ -2995,17 +3015,8 @@ ul.ulContainer li {
   /* mozilla browsers */
   -khtml-user-select: none;
   /* webkit (konqueror) browsers */
-  -ms-user-select: none;
-  /*@include rtl{
-    position: relative;
-    right: 0;
-    float: right;
+  -ms-user-select: none; }
 
-  }*/ }
-
-/*.wrappingDiv{
-  padding-left: 7%;
-}*/
 .timepickerContainer::after, .timepickerContainer::before {
   display: none; }
 
@@ -3056,9 +3067,6 @@ ul.ulContainer li {
   color: #151618;
   outline: none; }
 
-/*.xeTimePickerTextField:focus .inputicon {
-  background: url(images/timepicker/Clock-focus.svg) right no-repeat;
-}*/
 .timerFooter {
   width: 100%;
   position: fixed;
