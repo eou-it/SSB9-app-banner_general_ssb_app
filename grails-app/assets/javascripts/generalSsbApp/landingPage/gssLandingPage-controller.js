@@ -66,7 +66,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                             title: 'banner.generalssb.landingpage.actionsitem.title',
                             desc: 'banner.generalssb.landingpage.actionsitem.description',
                             url: $scope.applicationContextRoot +'/ssb/aip/#/list',
-                            icon: '../images/action_items_icon.svg'
+                            icon: '../assets/action_items_icon.svg'
                         }
                     );
                 }
@@ -77,7 +77,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                             title: 'banner.generalssb.landingpage.actionitemadmin.title',
                             desc: 'banner.generalssb.landingpage.actionitemadmin.description',
                             url: $scope.applicationContextRoot +'/ssb/aipAdmin/#/landing',
-                            icon: '../images/action_items_icon.svg',
+                            icon: '../assets/action_items_icon.svg',
                             roles: [AIPADMIN]
                         }
                     );
