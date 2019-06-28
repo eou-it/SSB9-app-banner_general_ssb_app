@@ -554,3 +554,40 @@ aip {
         idleWaitTime = 30000
     }
 }
+
+
+/*******************************************************************************
+ *                  Action Item processing Quartz Configurations                *
+ *******************************************************************************/
+quartz {
+
+     autoStartup = aip.scheduler.enabled ==true ? true: false
+     jdbcStore =  false
+
+       scheduler.skipUpdateCheck = true
+       scheduler.instanceName = 'Action Item Quartz Scheduler'
+       scheduler.instanceId = 'AIP'
+
+       if (aip.scheduler.idleWaitTime) {
+           scheduler.idleWaitTime =aip.scheduler.idleWaitTime
+       }
+
+       boolean isWebLogic = aip.weblogicDeployment == true
+       if (isWebLogic) {
+           println( "Setting driverDelegateClass to org.quartz.impl.jdbcjobstore.oracle.weblogic.WebLogicOracleDelegate" )
+           jobStore.driverDelegateClass = 'org.quartz.impl.jdbcjobstore.oracle.weblogic.WebLogicOracleDelegate'
+       } else {
+           println( "Setting driverDelegateClass to org.quartz.impl.jdbcjobstore.oracle.OracleDelegate" )
+           jobStore.driverDelegateClass = 'org.quartz.impl.jdbcjobstore.oracle.OracleDelegate'
+       }
+       jobStore.class = 'net.hedtech.banner.general.scheduler.quartz.BannerDataSourceJobStoreCMT'
+
+       jobStore.tablePrefix = 'GCRQRTZ_' // Share tables. AIP has own instance
+       jobStore.isClustered = true
+       if (aip.scheduler.clusterCheckinInterval) {
+           jobStore.clusterCheckinInterval = aip.scheduler.clusterCheckinInterval
+       }
+       jobStore.useProperties = false
+
+    println "Quartz Scheduler properties are initialized!"
+}

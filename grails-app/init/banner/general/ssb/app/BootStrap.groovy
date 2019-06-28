@@ -6,6 +6,7 @@ package banner.general.ssb.app
 import grails.converters.JSON
 import grails.util.Environment
 import grails.util.Holders
+import groovy.util.logging.Slf4j
 import net.hedtech.banner.converters.json.JSONBeanMarshaller
 import net.hedtech.banner.converters.json.JSONDomainMarshaller
 import net.hedtech.banner.i18n.LocalizeUtil
@@ -14,12 +15,16 @@ import org.grails.plugins.web.taglib.ValidationTagLib
 import org.grails.web.converters.configuration.ConverterConfiguration
 import org.grails.web.converters.configuration.ConvertersConfigurationHolder
 import org.grails.web.converters.configuration.DefaultConverterConfiguration
+import net.hedtech.banner.aip.post.engine.ActionItemAsynchronousTaskProcessingEngineImpl
+import net.hedtech.banner.aip.post.grouppost.ActionItemPostMonitor
+import org.grails.web.converters.marshaller.json. ValidationErrorsMarshaller
 
 /**
  * Executes arbitrary code at bootstrap time.
  * Code executed includes:
  * -- Configuring the dataSource to ensure connections are tested prior to use
  * */
+@Slf4j
 class BootStrap {
 
     def dateConverterService
@@ -46,14 +51,17 @@ class BootStrap {
         def ctx = servletContext.getAttribute( ApplicationAttributes.APPLICATION_CONTEXT )
 
         if (Holders.config.aip?.actionItemPostMonitor?.enabled && (Environment.current != Environment.TEST)) {
+            log.info("Starting actionItemPostMonitor thread...")
             actionItemPostMonitor.startMonitoring()
         }
 
         if (Holders.config.aip?.actionItemPostWorkProcessingEngine?.enabled && (Environment.current != Environment.TEST)) {
+            log.info("Starting -actionItemPostWorkProcessingEngine...")
             actionItemPostWorkProcessingEngine.startRunning()
         }
 
         if (Holders.config.aip?.actionItemJobProcessingEngine?.enabled && (Environment.current != Environment.TEST)) {
+            log.info("Starting actionItemJobProcessingEngine...")
             actionItemJobProcessingEngine.startRunning()
         }
 
@@ -167,6 +175,8 @@ class BootStrap {
 
         JSON.registerObjectMarshaller( new JSONBeanMarshaller( localizeMap ), 1 ) // for decorators and maps
         JSON.registerObjectMarshaller( new JSONDomainMarshaller( localizeMap, true ), 2 ) // for domain objects
+        JSON.registerObjectMarshaller( new ValidationErrorsMarshaller(),4)
+
 //    JSON.registerObjectMarshaller(ActionItemGroupAssignReadOnly) { it ->
 //        def returnArray = [:]
 //        returnArray['id']=it.id

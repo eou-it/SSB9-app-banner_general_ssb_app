@@ -188,6 +188,7 @@ grails.plugin.springsecurity.securityConfigType = grails.plugin.springsecurity.S
 grails.plugin.springsecurity.cas.active = false
 grails.plugin.springsecurity.saml.active = false
 
+pageBuilder.adminRoles = 'ROLE_GPBADMN_BAN_DEFAULT_PAGEBUILDER_M'
 
 // ******************************************************************************
 //
@@ -211,6 +212,37 @@ grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/ssb/PersonalInformationDetails/**', access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
         [pattern:'/ssb/PersonalInformationPicture/**', access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
         [pattern:'/ssb/PersonalInformationQA/**',      access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+
+        [pattern:'/ssb/aipAdmin/**',                   access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aipReview/**',                  access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/BCM/**',                        access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aipActionItemPosting/**',       access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aipActionItemPosting/**' ,      access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aip/**',                        access : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aipDocumentManagement/**',      access : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aipPageBuilder/**' ,            access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+
+        //Page Builder
+        [pattern: '/internalPb/virtualDomains.*/**' ,access  : ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/adminPb/virtualDomains.*/**',      access: [pageBuilder.adminRoles]],
+        [pattern:'/internalPb/pages/**',              access: [pageBuilder.adminRoles]],
+        [pattern: '/internalPb/csses/**' ,            access  : [pageBuilder.adminRoles]],
+        [pattern:'/internalPb/virtualdomains/**' ,    access : [pageBuilder.adminRoles]],
+        [pattern:'/internalPb/pagesecurity/**',        access : [pageBuilder.adminRoles]],
+        [pattern: '/internalPb/pageexports/**',         access : [pageBuilder.adminRoles]],
+        [pattern: '/internalPb/virtualdomainexports/**', access: [pageBuilder.adminRoles]],
+        [pattern: '/internalPb/cssexports/**' ,          access : [pageBuilder.adminRoles]],
+        [pattern: '/internalPb/admintasks/**',          access  : [pageBuilder.adminRoles]],
+        [pattern: '/virtualDomainComposer/**',          access   : [pageBuilder.adminRoles]],
+        [pattern: '/visualPageModelComposer/**',        access   : [pageBuilder.adminRoles]],
+        [pattern: '/cssManager/**',                     access    : [pageBuilder.adminRoles]],
+        [pattern:  '/admin/i18n/**',                    access     : [pageBuilder.adminRoles]],
+        [pattern: '/cssRender/**',                      access     : ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        //Page Builder master template included to allow for users to pass in without needing role applied in requestmap table in extz app.
+        [pattern:'/customPage/page/AIPMasterTemplateSystemRequired/**' , access : ['IS_AUTHENTICATED_FULLY']],
+        //For now use a page builder dummy page for cas aut
+        [pattern:'/customPage/page/pbadm.ssoauth/**' , access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', pageBuilder.adminRoles]],
+
         [pattern:'/selfServiceMenu/**',           access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/ssb/selfServiceMenu/**',       access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/ssb/menu**',                   access: ['IS_AUTHENTICATED_ANONYMOUSLY']],

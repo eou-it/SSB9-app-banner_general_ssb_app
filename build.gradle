@@ -72,6 +72,7 @@ dependencies {
     compile "org.springframework:spring-jms:2.5"
 
     compile "org.json:json:20090211"
+
       //  compile ':zipped-resources:1.0'
       //  compile ':cached-resources:1.0'
       //  compile ':yui-minify-resources:0.1.4'
@@ -138,9 +139,9 @@ grails {
         compile project(":banner-restful-api-support")
         compile project(':banner-general-common-ui-ss')
 
-
-  //      compile project(':banner-aip-ui')
-  //      compile project(':banner-aip-gate-keeper')
+        compile project(':banner-aip')
+        compile project(':banner-aip-ui')
+        compile project(':banner-aip-gate-keeper')
         compile project(':banner-general-direct-deposit-ui')
         compile project(':banner-general-personal-information-ui')
         compile project(':banner-general-proxy')

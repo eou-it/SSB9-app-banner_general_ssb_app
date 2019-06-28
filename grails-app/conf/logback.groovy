@@ -84,3 +84,11 @@ logger("net.sf.ehcache.*", OFF)
 logger("asset.pipeline.gradle", OFF)
 
 logger("grails.plugins.DefaultGrailsPluginManager", OFF)
+
+logger("net.hedtech.banner.aip.post.grouppost.ActionItemPostCompositeService", OFF)
+logger("net.hedtech.banner.service.ServiceBase", OFF)
+logger("net.hedtech.banner.aip.post.grouppost.ActionItemPost", OFF)
+logger("net.hedtech.banner.aip.post.grouppost.ActionItemPostCompositeService", OFF)
+logger("banner.general.ssb.app.BootStrap",OFF)
+logger("banner.aip.BannerAipGrailsPlugin",OFF)
+logger("org.quartz",INFO)
