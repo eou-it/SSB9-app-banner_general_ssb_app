@@ -8745,7 +8745,7 @@ clearFocus = function (e) {
                 }]
             };
         })
-        .directive('xeTabPanel', ['$compile', '$state', function ($compile, $state) {
+        .directive('xeTabPanel', ['$compile', function ($compile) {
             return {
                 restrict: 'EA',
                 transclude: true,
@@ -8754,8 +8754,7 @@ clearFocus = function (e) {
                     state: '@',
                     loadDataOnClick: '&',
                     jsLazyLoad: '@',
-                    xeField: '@?',
-                    stateParams: '='
+                    xeField: '@?'
                 },
                 templateUrl: 'templates/tabPanel.html',
                 require: '^xeTabNav',
@@ -8768,23 +8767,37 @@ clearFocus = function (e) {
                         script.src = activeTab.jsLazyLoad;
                         document.head.appendChild(script);
                     };
-                    $transclude(scope, function (clone, scope) {
+                    // Use closure to set tab scope property so transcluded content can use its default scope
+                    var setHasTranscludedContentTrue = function(){
+                        scope.hasTranscludedContent = true;
+                    };
+                    $transclude(function (clone, scope) {
                         var elementTo;
                         if (clone.text().trim().length) {
-                            scope.hasTranscludedContent = true;
+                            setHasTranscludedContentTrue();
                             elementTo = angular.element(ele[0].querySelector('[content]'));
                             elementTo.append(clone);
                         }
                     });
-                    if (attr.hasOwnProperty('active') || scope.state === $state.current.name) {
+                    // NOTE: This "isDefaultActivationDisabled" flag was added locally by the Banner General XE SSB
+                    // team to support the Personal Information 9.1 application.  The default behavior of this
+                    // xeTabPanel directive is to automatically select the first tab if no tab is explicitly set to
+                    // active. The isDefaultActivationDisabled flag allows this behavior to be turned off. This is
+                    // useful when an <xe-tab-nav> directive contains a nested ng-repeat, in which case the first tab
+                    // is *always* selected, even if not appropriate.
+                    // The flag is employed as a "boolean attribute" on the xeTabPanel directive's HTML element, e.g.
+                    // <xe-tab-panel ... disable-default-tab-activation>
+                    var isDefaultActivationDisabled = 'disableDefaultTabActivation' in attr;
+                    if (attr.hasOwnProperty('active')) {
                         scope.active = true;
                         xeTabNavCtrl.currentActive = scope;
-                        loadContent();
-                    } else if (ele.is(':last-child') && !xeTabNavCtrl.currentActive) {
+                    } else if (ele.is(':last-child') && !xeTabNavCtrl.currentActive && !isDefaultActivationDisabled) {
                         xeTabNavCtrl.tabs[0].active = true;
                         xeTabNavCtrl.currentActive = xeTabNavCtrl.tabs[0];
                         xeTabNavCtrl.currentActive.element.attr('active', '');
-                        loadContent();
+                    }
+                    if (xeTabNavCtrl.currentActive) {
+                        xeTabNavCtrl.loadDynamicContent(xeTabNavCtrl.currentActive.loadDataOnClick, xeTabNavCtrl.currentActive);
                     }
                     scope.dynamic = function (data) {
                         var htmlTemplate, content, elementTo;
@@ -8796,14 +8809,6 @@ clearFocus = function (e) {
                             scope.lazyLoadJs(scope);
                         }
                     };
-
-                    function loadContent() {
-                        if (attr.loadDataOnClick) {
-                            xeTabNavCtrl.loadDynamicContent(xeTabNavCtrl.currentActive.loadDataOnClick, xeTabNavCtrl.currentActive);
-                        } else {
-                            xeTabNavCtrl.activate(xeTabNavCtrl.currentActive);
-                        }
-                    }
                 }
             };
         }]);
