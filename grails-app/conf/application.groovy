@@ -40,6 +40,7 @@ build.number.uuid = "7f8235d8-2a51-4f2f-8516-47d913caf346" // specific UUID for 
 build.number.base.url = "http://m039198.ellucian.com:8080/BuildNumberServer/buildNumber?method=getNextBuildNumber&uuid="
 app.name="GeneralSelfService"
 app.appId="GENERAL_SS"
+app.platform.version="9.32"
 
 
 
