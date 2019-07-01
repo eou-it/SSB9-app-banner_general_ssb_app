@@ -8,8 +8,6 @@
     <g:set var="applicationName" value= "${grails.util.Metadata.current.getApplicationName()}"/>
     <g:set var="appName" value= "${System.properties['BANNERXE_APP_NAME']}"/>
 
-    <asset:javascript src="modules/gss-application-mf.js"/>
-
     <g:if test="${appName.equals('DirectDeposit')}">
         <g:set var="url" value="${'ssb/directDeposit'}"/>
     </g:if>
