@@ -1,0 +1,18 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": "2018-12-07T11:08:41Z",
+   "codeDelete": null,
+   "codeGet": "SELECT\r\n    gcraact_surrogate_id\r\nFROM\r\n    gcraact\r\nWHERE\r\n    gcraact_gcbactm_id =:actionitemid\r\n    AND   gcraact_pidm =:parm_user_pidm\r\n    AND   trunc(current_date) BETWEEN trunc(gcraact_display_start_date) AND trunc(gcraact_display_end_date)",
+   "typeOfCode": "S",
+   "serviceName": "UserActionItem"
+}

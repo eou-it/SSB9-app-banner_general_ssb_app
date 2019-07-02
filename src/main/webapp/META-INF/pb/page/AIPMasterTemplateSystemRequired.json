@@ -1,0 +1,141 @@
+{
+   "constantName": "AIPMasterTemplateSystemRequired",
+   "extendsPage": null,
+   "fileTimestamp": "2019-02-11T14:42:42Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "ActionItemContent",
+            "resource": "virtualDomains.ActionItemContent",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ActionItemStatus",
+            "resource": "virtualDomains.ActionItemStatus",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ActionItemReviewStatus",
+            "resource": "virtualDomains.ActionItemReviewStatus",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "loadInitially": true,
+            "model": "ActionItemContent",
+            "name": "popAID",
+            "onLoad": "if ( typeof(window.params.actionItemId) != 'undefined') {\n    var aid = window.params.actionItemId;\n} else {\n   //temporary - for testing only.\n   window.params.actionItemId = 6;\n}\nsetTimeout( function(){ \n    $ActionItemId.$load();\n}, \n500);",
+            "parameters": {},
+            "readonly": false,
+            "required": false,
+            "style": "hidden",
+            "type": "text",
+            "validation": {}
+         },
+         {
+            "loadInitially": true,
+            "model": "ActionItemReviewStatus",
+            "name": "ReviewStatus",
+            "parameters": {
+               "actionitemid": "$$params.actionItemId"
+            },
+            "readonly": false,
+            "required": false,
+            "style": "hidden",
+            "type": "text",
+            "validation": {},
+            "value": "gcraact_rvst_code"
+         },
+         {
+            "loadInitially": false,
+            "model": "ActionItemContent",
+            "name": "ActionItemId",
+            "onLoad": "$ActionItemContentDetail.$load();",
+            "parameters": {
+               "actionItemId": "$$params.actionItemId",
+               "pageid": "$$params.id"
+            },
+            "readonly": false,
+            "required": false,
+            "style": "hidden",
+            "type": "text",
+            "validation": {},
+            "value": "ACTION_ITEM_ID"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": true,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "name": "ActionItemNameHeader",
+                        "type": "literal",
+                        "value": "<h4>$ActionItemContentDetail.ACTION_ITEM_TITLE</h4>"
+                     },
+                     {
+                        "asHtml": true,
+                        "loadInitially": true,
+                        "model": "ACTION_ITEM_CONTENT",
+                        "name": "ActionItemContentDisplay",
+                        "onLoad": "/*$(\"#pbid-ActionItemContentDetail-save-button\").removeClass('btn-sm').addClass('btn-primary').addClass('btn-md');*/\n\n$ActionItemStatusAgree.$load();",
+                        "type": "display",
+                        "value": ""
+                     },
+                     {
+                        "labelKey": "STATUS_RULE_LABEL_TEXT",
+                        "loadInitially": false,
+                        "model": "STATUS_RULE_ID",
+                        "name": "ActionItemStatusAgree",
+                        "onLoad": "setTimeout( function(){ \n   var isCheckbox =  $ActionItemContentDetail.STATUS_COUNT === 1? true:false\n   if ( isCheckbox) {\n         // console.log(\"need checkbox\");\n\tvar radio = document.getElementById(\"pbid-ActionItemStatusAgree-radio-0-0\");\n\tradio.type = \"checkbox\"; \n    }\n   var isResponseReviewRequired = false;\n    if (typeof $ReviewStatus !==  'undefined' ){\n        isResponseReviewRequired = true;\n        if ( isCheckbox) {\n             $(\"input[type='checkbox']\").prop({disabled: isResponseReviewRequired });\n          } else{\n             $(\"input[type='radio']\").prop({disabled: isResponseReviewRequired });\n        }\n    } else{\n       $(\"#pbid-ActionItemContentDetail-save-button\").click(function(){\n       var selectedResponse = isCheckbox ? \"pbid-ActionItemStatusAgree-radio-0-0\" : $(\"input[type='radio']:checked\")[0].id;\n          var responseElementId  = selectedResponse.split(\"pbid-ActionItemStatusAgree-radio-0-\");\n          isResponseReviewRequired  = data[parseInt(responseElementId[1])].STATUS_REV_REQ_IND === 'Y'? true:false\n         if(isResponseReviewRequired){\n                if ( isCheckbox) {\n                         $(\"input[type='checkbox']\").prop({disabled: isResponseReviewRequired });\n                 } else{\n                         $(\"input[type='radio']\").prop({disabled: isResponseReviewRequired });\n                 }\n                $(\"#pbid-ActionItemContentDetail-save-button\").prop({disabled: isResponseReviewRequired });\n         }\n        });\n    }\n\t$('input[type=\"checkbox\"]').click( function(){\n\t\tif($(\"input[type='checkbox']:checked\").length ===1){\n\t\t\t$(\"#pbid-ActionItemContentDetail-save-button\").removeAttr(\"disabled\");\t\t\t\n        }else{\n\t\t\t$(\"#pbid-ActionItemContentDetail-save-button\").attr(\"disabled\", \"disabled\");\n\t\t}\n\t});\n},300);",
+                        "onUpdate": "params.isResponseModified = true;",
+                        "required": false,
+                        "sourceModel": "ActionItemStatus",
+                        "sourceParameters": {
+                           "actionitemid": "$$params.actionItemId"
+                        },
+                        "style": "",
+                        "type": "radio",
+                        "value": "",
+                        "valueKey": "STATUS_RULE_ID"
+                     }
+                  ],
+                  "documentation": "Displays data from virtual domain ActionItemContent",
+                  "label": "",
+                  "loadInitially": false,
+                  "model": "ActionItemContent",
+                  "name": "ActionItemContentDetail",
+                  "newRecordLabel": "",
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}\n$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop('disabled', false);\nwindow.params.isResponseLocked = false;",
+                  "onLoad": "setTimeout( function(){ \n    console.log(\"status count \" + $ActionItemContentDetail.STATUS_COUNT);\n    $ActionItemStatusAgree.$load();\n}, \n300);",
+                  "onSave": "",
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true});\nwindow.params.saved=true;",
+                  "pageSize": 1,
+                  "parameters": {
+                     "actionitemid": "$$params.actionItemId",
+                     "pageid": "$$params.id"
+                  },
+                  "type": "detail"
+               }
+            ],
+            "label": "",
+            "name": "PolicyBlock",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "label": "",
+      "name": "AIPMasterTemplateSystemRequired",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}
