@@ -1,8 +1,8 @@
 import grails.util.BuildSettings
-import grails.util.Environment
+import grails.util.Metadata
 import org.springframework.boot.logging.logback.ColorConverter
 import org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter
-
+import net.hedtech.banner.configuration.ExternalConfigurationUtils
 import java.nio.charset.Charset
 
 conversionRule 'clr', ColorConverter
@@ -23,20 +23,20 @@ appender('STDOUT', ConsoleAppender) {
 }
 
 def targetDir = BuildSettings.TARGET_DIR
-if (Environment.isDevelopmentMode() && targetDir != null) {
-    appender("FULL_STACKTRACE", FileAppender) {
-        file = "${targetDir}/stacktrace.log"
-        append = true
-        encoder(PatternLayoutEncoder) {
-            pattern = "%level %logger - %msg%n"
-        }
+String appname = Metadata.current.getApplicationName()
+ExternalConfigurationUtils.setupExternalLogbackConfig()
+
+appender("FULL_STACKTRACE", FileAppender) {
+    //file = "target/stacktrace.log"
+    file = "${targetDir}/${appname}.log"
+    append = true
+    encoder(PatternLayoutEncoder) {
+        pattern = "%d{[dd-MMM-yyyy @ HH:mm:ss.SSS]} %-5p %c{2} - %m%n"
     }
-    logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
-
-
-
 }
-root(ERROR, ['STDOUT'])
+logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
+
+root(ERROR, ['STDOUT','FULL_STACKTRACE'])
 
 logger("net.hedtech.banner.service", OFF)
 logger("net.hedtech.banner.representations", OFF)
@@ -85,10 +85,10 @@ logger("asset.pipeline.gradle", OFF)
 
 logger("grails.plugins.DefaultGrailsPluginManager", OFF)
 
-logger("net.hedtech.banner.aip.post.grouppost.ActionItemPostCompositeService", OFF)
-logger("net.hedtech.banner.service.ServiceBase", OFF)
-logger("net.hedtech.banner.aip.post.grouppost.ActionItemPost", OFF)
-logger("net.hedtech.banner.aip.post.grouppost.ActionItemPostCompositeService", OFF)
-logger("banner.general.ssb.app.BootStrap",OFF)
-logger("banner.aip.BannerAipGrailsPlugin",OFF)
-logger("org.quartz",INFO)
+logger("net.hedtech.banner.aip.post.grouppost.ActionItemPostCompositeService", ERROR)
+logger("net.hedtech.banner.service.ServiceBase", ERROR)
+logger("net.hedtech.banner.aip.post.grouppost.ActionItemPost", ERROR)
+logger("net.hedtech.banner.aip.post.grouppost.ActionItemPostCompositeService", ERROR)
+logger("banner.general.ssb.app.BootStrap",ERROR)
+logger("banner.aip.BannerAipGrailsPlugin",ERROR)
+logger("org.quartz",ERROR)
