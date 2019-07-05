@@ -8,6 +8,9 @@
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
+grails.resources.adhoc.excludes = ['/**/*-custom.css', '**/plugins/ckeditor-4.4.1.0/**']
+grails.resources.mappers.bundle.excludes = ['**/plugins/ckeditor-4.4.1.0/**']
+grails.resources.mappers.hashandcache.excludes = ['**/plugins/ckeditor-4.4.1.0/**']
 //grails.config.locations = [] // leave this initialized to an empty list, and add your locations in the map below.
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '*.png', '/plugins/*']
 

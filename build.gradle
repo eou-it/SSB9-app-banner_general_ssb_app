@@ -68,6 +68,8 @@ dependencies {
     compile "org.hibernate:hibernate-core:5.1.5.Final"
     compile "org.hibernate:hibernate-ehcache:5.1.5.Final"
 
+    compile "org.grails.plugins:ckeditor:4.5.9.0"
+
     compile "javax.jms:jms:1.1"
     compile "org.springframework:spring-jms:2.5"
 
