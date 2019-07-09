@@ -86,13 +86,12 @@ logger("asset.pipeline.gradle", OFF)
 logger("grails.plugins.DefaultGrailsPluginManager", OFF)
 
 
-logger("net.hedtech.banner.service.ServiceBase", ERROR)
-logger("net.hedtech.banner.aip.post.*", DEBUG)
-logger("net.hedtech.banner.aip.post.*", ERROR)
-logger("net.hedtech.banner.aip.post.*", TRACE)
+logger("net.hedtech.banner.service.ServiceBase", OFF)
+logger("net.hedtech.banner.aip.*", DEBUG)
+logger("net.hedtech.banner.aip.*", ERROR)
 
-logger("banner.general.ssb.app.BootStrap",ERROR)
-logger("banner.aip.BannerAipGrailsPlugin",ERROR)
-logger("org.quartz",TRACE)
-logger("org.quartz",ERROR)
-logger("org.quartz",INFO)
+
+logger("banner.general.ssb.app.BootStrap",OFF)
+logger("banner.aip.BannerAipGrailsPlugin",OFF)
+logger("org.quartz",OFF)
+
