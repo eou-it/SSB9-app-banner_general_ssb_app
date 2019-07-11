@@ -567,6 +567,9 @@ quartz {
        scheduler.skipUpdateCheck = true
        scheduler.instanceName = 'Action Item Quartz Scheduler'
        scheduler.instanceId = 'AIP'
+       waitForJobsToCompleteOnShutdown=true
+       purgeQuartzTablesOnStartup=false
+       pluginEnabled=true
 
        if (aip.scheduler.idleWaitTime) {
            scheduler.idleWaitTime =aip.scheduler.idleWaitTime
