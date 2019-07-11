@@ -93,5 +93,5 @@ logger("net.hedtech.banner.aip.*", ERROR)
 
 logger("banner.general.ssb.app.BootStrap",OFF)
 logger("banner.aip.BannerAipGrailsPlugin",OFF)
-logger("org.quartz",OFF)
+logger("org.quartz",INFO)
 
