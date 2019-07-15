@@ -86,10 +86,13 @@ logger("asset.pipeline.gradle", OFF)
 logger("grails.plugins.DefaultGrailsPluginManager", OFF)
 
 
+logger("net.hedtech.banner.aip.ActionItemAsynchronousTaskProcessingEngineImpl", DEBUG)
+logger("net.hedtech.banner.aip.post.job.ActionItemJobTaskManagerService",DEBUG)
+logger("net.hedtech.banner.aip.post.job.ActionItemJobService",DEBUG)
+logger("net.hedtech.banner.aip.post.job.ActionItemPostMonitor",DEBUG)
+logger("net.hedtech.banner.aip.post.job.ActionItemPostCompositeService",DEBUG)
 logger("net.hedtech.banner.service.ServiceBase", OFF)
-logger("net.hedtech.banner.aip.*", DEBUG)
-logger("net.hedtech.banner.aip.*", ERROR)
-
+logger("net.hedtech.banner.aip.post.grouppost.ActionItemPost", DEBUG)
 
 logger("banner.general.ssb.app.BootStrap",OFF)
 logger("banner.aip.BannerAipGrailsPlugin",OFF)
