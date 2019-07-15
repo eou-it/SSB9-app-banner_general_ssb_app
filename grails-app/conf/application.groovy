@@ -96,6 +96,8 @@ grails.views.gsp.sitemesh.preprocess = true
 //grails.resources.rewrite.css = false
 grails.resources.adhoc.excludes = ['/**/*-custom.css']
 
+grails.controllers.upload.maxFileSize=10000000000000
+grails.controllers.upload.maxRequestSize=10000000000000
 
 environments {
     development {
