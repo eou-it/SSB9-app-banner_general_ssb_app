@@ -1,3 +1,4 @@
+
 import grails.util.BuildSettings
 import grails.util.Metadata
 import org.springframework.boot.logging.logback.ColorConverter
@@ -76,7 +77,7 @@ logger("org.hibernate.SQL", OFF)
 logger("org.hibernate.*", OFF)                                 // hibernate ORM
 logger("javax.servlet.http.HttpSessionListener", OFF)
 logger("net.hedtech.banner.service.HttpSessionService", OFF)
-logger("net.sf.*", TRACE)
+logger("net.sf.*", OFF)
 logger("de.javakaffee.*", OFF)
 logger("org.hibernate.cache.*", OFF)
 logger("net.sf.ehcache.*", OFF)
@@ -86,10 +87,13 @@ logger("asset.pipeline.gradle", OFF)
 logger("grails.plugins.DefaultGrailsPluginManager", OFF)
 
 
+logger("net.hedtech.banner.aip.ActionItemAsynchronousTaskProcessingEngineImpl", OFF)
+logger("net.hedtech.banner.aip.post.job.ActionItemJobTaskManagerService",OFF)
+logger("net.hedtech.banner.aip.post.job.ActionItemJobService",OFF)
+logger("net.hedtech.banner.aip.post.job.ActionItemPostMonitor",OFF)
+logger("net.hedtech.banner.aip.post.job.ActionItemPostCompositeService",OFF)
 logger("net.hedtech.banner.service.ServiceBase", OFF)
-logger("net.hedtech.banner.aip.*", DEBUG)
-logger("net.hedtech.banner.aip.*", ERROR)
-
+logger("net.hedtech.banner.aip.post.grouppost.ActionItemPost", OFF)
 
 logger("banner.general.ssb.app.BootStrap",OFF)
 logger("banner.aip.BannerAipGrailsPlugin",OFF)
