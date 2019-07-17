@@ -219,11 +219,10 @@ grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/ssb/PersonalInformationPicture/**', access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
         [pattern:'/ssb/PersonalInformationQA/**',      access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
 
-        [pattern:'/ssb/aipAdmin/**',                   access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
-        [pattern:'/ssb/aipReview/**',                  access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aipAdmin/**',                   access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
+        [pattern:'/ssb/aipReview/**',                  access: ['ROLE_SELFSERVICE-ACTIONITEMREVIEWER_BAN_DEFAULT_M']],
         [pattern:'/ssb/BCM/**',                        access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
         [pattern:'/ssb/aipActionItemPosting/**',       access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
-        [pattern:'/ssb/aipActionItemPosting/**' ,      access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
         [pattern:'/ssb/aip/**',                        access : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
         [pattern:'/ssb/aipDocumentManagement/**',      access : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
         [pattern:'/ssb/aipPageBuilder/**' ,            access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
