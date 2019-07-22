@@ -105,6 +105,22 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                     $scope.isSingleTile = $scope.appTilesForRole.length === 1;
                 });
 
+                // Get user name for display
+                generalSsbService.getFromPersonalInfo('PersonalDetails').$promise.then(function (response) {
+                    var firstName = response && response.preferenceFirstName;
+
+                    if (firstName) {
+                        $scope.firstName = firstName;
+                    } else {
+                        generalSsbService.getFromPersonalInfo('UserName').$promise.then(function (response) {
+                            firstName = response && response.firstName;
+
+                            if (firstName) {
+                                $scope.firstName = firstName;
+                            }
+                        });
+                    }
+                });
 
                 generalSsbService.getFromPersonalInfo('BannerId').$promise.then(function (response) {
                     $scope.bannerId = response.bannerId;
