@@ -82,13 +82,13 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                         }
                     );
                 }
-                
+
                 if(generalConfigResolve.isProxyManagementEnabled && generalConfigResolve.proxyManagementUrl !== -1) {
                     $scope.appTiles.push(
                         {
                             title: 'banner.generalssb.landingpage.proxyMgmt.title',
                             desc: 'banner.generalssb.landingpage.proxyMgmt.description',
-                            url: generalConfigResolve.proxyManagementUrl = $scope.applicationContextRoot +'/ssb/proxyManagement',
+                            url:  $scope.applicationContextRoot +'/ssb/proxyManagement',
                             icon: '../assets/Proxy_management1.png'
                         }
                     );
