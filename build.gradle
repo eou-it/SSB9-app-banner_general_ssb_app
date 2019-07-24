@@ -9,6 +9,7 @@ buildscript {
         classpath "gradle.plugin.com.energizedwork:idea-gradle-plugins:1.4"
         classpath "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.6"
+        classpath "net.saliman:gradle-cobertura-plugin:2.6.0"        
     }
 }
 
@@ -23,7 +24,8 @@ apply plugin:"com.energizedwork.webdriver-binaries"
 apply plugin:"com.energizedwork.idea-project-components"
 apply plugin:"asset-pipeline"
 apply plugin:"org.grails.grails-gsp"
-apply plugin: 'codenarc'
+apply plugin:'codenarc'
+apply plugin:"net.saliman.cobertura"
 
 repositories {
     mavenLocal()
@@ -94,7 +96,17 @@ codenarc {
     maxPriority1Violations = Integer.MAX_VALUE
     maxPriority2Violations = Integer.MAX_VALUE
     maxPriority3Violations = Integer.MAX_VALUE
+    ignoreFailures = true
 }
+
+cobertura {
+    coverageFormats = ['html', 'xml']
+}
+
+integrationTest {
+        ignoreFailures = true
+}
+
     
 ext {
     grails {
@@ -186,8 +198,8 @@ assemble.doLast {
     println '.....Unzipping ...' + "build/libs/${rootProject.name}" + "-" + version + ".war"
     ant.unzip(src: "build/libs/" + warName, dest: packageDir, overwrite: "true", encoding: "UTF-8")
 
-    ant.move(file: packageDir + "/WEB-INF/lib/ojdbc6-11.2.0.1.0.jar", toDir: releaseDir)
-    ant.move(file: packageDir + "/WEB-INF/lib/xdb6-11.2.0.4.jar", toDir: releaseDir)
+    ant.move(file: packageDir + "/WEB-INF/lib/ojdbc6-11.2.0.1.0.jar", toFile: releaseDir + "/ojdbc6.jar")
+    ant.move(file: packageDir + "/WEB-INF/lib/xdb6-11.2.0.4.jar", toFile: releaseDir + "/xdb6.jar")
 
     ant.delete(file: packageDir + "/WEB-INF/lib/stax-api-1.0.1.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/xml-apis-1.4.01.jar")
