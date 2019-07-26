@@ -31,7 +31,7 @@ class GeneralController {
                 forward controller: 'proxy', action: 'landingPage'
             }
             else {
-                render view: "general"
+                render(view: "general")
             }
         } catch (ApplicationException e) {
             render returnFailureMessage( e ) as JSON
