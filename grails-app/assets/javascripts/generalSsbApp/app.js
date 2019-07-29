@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2017-2019 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 var generalSsbAppControllers = angular.module('generalSsbAppControllers', []);
 var generalSsbAppDirectives = angular.module('generalSsbAppDirectives', []);
@@ -58,7 +58,7 @@ generalSsbApp.constant('webAppResourcePathString', '../assets');
 
 generalSsbApp.config(function ($stateProvider, $urlRouterProvider) {
     // For any unmatched url, send to landing page
-    var url = url ? url : 'home';
+    var url = url ? url : '/home';
 
     $urlRouterProvider.otherwise(url);
 
