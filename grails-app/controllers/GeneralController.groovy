@@ -25,14 +25,14 @@ class GeneralController {
     def landingPage() {
         try {
 
-            def p_proxyIDM = SecurityContextHolder?.context?.authentication?.principal?.gidm
+            /*def p_proxyIDM = SecurityContextHolder?.context?.authentication?.principal?.gidm
 
             if(p_proxyIDM){
                 forward controller: 'proxy', action: 'landingPage'
             }
-            else {
-                render(view: "general")
-            }
+            else { //#TODO commented for debugging weblogic issue will remove the comment once its.
+*/                render(view: "general")
+           // }
         } catch (ApplicationException e) {
             render returnFailureMessage( e ) as JSON
         }
