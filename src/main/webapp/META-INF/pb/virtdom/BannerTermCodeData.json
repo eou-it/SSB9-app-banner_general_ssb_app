@@ -1,0 +1,18 @@
+{
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT SFBETRM_SURROGATE_ID,SFBETRM_TERM_CODE\r\nFROM SFBETRM\r\nWHERE SFBETRM_TERM_CODE IN (SELECT SGVSTSP_TERM_CODE_EFF FROM  SGVSTSP WHERE \r\nSGVSTSP_TERM_CODE_EFF IN (SELECT GTVSDAX_EXTERNAL_CODE FROM GTVSDAX WHERE GTVSDAX_INTERNAL_CODE = 'OENR_TERM' AND GTVSDAX_INTERNAL_CODE_GROUP = 'ESC_OENR'))\r\nAND SFBETRM_PIDM = :parm_user_pidm",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "BannerTermCodeData",
+   "codePost": null
+}
