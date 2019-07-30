@@ -1,18 +1,19 @@
 /*******************************************************************************
  Copyright 2019 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
+package banner.general.ssb.app
 
 import net.hedtech.banner.general.GeneralSsbConfigService
 
-class GeneralSelfServiceProxyInterceptor {
+class GeneralSelfServicePersonalInformationInterceptor {
     def generalSsbConfigService
 
-    GeneralSelfServiceProxyInterceptor() {
-        match controller: ~/(proxyManagement)/
+    GeneralSelfServicePersonalInformationInterceptor() {
+        match controller: ~/(personalInformation|personalInformationQA)/
     }
     boolean before()
     {
-        if (generalSsbConfigService.getParamFromSession(GeneralSsbConfigService.ENABLE_PROXY_MANAGMENT, 'Y') != 'Y') {
+        if (generalSsbConfigService.getParamFromSession(GeneralSsbConfigService.ENABLE_PERSONAL_INFORMATION, 'Y') != 'Y') {
             redirect(controller: "error", action: "accessForbidden")
             return false
         }
