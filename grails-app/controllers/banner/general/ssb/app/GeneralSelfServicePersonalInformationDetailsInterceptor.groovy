@@ -1,6 +1,7 @@
 /*******************************************************************************
  Copyright 2019 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
+package banner.general.ssb.app
 
 import net.hedtech.banner.general.GeneralSsbConfigService
 

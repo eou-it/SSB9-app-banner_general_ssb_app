@@ -1,18 +1,19 @@
 /*******************************************************************************
  Copyright 2019 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
+package banner.general.ssb.app
 
 import net.hedtech.banner.general.GeneralSsbConfigService
 
-class GeneralSelfServicePersonalInformationInterceptor {
+class GeneralSelfServiceAipInterceptor {
     def generalSsbConfigService
 
-    GeneralSelfServicePersonalInformationInterceptor() {
-        match controller: ~/(personalInformation|personalInformationQA)/
+    GeneralSelfServiceAipInterceptor() {
+        match controller: ~/(aip|aipAdmin|aipReview|aipActionItemPosting|aipDocumentManagement|BCM|aipPageBuilder)/
     }
     boolean before()
     {
-        if (generalSsbConfigService.getParamFromSession(GeneralSsbConfigService.ENABLE_PERSONAL_INFORMATION, 'Y') != 'Y') {
+        if (generalSsbConfigService.getParamFromSession(GeneralSsbConfigService.ENABLE_ACTION_ITEM, 'Y') != 'Y') {
             redirect(controller: "error", action: "accessForbidden")
             return false
         }

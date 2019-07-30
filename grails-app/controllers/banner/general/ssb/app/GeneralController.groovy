@@ -1,21 +1,22 @@
 /*******************************************************************************
  Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
-
+package banner.general.ssb.app
 
 import grails.converters.JSON
+import groovy.util.logging.Slf4j
 import net.hedtech.banner.exceptions.ApplicationException
 import net.hedtech.banner.general.overall.UserRoleService
-import org.apache.log4j.Logger
+
 import org.grails.plugins.web.taglib.ValidationTagLib
 import org.springframework.security.core.context.SecurityContextHolder
 
 /**
  * Controller for General
  */
+@Slf4j
 class GeneralController {
 
-    private static final logfile = Logger.getLogger( this.getClass() )
     static defaultAction = "landingPage"
 
     def generalSsbConfigService
@@ -24,9 +25,7 @@ class GeneralController {
 
     def landingPage() {
         try {
-
             def p_proxyIDM = SecurityContextHolder?.context?.authentication?.principal?.gidm
-
             if(p_proxyIDM){
                 forward controller: 'proxy', action: 'landingPage'
             }
@@ -60,15 +59,16 @@ class GeneralController {
     def returnFailureMessage( ApplicationException e ) {
         def model = [:]
         model.failure = true
-        logfile.error( e )
+        log.error(e)
         try {
             model.message = e.returnMap( {mapToLocalize -> new ValidationTagLib().message( mapToLocalize )} ).message
             return model
         } catch (ApplicationException ex) {
-            logfile.error( ex )
+            log.error( ex )
             model.message = e.message
             return model
         }
+
     }
 
 

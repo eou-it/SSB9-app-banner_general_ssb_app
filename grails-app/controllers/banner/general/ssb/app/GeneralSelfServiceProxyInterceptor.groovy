@@ -1,18 +1,19 @@
 /*******************************************************************************
  Copyright 2019 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
+package banner.general.ssb.app
 
 import net.hedtech.banner.general.GeneralSsbConfigService
 
-class GeneralSelfServiceAipInterceptor {
+class GeneralSelfServiceProxyInterceptor {
     def generalSsbConfigService
 
-    GeneralSelfServiceAipInterceptor() {
-        match controller: ~/(aip|aipAdmin|aipReview|aipActionItemPosting|aipDocumentManagement|BCM|aipPageBuilder)/
+    GeneralSelfServiceProxyInterceptor() {
+        match controller: ~/(proxyManagement)/
     }
     boolean before()
     {
-        if (generalSsbConfigService.getParamFromSession(GeneralSsbConfigService.ENABLE_ACTION_ITEM, 'Y') != 'Y') {
+        if (generalSsbConfigService.getParamFromSession(GeneralSsbConfigService.ENABLE_PROXY_MANAGMENT, 'Y') != 'Y') {
             redirect(controller: "error", action: "accessForbidden")
             return false
         }
