@@ -70,7 +70,7 @@ switch (Environment.current) {
         loggingDir = BuildSettings.TARGET_DIR
         break
 }
-loggingDir = loggingDir ?: "${System.properties["user.home"]}/FinanceSS_logs"
+loggingDir = loggingDir ?: "${System.properties["user.home"]}/BannerGeneralSsb_logs"
 
 
 // Define console appender
@@ -78,12 +78,7 @@ appender('STDOUT', ConsoleAppender) {
     encoder(PatternLayoutEncoder) {
         charset = Charset.forName('UTF-8')
         pattern = "${encoderPattern}"
-       /* pattern =
-                '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} ' + // Date
-                        '%clr(%5p) ' + // Log level
-                        '%clr(---){faint} %clr([%15.15t]){faint} ' + // Thread
-                        '%clr(%-40.40logger{39}){cyan} %clr(:){faint} ' + // Logger
-                        '%m%n%wex' // Message*/
+
     }
 }
 
@@ -93,10 +88,11 @@ appender("APP_LOG", RollingFileAppender) {
     encoder(PatternLayoutEncoder) {
         pattern = encoderPattern
     }
-    rollingPolicy(TimeBasedRollingPolicy) {
-        fileNamePattern = "${loggingDir}/${loggingAppName}-%d.log"
+    rollingPolicy(SizeAndTimeBasedRollingPolicy) {
+        fileNamePattern = "${loggingDir}/${loggingAppName}-%d-%i.log"
+        maxFileSize = FileSize.valueOf("1MB")
         maxHistory = 10
-        totalSizeCap = FileSize.valueOf("2GB")
+        totalSizeCap = FileSize.valueOf("10MB")
     }
     logger("appLog", ERROR, ['APP_LOG'], true)
 }
@@ -105,7 +101,7 @@ println "Application log file location [${Environment.current}]: ${loggingDir}"
 
 // Set the root logger level.
 if (Environment.current == Environment.PRODUCTION) {
-    root(DEBUG, ['APP_LOG'])
+    root(ERROR, ['APP_LOG'])
 } else {
     root(ERROR, ['STDOUT', 'APP_LOG'])
 }
