@@ -1,0 +1,18 @@
+{
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT SM.SMRPRLE_PROGRAM_DESC ,\r\nST.STVMAJR_DESC,\r\nSD.STVDEPT_DESC,\r\nSL.STVLEVL_DESC,\r\nSC.SOVLCUR_TERM_CODE_ADMIT\r\nFROM SOVLCUR SC ,SOVLFOS SF,SMRPRLE SM,STVMAJR ST,STVDEPT SD,STVLEVL SL,SGBSTDN SG\r\nWHERE SC.SOVLCUR_PIDM=SF.SOVLFOS_PIDM\r\nAND SC.SOVLCUR_PIDM=SG.SGBSTDN_PIDM\r\nAND SC.SOVLCUR_TERM_CODE=SF.SOVLFOS_TERM_CODE\r\nAND SC.SOVLCUR_SEQNO=SF.SOVLFOS_LCUR_SEQNO\r\nAND SC.SOVLCUR_PROGRAM=SM.SMRPRLE_PROGRAM\r\nAND SF.SOVLFOS_MAJR_CODE=ST.STVMAJR_CODE\r\nAND SF.SOVLFOS_DEPT_CODE=SD.STVDEPT_CODE\r\nAND SC.SOVLCUR_LEVL_CODE=SL.STVLEVL_CODE\r\nAND SC.SOVLCUR_LMOD_CODE = 'LEARNER'\r\nAND SC.SOVLCUR_KEY_SEQNO=:p_seq_no\r\nAND SC.SOVLCUR_PIDM = :parm_user_pidm\r\nAND SG.SGBSTDN_TERM_CODE_EFF=:p_term_code",
+   "typeOfCode": "S",
+   "fileTimestamp": "2018-12-10T10:43:14Z",
+   "serviceName": "BannerProgrammeData",
+   "codePost": null
+}

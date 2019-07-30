@@ -1,7 +1,7 @@
 /*******************************************************************************
  Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
-
+package banner.general.ssb.app
 
 import grails.converters.JSON
 import groovy.util.logging.Slf4j
@@ -25,18 +25,14 @@ class GeneralController {
 
     def landingPage() {
         try {
-            println "general landing page init"
             def p_proxyIDM = SecurityContextHolder?.context?.authentication?.principal?.gidm
-            println "p_proxyIDM: ${p_proxyIDM}"
             if(p_proxyIDM){
                 forward controller: 'proxy', action: 'landingPage'
             }
             else {
-                println " else general"
                 render(view: "general")
             }
         } catch (ApplicationException e) {
-            println "ApplicationException catch block = ${e}"
             render returnFailureMessage( e ) as JSON
         }
     }
@@ -61,7 +57,6 @@ class GeneralController {
 
 
     def returnFailureMessage( ApplicationException e ) {
-        println "returnFailureMessage method = ${e}"
         def model = [:]
         model.failure = true
         log.error(e)
