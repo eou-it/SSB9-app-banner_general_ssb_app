@@ -227,6 +227,8 @@ grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/ssb/aipDocumentManagement/**',      access : ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
         [pattern:'/ssb/aipPageBuilder/**' ,            access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
 
+        [pattern: '/internalPb/virtualDomains.*/**' ,access  : ['IS_AUTHENTICATED_ANONYMOUSLY']],
+
         //Page Builder master template included to allow for users to pass in without needing role applied in requestmap table in extz app.
         [pattern:'/customPage/page/AIPMasterTemplateSystemRequired/**' , access : ['IS_AUTHENTICATED_FULLY']],
         //For now use a page builder dummy page for cas aut
