@@ -148,7 +148,7 @@ grails {
                 artifactParameter = 'SAMLart'
                 serviceParameter = 'TARGET'
                 serverUrlEncoding = 'UTF-8'
-                filterProcessesUrl = '/j_spring_cas_security_check'
+                filterProcessUrl='login/cas'
                 if (active && useSingleSignout) {
                     grails.plugin.springsecurity.useSessionFixationPrevention = false
                 }

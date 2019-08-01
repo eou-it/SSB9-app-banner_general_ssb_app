@@ -72,4 +72,8 @@ project(':restful-api').projectDir= new File('plugins/restful-api.git')
 include ':banner-restful-api-support'
 project(':banner-restful-api-support').projectDir= new File('plugins/banner-restful-api-support.git')
 
+include ':banner-spring-security-cas'
+project(':banner-spring-security-cas').projectDir = new File('plugins/banner_spring_security_cas.git')
 
+include ':banner-spring-security-saml'
+project(':banner-spring-security-saml').projectDir = new File('plugins/banner_spring_security_saml.git')
