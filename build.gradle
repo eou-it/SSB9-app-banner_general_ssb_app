@@ -173,8 +173,8 @@ grails {
         compile project(':banner-aip-gate-keeper')
         compile project(':banner-general-direct-deposit-ui')
         compile project(':banner-general-personal-information-ui')
-        compile project(':banner-spring-security-saml')
-        compile project(':banner-spring-security-cas')
+//        compile project(':banner-spring-security-saml')
+//        compile project(':banner-spring-security-cas')
         compile project(':banner-general-proxy')
 
     }
