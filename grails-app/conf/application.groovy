@@ -176,7 +176,9 @@ formControllerMap = [
         'cssrender'                 : ['SELFSERVICE', 'GUAGMNU'],
         'custompage'                : ['SELFSERVICE', 'GPBADMN'],
         'userpreference'            : ['SELFSERVICE'],
-        'shortcut'                  : ['SELFSERVICE']
+        'shortcut'                  : ['SELFSERVICE'],
+        'login'                     : ['SELFSERVICE'],
+        'logout'                    : ['SELFSERVICE']
 
 ]
 

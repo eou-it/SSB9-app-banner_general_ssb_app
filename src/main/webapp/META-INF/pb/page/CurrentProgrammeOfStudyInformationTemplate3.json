@@ -1,7 +1,8 @@
 {
    "constantName": "CurrentProgrammeOfStudyInformationTemplate3",
+   "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2019-01-31T21:55:33Z",
+   "fileTimestamp": "2019-08-02T06:45:08Z",
    "modelView": {
       "components": [
          {
@@ -245,7 +246,7 @@
                   "model": "ActionItemUpdate",
                   "name": "CurrentProgrammeofStudyinformationConfirmation",
                   "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}",
-                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;\n$CurrentProgrammeofStudyinformationConfirmation.$load();",
                   "pageSize": 5,
                   "parameters": {
                      "actionitemid": "$$params.actionItemId",
@@ -272,6 +273,7 @@
       "name": "CurrentProgrammeOfStudyInformationTemplate3",
       "type": "page"
    },
+   "owner": null,
    "pageRoles": [
       {
          "roleName": "ALLROLES",
