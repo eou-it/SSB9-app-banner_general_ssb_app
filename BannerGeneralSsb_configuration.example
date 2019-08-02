@@ -116,13 +116,11 @@ banner {
     sso {
         authenticationProvider = 'default' //  Valid values are: 'default', 'cas', or 'saml'
         authenticationAssertionAttribute = 'UDC_IDENTIFIER'
-        if (authenticationProvider != 'default') {
-            grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/error'
-        }
-        if(authenticationProvider == 'saml') {
-            grails.plugin.springsecurity.auth.loginFormUrl = '/saml/login'
-        }
     }
+    if (banner.sso.authenticationProvider == 'cas' || banner.sso.authenticationProvider == 'saml' ) {
+       grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/error'
+    }
+
 }
 
 /** *****************************************************************************
@@ -137,7 +135,7 @@ grails {
             cas {
                 active = false
                 serverUrlPrefix = 'http://CAS_HOST:PORT/cas'
-                serviceUrl = 'http://BANNER9_HOST:PORT/APP_NAME/j_spring_cas_security_check'
+                serviceUrl = 'http://BANNER9_HOST:PORT/APP_NAME/login/cas'
                 serverName = 'http://BANNER9_HOST:PORT'
                 proxyCallbackUrl = 'http://BANNER9_HOST:PORT/APP_NAME/secure/receptor'
                 loginUri = '/login'
@@ -148,7 +146,7 @@ grails {
                 artifactParameter = 'SAMLart'
                 serviceParameter = 'TARGET'
                 serverUrlEncoding = 'UTF-8'
-                filterProcessesUrl = '/j_spring_cas_security_check'
+                filterProcessUrl='/login/cas'
                 if (active && useSingleSignout) {
                     grails.plugin.springsecurity.useSessionFixationPrevention = false
                 }

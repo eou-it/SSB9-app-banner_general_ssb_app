@@ -11,6 +11,7 @@ import org.springframework.context.i18n.LocaleContextHolder
             grailsApplication.mainContext.getBean('messageSource').getMergedProperties(LocaleContextHolder.getLocale()).properties.each { key ->
                 map.put key.key, key.value
             }
+            map.put "locale", LocaleContextHolder.getLocale()
             out << "window.i18n = ${map as JSON};\n"
         }
 
