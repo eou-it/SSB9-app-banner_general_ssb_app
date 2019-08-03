@@ -75,5 +75,6 @@ project(':banner-restful-api-support').projectDir= new File('plugins/banner-rest
 include ':banner-spring-security-cas'
 project(':banner-spring-security-cas').projectDir = new File('plugins/banner_spring_security_cas.git')
 
-include ':banner-spring-security-saml'
-project(':banner-spring-security-saml').projectDir = new File('plugins/banner_spring_security_saml.git')
+//Temporarily commenting out saml to fix build
+//include ':banner-spring-security-saml'
+//project(':banner-spring-security-saml').projectDir = new File('plugins/banner_spring_security_saml.git')
