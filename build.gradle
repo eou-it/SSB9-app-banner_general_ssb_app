@@ -27,22 +27,12 @@ apply plugin:"org.grails.grails-gsp"
 apply plugin:'codenarc'
 apply plugin:"net.saliman.cobertura"
 
-/* removing the shibboleth temporarily for build.
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
 	maven { url "http://central.maven.org/maven2/"}
     maven { url "https://build.shibboleth.net/nexus/content/repositories/releases"}
     maven { url "https://build.shibboleth.net/nexus/content/groups/public/"}
-    maven { url "https://code.lds.org/nexus/content/groups/main-repo"}
-    maven { url "http://repository.jboss.org/maven2/"}
-    maven { url "https://mvnrepository.com/artifact/backport-util-concurrent/backport-util-concurrent"}
-} */
-
-repositories {
-    mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
-	maven { url "http://central.maven.org/maven2/"}
     maven { url "https://code.lds.org/nexus/content/groups/main-repo"}
     maven { url "http://repository.jboss.org/maven2/"}
     maven { url "https://mvnrepository.com/artifact/backport-util-concurrent/backport-util-concurrent"}
@@ -173,8 +163,8 @@ grails {
         compile project(':banner-aip-gate-keeper')
         compile project(':banner-general-direct-deposit-ui')
         compile project(':banner-general-personal-information-ui')
-//        compile project(':banner-spring-security-saml')
-//        compile project(':banner-spring-security-cas')
+        compile project(':banner-spring-security-saml')
+        compile project(':banner-spring-security-cas')
         compile project(':banner-general-proxy')
 
     }
