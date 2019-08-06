@@ -117,11 +117,12 @@ banner {
         authenticationProvider = 'default' //  Valid values are: 'default', 'cas', or 'saml'
         authenticationAssertionAttribute = 'UDC_IDENTIFIER'
     }
+}
     if (banner.sso.authenticationProvider == 'cas' || banner.sso.authenticationProvider == 'saml' ) {
        grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/error'
     }
 
-}
+
 
 /** *****************************************************************************
  *                                                                              *
@@ -191,6 +192,18 @@ grails.plugin.springsecurity.saml.metadata.sp.defaults = [
         requireLogoutResponseSigned: false
 ]
 */
+responseHeaders =[
+   "X-Content-Type-Options": "nosniff",
+   "X-XSS-Protection": "1; mode=block"
+]
+
+
+/*********************************************************************************
+*                     Application Server Configuration                           *
+* When deployed on Tomcat this configuration should be targetServer="tomcat"     *
+* When deployed on Weblogic this configuration should be targetServer="weblogic" *
+**********************************************************************************/
+targetServer="weblogic"
 
 /** *****************************************************************************
  *                                                                              *
@@ -224,7 +237,7 @@ grails.plugin.springsecurity.homePageUrl = 'http://HOST:PORT/'
 banner.theme.url = '<UPDATE_ME>' //Required only if theme server is remote.
 //References the URL to the application hosting the Theme Server Example : http://hostname:port/BannerGeneralSsb/ssb/theme
 banner.theme.name = '<UPDATE_ME>' // This is the desired theme name to use. In a MEP environment, the application uses the MEP code as the theme name instead of the banner.theme.name . A theme by this name must be created in the Theme Editor on the server specified by banner.theme.url
-banner.theme.template = 'BannerGeneralSsb-9_3' // This is the name of the scss file containing the theme settings in war file.
+banner.theme.template = 'BannerGeneralSsb-9_4' // This is the name of the scss file containing the theme settings in war file.
 banner.theme.cacheTimeOut = 120 // seconds, required only if the app is theme server. The value indicates how long the CSS file that was generated using the template and the theme is cached.
 
 /******************************************************************************
