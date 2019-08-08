@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2015 Ellucian Company L.P. and its affiliates. -->
+<!-- Copyright 2015-2019 Ellucian Company L.P. and its affiliates. -->
 <wls:weblogic-web-app
         xmlns:wls="http://xmlns.oracle.com/weblogic/weblogic-web-app"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7,7 +7,7 @@
 http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd
 http://xmlns.oracle.com/weblogic/weblogic-web-app
 http://xmlns.oracle.com/weblogic/weblogic-web-app/1.4/weblogic-web-app.xsd">
-    <wls:weblogic-version>12.2.1.3.0</wls:weblogic-version>
+    <wls:weblogic-version>10.3.5.0</wls:weblogic-version>
     <wls:container-descriptor>
         <wls:prefer-web-inf-classes>true</wls:prefer-web-inf-classes>
         <!-- This is a potebannerntial security hole. We should not use getRealPath() calls from servlet context; instead we need to use getResource() -->
