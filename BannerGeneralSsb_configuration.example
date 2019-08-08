@@ -135,25 +135,26 @@ grails {
         springsecurity {
             cas {
                 active = false
-                serverUrlPrefix = 'http://CAS_HOST:PORT/cas'
-                serviceUrl = 'http://BANNER9_HOST:PORT/APP_NAME/login/cas'
-                serverName = 'http://BANNER9_HOST:PORT'
+                serverUrlPrefix  = 'http://CAS_HOST:PORT/cas'
+                serviceUrl       = 'http://BANNER9_HOST:PORT/APP_NAME/login/cas'
+                serverName       = 'http://BANNER9_HOST:PORT'
                 proxyCallbackUrl = 'http://BANNER9_HOST:PORT/APP_NAME/secure/receptor'
-                loginUri = '/login'
-                sendRenew = false
+                loginUri         = '/login'
+                sendRenew        = false
                 proxyReceptorUrl = '/secure/receptor'
                 useSingleSignout = true
                 key = 'grails-spring-security-cas'
                 artifactParameter = 'SAMLart'
                 serviceParameter = 'TARGET'
+                filterProcessesUrl = '/login/cas'
                 serverUrlEncoding = 'UTF-8'
-                filterProcessUrl='/login/cas'
                 if (active && useSingleSignout) {
                     grails.plugin.springsecurity.useSessionFixationPrevention = false
                 }
             }
             logout {
-                afterLogoutUrl = '/'   // 'https://cas-server/logout?url=http://myportal/main_page.html'
+                   afterLogoutUrl = 'https://cas-server/logout?url=http://myportal/main_page.html'
+                   mepErrorLogoutUrl = '/logout/logoutPage'
             }
         }
     }

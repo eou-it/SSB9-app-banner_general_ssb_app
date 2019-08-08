@@ -45,7 +45,10 @@ app.name="GeneralSelfService"
 app.appId="GENERAL_SS"
 app.platform.version="9.32.1"
 
-
+defaultResponseHeadersMap = [
+    "X-Content-Type-Options": "nosniff",
+    "X-XSS-Protection": "1; mode=block"
+]
 
 server.'contextPath' = '/BannerGeneralSsb'
 spring.jmx.enabled=false
