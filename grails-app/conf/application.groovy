@@ -39,11 +39,11 @@ grails.databinding.useSpringBinder=true
 //
 // DO NOT EDIT THIS UUID UNLESS YOU ARE AUTHORIZED TO DO SO AND KNOW WHAT YOU ARE DOING
 //
-build.number.uuid = "7f8235d8-2a51-4f2f-8516-47d913caf346" // specific UUID for Advisor solution
+build.number.uuid = "7f8235d8-2a51-4f2f-8516-47d913caf346" // specific UUID for general ssb solution
 build.number.base.url = "http://m039198.ellucian.com:8080/BuildNumberServer/buildNumber?method=getNextBuildNumber&uuid="
 app.name="GeneralSelfService"
 app.appId="GENERAL_SS"
-app.platform.version="9.32"
+app.platform.version="9.32.1"
 
 
 
@@ -185,12 +185,7 @@ formControllerMap = [
 
 
 grails.plugin.springsecurity.logout.afterLogoutUrl = "/"
-//grails.plugin.springsecurity.useRequestMapDomainClass = false
-//grails.plugin.springsecurity.rejectIfNoRule = true
-grails.plugin.springsecurity.filterChain.chainMap = [
-        [pattern: '/api/**', filters: 'authenticationProcessingFilter,basicAuthenticationFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,basicExceptionTranslationFilter,filterInvocationInterceptor'],
-        [pattern:  '/**'  ,  filters: 'securityContextPersistenceFilter,logoutFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor']
-]
+
 
 grails.plugin.springsecurity.securityConfigType = grails.plugin.springsecurity.SecurityConfigType.Requestmap
 grails.plugin.springsecurity.cas.active = false
