@@ -8,6 +8,10 @@
         margin-bottom: 10px;
     }
 
+    .gen-home-main-view {
+        height: 1000px;
+    }
+
     .gen-home-heading {
         text-align: center;
     }
