@@ -271,6 +271,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/ssb/classListApp/terms',			    access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-CLASSLISTADMINISTRATOR_BAN_DEFAULT_M']],
         [pattern:'/ssb/dropRoster/**',					access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-DROPROSTERADMINISTRATOR_BAN_DEFAULT_M']],
         [pattern:'/ssb/theme/**',						access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/shortcut/**',                    access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/ssb/themeEditor/**',				    access:['ROLE_SELFSERVICE-WTAILORADMIN_BAN_DEFAULT_M']],
         [pattern:'/ssb/keepAlive/data**',				access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/ssb/userPreference/**',				access:['IS_AUTHENTICATED_ANONYMOUSLY']],
