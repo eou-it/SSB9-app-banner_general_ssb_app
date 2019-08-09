@@ -260,7 +260,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/i18n/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/api/**',								access:['ROLE_DETERMINED_DYNAMICALLY']],
         [pattern:'/qapi/**',							access:['ROLE_DETERMINED_DYNAMICALLY']],
-        [pattern:'/ssb/survey/**',		                access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M','ROLE_SELFSERVICE_BAN_DEFAULT_M']],
+        [pattern:'/ssb/survey/**',		                access:['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
         [pattern:'/ssb/userAgreement/**',				access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/ssb/securityQA/**',					access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/ssb/selfServiceMenu/**',			    access:['IS_AUTHENTICATED_ANONYMOUSLY']],
