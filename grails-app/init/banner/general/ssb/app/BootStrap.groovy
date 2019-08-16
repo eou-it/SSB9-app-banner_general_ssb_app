@@ -9,6 +9,7 @@ import grails.util.Holders
 import groovy.util.logging.Slf4j
 import net.hedtech.banner.converters.json.JSONBeanMarshaller
 import net.hedtech.banner.converters.json.JSONDomainMarshaller
+import net.hedtech.banner.i18n.JavaScriptMessagesTagLib
 import net.hedtech.banner.i18n.LocalizeUtil
 import grails.core.ApplicationAttributes
 import org.grails.plugins.web.taglib.ValidationTagLib
@@ -35,6 +36,7 @@ class BootStrap {
 
     def grailsApplication
     def resourceService
+    def javaScriptMessagesTagLib = new JavaScriptMessagesTagLib()
 
     def actionItemPostMonitor
     def actionItemPostWorkProcessingEngine
@@ -46,6 +48,10 @@ class BootStrap {
         JSON.registerObjectMarshaller( Date ) {
             return it?.format( "yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone( 'UTC' ) )
         }
+
+        // The i18n_core plugin should load this JS file list, however, as of Grails 3.3.2, in August 2019, for whatever
+        // reason, sometimes the i18n_core BootStrap fails to run.  So loading it here to ensure that it always happens.
+        javaScriptMessagesTagLib.getJsFilesList(grailsApplication)
 
 
         def ctx = servletContext.getAttribute( ApplicationAttributes.APPLICATION_CONTEXT )
