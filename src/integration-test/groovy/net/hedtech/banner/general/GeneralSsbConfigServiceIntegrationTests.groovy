@@ -27,7 +27,7 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
 
     @Before
     public void setUp() {
-        formContext = ['GUAGMNU']
+        formContext = ['SELFSERVICE']
         super.setUp()
 
         webAppCtx = new GrailsWebApplicationContext()
@@ -68,7 +68,7 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         PersonUtility.setPersonConfigInSession(personConfigInSession)
         def config = generalSsbConfigService.getGeneralConfig()
         assertTrue config.isActionItemEnabled
-        assertFalse config.isDirectDepositEnabled
+        assertTrue config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertTrue config.isProxyManagementEnabled
         assertEquals(-1, config.proxyManagementUrl)
@@ -89,7 +89,7 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         Holders.config.grails.plugin.springsecurity.interceptUrlMap.put('/ssb/directDeposit/**', origUrlConf)
 
         assertFalse config.isActionItemEnabled
-        assertFalse config.isDirectDepositEnabled
+        assertTrue config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertTrue config.isProxyManagementEnabled
         assertEquals(-1, config.proxyManagementUrl)
@@ -106,7 +106,7 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         def config = generalSsbConfigService.getGeneralConfig()
 
         assertTrue config.isActionItemEnabled
-        assertFalse config.isDirectDepositEnabled
+        assertTrue config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertTrue config.isProxyManagementEnabled
         //assertEquals 'http://<host_name>:<port_number>/<banner8>/enUS/bwgkprxy.P_ManageProxy', config.proxyManagementUrl
@@ -123,7 +123,7 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         def config = generalSsbConfigService.getGeneralConfig()
 
         assertTrue config.isActionItemEnabled
-        assertFalse config.isDirectDepositEnabled
+        assertTrue config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertFalse config.isProxyManagementEnabled
         //assertEquals(-1, config.proxyManagementUrl)

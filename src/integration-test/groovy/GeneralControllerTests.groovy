@@ -1,8 +1,17 @@
 /********************************************************************************
   Copyright 2018 Ellucian Company L.P. and its affiliates.
  ********************************************************************************/
+import banner.general.ssb.app.GeneralController
 import grails.converters.JSON
+import grails.gorm.transactions.Rollback
+import grails.testing.mixin.integration.Integration
+import grails.util.GrailsWebMockUtil
+import grails.util.Holders
+import grails.web.servlet.context.GrailsWebApplicationContext
 import net.hedtech.banner.exceptions.ApplicationException
+import org.grails.plugins.testing.GrailsMockHttpServletRequest
+import org.grails.plugins.testing.GrailsMockHttpServletResponse
+import org.grails.web.servlet.mvc.GrailsWebRequest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -14,16 +23,29 @@ import net.hedtech.banner.testing.BaseIntegrationTestCase
 
 import net.hedtech.banner.general.AccountListingController
 
+@Integration
+@Rollback
 class GeneralControllerTests extends BaseIntegrationTestCase {
+
+    def controller
+
+
+    public GrailsWebRequest mockRequest() {
+        GrailsMockHttpServletRequest mockRequest = new GrailsMockHttpServletRequest();
+        GrailsMockHttpServletResponse mockResponse = new GrailsMockHttpServletResponse();
+        GrailsWebMockUtil.bindMockWebRequest(webAppCtx, mockRequest, mockResponse)
+    }
 
     /**
      * The setup method will run before all test case method executions start.
      */
     @Before
     public void setUp() {
-        formContext = ['GUAGMNU']
-        controller = new GeneralController()
+        formContext = ['SELFSERVICE']
         super.setUp()
+        webAppCtx = new GrailsWebApplicationContext()
+        controller = Holders.grailsApplication.getMainContext().getBean("banner.general.ssb.app.GeneralController")
+        mockRequest()
     }
 
     /**
@@ -38,7 +60,7 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
 
     @Test
     void testLandingPage(){
-        loginSSB 'MYE000001', '111111'
+        SSBSetUp ('HOP510001', '111111')
         
         controller.request.contentType = "text/json"
         controller.landingPage()
@@ -48,7 +70,7 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
 
     @Test
     void testGetRoles(){
-        loginSSB 'MYE000001', '111111'
+        SSBSetUp ('HOF00714', '111111')
 
         controller.request.contentType = "text/json"
         controller.getRoles()
@@ -62,7 +84,7 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
 
     @Test
     void testGetGeneralConfig(){
-        loginSSB 'GDP000005', '111111'
+        SSBSetUp( 'GDP000005', '111111')
 
         controller.request.contentType = "text/json"
         controller.getGeneralConfig()
@@ -78,7 +100,7 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
 
     @Test
     void testDenied403(){
-        loginSSB 'GDP000005', '111111'
+        SSBSetUp( 'GDP000005', '111111')
 
         controller.request.contentType = "text/json"
         controller.denied403()
@@ -88,7 +110,7 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
 
     @Test
     void testReturnFailureMessage(){
-        loginSSB 'MYE000001', '111111'
+        SSBSetUp ('HOP510001', '111111')
 
         controller.request.contentType = "text/json"
         def data = controller.returnFailureMessage(new ApplicationException('entityClassOrName', 'some exception message'))
