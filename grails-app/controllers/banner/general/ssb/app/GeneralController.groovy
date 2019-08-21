@@ -59,12 +59,12 @@ class GeneralController {
     def returnFailureMessage( ApplicationException e ) {
         def model = [:]
         model.failure = true
-        log.error(e)
+        log.error(e.getMessage())
         try {
             model.message = e.returnMap( {mapToLocalize -> new ValidationTagLib().message( mapToLocalize )} ).message
             return model
         } catch (ApplicationException ex) {
-            log.error( ex )
+            log.error( ex.getMessage() )
             model.message = e.message
             return model
         }
