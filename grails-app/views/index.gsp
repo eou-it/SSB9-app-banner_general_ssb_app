@@ -58,8 +58,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta HTTP-EQUIV="REFRESH" content="0; url=${url}">
 
-    <asset:javascript src="modules/gs-application-mf.js"/>
-    <asset:stylesheet src="modules/gs-applicationLTR-mf.css"/>
+    <g:if test="${message(code: 'default.language.direction')  == 'rtl'}">
+        <asset:stylesheet src="modules/gss-applicationRTL-mf.css"/>
+    </g:if>
+    <g:else>
+        <asset:stylesheet src="modules/gss-applicationLTR-mf.css"/>
+    </g:else>
+
+    <asset:javascript src="modules/gss-application-mf.js"/>
 </head>
 <body>
 </body>
