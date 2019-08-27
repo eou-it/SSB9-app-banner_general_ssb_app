@@ -91,7 +91,7 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
         def dataForNullCheck = controller.response.contentAsString
         def data = JSON.parse(dataForNullCheck)
         assertNotNull data
-        assertTrue(data.isDirectDepositEnabled)
+        assertFalse(data.isDirectDepositEnabled)
         assertTrue(data.isPersonalInformationEnabled)
         assertTrue(data.isProxyManagementEnabled)
         assertEquals(-1, data.proxyManagementUrl)

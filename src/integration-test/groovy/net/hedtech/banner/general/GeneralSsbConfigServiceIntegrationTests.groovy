@@ -23,16 +23,12 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
 
     def generalSsbConfigService
 
-    def controller
-
     @Before
     public void setUp() {
         formContext = ['SELFSERVICE']
         super.setUp()
 
         webAppCtx = new GrailsWebApplicationContext()
-        controller = Holders.grailsApplication.getMainContext().getBean("net.hedtech.banner.general.proxy.ProxyController")
-
     }
 
     @After
@@ -51,6 +47,9 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
 
     @Test
     void testGetParamFromSessionWithPreexistingConfig() {
+
+        mockRequest()
+        SSBSetUp('GDP000005', '111111')
         def personConfigInSession = [(generalSsbConfigService.getCacheName()): [(generalSsbConfigService.ENABLE_DIRECT_DEPOSIT): 'Y']]
         PersonUtility.setPersonConfigInSession(personConfigInSession)
 
@@ -68,7 +67,7 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         PersonUtility.setPersonConfigInSession(personConfigInSession)
         def config = generalSsbConfigService.getGeneralConfig()
         assertTrue config.isActionItemEnabled
-        assertTrue config.isDirectDepositEnabled
+        assertFalse config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertTrue config.isProxyManagementEnabled
         assertEquals(-1, config.proxyManagementUrl)
@@ -106,7 +105,7 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         def config = generalSsbConfigService.getGeneralConfig()
 
         assertTrue config.isActionItemEnabled
-        assertTrue config.isDirectDepositEnabled
+        assertFalse config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertTrue config.isProxyManagementEnabled
         //assertEquals 'http://<host_name>:<port_number>/<banner8>/enUS/bwgkprxy.P_ManageProxy', config.proxyManagementUrl
@@ -123,7 +122,7 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         def config = generalSsbConfigService.getGeneralConfig()
 
         assertTrue config.isActionItemEnabled
-        assertTrue config.isDirectDepositEnabled
+        assertFalse config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertFalse config.isProxyManagementEnabled
         //assertEquals(-1, config.proxyManagementUrl)
