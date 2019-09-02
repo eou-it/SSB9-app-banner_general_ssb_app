@@ -208,12 +208,9 @@ targetServer="weblogic"
 
 /** *****************************************************************************
  *                                                                              *
- *   Add admin roles as required by web-app-extensibility SecurityService in    *
- *   non-production environment.                                                *
- *   See:  http://confluence.ellucian.com/display/banner/                       *
- *         Steps+to+include+the+web-app-extensibility+plugin+to+an+application  *
+ *              Extensibility extensions & i18n file location                   *
  *                                                                              *
- ***************************************************************************** **/
+ *******************************************************************************/
 webAppExtensibility {
     locations {
         extensions = "path to the directory location where extensions JSON files will be written to and read from"
@@ -266,7 +263,7 @@ pageBuilder {
 
 /** *****************************************************************************
  *                                                                              *
- *                 Configuration for AIP application                     *
+ *                 Configuration for AIP application                            *
  *                                                                              *
  ***************************************************************************** **/
 BCMLOCATION='http://<HOST_NAME>:<PORT>/CommunicationManagement/' // The URL of BCM application. Please note, Banner Communication Management (BCM) is dependent application for General SS 9.3.

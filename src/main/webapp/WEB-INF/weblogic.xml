@@ -10,7 +10,6 @@ http://xmlns.oracle.com/weblogic/weblogic-web-app/1.4/weblogic-web-app.xsd">
     <wls:weblogic-version>10.3.5.0</wls:weblogic-version>
     <wls:container-descriptor>
         <wls:prefer-web-inf-classes>true</wls:prefer-web-inf-classes>
-        <!-- This is a potebannerntial security hole. We should not use getRealPath() calls from servlet context; instead we need to use getResource() -->
         <wls:show-archived-real-path-enabled>true</wls:show-archived-real-path-enabled>
     </wls:container-descriptor>
     <wls:session-descriptor>
