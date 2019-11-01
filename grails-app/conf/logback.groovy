@@ -130,8 +130,11 @@ if (Environment.current == Environment.PRODUCTION) {
 //logger("org.hibernate.SQL", DEBUG)
 
 
-// ******* Application packages *******
+// ******* Application packages and classes *******
+//logger("banner.general.ssb.app.BootStrap", DEBUG)
+//logger("net.hedtech.banner.service.ServiceBase", DEBUG)
 //logger("net.hedtech.banner.ui.ss", DEBUG)
+//logger("net.sf.*", DEBUG)
 
 
 // ******* Action Item Processing (AIP) classes *******
@@ -143,12 +146,6 @@ if (Environment.current == Environment.PRODUCTION) {
 //logger("net.hedtech.banner.aip.post.job.ActionItemPostCompositeService", DEBUG)
 //logger("net.hedtech.banner.aip.post.grouppost.ActionItemPost", DEBUG)
 //logger("org.quartz",DEBUG)
-
-
-// ******* Miscellaneous classes *******
-//logger("banner.general.ssb.app.BootStrap", DEBUG)
-//logger("net.hedtech.banner.service.ServiceBase", DEBUG)
-//logger("net.sf.*", DEBUG)
 
 
 // ******* Configure JMX access *******
