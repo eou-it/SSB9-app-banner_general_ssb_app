@@ -1,8 +1,8 @@
 /*
  * component-library
- * 
+ *
 
- * Version: 11.0.0 - 2019-06-28
+ * Version: 11.0.0 - 2019-11-14
  * License: Copyright 2018 Ellucian Company L.P. and its affiliates.
  */
 angular.module("xe-ui-components", ['badge','button','checkbox','dropdown','label','radiobutton','simpleTextbox','statusLabel','switch','textarea','textbox','ui.select','xeUISelect','external-resouces','utils','columnFilter','pagination','search','xebarmodule','dataTableModule','aboutModal','pieChartModule','popupModal','tabnav','timePicker','xe-ui-components-tpls']);
@@ -15,12 +15,12 @@ angular.module("templates/badge.html", []).run(["$templateCache", function ($tem
 
 angular.module("templates/button.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/button.html",
-    "<button class=\"{{xeType +' '+ xeBtnClass}}\" ng-disabled=\"xeDisabled\" aria-label=\"{{xeAriaLabel}}\" ng-click=\"xeBtnClick()\" ng-bind=\"xeLabel\"></button>");
+    "<button xe-data id=\"{{::xeId}}\" class=\"{{xeType +' '+ xeBtnClass}}\" ng-disabled=\"xeDisabled\" aria-label=\"{{xeAriaLabel}}\" ng-click=\"xeBtnClick()\" ng-bind=\"xeLabel\"></button>");
 }]);
 
 angular.module("templates/checkbox.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/checkbox.html",
-    "<div xe-section=\"{{::xeId}}\"><label class=\"xe-container\"><span data-ng-if=\"!xeLabelHidden\">{{::xeLabel}}</span> <input id=\"{{::'ckbox-' + xeId}}\" type=\"checkbox\" aria-checked=\"{{xeModel}}\" ng-click=\"cbClicked($event)\" ng-checked=\"xeModel\" aria-live=\"assertive\" aria-disabled=\"{{xeDisabled? true:false}}\" ng-disabled=\"xeDisabled == true\" name=\"{{xeName}}\" tabindex=\"{{!xeDisabled ? 0 : -1}}\"> <span class=\"xe-checkmark\" tabindex=\"-1\"></span></label></div>");
+    "<div><label class=\"xe-container\" xe-for=\"{{::'ckbox-' + xeId}}\">{{xeLabel}} <input id=\"{{::'ckbox-' + xeId}}\" xe-data type=\"checkbox\" aria-checked=\"{{xeModel}}\" aria-label=\"{{xeAriaLabel}}\" ng-click=\"cbClicked($event)\" ng-model=\"xeModel\" value=\"{{xeValue}}\" ng-checked=\"xeModel\" aria-live=\"assertive\" aria-disabled=\"{{xeDisabled? true:false}}\" ng-disabled=\"xeDisabled == true\" name=\"{{xeName}}\" tabindex=\"{{!xeDisabled ? 0 : -1}}\"> <span class=\"xe-checkmark\" tabindex=\"-1\"></span></label></div>");
 }]);
 
 angular.module("templates/dropdown.html", []).run(["$templateCache", function ($templateCache) {
@@ -55,30 +55,30 @@ angular.module("templates/switch.html", []).run(["$templateCache", function ($te
 
 angular.module("templates/text-area-counter.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/text-area-counter.html",
-    "<div class=\"textarea-container\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><textarea ng-model=\"ngModel\" class=\"comments-field\" ng-class=\"{readonly:xeReadonly}\" id=\"{{xeId}}\" placeholder=\"{{xePlaceholder}}\" ng-required=\"xeRequired\" aria-multiline=\"true\" ng-readonly=\"xeReadonly\" maxlength=\"{{xeCharCounter}}\" ng-trim=\"false\">\n" +
+    "<div class=\"textarea-container\" xe-field=\"{{::xeId}}\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><textarea xe-data ng-model=\"ngModel\" class=\"comments-field\" ng-class=\"{readonly:xeReadonly}\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-required=\"xeRequired\" aria-multiline=\"true\" ng-readonly=\"xeReadonly\" maxlength=\"{{xeCharCounter}}\" ng-trim=\"false\">\n" +
     "\n" +
     "    </textarea><div id=\"xe-id-characters-count\"><span>{{::'xe.text.chars.left' | xei18n}} : {{ charRemaining }}</span></div></div>");
 }]);
 
 angular.module("templates/text-area.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/text-area.html",
-    "<div class=\"textarea-container\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><textarea ng-model=\"ngModel\" class=\"comments-field\" ng-class=\"{readonly:xeReadonly}\" id=\"{{xeId}}\" placeholder=\"{{xePlaceholder}}\" ng-required=\"xeRequired\" aria-multiline=\"true\" ng-readonly=\"xeReadonly\">\n" +
+    "<div class=\"textarea-container\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><textarea xe-data ng-model=\"ngModel\" class=\"comments-field\" ng-class=\"{readonly:xeReadonly}\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-required=\"xeRequired\" aria-multiline=\"true\" ng-readonly=\"xeReadonly\">\n" +
     "    </textarea></div>");
 }]);
 
 angular.module("templates/text-box-char-limit.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/text-box-char-limit.html",
-    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><span id=\"xe-id-max-characters\">{{ xeMaxlength }} {{::'xe.text.max.chars' | xei18n}}</span><div class=\"xe-labeltext-margin\"></div><input ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-labelledby=\"{{xeId}}\" aria-describedby=\"xe-id-max-characters\" aria-required=\"{{xeRequired? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
+    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><span id=\"xe-id-max-characters\">{{ xeMaxlength }} {{::'xe.text.max.chars' | xei18n}}</span><div class=\"xe-labeltext-margin\"></div><input xe-data ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-labelledby=\"{{xeId}}\" aria-describedby=\"xe-id-max-characters\" aria-required=\"{{xeRequired? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
 }]);
 
 angular.module("templates/text-box-password.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/text-box-password.html",
-    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><input ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" type=\"password\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-describedby=\"{{xeId}}\" aria-required=\"{{xeRequired? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
+    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><input xe-data ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" type=\"password\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-describedby=\"{{xeId}}\" aria-required=\"{{xeRequired? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
 }]);
 
 angular.module("templates/text-box.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/text-box.html",
-    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><input ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-describedby=\"{{xeId}}\" aria-required=\"{{xeRequired ? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
+    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><input xe-data ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-describedby=\"{{xeId}}\" aria-required=\"{{xeRequired ? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
 }]);
 
 angular.module("templates/column-filter.html", []).run(["$templateCache", function ($templateCache) {
@@ -98,7 +98,7 @@ angular.module("templates/search.html", []).run(["$templateCache", function ($te
 
 angular.module("templates/dataTable.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/dataTable.html",
-    "<div id=\"{{tableId}}\" class=\"table-container\" ng-class=\"{'fixed-height': !!height, 'noToolbar': noCaptionAndToolbar, 'no-data': !resultsFound, 'empty': emptyTableMsg}\" browser-detect role=\"grid\" aria-labelledby=\"gridCaption\" ng-cloak><div class=\"trMobile\" ng-if=\"totalRow && isMobileView  \"><div ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\"><span class=\"total-row\" total-label=\"{{heading.totalDisplayName}}\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></div><div class=\"caption\" ng-if=\"::!noCaptionBar\" xe-section=\"{{xeSection + 'CaptionBar'}}\"><table class=\"data-table datatable_spacing\" role=\"heading\" aria-level=\"1\"><caption ng-class=\"{'search-opened': hideContainer}\"><span id=\"gridCaption\" class=\"caption-container font-semibold\" ng-if=\"::!nocaption\" ng-bind=\"::caption\" xe-field=\"caption\"></span><div class=\"toolbar\" ng-if=\"toolbar\"><xe-toolbar></xe-toolbar><xe-column-filter header=\"header\"></xe-column-filter><span role=\"search\" title=\"{{'search.title' | xei18n}}\" ng-if=\"::!nosearch\"><xe-search value=\"searchConfig.searchString\" place-holder=\"{{'search.label' | xei18n}}\" on-change=\"fetchSpecial(query)\" on-focus=\"onSearchFocus({event: event})\" on-blur=\"onSearchBlur({event: event})\" search-config=\"searchConfig\" xe-focus loading-data=\"loadingData\"></xe-search></span></div></caption></table></div><div class=\"hr-scrollable-content\"><div class=\"thead\"><table class=\"data-table\" ng-style=\"headerPadding\" role=\"presentaion\"><thead role=\"rowgroup\"><tr role=\"row\"><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" ng-click=\"onSort({heading: heading}); sortOnHeading(heading, $index);\" role=\"columnheader\" aria-sort=\"{{sortArray[heading.name].ascending ? ('dataTable.sort.ascending.label' | xei18n) : (sortArray[heading.name].decending ? ('dataTable.sort.descending.label' | xei18n) : 'none')}}\" aria-describedby=\"{{'headingAria' + $index}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name}}\" xe-heading-injector xe-focus xe-click-grid><div class=\"data\" title=\"{{heading.label}}\"><span ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"::heading.title\"></span><label id=\"${{'headingAria' + $index}}\" class=\"sr-only\" ng-bind=\"heading.ariaLabel + (heading.options.sortable ? ('dataTable.sortable.label' | xei18n) : '')\"></label></div></th></tr></thead></table></div><div class=\"tbody\" ng-style=\"::{'height': height}\" continuous-scroll=\"nextPage()\" scroll-parent=\"{{::continuousScrollParent}}\" aria-labelledby=\"msg\" tabindex=\"{{(!resultsFound || emptyTableMsg) ? 0 : ''}}\" resize><div id=\"msg\" ng-bind=\"emptyTableMsg? emptyTableMsg : ((!resultsFound && !loadingData) ? noDataMsg : '')\"></div><table class=\"data-table\" ng-class=\"::mobileLayout ? 'mobileLayout' : 'noMobileLayout'\" role=\"presentaion\"><thead role=\"presentaion\" aria-hidden=\"true\"><tr><th class=\"font-semibold {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" xe-field=\"{{::heading.name}}\" xe-heading-injector tabindex=\"0\"><div class=\"data\"><span ng-show=\"::heading.options.titleVisible !== false\" ng-bind=\"::heading.title\"></span></div></th></tr></thead><tbody role=\"rowgroup\"><tr ng-repeat=\"row in content\" ng-click=\"onRowClick({data:row,index:$index})\" ng-dblclick=\"onRowDoubleClick({data:row,index:$index})\" xe-row-injector tabindex=\"-1\" role=\"row\"><td class=\"width-animate\" ng-repeat=\"heading in header\" ng-class=\"{'align-right': heading.options.actionOrStatus, 'sortable': heading.options.sortable}\" ng-if=\"heading.options.visible === true\" data-name=\"{{::heading.name}}\" data-title=\"{{::(heading.title && heading.options.titleVisible !== false) ? heading.title + ':' : ''}}\" attain-mobile-layout=\"{{mobileLayout[heading.name]}}\" xe-field=\"{{::heading.name}}\" xe-cell-injector xe-focus xe-click-grid role=\"gridcell\" ng-cloak><div ng-if=\"!isExtendedField(row, heading.name)\"><span ng-bind=\"getObjectValue(row, heading.name)\" tabindex=\"0\"></span></div><div ng-if=\"isExtendedField(row, heading.name)\"><div ng-if=\"isEditable\"><div ng-if=\"dataType === 'DATE'\"><input date-picker=\"\" value=\"{{::extensionValue}}\" class=\"datePicker\" aria-labelledby=\"\"></div><div ng-if=\"dataType === 'VARCHAR2'\"><xe-simple-text-box value=\"::extensionValue\"></xe-simple-text-box></div><div ng-if=\"dataType === 'NUMBER'\"><decimal-input ng-model=\"::extensionValue\" decimals=\"0\"></decimal-input></div></div><div ng-if=\"!isEditable\"><span ng-bind=\"::extensionValue\"></span></div></div></td></tr></tbody></table></div><div class=\"trDesktop\" ng-if=\"totalRow && !isMobileView\" xe-section=\"totalRow\"><table class=\"data-table\" ng-style=\"headerPadding\"><thead><tr><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name+'Total'}}\" xe-focus xe-click-grid><div class=\"aggregateRow data\" ng-class=\"{'align-right': heading.options.actionOrStatus}\" title=\"{{heading.label}}\"><label ng-if=\"heading.totalLabel\" id=\"{{::heading.name+'Total'}}\" for=\"{{::heading.name+'Total'}}\">{{getTotalValue(heading)}}</label><span ng-if=\"!heading.totalLabel\" class=\"total-display\" ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></th></tr></thead></table></div></div><div class=\"tfoot\" ng-transclude></div><xe-pagination model=\"content\" results-found=\"resultsFound\" ng-show=\"showPagination\" xe-grid-pagination-control search-string=\"searchConfig.searchString\"></xe-pagination><div ng-show=\"loadingData\" class=\"load-indicator\"><div class=\"spinner\"><div class=\"bounce1\"></div><div class=\"bounce2\"></div><div class=\"bounce3\"></div></div></div></div>");
+    "<div id=\"{{tableId}}\" class=\"table-container\" ng-class=\"{'fixed-height': !!height, 'noToolbar': noCaptionAndToolbar, 'no-data': !resultsFound, 'empty': emptyTableMsg}\" browser-detect role=\"grid\" aria-labelledby=\"gridCaption\" ng-cloak><div class=\"trMobile\" ng-if=\"totalRow && isMobileView  \"><div ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\"><span class=\"total-row\" total-label=\"{{heading.totalDisplayName}}\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></div><div class=\"caption\" ng-if=\"::!noCaptionBar\" xe-section=\"{{xeSection + 'CaptionBar'}}\"><table class=\"data-table datatable_spacing\" role=\"heading\" aria-level=\"1\"><caption ng-class=\"{'search-opened': hideContainer}\"><span id=\"gridCaption\" class=\"caption-container font-semibold\" ng-if=\"::!nocaption\" ng-bind=\"::caption\" xe-field=\"caption\"></span><div class=\"toolbar\" ng-if=\"toolbar\"><xe-toolbar></xe-toolbar><xe-column-filter header=\"header\"></xe-column-filter><span role=\"search\" title=\"{{'search.title' | xei18n}}\" ng-if=\"::!nosearch\"><xe-search value=\"searchConfig.searchString\" place-holder=\"{{'search.label' | xei18n}}\" on-change=\"fetchSpecial(query)\" on-focus=\"onSearchFocus({event: event})\" on-blur=\"onSearchBlur({event: event})\" search-config=\"searchConfig\" xe-focus loading-data=\"loadingData\"></xe-search></span></div></caption></table></div><div class=\"hr-scrollable-content\"><div class=\"thead\"><table class=\"data-table\" ng-style=\"headerPadding\" role=\"presentation\"><thead role=\"rowgroup\"><tr role=\"row\"><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" ng-click=\"onSort({heading: heading}); sortOnHeading(heading, $index);\" role=\"columnheader\" aria-sort=\"{{sortArray[heading.name].ascending ? ('dataTable.sort.ascending.label' | xei18n) : (sortArray[heading.name].decending ? ('dataTable.sort.descending.label' | xei18n) : 'none')}}\" aria-describedby=\"{{'headingAria' + $index}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name}}\" xe-heading-injector xe-focus xe-click-grid><div class=\"data\" title=\"{{heading.label}}\"><span ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"::heading.title\"></span><label id=\"${{'headingAria' + $index}}\" class=\"sr-only\" ng-bind=\"heading.ariaLabel + (heading.options.sortable ? ('dataTable.sortable.label' | xei18n) : '')\"></label></div></th></tr></thead></table></div><div class=\"tbody\" ng-style=\"::{'height': height}\" continuous-scroll=\"nextPage()\" scroll-parent=\"{{::continuousScrollParent}}\" aria-labelledby=\"msg\" tabindex=\"{{(!resultsFound || emptyTableMsg) ? 0 : ''}}\" resize><div id=\"msg\" ng-bind=\"emptyTableMsg? emptyTableMsg : ((!resultsFound && !loadingData) ? noDataMsg : '')\"></div><table class=\"data-table\" ng-class=\"::mobileLayout ? 'mobileLayout' : 'noMobileLayout'\" role=\"presentation\"><thead role=\"presentation\" aria-hidden=\"true\"><tr><th class=\"font-semibold {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" xe-field=\"{{::heading.name}}\" xe-heading-injector tabindex=\"0\"><div class=\"data\"><span ng-show=\"::heading.options.titleVisible !== false\" ng-bind=\"::heading.title\"></span></div></th></tr></thead><tbody role=\"rowgroup\"><tr ng-repeat=\"row in content\" ng-click=\"onRowClick({data:row,index:$index})\" ng-dblclick=\"onRowDoubleClick({data:row,index:$index})\" xe-row-injector tabindex=\"-1\" role=\"row\"><td class=\"width-animate\" ng-repeat=\"heading in header\" ng-class=\"{'align-right': heading.options.actionOrStatus, 'sortable': heading.options.sortable}\" ng-if=\"heading.options.visible === true\" data-name=\"{{::heading.name}}\" data-title=\"{{::(heading.title && heading.options.titleVisible !== false) ? heading.title + ':' : ''}}\" attain-mobile-layout=\"{{mobileLayout[heading.name]}}\" xe-field=\"{{::heading.name}}\" xe-cell-injector xe-focus xe-click-grid role=\"gridcell\" ng-cloak><div ng-if=\"!isExtendedField(row, heading.name)\"><span ng-bind=\"getObjectValue(row, heading.name)\" tabindex=\"0\"></span></div><div ng-if=\"isExtendedField(row, heading.name)\"><div ng-if=\"isEditable\"><div ng-if=\"dataType === 'DATE'\"><input date-picker=\"\" value=\"{{::extensionValue}}\" class=\"datePicker\" aria-labelledby=\"\"></div><div ng-if=\"dataType === 'VARCHAR2'\"><xe-simple-text-box value=\"::extensionValue\"></xe-simple-text-box></div><div ng-if=\"dataType === 'NUMBER'\"><decimal-input ng-model=\"::extensionValue\" decimals=\"0\"></decimal-input></div></div><div ng-if=\"!isEditable\"><span ng-bind=\"::extensionValue\"></span></div></div></td></tr></tbody></table></div><div class=\"trDesktop\" ng-if=\"totalRow && !isMobileView\" xe-section=\"totalRow\"><table class=\"data-table\" ng-style=\"headerPadding\"><thead><tr><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name+'Total'}}\" xe-focus xe-click-grid><div class=\"aggregateRow data\" ng-class=\"{'align-right': heading.options.actionOrStatus}\" title=\"{{heading.label}}\"><label ng-if=\"heading.totalLabel\" id=\"{{::heading.name+'Total'}}\" for=\"{{::heading.name+'Total'}}\">{{getTotalValue(heading)}}</label><span ng-if=\"!heading.totalLabel\" class=\"total-display\" ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></th></tr></thead></table></div></div><div class=\"tfoot\" ng-transclude></div><xe-pagination model=\"content\" results-found=\"resultsFound\" ng-show=\"showPagination\" xe-grid-pagination-control search-string=\"searchConfig.searchString\"></xe-pagination><div ng-show=\"loadingData\" class=\"load-indicator\"><div class=\"spinner\"><div class=\"bounce1\"></div><div class=\"bounce2\"></div><div class=\"bounce3\"></div></div></div></div>");
 }]);
 
 angular.module("templates/dialog.html", []).run(["$templateCache", function ($templateCache) {
@@ -156,6 +156,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
         return {
             restrict: 'E',
             scope: {
+                xeId : '@',
                 xeType : '@',
                 xeDisabled : '=',
                 xeLabel : '@',
@@ -175,7 +176,9 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
             scope : {
                 xeId : '@',
                 xeValue : '@',
+				xeName : '@',
                 xeLabel : '@',
+                xeAriaLabel: '@',
                 xeLabelHidden : '@',
                 xeModel : '=',
                 xeOnClick : '&',
@@ -192,17 +195,24 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                     scope.xeModel = !scope.xeModel;
                     $timeout(function () {
                         scope.xeOnClick({checked: scope.xeModel, event: event});
+                        angular.element(element.find('input')).controller('ngModel').$setDirty();
                     });
                 };
 
                 element.on('keydown', function (event) {
-                    if (event.keyCode === keyCodes.ENTER) {
+                    if (event.keyCode === keyCodes.ENTER || event.keyCode === keyCodes.SPACEBAR) {
                         event.preventDefault();
                         event.stopPropagation();
                         scope.cbClicked(event);
-                        scope.$apply();
                     }
                 });
+
+				element.on('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    scope.cbClicked(event);
+                });
+
             }
         };
     }]);
@@ -253,6 +263,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
         return {
         restrict: 'E',
             scope : {
+            xeId: '@',
             xeValue: '@',
             xeHidden: '@?',
             xeRequired: '=?',
@@ -358,7 +369,8 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                 xeOnChange: '&',
                 xePlaceholder: '@',
                 xeLabel: '=',
-                xeId: '=',
+                xeId: '@',
+                xeName: '@?',
                 xeRequired: '=',
                 xeReadonly: '=',
                 xeCharCounter: '@'
@@ -3593,15 +3605,15 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
 angular.module('pagination', [])
 .directive('xePagination', ["$http", "$q", function($http, $q) {
     var fetch = function(query) {
-        var deferred = $q.defer();          
-        
+        var deferred = $q.defer();
+
         url = query.endPoint + "?"
             + "searchString=" + (query.searchString ? query.searchString : "")
             + "&sortColumnName=" + (query.sortColumnName ? query.sortColumnName : "")
             + "&ascending=" + query.ascending
             + "&offset=" + (query.offset ? query.offset : "")
             + "&max=" + (query.max ? query.max : "");
-        
+
         $http.get(url).then(function onSuccess(data){
                 deferred.resolve(data);
             }).catch(function () {
@@ -3622,7 +3634,7 @@ angular.module('pagination', [])
         replace: true,
         require: "?^xeTableGrid",
         scope: {
-            model: "=",         
+            model: "=",
             endPoint: "=?",
             paginationConfig: "=?",
             resultsFound: "=",
@@ -3633,8 +3645,8 @@ angular.module('pagination', [])
         },
         templateUrl: "templates/pagination.html",
         controller: ['$scope', '$attrs', "$timeout", function($scope, $attrs, $timeout) {
-            var oldPageValue = 1;   
-            
+            var oldPageValue = 1;
+
             $scope.firstPrev = false;
             $scope.nextLast = false;
             $scope.onPage = 1;
@@ -3655,14 +3667,14 @@ angular.module('pagination', [])
                 $scope.pageOffsets.push($scope.offset);
                 $scope.pageOffsets.sort(function(a, b){ return a-b; });
             }
-            
-            $scope.offsetChanged = function(doFetch) {                              
+
+            $scope.offsetChanged = function(doFetch) {
                 calculateNumberOfPages();
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 if (doFetch) {
                     $scope.fetchData($scope.onPage, $scope.offset);
                 }
-            };      
+            };
 
             $scope.first = function() {
                 if ($scope.firstPrev) {
@@ -3670,7 +3682,7 @@ angular.module('pagination', [])
                 }
 
                 setPageValue(1);
-                
+
                 $scope.fetchData($scope.onPage, $scope.offset);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 focusPageInput();
@@ -3684,7 +3696,7 @@ angular.module('pagination', [])
                 var onPage = parseInt($scope.onPage);
                 onPage--;
                 setPageValue(onPage);
-                
+
                 $scope.fetchData($scope.onPage, $scope.offset, append);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 if ($scope.firstPrev) {
@@ -3692,15 +3704,15 @@ angular.module('pagination', [])
                 }
             };
 
-            $scope.next = function(append) {    
+            $scope.next = function(append) {
                 if ($scope.nextLast) {
                     return;
-                }   
+                }
 
                 var onPage = parseInt($scope.onPage);
                 onPage++;
                 setPageValue(onPage);
-                
+
                 $scope.fetchData($scope.onPage, $scope.offset, append);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 if ($scope.nextLast) {
@@ -3714,7 +3726,7 @@ angular.module('pagination', [])
                 }
 
                 setPageValue($scope.numberOfPages);
-                
+
                 $scope.fetchData($scope.onPage, $scope.offset);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 focusPageInput();
@@ -3740,7 +3752,7 @@ angular.module('pagination', [])
                 angular.element(event.target).val(oldPageValue);
             };
 
-            $scope.$watch("resultsFound", function(newValue, oldValue) {              
+            $scope.$watch("resultsFound", function(newValue, oldValue) {
                 $timeout(function() {
                     if (newValue === 0) {
                         setPageValue(0);
@@ -3750,7 +3762,7 @@ angular.module('pagination', [])
 
                     calculateNumberOfPages();
                     disableButtons($scope.onPage, $scope.numberOfPages);
-                });             
+                });
             });
 
             // Private functions
@@ -3770,14 +3782,14 @@ angular.module('pagination', [])
 
             var calculateNumberOfPages = function() {
                 $scope.numberOfPages = Math.ceil($scope.resultsFound / $scope.offset);
-                $scope.numberOfPages = $scope.numberOfPages < 1 ? 0 : $scope.numberOfPages;             
+                $scope.numberOfPages = $scope.numberOfPages < 1 ? 0 : $scope.numberOfPages;
 
                 if ($scope.onPage > $scope.numberOfPages) {
-                    setPageValue($scope.numberOfPages);              
+                    setPageValue($scope.numberOfPages);
                 }
             };
 
-            var disableButtons = function(pageNumber, numberOfPages) {              
+            var disableButtons = function(pageNumber, numberOfPages) {
                 pageNumber = parseInt(pageNumber);
                 numberOfPages = parseInt(numberOfPages);
                 var reminder = numberOfPages / pageNumber;
@@ -3793,27 +3805,27 @@ angular.module('pagination', [])
                     $scope.nextLast = false;
                 } else if(pageNumber <= 0 || (pageNumber > numberOfPages)) { // Out of range
                     $scope.firstPrev = true;
-                    $scope.nextLast = true;                 
+                    $scope.nextLast = true;
                 } else { // Between first and last page
                     $scope.nextLast = false;
                     $scope.firstPrev = false;
-                }               
+                }
             };
 
             /*
                 boolean append variable is used to check if we need append to the result set or not.
-                This is because on tablet we will not show the pagination but it components can still use pagination 
+                This is because on tablet we will not show the pagination but it components can still use pagination
                 code to make the continuous scroll happen.
             */
             $scope.fetchData = function(onPage, offset, append) {
-                if (!angular.isNumber(onPage)) {            
+                if (!angular.isNumber(onPage)) {
                     onPage = parseInt(onPage);
                 }
 
                 setPageValue(onPage);
 
                 var range = reassignRange(onPage, offset),
-                    query = {                       
+                    query = {
                         searchString: $scope.searchString,
                         sortColumnName: $scope.sortColumnName,
                         ascending: $scope.ascending,
@@ -3821,7 +3833,7 @@ angular.module('pagination', [])
                         max: range.max,
                         endPoint: $scope.endPoint,
                         onPage: onPage,
-                        pageSize:offset             
+                        pageSize:offset
                     };
 
                 // Show Load indicator
@@ -3863,8 +3875,8 @@ angular.module('pagination', [])
                         });
                 }
             };
-            
-            $scope.offsetChanged(false);            
+
+            $scope.offsetChanged(false);
         }],
         link: function(scope, elem, attributes, parentController) {
             // Assigning values from parentCOntroller to be used later in paginations controller.
@@ -3903,7 +3915,7 @@ angular.module('pagination', [])
 
             parentController.sort = function(sortColumnName, order) {
                 scope.sortColumnName = sortColumnName;
-                scope.ascending = order;        
+                scope.ascending = order;
                 scope.fetchData(scope.onPage, scope.offset);
             };
         }
@@ -4760,7 +4772,7 @@ angular.module('pagination', [])
           "attributes": {"label": {"key": "dataTable.column.term.heading"}}
        }]
     }]}
- 
+
  2. position: This configuration for each heading in $scope.headings array, orders the headings in the specified positions
  ex: position : {
                 desktop: 1, // displays in 1st position for desktop & in 2nd position for mobile
@@ -7028,7 +7040,6 @@ clearFocus = function (e) {
                             return d.data.percentage;
                         });
                     text.on("click", function(d) {
-                       alert("sdad");
                     });
                     text.selectAll("text").append('tspan')
                         .attr('x', '0')
@@ -8840,7 +8851,7 @@ clearFocus = function (e) {
                     $scope.hours = [];
                     $scope.minutes = [];
                     if (!$scope.displayFormat) {
-                        $scope.displayFormat = $filter('xei18n')('default.time.format');
+                        $scope.displayFormat = $filter('xei18n')('default.timepicker.time.format');
                         if ('default.time.watermark.format' != $filter('xei18n')('default.time.watermark.format')) {
                             $scope.xeTimePlaceholder = $filter('xei18n')('default.time.watermark.format');
                         }
@@ -9155,6 +9166,7 @@ clearFocus = function (e) {
                                 .length > 0;
                         if (!isClickedElementChildOfPopup) {
                             scope.toggleContainer = false;
+                            ele.removeClass("time-picker-position");
                             scope.enableInput(ele);
                             scope.$digest();
                         }
@@ -9167,6 +9179,7 @@ clearFocus = function (e) {
                         angular.element(ele.find('div.timepickerContainer')).on('keydown', function (event) {
                             if (event.keyCode === keyCodes.F9) {
                                 scope.toggleContainer = false;
+                                ele.removeClass("time-picker-position");
                                 scope.$digest();
                                 scope.enableInput(ele);
                                 ele.find('div.input-container input.input-field').focus();
@@ -9180,7 +9193,9 @@ clearFocus = function (e) {
                             event.cancelBubble = true;
                         };
 
-                        convertTimeOnPageLoad(scope.displayModel);
+                        if(scope.displayModel){
+                            convertTimeOnPageLoad(scope.displayModel);
+                        }
 
                         var browser = scope.getBrowser();
                         var eventtype;
@@ -9206,8 +9221,10 @@ clearFocus = function (e) {
                             scope.showError = false;
                             scope.toggleContainer = scope.toggleContainer ? false : true;
                             if (scope.toggleContainer) {
+                                ele.addClass("time-picker-position");
                                 scope.disableInput(ele);
                             } else {
+                                ele.removeClass("time-picker-position");
                                 scope.enableInput(ele);
                             }
                             var enteredContent = ele.find('input.input-field').val();
@@ -9268,6 +9285,7 @@ clearFocus = function (e) {
                                 scope.enableInput(ele);
                                 scope.showError = false;
                                 scope.toggleContainer = false;
+                                ele.removeClass("time-picker-position");
                                 scope.$digest();
                                 ele.find('div.input-container input.input-field').focus();
                                 stopEventsDefault(event);
@@ -9301,6 +9319,7 @@ clearFocus = function (e) {
                                 scope.showError = false;
                                 var enteredContent = angular.element(ele).find('input.input-field').val();
                                 scope.toggleContainer = true;
+                                ele.addClass("time-picker-position");
                                 validateEnteredContent(enteredContent);
                                 scope.$digest();
                                 scope.disableInput(ele);
@@ -9461,6 +9480,7 @@ clearFocus = function (e) {
                             scope.showError = false;
                             scope.enableInput(ele);
                             scope.toggleContainer = false;
+                            ele.removeClass("time-picker-position");
                             scope.$digest();
                             ele.find('div.input-container input.input-field').focus();
                             stopEventsDefault(event);
@@ -9499,6 +9519,7 @@ clearFocus = function (e) {
                         function setTimePickerValue() {
                             var parentDiv = angular.element("#" + scope.xeId).closest('div').next();
                             scope.toggleContainer = false;
+                            ele.removeClass("time-picker-position");
                             var hrLiSelected = angular.element(parentDiv).find('ul:first li.active-timepicker').text();
                             var minLiSelected = angular.element(parentDiv).find('ul:last li.active-timepicker').text();
                             var meridianValue = angular.element(parentDiv).find('div.pushmeBorder').text();
@@ -9914,7 +9935,7 @@ clearFocus = function (e) {
                             var minFocus = ele.find('.minFocus');
                             var hrsFocus = ele.find('.hrsFocus');
                             var meridianFocus = ele.find('.meridianFocus');
-                            var cancelFocus = ele.find('.footercancelButton')
+                            var cancelFocus = ele.find('.footercancelButton');
                             angular.element(meridianFocus).removeClass('active-timepickerFocus');
                             angular.element(minFocus).removeClass('active-timepickerFocus');
                             angular.element(hrsFocus).removeClass('active-timepickerFocus');
