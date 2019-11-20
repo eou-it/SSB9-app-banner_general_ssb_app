@@ -499,7 +499,7 @@ xe-button .secondary:active:not([disabled]) {
 .xe-container {
   display: block;
   position: relative;
-  padding-left: 35px;
+  padding-left: 25px;
   margin-bottom: 12px;
   cursor: pointer;
   -webkit-user-select: none;
@@ -535,17 +535,22 @@ xe-button .secondary:active:not([disabled]) {
 
 .xe-container input:focus:checked ~ .xe-checkmark {
   background-color: #026BC8;
-  border: 1px solid #81C8FF;
+  border: 1px solid #51ABFF;
   border-radius: 4px; }
 
 .xe-container input:focus ~ .xe-checkmark {
   background-color: #FFFFFF;
-  border: 1px solid #81C8FF;
+  border: 1px solid #51ABFF;
   border-radius: 4px; }
 
 .xe-container input:disabled ~ .xe-checkmark {
   background-color: #F7F7F7;
   border: 1px solid #B2B3B7; }
+
+/* Css for selected checkbox disabled */
+.xe-container input:disabled:checked ~ .xe-checkmark {
+  background-color: #D9D9D9;
+  border: 1px solid #D9D9D9; }
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .xe-checkmark:after {
@@ -559,15 +564,10 @@ xe-button .secondary:active:not([disabled]) {
 
 /* Style the checkmark/indicator */
 .xe-container .xe-checkmark:after {
-  top: 3px;
-  width: 5px;
-  left: 7px;
-  height: 8px;
-  border: solid #FFFFFF;
-  border-width: 0 1.5px 1.5px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg); }
+  height: 20px;
+  bottom: 0px;
+  background: url(images/checkbox/tick.svg);
+  width: 20px; }
 
 xe-dropdown .dropdown {
   color: #4F585F;
