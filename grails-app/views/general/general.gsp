@@ -30,9 +30,7 @@ Copyright 2017-2018 Ellucian Company L.P. and its affiliates.
         <asset:javascript src="modules/gss-application-mf.js"/>
     </g:applyLayout>
 
-    <script type="text/javascript">
-        <g:i18n_setup/>
-    </script>
+    <g:bannerMessages/>
 
     <script>
         document.createElement('ng-include');
