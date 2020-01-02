@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "UPDATE SKBHINS\r\nSET SKBHINS_SSDT_CODE_NEWENT = :SKBHINS_SSDT_CODE_NEWENT,\r\nSKBHINS_SSDT_CODE_DISALL = :SKBHINS_SSDT_CODE_DISALL,\r\nSKBHINS_SSDT_CODE_PARED = :SKBHINS_SSDT_CODE_PARED,\r\nSKBHINS_SSDT_CODE_DOMICILE = :SKBHINS_SSDT_CODE_DOMICILE,\r\nSKBHINS_SSDT_CODE_QUALENT3 = :SKBHINS_SSDT_CODE_QUALENT3,\r\nSKBHINS_SSDT_CODE_PREVINST = :SKBHINS_SSDT_CODE_PREVINST\r\nWHERE SKBHINS_PIDM = :parm_user_pidm",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT SKBHINS_PIDM AS ID, \r\nSKBHINS_SSDT_CODE_NEWENT,\r\nSKBHINS_SSDT_CODE_DISALL,\r\nSKBHINS_SSDT_CODE_PARED,\r\nSKBHINS_SSDT_CODE_QUALENT3,\r\nSKBHINS_SSDT_CODE_DOMICILE,\r\nSKBHINS_SSDT_CODE_PREVINST\r\nFROM SKBHINS\r\nWHERE SKBHINS_NUMHUS = 1\r\nAND SKBHINS_PIDM = :parm_user_pidm",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPHESAInstance",
+   "codePost": null,
+   "developerSecurity": []
+}

@@ -1,0 +1,369 @@
+@charset "UTF-8";
+a:link {color:black}
+h4{padding:10px 0px;}
+h2{padding-top:.5em;}
+table{
+margin-left:10px;
+margin-bottom:10px;
+}
+.table{
+width:95%!important;
+}
+input.pb-item.pb-text,
+input.pb-item.pb-number,
+input.pb-item.pb-datetime,
+input.pb-item.pb-email,
+input.pb-item.pb-tel {
+ font-size:1em;
+ font-family:"OpenSans-semibold";
+ color:darkSlateGray;
+ border:1px solid #869fb1;
+ padding:8px 5px;
+ width:18.75em;
+ -moz-border-radius:4px;
+ -webkit-border-radius:4px;
+ margin-left:15px;
+ border-radius:4px
+}
+input.pb-item:focus {
+ border:1px solid #206e9f;
+ box-shadow:inset 0 2px 2px #cbe2e8;
+ color:#4f585f
+}
+input.pb-item.hasDatepicker{
+ height:inherit
+}
+h2.pb-block-label,
+h2.pb-form-label {
+ color:#4f585f;
+ font-size:1.5em;
+ font-family:"OpenSans-semibold";
+ margin:2px 0;
+ padding:.5em .5em
+}
+ span.pb-form {
+ color:#4f585f;
+ line-height:25px;
+}
+ h3.pb-form-label {
+ color:#4f585f;
+ font-size:1.25em;
+ font-family:"OpenSans-semibold";
+ margin-left:5px;
+ padding:.75em .5em
+}
+div.pb-literal {
+ color:#4f585f;
+ font-size:1em;
+ padding-left:.75em;
+ line-height:30px;
+ }
+label,
+span.pb-detail {
+ font-size:1em;
+ line-height:30px;
+ padding-left:.75em;
+ color:#4f585f
+}
+label.pb-label {
+ font-size:1.10em;
+ font-weight:bold;
+ margin-left:4px;
+ margin-bottom:1px;
+ padding:.4em .75em;
+ display:block;
+ color:#4f585f
+}
+label.pb-label.pb-boolean {
+ font-size:1.15em;
+ display:inline-block;
+ color:#4f585f
+}
+select.pb-item.pb-select {
+ font-size:1em;
+ font-family:"OpenSans-semibold";
+ color:darkSlateGray;
+ border:1px solid #869fb1;
+ padding:8px 5px;
+ width:18.75em;
+ -moz-border-radius:4px;
+ -webkit-border-radius:4px;
+ margin-left:15px;
+ border-radius:4px
+}
+select.pb-select:focus {
+ border:2px solid #206e9f;
+ background-color:#fff;
+ color:#000
+}
+option:empty {
+ display:none
+}
+.pb-button {
+ padding:.75em .75em
+}
+input[type="checkbox"] {
+ width:20px;
+ height:18px;
+ line-height:normal;
+ padding:.75em .75em;
+ margin-left:9px
+}
+input:read-only {
+ background-color:#ebebe4
+}
+#pbid-Email-0{
+ background-color:#ebebe4
+}
+#pbid-Name-0 {
+ width:600px
+}
+#title-panel{
+display:none;
+}
+.aip-item-detail-container .detail-content .detail-nav{
+position:relative;
+}
+.aip-item-detail-container .detail-content{
+padding: 0px 5px 5px 5px;
+}
+#pbid-TermAddress-new-button{
+padding: .75em .75em;
+margin-left: 15px;
+font-size:14px;
+}
+.pb-radio {
+ margin-top:-10px;
+ margin-bottom:5px;
+}
+.pb-detail.pb-item.pb-radiolabel{
+margin-bottom:5px!important;
+}
+#pbid-PaymentOptionsLinks-container a{
+    background-color: #3276b1;
+    color: #fff;
+    border: 2px solid #285e8e;
+    padding: 0.2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom:10px;
+    width:130px;
+    border-radius:5px;
+}
+#pbid-PaymentOptionsLinks-container a:link{color:#fff;}
+#pbid-PaymentOptionsLinks-container a:visited{color:#fff;}
+#pbid-PaymentOptionsLinks-container a:active{color:#fff;}
+#pbid-PaymentOptionsLinks-container a:focus{outline: none;}
+
+#banktransfer{
+    background-color: #3276b1;
+    color: #fff;
+    border: 2px solid #285e8e;
+    padding: .2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom:10px;
+    width:130px;
+    border-radius:5px;
+}
+#pbid-BankTranferText table{
+border:none;
+}
+#pbid-BankTranferText td{
+padding:5px;
+}
+#pbid-PrimaryEmergencyContact-new-button{
+padding: .75em .75em;
+margin-left: 15px;
+font-size:14px;
+
+}
+#pbid-SecondaryEmergencyContact-new-button{
+padding: .75em .75em;
+margin-left: 15px;
+font-size:14px;
+}
+#pbid-ActionItemNameHeader-container-0 p{
+margin-top:20px;
+}
+#pbid-ActionItemStatusAgree-container-0 .pb-radio{
+ margin-top:-30px;
+ margin-bottom:5px;
+}
+#pbid-PaymentOptionsLinks p{
+margin-top:20px;
+}
+#pbid-ConfrimFeesText-container p{
+margin-top:20px
+}
+#pbid-BankTranferText p{
+margin-top:20px;
+}
+#pbid-ModuleRegistrationText p{
+margin-top:20px;
+}
+#pbid-ConfirmEnrolmentMessage{
+margin-top:20px;
+}
+#pbid-ActionItemNameHeader-0 h2{margin-top:-30px;}
+#pbid-ActionItemStatusAgree-0 .pb-radio{margin-top:-20px;}
+@-moz-document url-prefix() {
+#pbid-ActionItemStatusAgree-label-0-0{
+        margin-top:20px;}
+}
+#pbid-ActionItemNameHeader-0 h4{
+margin-top:-10px;
+padding:0px;
+}
+#pbid-ActionItemContentDisplay-container-0 p{
+margin-top:-20px;
+padding-left:.75em;
+}
+@-moz-document url-prefix() {
+#pbid-ActionItemContentDisplay-container-0 p{
+margin-top:-20px;
+padding-left:.75em;}
+}
+#pbid-ActionItemContentDetail-change-data-container{
+padding-left:1em;
+}
+
+#pbid-PhoneNumbersGrid select.pb-item.pb-select{
+width:14em;
+margin-left:0px;
+}
+#pbid-PhoneNumbersGrid input.pb-item.pb-text{
+width:12em;
+margin-left:0px;
+}
+#pbid-EmailAddressGrid select.pb-item.pb-select{
+width:14em;
+margin-left:0px;
+}
+#pbid-EmailAddressGrid input.pb-item.pb-text{
+width:18em;
+margin-left:0px;
+}	
+@media only screen and (max-width: 760px){
+#pbid-PhoneNumbersGrid table, #pbid-PhoneNumbersGrid thead, #pbid-PhoneNumbersGrid tbody, #pbid-PhoneNumbersGrid th, 
+#pbid-PhoneNumbersGrid td, #pbid-PhoneNumbersGrid tr, #pbid-EmailAddressGrid table, #pbid-EmailAddressGrid thead, 
+#pbid-EmailAddressGrid tbody, #pbid-EmailAddressGrid th, #pbid-EmailAddressGrid td, #pbid-EmailAddressGrid tr
+{ 
+display: block; 
+}
+#pbid-EmailAddressGrid thead tr { 
+position: absolute;
+top: -9999px;
+left: -9999px;
+}
+#pbid-EmailAddressGrid td { 
+border: none;
+position: relative;
+padding-left: 40%; 
+}
+#pbid-EmailAddressGrid td:before { 
+position: absolute;
+top: 14px;
+left: 15px;
+width: 35%; 
+padding-right: 10px; 
+white-space: nowrap;
+font-weight:bold;
+}
+#pbid-EmailAddressGrid td:nth-of-type(1):before { content: "Delete";}
+#pbid-EmailAddressGrid td:nth-of-type(2):before { content: "Email Type"; }
+#pbid-EmailAddressGrid td:nth-of-type(3):before { content: "Email Address"; }
+#pbid-EmailAddressGrid td:nth-of-type(4):before { content: "Preferred"; }
+#pbid-EmailAddressGrid input.pb-item.pb-text{
+width:14em;
+margin-left:0px;
+}	
+#pbid-EmailAddressGrid select.pb-item.pb-select{
+width:14em;
+margin-left:0px;
+}
+#pbid-PhoneNumbersGrid select.pb-item.pb-select{
+width:14em;
+margin-left:0px;
+}
+#pbid-PhoneNumbersGrid input.pb-item.pb-text{
+width:14em;
+margin-left:0px;
+}
+#pbid-PhoneNumbersGrid thead tr { 
+position: absolute;
+top: -9999px;
+left: -9999px;
+}
+#pbid-PhoneNumbersGrid td { 
+border: none;
+position: relative;
+padding-left: 40%; 
+}
+#pbid-PhoneNumbersGrid td:before { 
+position: absolute;
+top: 14px;
+left: 15px;
+width: 35%; 
+padding-right: 10px; 
+white-space: nowrap;
+font-weight:bold;
+}
+#pbid-PhoneNumbersGrid td:nth-of-type(1):before { content: "Delete";}
+#pbid-PhoneNumbersGrid td:nth-of-type(2):before { content: "Phone Type"; }
+#pbid-PhoneNumbersGrid td:nth-of-type(3):before { content: "Area Code"; }
+#pbid-PhoneNumbersGrid td:nth-of-type(4):before { content: "Phone Number"; }
+#pbid-PhoneNumbersGrid td:nth-of-type(5):before { content: "Primary"; }
+}
+#pbid-EmailAddressGrid input[type="checkbox"]{margin-left:0px;}
+#pbid-EmailAddressGrid-new-button{
+padding: .75em .75em;
+margin-left: 15px;
+background-color: #275c8a;
+color: #fff;
+border-color: #357ebd;
+}
+#pbid-PhoneNumbersGrid input[type="checkbox"]{margin-left:0px;}
+#pbid-PhoneNumbersGrid-new-button{
+padding: .75em .75em;
+margin-left: 15px;
+background-color: #275c8a;
+color: #fff;
+border-color: #357ebd;
+}
+.ui-corner-all.ui-button.ui-widget{
+height:auto;
+background-image:none;
+background-color: #275c8a;
+color: #fff;
+border-color: #357ebd;
+font-family: Open Sans !important;
+font-weight:400;
+font-size: 14px
+padding: 0.75em;
+}
+.pagination-container{
+padding: 0.1em!important;
+}
+.aip-item-detail-container .detail-content{
+padding: 0px 5px 5px 5px !important;}	 	 	
+.ui-button-text-only .ui-button-text{
+padding:0em;
+}
+.btn{padding:0.75em!important;}
+.pagination-container{display:none;}
+#pbid-SecondaryEmergencyContactHomeAddress-container-0{
+margin-left:12px;
+margin-top:10px;
+}
+#pbid-PrimaryEmergencyContactHomeAddress-container-0{
+margin-left:12px;
+margin-top:10px;
+}
+#pbid-UseHomeAddress-container-0{
+margin-left:12px;
+}

@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT SKVSSDT_SDAT_CODE_OPT_1, \r\nSKVSSDT_TITLE\r\nFROM SKVSSDT \r\nWHERE SKVSSDT_SDAT_CODE_ATTR = 'SKBHINS_SSDT_CODE_DISALL'",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPHesaDSA",
+   "codePost": null,
+   "developerSecurity": []
+}

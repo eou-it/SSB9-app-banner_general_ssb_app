@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "UPDATE \r\n(\r\nSELECT SFRENSP_ESTS_CODE \r\nFROM SFRENSP\r\nINNER JOIN STVTERM ON SFRENSP_TERM_CODE = STVTERM_CODE\r\nWHERE SFRENSP_PIDM =:parm_user_pidm\r\nAND SFRENSP_ESTS_CODE = 'EL'\r\nAND TO_DATE(STVTERM_END_DATE, 'DD-MON-YY') > TO_DATE(SYSDATE, 'DD-MON-YY')\r\n)U\r\nSET U.SFRENSP_ESTS_CODE = 'ES'\r\n",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT SFRENSP_TERM_CODE as ID, SFRENSP_ESTS_CODE\r\nFROM SFRENSP\r\nINNER JOIN STVTERM ON SFRENSP_TERM_CODE = STVTERM_CODE\r\nWHERE SFRENSP_PIDM =:parm_user_pidm\r\nAND SFRENSP_ESTS_CODE = 'EL'\r\nAND SFRENSP_KEY_SEQNO = 1\r\nAND TO_DATE(STVTERM_END_DATE, 'DD-MON-YY') > TO_DATE(SYSDATE, 'DD-MON-YY')",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPTermCodeUpdate",
+   "codePost": null,
+   "developerSecurity": []
+}

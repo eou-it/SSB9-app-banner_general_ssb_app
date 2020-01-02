@@ -1,0 +1,18 @@
+{
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT\r\n     SKRDRCO_CRS_STUDY_NAME AS STUDY_PATH,\r\n     SMRPRLE_PROGRAM,\r\n     STVMAJR_DESC,\r\n     STVCAMP_DESC,\r\n     CASE\r\n            WHEN SKRECAF_HELP_TYPE = 'H' THEN 'Commonwealth Support and HECS-HELP effective from'||' '||STVTERM_DESC\r\n            WHEN SKRECAF_HELP_TYPE = 'F' THEN 'FEE-HELP effective from'||' '||STVTERM_DESC\r\n            WHEN SKRECAF_HELP_TYPE = 'O' THEN 'OS-HELP effective from'||' '||STVTERM_DESC\r\n            WHEN SKRECAF_HELP_TYPE = 'S' THEN 'SA-HELP effective from'||' '||STVTERM_DESC\r\n            ELSE SKRECAF_HELP_TYPE\r\n        END\r\n    AS ASSISTANCE\r\nFROM\r\n    SKRECAF\r\n    INNER JOIN STVTERM \r\n          ON   SKRECAF_TERM_CODE = STVTERM_CODE\r\n    INNER JOIN SOVLCUR\r\n          ON   SKRECAF_PIDM = SOVLCUR_PIDM\r\n             AND SOVLCUR_LMOD_CODE = 'LEARNER'\r\n             AND SOVLCUR_TERM_CODE = SKRECAF_TERM_CODE\r\n             AND SOVLCUR_PROGRAM = SKRECAF_PROGRAM\r\n             AND SOVLCUR_CURRENT_IND = 'Y'\r\n             AND SOVLCUR_ACTIVE_IND = 'Y'\r\n    INNER JOIN SKRDRCO\r\n          ON     SOVLCUR_PROGRAM = SKRDRCO_PROGRAM\r\n             AND SKRDRCO_TERM_CODE_EFF =\r\n                    (SELECT MAX (SKRDRCO_TERM_CODE_EFF)\r\n                       FROM SKRDRCO\r\n                      WHERE     SKRDRCO_PROGRAM = SOVLCUR_PROGRAM\r\n                            AND SKRDRCO_TERM_CODE_EFF <= SOVLCUR_TERM_CODE)\r\n    INNER JOIN SMRPRLE \r\n         ON SOVLCUR_PROGRAM = SMRPRLE_PROGRAM\r\n    INNER JOIN SOVLFOS \r\n         ON SOVLCUR_PIDM = SOVLFOS_PIDM\r\n            AND SOVLCUR_SEQNO = SOVLFOS_LCUR_SEQNO\r\n            AND SOVLFOS_LFST_CODE = 'MAJOR'\r\n    INNER JOIN STVMAJR ON SOVLFOS_MAJR_CODE = STVMAJR_CODE\r\n    LEFT JOIN STVCAMP\r\n        ON SOVLCUR_CAMP_CODE = STVCAMP_CODE    \r\nWHERE\r\n        SKRECAF_CURRENT_IND = 'Y'\r\n        AND SKRECAF_PIDM = :parm_user_pidm",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "EcafSummary",
+   "codePost": null
+}

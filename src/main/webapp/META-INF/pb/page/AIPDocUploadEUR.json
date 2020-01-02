@@ -1,0 +1,170 @@
+{
+   "constantName": "AIPDocUploadEUR",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2019-12-19T17:22:36Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.ActionItemContent",
+            "name": "ActionItemContent",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemStatus",
+            "name": "ActionItemStatus",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemReviewStatus",
+            "name": "ActionItemReviewStatus",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UserActionItem",
+            "name": "UserActionItem",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "readonly": false,
+            "name": "popAID",
+            "onLoad": "if ( typeof(window.params.actionItemId) != 'undefined') {\n    var aid = window.params.actionItemId;\n} else {\n   //temporary - for testing only.\n   window.params.actionItemId = 6;\n}\nsetTimeout( function(){ \n    $ActionItemId.$load();\n}, \n500);",
+            "model": "ActionItemContent",
+            "style": "hidden",
+            "loadInitially": true,
+            "type": "text",
+            "parameters": {},
+            "required": false,
+            "validation": {}
+         },
+         {
+            "readonly": false,
+            "name": "ReviewStatus",
+            "model": "ActionItemReviewStatus",
+            "style": "hidden",
+            "loadInitially": true,
+            "type": "text",
+            "parameters": {
+               "actionitemid": "$$params.actionItemId"
+            },
+            "value": "gcraact_rvst_code",
+            "required": false,
+            "validation": {}
+         },
+         {
+            "readonly": false,
+            "name": "ActionItemId",
+            "onLoad": "$ActionItemContentDetail.$load();",
+            "model": "ActionItemContent",
+            "style": "hidden",
+            "loadInitially": false,
+            "type": "text",
+            "parameters": {
+               "actionItemId": "$$params.actionItemId",
+               "pageid": "$$params.id"
+            },
+            "value": "ACTION_ITEM_ID",
+            "required": false,
+            "validation": {}
+         },
+         {
+            "readonly": false,
+            "name": "UserActionItemId",
+            "model": "UserActionItem",
+            "style": "hidden",
+            "loadInitially": true,
+            "type": "text",
+            "parameters": {
+               "actionitemid": "$$params.actionItemId"
+            },
+            "value": "gcraact_surrogate_id",
+            "required": false,
+            "validation": {}
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "name": "ActionItemNameHeader",
+                        "type": "literal",
+                        "value": "<h2>Upload a Photo</h2>\n\n<p>Please click the paperclip icon to upload a picture of yourself for use on your Student Identification Card. Only image files can be uploaded. Only 1 image file can be uploaded per user. If you need to replace the image that has been upload you can delete the uploaded image by clicking the delete icon and then upload a new image.</p>\n\n<p>The picture needs to be taken against a white background. If you need to edit or resize a photo, you can use an <a href=\"https://pixlr.com/x/\" target=\"_blank\">Online Editor.</a></p>"
+                     },
+                     {
+                        "asHtml": true,
+                        "name": "ActionItemContentDisplay",
+                        "onLoad": "/*$(\"#pbid-ActionItemContentDetail-save-button\").removeClass('btn-sm').addClass('btn-primary').addClass('btn-md');*/\n\n$ActionItemStatusAgree.$load();",
+                        "model": "ACTION_ITEM_CONTENT",
+                        "loadInitially": true,
+                        "type": "display",
+                        "value": ""
+                     },
+                     {
+                        "loadInitially": false,
+                        "type": "radio",
+                        "required": false,
+                        "sourceParameters": {
+                           "actionitemid": "$$params.actionItemId"
+                        },
+                        "name": "ActionItemStatusAgree",
+                        "onLoad": "setTimeout( function(){\n    var userActionItemId = $UserActionItemId.GCRAACT_SURROGATE_ID;\n    var selectedResponse = null;\n    var isResponseReviewRequired = false;\n   \n    for(var elementId = 0; elementId < data.length; elementId++){\n        var responseElementId = \"#pbid-ActionItemStatusAgree-label-0-\"+elementId;\n        var paperClipId = \"pbid-ActionItemStatusAgree-paper-clip-0-\"+elementId;\n        var responseElement = $('#pbid-ActionItemStatusAgree-0').find(responseElementId);\n        var allowedAttachments = data[elementId].STATUS_ALLOWED_ATTACHMENT;\n        var responseId = data[elementId].STATUS_RULE_ID;\n        if(allowedAttachments  > 0){    \n                    AIP.ListItemPageCtrl.prototype.documentUploader (userActionItemId, paperClipId, responseElement, allowedAttachments , responseId, isResponseReviewRequired);\n        }        \n    }\n     \n    $('input[type=\"radio\"]').click( function(){\n        $('#pbid-ActionItemStatusAgree-0').find('input[type=\"image\"]').attr(\"src\",\"../images/attach_icon_disabled.svg\");\n        var id = $(\"input[type='radio']:checked\")[0].id;\n        id= id.split(\"pbid-ActionItemStatusAgree-radio-0-\");\n        if($(\"#pbid-ActionItemStatusAgree-paper-clip-0-\"+id[1]).length >0){\n                $(\"#pbid-ActionItemStatusAgree-paper-clip-0-\"+id[1])[0].setAttribute(\"src\", \"../images/attach_icon_default.svg\");\n        }\n    });\n\n},300);",
+                        "model": "STATUS_RULE_ID",
+                        "sourceModel": "ActionItemStatus",
+                        "style": "",
+                        "labelKey": "STATUS_RULE_LABEL_TEXT",
+                        "valueKey": "STATUS_RULE_ID",
+                        "onUpdate": "params.isResponseModified = true;",
+                        "value": ""
+                     }
+                  ],
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});};\n$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop('disabled', false);\nwindow.params.isResponseLocked = false;",
+                  "onSave": "",
+                  "allowNew": false,
+                  "documentation": "Displays data from virtual domain ActionItemContent",
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true});\nwindow.params.saved=true;",
+                  "pageSize": 1,
+                  "label": "",
+                  "loadInitially": false,
+                  "type": "detail",
+                  "newRecordLabel": "",
+                  "name": "ActionItemContentDetail",
+                  "allowModify": true,
+                  "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n$(\"#pbid-ActionItemContentDetail-save-button\").hide();\nsetTimeout( function(){ \n    console.log(\"status count \" + $ActionItemContentDetail.STATUS_COUNT);\n    $ActionItemStatusAgree.$load();\n}, \n300);",
+                  "model": "ActionItemContent",
+                  "allowReload": false,
+                  "parameters": {
+                     "actionitemid": "$$params.actionItemId",
+                     "pageid": "$$params.id"
+                  }
+               },
+               {
+                  "valueStyle": "btn btn-primary",
+                  "onClick": "if($(\"#pbid-ActionItemStatusAgree-radio-0-0:checked\").val()||\n$(\"#pbid-ActionItemStatusAgree-radio-0-1:checked\").val()\n){\n$ActionItemContentDetail.$save();\n}\nelse{\nalert(\"Please confirm whether you wish to upload a photo\", {type:\"error\", flash:true}); \n}",
+                  "name": "ActionItemContentDetailSave",
+                  "label": "Confirm",
+                  "type": "button"
+               }
+            ],
+            "name": "PolicyBlock",
+            "showInitially": true,
+            "label": "",
+            "type": "block"
+         }
+      ],
+      "name": "AIPDocUploadEUR",
+      "label": "",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}
