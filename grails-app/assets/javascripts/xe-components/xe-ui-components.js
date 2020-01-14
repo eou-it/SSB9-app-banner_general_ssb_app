@@ -1,9 +1,7 @@
 /*
- * component-library
- *
-
- * Version: 11.0.0 - 2019-11-14
- * License: Copyright 2018 Ellucian Company L.P. and its affiliates.
+ * ******************************************************************************
+ *  Copyright 2019-2020 Ellucian Company L.P. and its affiliates.
+ *  ******************************************************************************
  */
 angular.module("xe-ui-components", ['badge','button','checkbox','dropdown','label','radiobutton','simpleTextbox','statusLabel','switch','textarea','textbox','ui.select','xeUISelect','external-resouces','utils','columnFilter','pagination','search','xebarmodule','dataTableModule','aboutModal','pieChartModule','popupModal','tabnav','timePicker','xe-ui-components-tpls']);
 angular.module('xe-ui-components-tpls', ['templates/badge.html', 'templates/button.html', 'templates/checkbox.html', 'templates/dropdown.html', 'templates/label.html', 'templates/radio-button.html', 'templates/simple-textbox.html', 'templates/statusLabel.html', 'templates/switch.html', 'templates/text-area-counter.html', 'templates/text-area.html', 'templates/text-box-char-limit.html', 'templates/text-box-password.html', 'templates/text-box.html', 'templates/column-filter.html', 'templates/pagination.html', 'templates/search.html', 'templates/dataTable.html', 'templates/dialog.html', 'templates/dialog_default.html', 'templates/modal.html', 'templates/tabNav.html', 'templates/tabPanel.html', 'templates/timePicker.html', 'templates/timePicker_rtl.html']);
@@ -20,7 +18,7 @@ angular.module("templates/button.html", []).run(["$templateCache", function ($te
 
 angular.module("templates/checkbox.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/checkbox.html",
-    "<div><label class=\"xe-container\" xe-for=\"{{::'ckbox-' + xeId}}\">{{xeLabel}} <input id=\"{{::'ckbox-' + xeId}}\" xe-data type=\"checkbox\" aria-checked=\"{{xeModel}}\" aria-label=\"{{xeAriaLabel}}\" ng-click=\"cbClicked($event)\" ng-model=\"xeModel\" value=\"{{xeValue}}\" ng-checked=\"xeModel\" aria-live=\"assertive\" aria-disabled=\"{{xeDisabled? true:false}}\" ng-disabled=\"xeDisabled == true\" name=\"{{xeName}}\" tabindex=\"{{!xeDisabled ? 0 : -1}}\"> <span class=\"xe-checkmark\" tabindex=\"-1\"></span></label></div>");
+    "<div class=\"xe-container\" aria-checked=\"{{xeModel}}\" tabindex=\"{{!xeDisabled ? 0 : -1}}\" role=\"checkbox\" aria-live=\"assertive\" aria-label=\"{{xeAriaLabel}}\"><input id=\"{{::xeId}}\" xe-data type=\"checkbox\" aria-checked=\"{{xeModel}}\" aria-label=\"{{xeAriaLabel}}\" ng-click=\"cbClicked($event)\" ng-model=\"xeModel\" value=\"{{xeValue}}\" ng-checked=\"xeModel\" aria-live=\"assertive\" aria-disabled=\"{{xeDisabled? true:false}}\" ng-disabled=\"xeDisabled == true\" name=\"{{xeName}}\" tabindex=\"-1\"> <span class=\"xe-checkmark\" tabindex=\"-1\"></span><label class=\"checkbox-label\" xe-for=\"{{::xeId}}\">{{xeLabel}}</label></div>");
 }]);
 
 angular.module("templates/dropdown.html", []).run(["$templateCache", function ($templateCache) {
@@ -55,7 +53,7 @@ angular.module("templates/switch.html", []).run(["$templateCache", function ($te
 
 angular.module("templates/text-area-counter.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/text-area-counter.html",
-    "<div class=\"textarea-container\" xe-field=\"{{::xeId}}\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><textarea xe-data ng-model=\"ngModel\" class=\"comments-field\" ng-class=\"{readonly:xeReadonly}\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-required=\"xeRequired\" aria-multiline=\"true\" ng-readonly=\"xeReadonly\" maxlength=\"{{xeCharCounter}}\" ng-trim=\"false\">\n" +
+    "<div class=\"textarea-container\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><textarea xe-data ng-model=\"ngModel\" class=\"comments-field\" ng-class=\"{readonly:xeReadonly}\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-required=\"xeRequired\" aria-multiline=\"true\" ng-readonly=\"xeReadonly\" maxlength=\"{{xeCharCounter}}\" ng-trim=\"false\">\n" +
     "\n" +
     "    </textarea><div id=\"xe-id-characters-count\"><span>{{::'xe.text.chars.left' | xei18n}} : {{ charRemaining }}</span></div></div>");
 }]);
@@ -113,7 +111,7 @@ angular.module("templates/dialog_default.html", []).run(["$templateCache", funct
 
 angular.module("templates/modal.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/modal.html",
-    "<div id=\"xeModalMask\" class=\"xe-popup-mask\" ng-show=\"show\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"xePopTitle\"><div class=\"xe-popup-wrapper\"><div class=\"xe-popup-container\"><div id=\"xeModalHeader\" class=\"xe-popup-header\"><h5 id=\"xePopTitle\" class=\"xe-app-title\" role=\"heading\" data-ng-bind=\"popupTitle\"></h5><span id=\"xePopupClose\" class=\"xe-popup-close\" ng-click=\"hide()\" tabindex=\"0\" role=\"button\" aria-label=\"{{'userpreference.popup.language.close' | xei18n}}\" alt=\"{{'userpreference.popup.language.close' | xei18n}}\" title=\"{{'userpreference.popup.language.close' | xei18n}}\"></span></div><div id=\"xePopupContent\" class=\"xe-pop-content\" ng-transclude=\"popupContent\"></div><div id=\"buttonContainer\" class=\"buttonContainer\" ng-transclude=\"popupButtons\"></div><div tabindex=\"0\" id=\"tabOrdering\"></div></div></div></div>");
+    "<div class=\"xe-popup-mask\" ng-show=\"show\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"xePopTitle\"><div class=\"xe-popup-wrapper\"><div class=\"xe-popup-container\"><div id=\"xeModalHeader\" class=\"xe-popup-header\"><h5 id=\"xePopTitle\" class=\"xe-app-title\" role=\"heading\"><label ng-bind=\"popupTitle\"></label></h5><span id=\"xePopupClose\" class=\"xe-popup-close\" ng-click=\"hide()\" tabindex=\"0\" role=\"button\" aria-label=\"{{'userpreference.popup.language.close' | xei18n}}\" alt=\"{{'userpreference.popup.language.close' | xei18n}}\" title=\"{{'userpreference.popup.language.close' | xei18n}}\"></span></div><div id=\"xePopupContent\" class=\"xe-pop-content\" ng-transclude=\"popupContent\"></div><div id=\"buttonContainer\" class=\"buttonContainer\" ng-transclude=\"popupButtons\"></div><div tabindex=\"0\" id=\"tabOrdering\"></div></div></div></div>");
 }]);
 
 angular.module("templates/tabNav.html", []).run(["$templateCache", function ($templateCache) {
@@ -176,19 +174,19 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
             scope : {
                 xeId : '@',
                 xeValue : '@',
-				xeName : '@',
-                xeLabel : '@',
-                xeAriaLabel: '@',
-                xeLabelHidden : '@',
+                xeName : '@?',
+                xeLabel : '@?',
+                xeAriaLabel: '@?',
+                xeLabelHidden : '@?',
                 xeModel : '=',
                 xeOnClick : '&',
-                xeDisabled : '=',
-                ariaRole : '@'
+                xeDisabled : '=?',
+                ariaRole : '@?'
             },
             restrict : 'E',
             replace : true,
             templateUrl : 'templates/checkbox.html',
-            link : function (scope, element, attrs) {
+            link : function (scope, element) {
                 scope.cbClicked = function (event) {
                     if (scope.xeDisabled) { return; }
 
@@ -204,13 +202,15 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                         event.preventDefault();
                         event.stopPropagation();
                         scope.cbClicked(event);
+                        scope.$apply();
                     }
                 });
 
-				element.on('click', function (event) {
+                element.on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
                     scope.cbClicked(event);
+                    scope.$apply();
                 });
 
             }
@@ -753,19 +753,32 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
 
                             $compile(element, transcludeFn)(scope); //Passing current transcludeFn to be able to append elements correctly from uisTranscludeAppend
 
-                            scope.$watch('$select.search', function (newValue) {
+                            scope.$watch('$select.search', function(newValue) {
                                 if (newValue && !$select.open && $select.multiple) {
                                     $select.activate(false, true);
                                     $select.activeIndex = $select.tagging.isActivated ? -1 : 0;
-                                }if (!attrs.minimumInputLength || $select.search.length >= attrs.minimumInputLength) {
+                                }if ((!attrs.minimumInputLength || $select.search.length >= attrs.minimumInputLength) && !$select.disabled) {
                                     $select.refresh(attrs.refresh);
                                     $select.showMinMsg = false;
-                                } else {
+                                } else if (!$select.disabled) {
                                     $select.minimumInputLength = attrs.minimumInputLength;
                                     $select.showMinMsg = true;
                                     $select.items = [];
                                 }
                             });
+
+                            scope.$watch('$select.disabled', function(newValue, oldValue) {
+                                if (!newValue && newValue !== oldValue && !$select.items.length) {
+                                    $select.refresh(attrs.refresh);
+                                }
+                            });
+
+                            scope.$watch($select.refreshOnChange, function(newValue, oldValue) {
+                                if (newValue && newValue !== oldValue  ) {
+                                    $select.refresh(attrs.refresh);
+                                }
+                            });
+
                             attrs.$observe('refreshDelay', function() {
                                 // $eval() is needed otherwise we get a string instead of a number
                                 var refreshDelay = scope.$eval(attrs.refreshDelay);
@@ -1034,6 +1047,9 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                     }
 
                     ctrl.refreshItems = function (data) {
+                        if (angular.isArray(data) && attrs.refresh && angular.isArray(ctrl.items) && (typeof ctrl.items[0] === 'object') && ctrl.items[0].isTag) {
+                            data.unshift(ctrl.items[0]);
+                        }
                         data = data || ctrl.parserResult.source($scope);
                         var selectedItems = ctrl.selected;
                         //TODO should implement for single mode removeSelected
@@ -1154,6 +1170,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                 // When the user selects an item with ENTER or clicks the dropdown
                 ctrl.select = function(item, skipFocusser, $event) {
                     if (item === undefined || !item._uiSelectChoiceDisabled) {
+                        var removedChoice = ctrl.selected;
 
                         if ( ! ctrl.items && ! ctrl.search && ! ctrl.tagging.isActivated) return;
 
@@ -1162,7 +1179,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                                 // if taggingLabel is disabled, we pull from ctrl.search val
                                 if ( ctrl.taggingLabel === false ) {
                                     if ( ctrl.activeIndex < 0 ) {
-                                        item = ctrl.tagging.fct !== undefined ? ctrl.tagging.fct(ctrl.search) : ctrl.search;
+                                        item = ctrl.tagging.fct !== undefined ? ctrl.tagging.fct({tag: ctrl.search, taggingKey: ctrl.taggingKey}) : ctrl.search;
                                         if (!item || angular.equals( ctrl.items[0], item ) ) {
                                             return;
                                         }
@@ -1173,18 +1190,22 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                                 } else {
                                     // tagging always operates at index zero, taggingLabel === false pushes
                                     // the ctrl.search value without having it injected
-                                    if ( ctrl.activeIndex === 0 ) {
+                                    if ( item ) {
                                         // ctrl.tagging pushes items to ctrl.items, so we only have empty val
                                         // for `item` if it is a detected duplicate
-                                        if ( item === undefined ) return;
+                                        // if ( item === undefined ) return;
 
                                         // create new item on the fly if we don't already have one;
                                         // use tagging function if we have one
-                                        if ( ctrl.tagging.fct !== undefined && typeof item === 'string' ) {
-                                            item = ctrl.tagging.fct(item);
+                                        if ( ctrl.tagging.fct !== undefined && typeof item === 'object' && item.isTag) {
+                                            item = ctrl.tagging.fct({tag: ctrl.search, taggingKey: ctrl.taggingKey, onSelect: true});
                                             if (!item) return;
                                             // if item type is 'string', apply the tagging label
-                                        } else if ( typeof item === 'string' ) {
+                                        } else if ( ctrl.tagging.fct !== undefined && typeof item === 'string' && item.indexOf(ctrl.taggingLabel) !== -1) {
+                                            item = ctrl.tagging.fct({tag: item, taggingKey: ctrl.taggingKey, onSelect: true});
+                                            if (!item) return;
+                                            // if item type is 'string', apply the tagging label
+                                        } else if ( typeof item === 'string' && item.indexOf(ctrl.taggingLabel) !== -1) {
                                             // trim the trailing space
                                             item = item.replace(ctrl.taggingLabel,'').trim();
                                         }
@@ -1198,25 +1219,37 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                             }
                             ctrl.search = "";
                             var ariaOptionSelected;
-                            $('.uiselect-choice-status-hidden-accessible').text("");
-                            if(undefined != ctrl.selectedValue){
-                                ariaOptionSelected = $filter('xei18n')('uiselect.option.selected',item[ctrl.selectedValue]);
-                            }else{
-                                ariaOptionSelected = $filter('xei18n')('uiselect.option.selected',item.name);
+                            if (item) {
+                                $('.uiselect-choice-status-hidden-accessible').text("");
+                                if(undefined != ctrl.selectedValue){
+                                    ariaOptionSelected = $filter('xei18n')('uiselect.option.selected',item[ctrl.selectedValue]);
+                                }else{
+                                    ariaOptionSelected = $filter('xei18n')('uiselect.option.selected',item.name);
+                                }
+                                $('.uiselect-choice-status-hidden-accessible').text(ariaOptionSelected);
+                                $('.uiselect-choice-status-hidden-accessible').innerText = ariaOptionSelected;
                             }
-                            $('.uiselect-choice-status-hidden-accessible').text(ariaOptionSelected);
-                            $('.uiselect-choice-status-hidden-accessible').innerText = ariaOptionSelected;
 
                             $scope.$broadcast('uis:select', item);
 
                             var locals = {};
                             locals[ctrl.parserResult.itemName] = item;
 
-                            $timeout(function(){
-                                ctrl.onSelectCallback($scope, {
-                                    $item: item,
-                                    $model: ctrl.parserResult.modelMapper($scope, locals)
-                                });
+                            var locals1 = {};
+                            locals1[ctrl.parserResult.itemName] = removedChoice;
+
+                            $timeout(function() {
+                                if (angular.isUndefined(item)) {
+                                    ctrl.onRemoveCallback($scope, {
+                                        $item: removedChoice,
+                                        $model: ctrl.parserResult.modelMapper($scope, locals1)
+                                    });
+                                } else {
+                                    ctrl.onSelectCallback($scope, {
+                                        $item: item,
+                                        $model: ctrl.parserResult.modelMapper($scope, locals)
+                                    });
+                                }
                             });
 
                             //To set focus on current element When user selects an item with clicks the dropdown
@@ -1392,7 +1425,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                                         ctrl.searchInput.triggerHandler('tagged');
                                         var newItem = ctrl.search.replace(KEY.MAP[e.keyCode], '').trim();
                                         if (ctrl.tagging.fct) {
-                                            newItem = ctrl.tagging.fct(newItem);
+                                            newItem = ctrl.tagging.fct({tag: newItem, taggingKey: ctrl.taggingKey});
                                         }
                                         if (newItem) ctrl.select(newItem, true);
                                     });
@@ -1443,7 +1476,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                             if (items && items.length > 0) {
                                 var oldsearch = ctrl.search;
                                 angular.forEach(items, function (item) {
-                                    var newItem = ctrl.tagging.fct ? ctrl.tagging.fct(item) : item;
+                                    var newItem = ctrl.tagging.fct ? ctrl.tagging.fct({tag: item, taggingKey: ctrl.taggingKey}) : item;
                                     if (newItem) {
                                         ctrl.select(newItem, true);
                                     }
@@ -1609,6 +1642,10 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                                 $select.disabled = attrs.disabled !== undefined ? attrs.disabled : false;
                             });
 
+                            attrs.$observe('refreshOnChange', function() {
+                                $select.refreshOnChange = attrs.refreshOnChange !== undefined ? attrs.refreshOnChange : false;
+                            });
+
                             attrs.$observe('resetSearchInput', function() {
                                 // $eval() is needed otherwise we get a string instead of a boolean
                                 var resetSearchInput = scope.$eval(attrs.resetSearchInput);
@@ -1644,6 +1681,12 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                                     {
                                         $select.taggingLabel = attrs.taggingLabel !== undefined ? attrs.taggingLabel : '(new)';
                                     }
+                                }
+                            });
+
+                            attrs.$observe('taggingKey', function() {
+                                if (attrs.tagging !== undefined ) {
+                                    $select.taggingKey = attrs.taggingKey !== undefined ? attrs.taggingKey : '';
                                 }
                             });
 
@@ -2245,11 +2288,11 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                                 items = items.slice(1,items.length);
                                 stashArr = stashArr.slice(1,stashArr.length);
                             }
-                            newItem = $select.tagging.fct($select.search);
+                            newItem = $select.tagging.fct({tag: $select.search, taggingKey: $select.taggingKey});
                             // verify the new tag doesn't match the value of a possible selection choice or an already selected item.
                             if (
                                 stashArr.some(function (origItem) {
-                                    return angular.equals(origItem, $select.tagging.fct($select.search));
+                                    return angular.equals(origItem, $select.tagging.fct({tag: $select.search, taggingKey: $select.taggingKey}));
                                 }) ||
                                 $select.selected.some(function (origItem) {
                                     return angular.equals(origItem, newItem);
@@ -2425,6 +2468,9 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
 
                 scope.$on('uis:close', function (event, skipFocusser) {
                     $timeout(function(){
+                        if ( $select.tagging.isActivated ) {
+                            $select.refreshItems();
+                        }
                         $select.focusser.prop('disabled', false);
                         if (!skipFocusser) $select.focusser[0].focus();
                     },0,false);
@@ -2479,6 +2525,118 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
 
                     scope.$digest();
                 });
+
+                $select.searchInput.on('keyup', function(e) {
+                    // Push a "create new" item into array if there is a search string
+                    if ( $select.tagging.isActivated && $select.search.length > 0 ) {
+
+                        // return early with these keys
+                        if (e.which === KEY.TAB || KEY.isControl(e) || KEY.isFunctionKey(e) || e.which === KEY.ESC || KEY.isVerticalMovement(e.which) ) {
+                            return;
+                        }
+                        // always reset the activeIndex to the first item when tagging
+                        $select.activeIndex = $select.taggingLabel === false ? -1 : 0;
+                        // taggingLabel === false bypasses all of this
+                        if ($select.taggingLabel === false) return;
+
+                        var items = angular.copy( $select.items );
+                        var stashArr = angular.copy( $select.items );
+                        var newItem;
+                        var item;
+                        var hasTag = false;
+                        var tagItems;
+                        var tagItem;
+
+                        // case for object tagging via transform `$select.tagging.fct` function
+                        if ( $select.tagging.fct !== undefined ) {
+                            tagItems = $select.$filter('filter')(items,{'isTag': true});
+                            if ( tagItems.length > 0 ) {
+                                tagItem = tagItems[0];
+                            }
+                            // remove the first element, if it has the `isTag` prop we generate a new one with each keyup, shaving the previous
+                            if ( items.length > 0 && tagItem ) {
+                                hasTag = true;
+                                items = items.slice(1,items.length);
+                                stashArr = stashArr.slice(1,stashArr.length);
+
+                                // verify the new tag doesn't match the value of a possible selection choice.
+                                if (
+                                    stashArr.some(function (origItem) {
+                                        return angular.equals(origItem[$select.taggingKey].toLowerCase(), $select.search.toLowerCase());
+                                    })
+                                ) {
+                                    scope.$evalAsync(function () {
+                                        $select.activeIndex = 0;
+                                        $select.items = items;
+                                    });
+                                    return;
+                                }
+                            }
+                            newItem = $select.tagging.fct({tag: $select.search, taggingKey: $select.taggingKey});
+                            newItem.isTag = true;
+                            // handle newItem string and stripping dupes in tagging string context
+                        } else {
+                            // find any tagging items already in the $select.items array and store them
+                            var originItems = $select.parserResult.source(scope, { $select : {search:''}});
+                            tagItem = items.filter(function(item) { return originItems.indexOf(item) < 0; })[0];
+                            item = items[0];
+                            // remove existing tag item if found (should only ever be one tag item)
+                            if ( item !== undefined && items.length > 0 && tagItem ) {
+                                hasTag = true;
+                                items = items.slice(1,items.length);
+                                stashArr = stashArr.slice(1,stashArr.length);
+                            }
+
+                            newItem = $select.search + ($select.taggingLabel ? (' '+$select.taggingLabel) : '');
+
+                            // verify the the tag doesn't match the value of an existing item from
+                            // the searched data set or the items already selected
+                            if ( _findCaseInsensitiveDupe(stashArr.concat($select.selected)) ) {
+                                // if there is a tag from prev iteration, strip it / queue the change
+                                // and return early
+                                if ( hasTag ) {
+                                    items = stashArr;
+                                    scope.$evalAsync( function () {
+                                        $select.activeIndex = 0;
+                                        $select.items = items;
+                                    });
+                                }
+                                return;
+                            }
+                            if ( _findCaseInsensitiveDupe(stashArr) ) {
+                                // if there is a tag from prev iteration, strip it
+                                if ( hasTag ) {
+                                    $select.items = stashArr.slice(1,stashArr.length);
+                                }
+                                return;
+                            }
+                        }
+
+                        items = [];
+                        items.push(newItem);
+                        items = items.concat(stashArr);
+
+                        scope.$evalAsync( function () {
+                            $select.activeIndex = 0;
+                            $select.items = items;
+                        });
+                    } else if ( $select.tagging.isActivated && $select.search.length === 0 && angular.isArray($select.items)) {
+                        $select.refreshItems();
+                    }
+                });
+                function _findCaseInsensitiveDupe(arr) {
+                    if ( arr === undefined || $select.search === undefined ) {
+                        return false;
+                    }
+                    var hasDupe = arr.filter( function (origItem) {
+                        if ( $select.search.toUpperCase() === undefined || origItem === undefined ) {
+                            return false;
+                        }
+                        return origItem.toUpperCase() === $select.search.toUpperCase();
+                    }).length > 0;
+
+                    return hasDupe;
+                }
 
                 focusser.bind("keyup input", function(e){
 
@@ -2726,7 +2884,7 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
 
     $templateCache.put("select2/choices.tpl.html",
         "<ul class=\"ui-select-choices ui-select-choices-content select2-results\" >" +
-        "<li ng-show=\"$select.showMinMsg\" class=\"select2-no-results\" role=\"listbox\" ng-bind=\"'uiselect.minimum.input.text' | xei18n: $select.minimumInputLength\" aria-live=\"polite\" ></li>" +
+        "<li ng-if=\"$select.minimumInputLength\" ng-show=\"$select.showMinMsg\" class=\"select2-no-results\" role=\"listbox\" ng-bind=\"'uiselect.minimum.input.text' | xei18n: $select.minimumInputLength\" aria-live=\"polite\" ></li>" +
         "<li ng-show=\"$select.showNoResultsMsg && !$select.showMinMsg\" role=\"listbox\"  class=\"select2-no-results \"  ng-bind=\"'uiselect.no.results.found.text' | xei18n\" > " +
         "<li class=\"ui-select-choices-group\" ng-class=\"{\'select2-result-with-children\': $select.choiceGrouped($group) }\" role=\"listbox\"  >" +
         "<div ng-show=\"$select.choiceGrouped($group) && !$select.showNoResultsMsg && !$select.showMinMsg\" class=\"ui-select-choices-group-label select2-result-label\" ng-bind=\"$group.name\"></div>" +
@@ -2737,7 +2895,7 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
         "<div class=\"select2-result-label ui-select-choices-row-inner\"></div></li></ul></li></ul>");
 
     $templateCache.put("select2/match-multiple.tpl.html","<span class=\"ui-select-match\"><li class=\"ui-select-match-item select2-search-choice\" ng-repeat=\"$item in $select.selected\" ng-class=\"{\'select2-search-choice-focus\':$selectMultiple.activeMatchIndex === $index, \'select2-locked\':$select.isLocked(this, $index)}\" ui-select-sort=\"$select.selected\"><span uis-transclude-append=\"\"></span> <a class=\"ui-select-match-close select2-search-choice-close\" ng-click=\"$selectMultiple.removeChoice($index)\" tabindex=\"-1\"></a></li></span>");
-    $templateCache.put("select2/match.tpl.html","<a class=\"select2-choice ui-select-match\" ng-class=\"{\'select2-default\': $select.isEmpty()}\" ng-click=\"$select.toggle($event)\" aria-label=\"{{ $select.baseTitle }} select\"><span ng-show=\"$select.isEmpty()\" class=\"select2-chosen\">{{$select.placeholder}}</span> <span ng-hide=\"$select.isEmpty()\" class=\"select2-chosen\" ng-transclude=\"\"></span> <abbr ng-if=\"$select.allowClear && !$select.isEmpty()\" class=\"select2-search-choice-close\" ng-click=\"$select.clear($event)\"></abbr> <span class=\"select2-arrow ui-select-toggle\"><b></b></span></a>");
+    $templateCache.put("select2/match.tpl.html","<a class=\"select2-choice ui-select-match\" ng-class=\"{\'select2-default\': $select.isEmpty()}\" ng-click=\"$select.toggle($event)\" aria-label=\"{{ $select.baseTitle }} select\"><span ng-show=\"$select.isEmpty()\" class=\"select2-chosen\">{{$select.placeholder}}</span> <span ng-hide=\"$select.isEmpty()\" class=\"select2-chosen\" ng-transclude=\"\"></span> <abbr ng-if=\"$select.allowClear && !$select.isEmpty()\" class=\"select2-search-choice-close ui-select-clear\" tabindex=\"0\" ng-click=\"$select.clear($event)\" key-enter></abbr> <span class=\"select2-arrow ui-select-toggle\"><b></b></span></a>");
 
     $templateCache.put("select2/select-multiple.tpl.html",
         "<div class=\"ui-select-container ui-select-multiple select2 select2-container select2-container-multi\" " +
@@ -2775,13 +2933,19 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
                     items.forEach(function(item) {
                         var itemMatches = false;
 
-                        var keys = Object.keys(props);
-                        for (var i = 0; i < keys.length; i++) {
-                            var prop = keys[i];
-                            var text = props[prop].toLowerCase();
-                            if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                        if (typeof item === 'string') {
+                            if (item.toLowerCase().indexOf(props.toLowerCase()) !== -1) {
                                 itemMatches = true;
-                                break;
+                            }
+                        } else if (typeof item === 'object') {
+                            var keys = Object.keys(props);
+                            for (var i = 0; i < keys.length; i++) {
+                                var prop = keys[i];
+                                var text = props[prop].toLowerCase();
+                                if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                                    itemMatches = true;
+                                    break;
+                                }
                             }
                         }
 
@@ -2795,11 +2959,15 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
                 }
 
                 return out;
-            }
+            };
         }).directive('reachInfinity', ['$parse', '$timeout', '$q', function($parse, $timeout, $q) {
             function height(elem) {
+                if (!elem) {
+                    return;
+                }
+
                 elem = elem[0] || elem;
-                if (isNaN(elem.offsetHeight)) {
+                if (isNaN(elem.offsetHeight) && elem.document) {
                     return elem.document.documentElement.clientHeight;
                 } else {
                     return elem.offsetHeight;
@@ -2807,15 +2975,19 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
             }
 
             function offsetTop(elem) {
-                if (!elem[0].getBoundingClientRect || elem.css('none')) {
+                if (!elem || !elem[0] || !elem[0].getBoundingClientRect || elem.css('none')) {
                     return;
                 }
                 return elem[0].getBoundingClientRect().top + pageYOffset(elem);
             }
 
             function pageYOffset(elem) {
+                if (!elem) {
+                    return;
+                }
+
                 elem = elem[0] || elem;
-                if (isNaN(window.pageYOffset)) {
+                if (isNaN(window.pageYOffset) && elem.document) {
                     return elem.document.documentElement.scrollTop;
                 } else {
                     return elem.ownerDocument.defaultView.pageYOffset;
@@ -2878,6 +3050,9 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
                                 containerTopOffset = 0,
                                 elementBottom;
 
+                            rows = elem.querySelectorAll('.ui-select-choices-row');
+                            lastChoice = angular.element(rows[rows.length - 1]);
+
                             if (offsetTop(container) !== void 0) {
                                 containerTopOffset = offsetTop(container);
                             }
@@ -2885,7 +3060,7 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
                             elementBottom = offsetTop(lastChoice) - containerTopOffset + height(lastChoice);
 
                             var remaining = elementBottom - containerBottom,
-                                shouldScroll = remaining <= height(container) * (scrollDistance + 1);
+                                shouldScroll = (height(container) > 0) && (remaining <= height(container) * (scrollDistance + 1));
 
                             if (shouldScroll) {
                                 $q.when($parse(attrs['reachInfinity'])(scope)).then(function() {
@@ -2921,7 +3096,22 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
                     });
                 }
             }
-        }]);
+        }])
+        .directive("keyEnter", function() {
+            return {
+                restrict: 'A',
+                scope: true,
+                link: function (scope, element) {
+                    element.on("keydown", function(event) {
+                        if (event.which === 13) {
+                            element.click();
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                    });
+                }
+            };
+        });
 }());
 angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
 (function () {
@@ -8541,7 +8731,7 @@ clearFocus = function (e) {
     'use strict';
 
     angular.module('popupModal', ['xe-ui-components'])
-        .directive('xePopupModal', ['$timeout','$compile', function ($timeout, $compile) {
+        .directive('xePopupModal', ['$timeout', function ($timeout) {
             return {
                 restrict: 'EA',
                 scope: {
@@ -8555,18 +8745,34 @@ clearFocus = function (e) {
                     popupButtons:'?popupButtons'
                 }, // we want to insert custom content inside the directive
                 templateUrl: 'templates/modal.html',
-                controller: ['$scope', function ($scope) {
-                    $scope.hide = function () {
+                controller: ['$scope', function($scope) {
+                    $scope.hide = function() {
+                        $scope.show = false;
+                        if ($scope.focusBackElement) {
+                            angular.element('#' + $scope.focusBackElement).focus();
+                        }
                         $scope.show = false;
                     };
                     $scope.popupTitle = $scope.pageheader;
                     $scope.focusBackElement = $scope.focusbackelement;
                 }],
+                link: function(scope, elem, attrs) {
+                    elem.attr('id', attrs.id);
 
-                link: function (scope, ele) {
-                    // Keyboard Navigation
-                    angular.element('#xeModalMask').attr('tabindex', 0).focus();
-                    ele.on('keydown', function (event) {
+                    elem.attr('tabindex', 0).focus();
+
+                    if (attrs.pageheaderXeField) {
+                        elem.find('.xe-popup-header .xe-app-title').attr('xe-field', attrs.pageheaderXeField);
+                    }
+
+                    if (attrs.width) {
+                        elem.find('.xe-popup-container').css({
+                            'max-width': attrs.width,
+                            'width': attrs.width
+                        });
+                    }
+
+                    elem.on('keydown', function(e) {
                         //ESC Key and Enter
                         if (event.keyCode === 27 || (document.activeElement.className === "xe-popup-close" && event.keyCode === 13)) {
                             scope.show = false;
@@ -8578,32 +8784,26 @@ clearFocus = function (e) {
 
                     });
 
-                    $timeout(function () {
-                        angular.element("#tabOrdering").on('focus', function (event) {
-                            angular.element("#xePopupClose").focus();
+                    $timeout(function() {
+                        elem.on('focus', '#tabOrdering', function() {
+                            elem.find('#xePopupClose').focus();
                         });
 
-                        angular.element("#xePopupClose").on('keydown', function (event) {
-                            if (event.shiftKey) {
-                                if (event.keyCode === 9) {
-                                    if (angular.element("#buttonContainer").find('xe-button').length > 1) {
-                                        angular.element("#buttonContainer").find('xe-button:last').closest('xe-button').focus();
-                                    } else {
-                                        angular.element("#buttonContainer").find('xe-button').focus();
-                                    }
-                                }
-                            } else if (event.keyCode === 9) {
+                        elem.on('keydown', '#xePopupClose', function(e) {
+                            if (e.keyCode === 9 && e.shiftKey) {
+                                elem.find('#buttonContainer xe-button:last button:not(:disabled):not(:hidden)').focus();
+                            } else if (e.keyCode === 9) {
                                 return true;
                             }
-                            if (event.keyCode === 27 || (document.activeElement.className === "xe-popup-close" && event.keyCode === 13)) {
+                            if (e.keyCode === 27 || e.keyCode === 13) {
                                 scope.show = false;
                                 scope.$apply();
                                 if(null!=scope.focusBackElement && undefined!=scope.focusBackElement) {
                                     angular.element("#" + scope.focusBackElement).focus();
                                 }
                             }
-                            event.preventDefault();
-                            event.stopImmediatePropagation();
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
                         });
 
                     }, 100);
