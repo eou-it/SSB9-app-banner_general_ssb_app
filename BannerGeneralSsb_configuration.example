@@ -311,23 +311,7 @@ ssconfig.app.seeddata.keys = [
 
 */
 //Below are keys configured using pattern 2
-ssconfig.app.seeddata.keys = [
-	['BCMLOCATION'],
-	['BANNER_AIP_BLOCK_PROCESS_PERSONA'],
-	['aip.restricted.attachment.type'],
-	['aip.allowed.attachment.max.size'],
-	['aip.institution.maximum.attachment.number'],
-	['aip.attachment.file.storage.location'],
-	['bdmserver.AXWebServicesUrl'],
-	['bdmserver.AXWebAccessURL'],
-	['bdmserver.Username'],
-	['bdmserver.BdmDataSource'],
-	['bdmserver.AppName'],
-	['bdmserver.file.location'],
-	['bdmserver.defaultFileSize'],
-	['bdmserver.defaultfile.ext'],
-	['bdm.enabled']
-]
+
 
 
 /*******************************************************************************
