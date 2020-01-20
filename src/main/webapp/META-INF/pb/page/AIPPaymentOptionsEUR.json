@@ -2,7 +2,7 @@
    "constantName": "AIPPaymentOptionsEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2019-12-19T17:22:36Z",
+   "fileTimestamp": "2020-01-17T15:45:18Z",
    "modelView": {
       "components": [
          {
@@ -29,7 +29,7 @@
             "allowNew": false,
             "name": "LoadCSSDetail",
             "allowModify": false,
-            "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n$(\"#pbid-BankTranferText-container\").hide();\n$(\"#banktransfer\").click(function(){\n   $(\"#pbid-BankTranferText-container\").show();\n  });",
+            "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n$(\"#pbid-BankTranferText-container\").hide();\n$(\"#banktransfer\").click(function(){\n   $(\"#pbid-BankTranferText-container\").show();\n  });\ndocument.getElementById(\"pbid-PaymentOptionsLinks\").scrollIntoView(true);",
             "pageSize": 5,
             "model": "CSSModel",
             "allowReload": false,
@@ -43,7 +43,7 @@
             "value": "<h2>Payment Options</h2>\n\n<p>Please select your part or full method of payment from the list below:</p>\n<p>\n<a href=\"https://s001-idm.cloud.elluciandemo.com/ssomanager/c/SSB?pkg=bwkkddpy.P_Home_Page\" target=\"_blank\">Direct Debit</a></br>\n<a href=\"https://secure.touchnet.net:443/C20184_tsa/web/caslogin.jsp\" target=\"_blank\">Credit Card</a></br>\n<button id=\"banktransfer\">Bank Transfer</button>\n</p>"
          },
          {
-            "name": "BankTranferText",
+            "name": "BankTransferText",
             "type": "literal",
             "value": "<p>Please provide the following details to your bank to set up an electronic funds transfer: </p>\n<table>\n<tr><td><b>Bank Name:</b><td/><td>ELLUCIAN UNIVERSITY PLC</td></tr>\n<tr><td><b>BIC Code:</b><td/><td>ELLUCIAN</td></tr>\n<tr><td><b>Address:</b><td/><td>CHARLEMONT PLACE, 2, DUBLIN, IRELAND</td></tr>\n<tr><td><b>Reference:</b><td/><td>A00014030-201819-1</td></tr>\n</table>\n<p></p>"
          },
@@ -73,14 +73,15 @@
                      }
                   ],
                   "allowNew": false,
-                  "name": "PaymentConfirmation",
-                  "allowModify": false,
                   "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;\n$PaymentConfirmation.$load();",
                   "pageSize": 5,
-                  "model": "ActionItemUpdate",
-                  "allowReload": false,
                   "loadInitially": true,
                   "type": "detail",
+                  "name": "PaymentConfirmation",
+                  "allowModify": false,
+                  "onLoad": "",
+                  "model": "ActionItemUpdate",
+                  "allowReload": false,
                   "parameters": {
                      "actionitemid": "$$params.actionItemId",
                      "pageid": "$$params.id"

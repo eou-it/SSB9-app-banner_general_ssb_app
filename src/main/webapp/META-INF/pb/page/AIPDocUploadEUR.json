@@ -2,7 +2,7 @@
    "constantName": "AIPDocUploadEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2019-12-19T17:22:36Z",
+   "fileTimestamp": "2020-01-17T15:46:56Z",
    "modelView": {
       "components": [
          {
@@ -126,7 +126,7 @@
                   "onSave": "",
                   "allowNew": false,
                   "documentation": "Displays data from virtual domain ActionItemContent",
-                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true});\nwindow.params.saved=true;",
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true});\nwindow.params.saved=true;\n$ActionItemContentDetail.$load;",
                   "pageSize": 1,
                   "label": "",
                   "loadInitially": false,

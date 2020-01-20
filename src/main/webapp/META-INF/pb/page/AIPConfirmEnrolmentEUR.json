@@ -2,7 +2,7 @@
    "constantName": "AIPConfirmEnrolmentEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2019-12-19T17:22:36Z",
+   "fileTimestamp": "2020-01-17T15:45:18Z",
    "modelView": {
       "components": [
          {
@@ -36,7 +36,7 @@
                   "allowNew": false,
                   "name": "SelectedResponses",
                   "allowModify": false,
-                  "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');",
+                  "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\ndocument.getElementById(\"pbid-ConfirmEnrolment-label\").scrollIntoView(true);",
                   "pageSize": 5,
                   "model": "GetResponseStatusName",
                   "allowReload": false,
@@ -69,7 +69,7 @@
                   "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}",
                   "onSave": "",
                   "allowNew": false,
-                  "onSaveSuccess": "alert(\"Your Enrolment is complete\", {type:\"success\", flash:true}); \nwindow.params.saved=true;\n$(\"#pbid-ConfirmEnrolmentComplete\").addClass(\"disabled\");\n$ConfirmEnrolmentConfirmation.$load();",
+                  "onSaveSuccess": "alert(\"Your Enrolment is complete\", {type:\"success\", flash:true}); \nwindow.params.saved=true;\n$(\"#pbid-ConfirmEnrolmentComplete\").addClass(\"disabled\");",
                   "pageSize": 1,
                   "loadInitially": true,
                   "type": "detail",

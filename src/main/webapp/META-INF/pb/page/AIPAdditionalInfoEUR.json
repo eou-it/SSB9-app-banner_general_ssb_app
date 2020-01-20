@@ -2,7 +2,7 @@
    "constantName": "AIPAdditionalInfoEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2019-12-19T17:22:36Z",
+   "fileTimestamp": "2020-01-17T15:45:18Z",
    "modelView": {
       "components": [
          {
@@ -369,7 +369,7 @@
                         "allowNew": false,
                         "name": "AdditionalInfoConfirmation",
                         "allowModify": false,
-                        "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                        "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;\n$AdditionalInfoConfirmation.$load();",
                         "pageSize": 5,
                         "model": "ActionItemUpdate",
                         "allowReload": false,

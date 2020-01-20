@@ -2,7 +2,7 @@
    "constantName": "AIPContactDetailsEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2019-12-19T17:22:36Z",
+   "fileTimestamp": "2020-01-17T15:45:18Z",
    "modelView": {
       "components": [
          {
@@ -87,7 +87,8 @@
                               "model": "GOREMAL_PREFERRED_IND",
                               "label": "Preferred",
                               "loadInitially": true,
-                              "type": "boolean"
+                              "type": "boolean",
+                              "value": "N"
                            }
                         ],
                         "allowNew": true,

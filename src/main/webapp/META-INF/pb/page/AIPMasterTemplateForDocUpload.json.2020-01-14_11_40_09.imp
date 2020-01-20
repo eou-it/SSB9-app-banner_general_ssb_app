@@ -1,0 +1,163 @@
+{
+   "constantName": "AIPMasterTemplateForDocUpload",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2019-08-04T16:51:18Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "ActionItemContent",
+            "resource": "virtualDomains.ActionItemContent",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ActionItemStatus",
+            "resource": "virtualDomains.ActionItemStatus",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ActionItemReviewStatus",
+            "resource": "virtualDomains.ActionItemReviewStatus",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "UserActionItem",
+            "resource": "virtualDomains.UserActionItem",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "loadInitially": true,
+            "model": "ActionItemContent",
+            "name": "popAID",
+            "onLoad": "if ( typeof(window.params.actionItemId) != 'undefined') {\n    var aid = window.params.actionItemId;\n} else {\n   //temporary - for testing only.\n   window.params.actionItemId = 6;\n}\nsetTimeout( function(){ \n    $ActionItemId.$load();\n}, \n500);",
+            "parameters": {},
+            "readonly": false,
+            "required": false,
+            "style": "hidden",
+            "type": "text",
+            "validation": {}
+         },
+         {
+            "loadInitially": true,
+            "model": "ActionItemReviewStatus",
+            "name": "ReviewStatus",
+            "parameters": {
+               "actionitemid": "$$params.actionItemId"
+            },
+            "readonly": false,
+            "required": false,
+            "style": "hidden",
+            "type": "text",
+            "validation": {},
+            "value": "gcraact_rvst_code"
+         },
+         {
+            "loadInitially": false,
+            "model": "ActionItemContent",
+            "name": "ActionItemId",
+            "onLoad": "$ActionItemContentDetail.$load();",
+            "parameters": {
+               "actionItemId": "$$params.actionItemId",
+               "pageid": "$$params.id"
+            },
+            "readonly": false,
+            "required": false,
+            "style": "hidden",
+            "type": "text",
+            "validation": {},
+            "value": "ACTION_ITEM_ID"
+         },
+         {
+            "loadInitially": true,
+            "model": "UserActionItem",
+            "name": "UserActionItemId",
+            "parameters": {
+               "actionitemid": "$$params.actionItemId"
+            },
+            "readonly": false,
+            "required": false,
+            "style": "hidden",
+            "type": "text",
+            "validation": {},
+            "value": "gcraact_surrogate_id"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": true,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "name": "ActionItemNameHeader",
+                        "type": "literal",
+                        "value": "<h4>$ActionItemContentDetail.ACTION_ITEM_TITLE</h4>"
+                     },
+                     {
+                        "asHtml": true,
+                        "loadInitially": true,
+                        "model": "ACTION_ITEM_CONTENT",
+                        "name": "ActionItemContentDisplay",
+                        "onLoad": "/*$(\"#pbid-ActionItemContentDetail-save-button\").removeClass('btn-sm').addClass('btn-primary').addClass('btn-md');*/\n\n$ActionItemStatusAgree.$load();",
+                        "type": "display",
+                        "value": ""
+                     },
+                     {
+                        "labelKey": "STATUS_RULE_LABEL_TEXT",
+                        "loadInitially": false,
+                        "model": "STATUS_RULE_ID",
+                        "name": "ActionItemStatusAgree",
+                        "onLoad": "setTimeout(function () {\n\tvar userActionItemId = $UserActionItemId.GCRAACT_SURROGATE_ID;\n\tvar isCheckbox = $ActionItemContentDetail.STATUS_COUNT === 1 ? true : false;\n\tvar selectedResponse = null;\n        var browserType = window.navigator.userAgent;\n\tif (isCheckbox) {\n\t\tvar radio = document.getElementById(\"pbid-ActionItemStatusAgree-radio-0-0\");\n\t\tradio.type = \"checkbox\";\n\t}\n\tvar isResponseReviewRequired = false;\n      console.log(typeof $ReviewStatus)\n\tif (typeof $ReviewStatus !== 'undefined') {\n             console.log(\"IF Reve\")\n\t\tisResponseReviewRequired = true;\n\t\t$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop({\n\t\t\tdisabled: isResponseReviewRequired\n\t\t});\n\t}\n\t$(\"#pbid-ActionItemContentDetail-save-button\").click(function () {\n\t\tselectedResponse = $(\"input[id^='pbid-ActionItemStatusAgree-radio']:checked\")[0].id;\n\t\tvar responseElementId = selectedResponse.split(\"pbid-ActionItemStatusAgree-radio-0-\");\n\t\tisResponseReviewRequired = data[parseInt(responseElementId[1])].STATUS_REV_REQ_IND === 'Y' ? true : false;\n          \n\t\tif (isResponseReviewRequired) {\n\t\t\t$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop({\n\t\t\t\tdisabled: isResponseReviewRequired\n\t\t\t});\n\t\t\t$(\"#pbid-ActionItemContentDetail-save-button\").prop({\n\t\t\t\tdisabled: isResponseReviewRequired\n\t\t\t});\n\t\t\twindow.params.isResponseLocked = true;\n\t\t}\n\t});\n\n\tfor (var elementId = 0; elementId < data.length; elementId++) {\n\t\tvar responseElementId = \"#pbid-ActionItemStatusAgree-label-0-\" + elementId;\n\t\tvar paperClipId = \"pbid-ActionItemStatusAgree-paper-clip-0-\" + elementId;\n\t\tvar responseElement = $('#pbid-ActionItemStatusAgree-0').find(responseElementId);\n\t\tvar allowedAttachments = data[elementId].STATUS_ALLOWED_ATTACHMENT;\n\t\tvar responseId = data[elementId].STATUS_RULE_ID;\n\t\tif (allowedAttachments > 0) {\n\t\t\tAIP.ListItemPageCtrl.prototype.documentUploader(userActionItemId, paperClipId, responseElement, allowedAttachments, responseId, isResponseReviewRequired);\n\t\t}\n\t}\n\tselectedResponse = $(\"input[id^='pbid-ActionItemStatusAgree-radio']:checked\");\n\tif (selectedResponse.length > 0) {\n\t\tvar selResElementId = selectedResponse[0].id;\n\t\tvar index = selResElementId.split(\"pbid-ActionItemStatusAgree-radio-0-\")[1];\n\t\tif ($(\"#pbid-ActionItemStatusAgree-paper-clip-0-\" + index).length > 0) {\n\n\t\t\t//IE 10 or IE 11\n\t\t\tif ((browserType.indexOf('MSIE') > 0) || browserType.indexOf('Trident') > 0 ) {\n\t\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-\" + index)[0].setAttribute(\"src\", \"../../assets/attach_icon_default.svg\");\n\t\t\t} else {\n\t\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-\" + index)[0].setAttribute(\"src\", \"../assets/attach_icon_default.svg\");\n\t\t\t}\n\t\t}\n\t}\n\n\tif (isCheckbox) {\n\t\t$('input[type=\"checkbox\"]').click(function () {\n\t\t\tif ($(\"input[type='checkbox']:checked\").length === 1) {\n\t\t\t\t$(\"#pbid-ActionItemContentDetail-save-button\").removeAttr(\"disabled\");\n\t\t\t\tif ($(\"#pbid-ActionItemStatusAgree-paper-clip-0-0\").length > 0) {\n\t\t\t\t\t\n\t\t\t\t\t//IE 10 or IE 11\n\t\t\t\t\tif ((browserType.indexOf('MSIE') > 0) || browserType.indexOf('Trident') > 0 ) {\n\t\t\t\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-0\")[0].setAttribute(\"src\", \"../../assets/attach_icon_default.svg\");\n\t\t\t\t\t} else {\n\t\t\t\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-0\")[0].setAttribute(\"src\", \"../assets/attach_icon_default.svg\");\n\t\t\t\t\t}\n\n\t\t\t\t} else {\n\n\t\t\t\t\t//IE 10 or IE 11\n\t\t\t\t\tif ((browserType.indexOf('MSIE') > 0) || browserType.indexOf('Trident') > 0 ) {\n\t\t\t\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-0\")[0].setAttribute(\"src\", \"../../assets/attach_icon_disabled.svg\");\n\t\t\t\t\t} else {\n\t\t\t\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-0\")[0].setAttribute(\"src\", \"../assets/attach_icon_disabled.svg\");\n\t\t\t\t\t}\n\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\t$(\"#pbid-ActionItemContentDetail-save-button\").attr(\"disabled\", \"disabled\");\n\t\t\t}\n\t\t});\n\t} else {\n\t\t$('input[type=\"radio\"]').click(function () {\n\n\t\t\t//IE 10 or IE 11\n\t\t\tif ((browserType.indexOf('MSIE') > 0) || browserType.indexOf('Trident') > 0 ) {\n\t\t\t\t$('#pbid-ActionItemStatusAgree-0').find('input[type=\"image\"]').attr(\"src\", \"../../assets/attach_icon_disabled.svg\");\n\t\t\t} else {\n\t\t\t\t$('#pbid-ActionItemStatusAgree-0').find('input[type=\"image\"]').attr(\"src\", \"../assets/attach_icon_disabled.svg\");\n\t\t\t}\n\n\n\t\t\tvar id = $(\"input[type='radio']:checked\")[0].id;\n\t\t\tid = id.split(\"pbid-ActionItemStatusAgree-radio-0-\");\n\t\t\tif ($(\"#pbid-ActionItemStatusAgree-paper-clip-0-\" + id[1]).length > 0) {\n\n\t\t\t\t//IE 10 or IE 11\n\t\t\t\tif ((browserType.indexOf('MSIE') > 0) || browserType.indexOf('Trident') > 0 ) {\n\t\t\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-\" + id[1])[0].setAttribute(\"src\", \"../../assets/attach_icon_default.svg\");\n\t\t\t\t} else {\n\t\t\t\t\t$(\"#pbid-ActionItemStatusAgree-paper-clip-0-\" + id[1])[0].setAttribute(\"src\", \"../assets/attach_icon_default.svg\");\n\t\t\t\t}\n\t\t\t}\n\t\t});\n\t}\n}, 300);",
+                        "onUpdate": "params.isResponseModified = true;",
+                        "required": false,
+                        "sourceModel": "ActionItemStatus",
+                        "sourceParameters": {
+                           "actionitemid": "$$params.actionItemId"
+                        },
+                        "style": "",
+                        "type": "radio",
+                        "value": "",
+                        "valueKey": "STATUS_RULE_ID"
+                     }
+                  ],
+                  "documentation": "Displays data from virtual domain ActionItemContent",
+                  "label": "",
+                  "loadInitially": false,
+                  "model": "ActionItemContent",
+                  "name": "ActionItemContentDetail",
+                  "newRecordLabel": "",
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});};\n$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop('disabled', false);\nwindow.params.isResponseLocked = false;",
+                  "onLoad": "setTimeout( function(){ \n    console.log(\"status count \" + $ActionItemContentDetail.STATUS_COUNT);\n    $ActionItemStatusAgree.$load();\n}, \n300);",
+                  "onSave": "",
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true});\nwindow.params.saved=true;\n$ReviewStatus.$load();\n$ActionItemContentDetail.$load();",
+                  "pageSize": 1,
+                  "parameters": {
+                     "actionitemid": "$$params.actionItemId",
+                     "pageid": "$$params.id"
+                  },
+                  "type": "detail"
+               }
+            ],
+            "label": "",
+            "name": "PolicyBlock",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "label": "",
+      "name": "AIPMasterTemplateForDocUpload",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}
