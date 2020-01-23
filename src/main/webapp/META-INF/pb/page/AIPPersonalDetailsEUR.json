@@ -2,7 +2,7 @@
    "constantName": "AIPPersonalDetailsEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-01-17T15:45:18Z",
+   "fileTimestamp": "2020-01-22T14:30:50Z",
    "modelView": {
       "components": [
          {
@@ -126,6 +126,7 @@
                               "model": "SPBPERS_GNDR_CODE",
                               "sourceModel": "GenderData",
                               "style": "",
+                              "placeholder": "None",
                               "labelKey": "GTVGNDR_GNDR_DESC",
                               "valueKey": "GTVGNDR_GNDR_CODE",
                               "onUpdate": "params.isResponseModified = true;"
@@ -155,6 +156,7 @@
                               "model": "SPBPERS_PPRN_CODE",
                               "sourceModel": "PronounData",
                               "style": "",
+                              "placeholder": "None",
                               "labelKey": "GTVPPRN_PPRN_DESC",
                               "valueKey": "GTVPPRN_PPRN_CODE",
                               "onUpdate": "params.isResponseModified = true;"
@@ -207,7 +209,7 @@
                   "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}",
                   "onSave": "",
                   "allowNew": false,
-                  "onSaveSuccess": "$PersonalDetailsConfirmation.$load();\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;\n$PersonalDetailsConfirmation.$load();",
                   "pageSize": 5,
                   "loadInitially": true,
                   "type": "detail",

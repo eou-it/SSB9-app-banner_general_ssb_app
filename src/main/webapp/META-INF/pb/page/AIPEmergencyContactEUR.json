@@ -2,7 +2,7 @@
    "constantName": "AIPEmergencyContactEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-01-17T15:45:18Z",
+   "fileTimestamp": "2020-01-22T14:32:55Z",
    "modelView": {
       "components": [
          {
@@ -98,6 +98,17 @@
                               "type": "select",
                               "valueKey": "STVNATN_CODE",
                               "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "HomeAddressCountryHidden",
+                              "style": "hidden",
+                              "model": "SPRADDR_NATN_CODE",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
                            }
                         ],
                         "allowNew": false,
@@ -182,7 +193,7 @@
                               "label": "Use Home Address",
                               "loadInitially": true,
                               "type": "boolean",
-                              "onUpdate": "if($('#pbid-PrimaryEmergencyContactHomeAddress-0').prop('checked')){\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd1-0\").value = document.getElementById(\"pbid-HomeAddressLine1-0\").value;\n$('#pbid-EmergencyContactPrimaryAdd1-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryAdd1-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd2-0\").value = document.getElementById(\"pbid-HomeAddressLine2-0\").value;\n$('#pbid-EmergencyContactPrimaryAdd2-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryAdd2-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCity-0\").value = document.getElementById(\"pbid-HomeAddressCity-0\").value;\n$('#pbid-EmergencyContactPrimaryCity-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryCity-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactPrimaryPostcode-0\").value = document.getElementById(\"pbid-HomeAddressPostcode-0\").value;\n$('#pbid-EmergencyContactPrimaryPostcode-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryPostcode-0').trigger('change');\n}else {\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd1-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd2-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCity-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactPrimaryPostcode-0\").value = '';\n document.getElementById(\"pbid-EmergencyContactPrimaryCountry-0\").value = ''; \n}"
+                              "onUpdate": "if($('#pbid-PrimaryEmergencyContactHomeAddress-0').prop('checked')){\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd1-0\").value = document.getElementById(\"pbid-HomeAddressLine1-0\").value;\n$('#pbid-EmergencyContactPrimaryAdd1-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryAdd1-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd2-0\").value = document.getElementById(\"pbid-HomeAddressLine2-0\").value;\n$('#pbid-EmergencyContactPrimaryAdd2-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryAdd2-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCity-0\").value = document.getElementById(\"pbid-HomeAddressCity-0\").value;\n$('#pbid-EmergencyContactPrimaryCity-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryCity-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactPrimaryPostcode-0\").value = document.getElementById(\"pbid-HomeAddressPostcode-0\").value;\n$('#pbid-EmergencyContactPrimaryPostcode-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryPostcode-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCountry-0\").value = document.getElementById(\"pbid-HomeAddressCountry-0\").value;\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCountryHidden-0\").value = document.getElementById(\"pbid-HomeAddressCountryHidden-0\").value;\n$('#pbid-EmergencyContactPrimaryCountryHiddene-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryCountryHidden-0').trigger('change');\n}else {\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd1-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd2-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCity-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactPrimaryPostcode-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCountry-0\").value = ''; \n}"
                            },
                            {
                               "readonly": false,
@@ -249,6 +260,17 @@
                               "labelKey": "STVNATN_NATION",
                               "type": "select",
                               "valueKey": "STVNATN_CODE",
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactPrimaryCountryHidden",
+                              "style": "hidden",
+                              "model": "SPREMRG_NATN_CODE",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
                               "required": false
                            }
                         ],
@@ -340,7 +362,7 @@
                               "label": "Use Home Address",
                               "loadInitially": true,
                               "type": "boolean",
-                              "onUpdate": "if($('#pbid-SecondaryEmergencyContactHomeAddress-0').prop('checked')){\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd1-0\").value = document.getElementById(\"pbid-HomeAddressLine1-0\").value;\n$('#pbid-EmergencyContactSecondaryAdd1-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryAdd1-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd2-0\").value = document.getElementById(\"pbid-HomeAddressLine2-0\").value;\n$('#pbid-EmergencyContactSecondaryAdd2-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryAdd2-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactSecondaryCity-0\").value = document.getElementById(\"pbid-HomeAddressCity-0\").value;\n$('#pbid-EmergencyContactSecondaryCity-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryCity-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactSecondaryPostcode-0\").value = document.getElementById(\"pbid-HomeAddressPostcode-0\").value;\n$('#pbid-EmergencyContactSecondaryPostcode-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryPostcode-0').trigger('change');\n}else {\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd1-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd2-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactSecondaryCity-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactSecondaryPostcode-0\").value = '';\n document.getElementById(\"pbid-EmergencyContactSecondaryCountry-0\").value = ''; \n}"
+                              "onUpdate": "if($('#pbid-SecondaryEmergencyContactHomeAddress-0').prop('checked')){\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd1-0\").value = document.getElementById(\"pbid-HomeAddressLine1-0\").value;\n$('#pbid-EmergencyContactSecondaryAdd1-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryAdd1-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd2-0\").value = document.getElementById(\"pbid-HomeAddressLine2-0\").value;\n$('#pbid-EmergencyContactSecondaryAdd2-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryAdd2-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactSecondaryCity-0\").value = document.getElementById(\"pbid-HomeAddressCity-0\").value;\n$('#pbid-EmergencyContactSecondaryCity-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryCity-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactSecondaryPostcode-0\").value = document.getElementById(\"pbid-HomeAddressPostcode-0\").value;\n$('#pbid-EmergencyContactSecondaryPostcode-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryPostcode-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactSecondaryCountry-0\").value = document.getElementById(\"pbid-HomeAddressCountry-0\").value;\ndocument.getElementById(\"pbid-EmergencyContactSecondaryCountryHidden-0\").value = document.getElementById(\"pbid-HomeAddressCountryHidden-0\").value;\n$('#pbid-EmergencyContactSecondaryCountryHiddene-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryCountryHidden-0').trigger('change');\n}else {\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd1-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd2-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactSecondaryCity-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactSecondaryPostcode-0\").value = '';\n document.getElementById(\"pbid-EmergencyContactSecondaryCountry-0\").value = ''; \n}"
                            },
                            {
                               "readonly": false,
@@ -407,6 +429,17 @@
                               "labelKey": "STVNATN_NATION",
                               "type": "select",
                               "valueKey": "STVNATN_CODE",
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactSecondaryCountryHidden",
+                              "style": "hidden",
+                              "model": "SPREMRG_NATN_CODE",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
                               "required": false
                            }
                         ],

@@ -2,7 +2,7 @@
    "constantName": "AIPPaymentOptionsEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-01-17T15:45:18Z",
+   "fileTimestamp": "2020-01-22T14:30:50Z",
    "modelView": {
       "components": [
          {
@@ -29,7 +29,7 @@
             "allowNew": false,
             "name": "LoadCSSDetail",
             "allowModify": false,
-            "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n$(\"#pbid-BankTranferText-container\").hide();\n$(\"#banktransfer\").click(function(){\n   $(\"#pbid-BankTranferText-container\").show();\n  });\ndocument.getElementById(\"pbid-PaymentOptionsLinks\").scrollIntoView(true);",
+            "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n$(\"#pbid-BankTransferText-container\").hide();\n$(\"#banktransfer\").click(function(){\n   $(\"#pbid-BankTransferText-container\").show();\n  });\ndocument.getElementById(\"pbid-PaymentOptionsLinks\").scrollIntoView(true);",
             "pageSize": 5,
             "model": "CSSModel",
             "allowReload": false,

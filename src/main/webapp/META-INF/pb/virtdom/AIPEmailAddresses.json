@@ -1,6 +1,6 @@
 {
    "owner": null,
-   "codePut": "DECLARE\r\nBEGIN\r\nGB_EMAIL.p_update(\r\n    p_pidm =>              :parm_user_pidm,\r\n    p_emal_code =>         :GOREMAL_EMAL_CODE,\r\n    p_email_address =>     :GOREMAL_EMAIL_ADDRESS,\r\n    p_status_ind =>       'A',\r\n    p_preferred_ind =>     :GOREMAL_PREFERRED_IND,\r\n    p_user_id =>           F_GetSpridenID(:parm_user_pidm),\r\n    p_comment =>           NULL,\r\n    p_disp_web_ind =>      'Y',\r\n    p_data_origin  =>      'OENR',\r\n    p_rowid  =>            :id);\r\n\r\nEND;",
+   "codePut": "DECLARE\r\nBEGIN\r\nIF :GOREMAL_PREFERRED_IND = 'Y' THEN \r\nUPDATE GOREMAL \r\nSET GOREMAL_PREFERRED_IND = 'N'\r\nWHERE GOREMAl_PIDM = :parm_user_pidm;\r\nEND IF;\r\nGB_EMAIL.p_update(\r\n    p_pidm =>              :parm_user_pidm,\r\n    p_emal_code =>         :GOREMAL_EMAL_CODE,\r\n    p_email_address =>     :GOREMAL_EMAIL_ADDRESS,\r\n    p_status_ind =>       'A',\r\n    p_preferred_ind =>     :GOREMAL_PREFERRED_IND,\r\n    p_user_id =>           F_GetSpridenID(:parm_user_pidm),\r\n    p_comment =>           NULL,\r\n    p_disp_web_ind =>      'Y',\r\n    p_data_origin  =>      'OENR',\r\n    p_rowid  =>            :id);\r\nEND;",
    "codeDelete": "BEGIN\r\nGB_EMAIL.p_delete(\r\n    p_pidm =>              :parm_user_pidm,\r\n    p_emal_code =>         :GOREMAL_EMAL_CODE,\r\n    p_email_address =>     :GOREMAL_EMAIL_ADDRESS,\r\n    p_rowid  =>            :id);\r\nEND;",
    "virtualDomainRoles": [
       {
@@ -11,10 +11,10 @@
          "allowGet": true
       }
    ],
-   "codeGet": "SELECT\r\nrowidtochar(E1.ROWID) \"id\",\r\n:parm_user_pidm as PIDM, \r\nE1.GOREMAL_EMAL_CODE,\r\nGTVEMAL_DESC,\r\nE1.GOREMAL_EMAIL_ADDRESS,\r\nE1.GOREMAL_PREFERRED_IND\r\nFROM GOREMAL E1\r\nLEFT JOIN GTVEMAL ON E1.GOREMAL_EMAL_CODE = GTVEMAL_CODE\r\nWHERE E1.GOREMAL_PIDM = :parm_user_pidm\r\nAND E1.GOREMAL_STATUS_IND = 'A'\r\nORDER BY E1.GOREMAL_PREFERRED_IND",
+   "codeGet": "SELECT\r\nrowidtochar(E1.ROWID) \"id\",\r\n:parm_user_pidm as PIDM, \r\nE1.GOREMAL_EMAL_CODE,\r\nGTVEMAL_DESC,\r\nE1.GOREMAL_EMAIL_ADDRESS,\r\nE1.GOREMAL_PREFERRED_IND\r\nFROM GOREMAL E1\r\nLEFT JOIN GTVEMAL ON E1.GOREMAL_EMAL_CODE = GTVEMAL_CODE\r\nWHERE E1.GOREMAL_PIDM = :parm_user_pidm\r\nAND E1.GOREMAL_STATUS_IND = 'A'\r\nORDER BY E1.GOREMAL_PREFERRED_IND DESC",
    "typeOfCode": "S",
    "fileTimestamp": null,
    "serviceName": "AIPEmailAddresses",
-   "codePost": "DECLARE\r\nl_rowid_out rowid;   \r\n\r\nBEGIN\r\nGB_EMAIL.p_create(\r\n    p_pidm =>              :parm_user_pidm,\r\n    p_emal_code =>         :GOREMAL_EMAL_CODE,\r\n    p_email_address =>     :GOREMAL_EMAIL_ADDRESS,\r\n    p_status_ind =>       'A',\r\n    p_preferred_ind =>     :GOREMAL_PREFERRED_IND,\r\n    p_user_id =>           F_GetSpridenID(:parm_user_pidm),\r\n    p_comment =>           NULL,\r\n    p_disp_web_ind =>      'Y',\r\n    p_data_origin  =>      'OENR',\r\n    p_rowid_out  =>        l_rowid_out);\r\n\r\nEND;",
+   "codePost": "DECLARE\r\nl_rowid_out rowid;   \r\nBEGIN\r\nIF :GOREMAL_PREFERRED_IND = 'Y' THEN \r\nUPDATE GOREMAL \r\nSET GOREMAL_PREFERRED_IND = 'N'\r\nWHERE GOREMAl_PIDM = :parm_user_pidm;\r\nEND IF;\r\nGB_EMAIL.p_create(\r\n    p_pidm =>              :parm_user_pidm,\r\n    p_emal_code =>         :GOREMAL_EMAL_CODE,\r\n    p_email_address =>     :GOREMAL_EMAIL_ADDRESS,\r\n    p_status_ind =>       'A',\r\n    p_preferred_ind =>     :GOREMAL_PREFERRED_IND,\r\n    p_user_id =>           F_GetSpridenID(:parm_user_pidm),\r\n    p_comment =>           NULL,\r\n    p_disp_web_ind =>      'Y',\r\n    p_data_origin  =>      'OENR',\r\n    p_rowid_out  =>        l_rowid_out);\r\n\r\nEND;",
    "developerSecurity": []
 }

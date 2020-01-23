@@ -2,7 +2,7 @@
    "constantName": "AIPModuleRegistrationEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-01-17T15:45:18Z",
+   "fileTimestamp": "2020-01-22T14:30:50Z",
    "modelView": {
       "components": [
          {
@@ -64,7 +64,7 @@
                   "allowNew": false,
                   "name": "ModuleConfirmation",
                   "allowModify": false,
-                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;\n$ModuleConfirmation.$load();",
                   "pageSize": 5,
                   "model": "ActionItemUpdate",
                   "allowReload": false,

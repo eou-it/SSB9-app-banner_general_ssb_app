@@ -2,7 +2,7 @@
    "constantName": "AIPAddresslDetailsEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-01-17T15:45:18Z",
+   "fileTimestamp": "2020-01-22T14:30:50Z",
    "modelView": {
       "components": [
          {
@@ -81,7 +81,7 @@
                               "loadInitially": true,
                               "type": "text",
                               "parameters": {},
-                              "required": false,
+                              "required": true,
                               "validation": {}
                            },
                            {
@@ -109,6 +109,18 @@
                               "labelKey": "STVNATN_NATION",
                               "type": "select",
                               "valueKey": "STVNATN_CODE",
+                              "required": true
+                           },
+                           {
+                              "readonly": false,
+                              "name": "NationPermHidden",
+                              "model": "SPRADDR_NATN_CODE",
+                              "style": "hidden",
+                              "loadInitially": true,
+                              "label": "Nation Hidden",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
                               "required": false
                            }
                         ],
@@ -122,7 +134,7 @@
                         "type": "detail",
                         "name": "PermAddress",
                         "allowModify": true,
-                        "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n\nthis.AIPGetControllerId = function (id) {\nvar rootScope = angular.element(document.querySelector('#pbid-AddresslDetails')).injector().get('\\$rootScope');\n    \n     var scope = rootScope.\\$\\$childHead;\n    //traverse children of root scope to find the id matching _controllerId\n    for (; scope && scope._controllerId !== id; scope = scope.\\$\\$nextSibling){}\n    return scope;\n};\n\nthis.AIPCreateNewRecord = function (detailName) {\n   setTimeout(function () {\n       var scope = AIPGetControllerId(controllerId);\n       console.log(\"scope[detailName + 'DS'] : \" + scope[detailName + 'DS']);\n       if (scope[detailName + 'DS'].data.length === 0) {\n           scope[detailName + 'DS'].add(scope['pbNew_' + detailName]());\n           scope[detailName + 'DS'].setCurrentRecord(scope[detailName + 'DS'].data[0]);\n           scope.$apply();\n       }\n   });\n};\nAIPCreateNewRecord('PermAddress');\n$(\"#pbid-PermAddress-new-button\").hide();\n$(\"#pbid-PermAddress-save-button\").hide();\n$(\"#pbid-TermAddress-save-button\").hide();\n$(\"#pbid-TermAddress-new-button\").addClass(\"btn btn-primary\");\n$(\"#pbid-TermAddress-new-button\").button().click(function(){\n$(\"#pbid-TermAddress-new-button\").hide();\n   });",
+                        "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n\nthis.AIPGetControllerId = function (id) {\nvar rootScope = angular.element(document.querySelector('#pbid-AddresslDetails')).injector().get('\\$rootScope');\n    \n     var scope = rootScope.\\$\\$childHead;\n    //traverse children of root scope to find the id matching _controllerId\n    for (; scope && scope._controllerId !== id; scope = scope.\\$\\$nextSibling){}\n    return scope;\n};\n\nthis.AIPCreateNewRecord = function (detailName) {\n   setTimeout(function () {\n       var scope = AIPGetControllerId(controllerId);\n       console.log(\"scope[detailName + 'DS'] : \" + scope[detailName + 'DS']);\n       if (scope[detailName + 'DS'].data.length === 0) {\n           scope[detailName + 'DS'].add(scope['pbNew_' + detailName]());\n           scope[detailName + 'DS'].setCurrentRecord(scope[detailName + 'DS'].data[0]);\n           scope.$apply();\n       }\n   });\n};\nAIPCreateNewRecord('PermAddress');\n$(\"#pbid-PermAddress-new-button\").hide();\n$(\"#pbid-PermAddress-save-button\").hide();\n$(\"#pbid-TermAddress-save-button\").hide();\n$(\"#pbid-TermAddress-new-button\").addClass(\"btn btn-primary\");\n$(\"#pbid-TermAddress-new-button\").button().click(function(){\n$(\"#pbid-TermAddress-new-button\").hide();\ndocument.getElementById(\"pbid-TermAddresscontainer-1\").style.display = \"none\";\n   });\n$(\"#pbid-TermAddress-save-button\").hide();\n$(\"#pbid-TermAddress-save-button\").hide();",
                         "model": "AddressModelPerm",
                         "allowReload": false,
                         "parameters": {}
@@ -147,7 +159,7 @@
                               "label": "Use Home Address",
                               "loadInitially": true,
                               "type": "boolean",
-                              "onUpdate": "if($('#pbid-UseHomeAddress-0').prop('checked')){\ndocument.getElementById(\"pbid-Line1Term-0\").value = document.getElementById(\"pbid-Line1Perm-0\").value;\n$('#pbid-Line1Term-0').trigger('input');\n$('#pbid-Line1Term-0').trigger('change');\ndocument.getElementById(\"pbid-Line2Term-0\").value = document.getElementById(\"pbid-Line2Perm-0\").value;\n$('#pbid-Line2Term-0').trigger('input');\n$('#pbid-Line2Term-0').trigger('change');\ndocument.getElementById(\"pbid-CityTerm-0\").value = document.getElementById(\"pbid-CityPerm-0\").value;\n$('#pbid-CityTerm-0').trigger('input');\n$('pbid-CityTerm-0').trigger('change');\ndocument.getElementById(\"pbid-PostcodeTerm-0\").value = document.getElementById(\"pbid-PostcodePerm-0\").value;\n$('#pbid-PostcodeTerm-0').trigger('input');\n$('#pbid-PostcodeTerm-0').trigger('change');\n}else {\ndocument.getElementById(\"pbid-Line1Term-0\").value = '';\ndocument.getElementById(\"pbid-Line2Term-0\").value = '';\ndocument.getElementById(\"pbid-CityTerm-0\").value = '';\ndocument.getElementById(\"pbid-PostcodeTerm-0\").value = '';\ndocument.getElementById(\"pbid-NationTerm-0\").value = ''; \n}"
+                              "onUpdate": "if($('#pbid-UseHomeAddress-0').prop('checked')){\ndocument.getElementById(\"pbid-Line1Term-0\").value = document.getElementById(\"pbid-Line1Perm-0\").value;\n$('#pbid-Line1Term-0').trigger('input');\n$('#pbid-Line1Term-0').trigger('change');\ndocument.getElementById(\"pbid-Line2Term-0\").value = document.getElementById(\"pbid-Line2Perm-0\").value;\n$('#pbid-Line2Term-0').trigger('input');\n$('#pbid-Line2Term-0').trigger('change');\ndocument.getElementById(\"pbid-CityTerm-0\").value = document.getElementById(\"pbid-CityPerm-0\").value;\n$('#pbid-CityTerm-0').trigger('input');\n$('pbid-CityTerm-0').trigger('change');\ndocument.getElementById(\"pbid-PostcodeTerm-0\").value = document.getElementById(\"pbid-PostcodePerm-0\").value;\n$('#pbid-PostcodeTerm-0').trigger('input');\n$('#pbid-PostcodeTerm-0').trigger('change');\ndocument.getElementById(\"pbid-NationTerm-0\").value = document.getElementById(\"pbid-NationPerm-0\").value;\ndocument.getElementById(\"pbid-NationTermHidden-0\").value = document.getElementById(\"pbid-NationPermHidden-0\").value;\n$('#pbid-NationTermHidden-0').trigger('input');\n$('#pbid-NationTermHidden-0').trigger('change');\n}else {\ndocument.getElementById(\"pbid-Line1Term-0\").value = '';\ndocument.getElementById(\"pbid-Line2Term-0\").value = '';\ndocument.getElementById(\"pbid-CityTerm-0\").value = '';\ndocument.getElementById(\"pbid-PostcodeTerm-0\").value = '';\ndocument.getElementById(\"pbid-NationTerm-0\").value = ''; \ndocument.getElementById(\"pbid-NationTermHidden-0\").value = ''; \n}"
                            },
                            {
                               "valueStyle": "",
@@ -214,19 +226,31 @@
                               "labelKey": "STVNATN_NATION",
                               "type": "select",
                               "valueKey": "STVNATN_CODE",
-                              "required": true
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "NationTermHidden",
+                              "model": "SPRADDR_NATN_CODE",
+                              "style": "hidden",
+                              "loadInitially": true,
+                              "label": "Nation Hidden",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
                            }
                         ],
                         "onSave": "",
                         "allowNew": true,
                         "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;\n$TermAddress.$load();",
                         "pageSize": 1,
-                        "loadInitially": false,
+                        "loadInitially": true,
                         "type": "detail",
-                        "newRecordLabel": "Add Term Time Address",
+                        "newRecordLabel": "Add New Term Time Address",
                         "name": "TermAddress",
                         "allowModify": true,
-                        "onLoad": "",
+                        "onLoad": "setTimeout(\nfunction() {\nif ($TermAddress.SPRADDR_STREET_LINE1.length>0) {\n$(\"#pbid-UseHomeAddress-container-0\").hide();\n}\n}\n,250)",
                         "model": "AddressModelTerm",
                         "style": "",
                         "allowReload": false,
@@ -266,12 +290,13 @@
                   "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}",
                   "onSave": "",
                   "allowNew": false,
-                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;\n$AddressConfirmation.$load();",
                   "pageSize": 5,
                   "loadInitially": true,
                   "type": "detail",
                   "name": "AddressConfirmation",
                   "allowModify": false,
+                  "onLoad": "",
                   "model": "ActionItemUpdate",
                   "style": "",
                   "allowReload": false,
@@ -282,7 +307,7 @@
                },
                {
                   "valueStyle": "btn btn-primary",
-                  "onClick": "if($(\"#pbid-AddressDetailsAgree-radio-0-0:checked\").val()){\nif ($PermAddressForm.\\$dirty) {\n$PermAddress.$save();\n}\nif ($TermAddressForm.\\$dirty) {\nif(!$TermAddress.SPRADDR_STREET_LINE1 )\n{\nalert(\"Address Line 1 is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$TermAddress.SPRADDR_CITY )\n{\nalert(\"City is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$TermAddress.SPRADDR_ZIP )\n{\nalert(\"Postcode is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$TermAddress.SPRADDR_NATN_CODE )\n{\nalert(\"Country is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\n$TermAddress.$save();\n}\n$AddressConfirmation.$save();\n$(\"#pbid-TermAddress-new-button\").hide();\n}\nelse{\nalert(\"Please confirm address details are correct\", {type:\"error\", flash:true}); \n}",
+                  "onClick": "if($(\"#pbid-AddressDetailsAgree-radio-0-0:checked\").val()){\nif ($PermAddressForm.\\$dirty) {\nif(!$PermAddress.SPRADDR_STREET_LINE1 )\n{\nalert(\"Address Line 1 is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$PermAddress.SPRADDR_CITY )\n{\nalert(\"City is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$PermAddress.SPRADDR_ZIP )\n{\nalert(\"Postcode is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$PermAddress.SPRADDR_NATN_CODE )\n{\nalert(\"Country is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\n$PermAddress.$save();\n}\nif ($TermAddressForm.\\$dirty) {\nif(!$TermAddress.SPRADDR_STREET_LINE1 )\n{\nalert(\"Address Line 1 is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$TermAddress.SPRADDR_CITY )\n{\nalert(\"City is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$TermAddress.SPRADDR_ZIP )\n{\nalert(\"Postcode is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$TermAddress.SPRADDR_NATN_CODE )\n{\nalert(\"Country is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\n$TermAddress.$save();\n}\n$AddressConfirmation.$save();\n$(\"#pbid-TermAddress-new-button\").hide();\n}\nelse{\nalert(\"Please confirm address details are correct\", {type:\"error\", flash:true}); \n}",
                   "name": "AddressDetailsSave",
                   "style": "",
                   "label": "Confirm",

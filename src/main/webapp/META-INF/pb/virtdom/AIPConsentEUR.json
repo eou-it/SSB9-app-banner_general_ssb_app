@@ -15,6 +15,6 @@
    "typeOfCode": "S",
    "fileTimestamp": null,
    "serviceName": "AIPConsentEUR",
-   "codePost": "INSERT INTO GURCCPR \r\n(GURCCPR_PIDM, \r\n GURCCPR_CCPP_CODE, \r\n GURCCPR_SCDE_CODE,\r\n GURCCPR_CCPD_CODE, \r\nGURCCPR_CONSENT_DATE, \r\nGURCCPR_USER_ID, \r\nGURCCPR_ACTIVITY_DATE)\r\nVALUES \r\n(:parm_user_pidm, \r\n'01', \r\n'01', \r\n:GURCCPR_CCPD_CODE, \r\nSYSDATE, \r\n'OENR',\r\nSYSDATE)",
+   "codePost": "INSERT INTO GURCCPR \r\n(GURCCPR_PIDM, \r\n GURCCPR_CCPP_CODE, \r\n GURCCPR_SCDE_CODE,\r\n GURCCPR_CCPD_CODE, \r\nGURCCPR_CONSENT_DATE, \r\nGURCCPR_USER_ID,\r\nGURCCPR_DATA_ORIGIN, \r\nGURCCPR_ACTIVITY_DATE)\r\nVALUES \r\n(:parm_user_pidm, \r\n'01', \r\n'01', \r\n:GURCCPR_CCPD_CODE, \r\nSYSDATE, \r\nF_GetSpridenID(:parm_user_pidm),\r\n'OENR',\r\nSYSDATE)",
    "developerSecurity": []
 }

@@ -2,7 +2,7 @@
    "constantName": "AIPContactDetailsEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-01-17T15:45:18Z",
+   "fileTimestamp": "2020-01-22T14:30:50Z",
    "modelView": {
       "components": [
          {
@@ -64,7 +64,7 @@
                               "type": "select",
                               "labelKey": "GTVEMAL_DESC",
                               "valueKey": "GTVEMAL_CODE",
-                              "required": false
+                              "required": true
                            },
                            {
                               "readonly": false,
@@ -76,7 +76,7 @@
                               "type": "text",
                               "parameters": {},
                               "validation": {},
-                              "required": false
+                              "required": true
                            },
                            {
                               "readonly": false,
@@ -88,7 +88,8 @@
                               "label": "Preferred",
                               "loadInitially": true,
                               "type": "boolean",
-                              "value": "N"
+                              "value": "N",
+                              "onUpdate": "// We want to ensure that if this primary indicator is selected, that we de-select other records. I.e. there can only be one primary.\nif ($EmailAddressGridDS.currentRecord.GOREMAL_PREFERRED_IND == 'Y') {\n    var currentRowId = $EmailAddressGridDS.currentRecord.id ? $EmailAddressGridDS.currentRecord.id : $EmailAddressGridDS.currentRecord.\\$\\$hashKey;\n    var evalRowId = null;\n\n    // Set all but the current row to 'N' - unchecked.\n    for( var i=0; i < $EmailAddressGridDS.data.length; i++) {\n        // Note, new rows do not have an \"id\" value set. They instead get a '$$hashKey' variable set for them\n        evalRowId = $EmailAddressGridDS.data[i].id ? $EmailAddressGridDS.data[i].id : $EmailAddressGridDS.data[i].\\$\\$hashKey;\n\n        if (evalRowId != currentRowId ) {\n            $EmailAddressGridDS.data[i].GOREMAL_PREFERRED_IND = 'N';\n        }\n    }\n}"
                            }
                         ],
                         "allowNew": true,
@@ -130,44 +131,48 @@
                            },
                            {
                               "valueStyle": "",
+                              "label": "Area Code",
+                              "loadInitially": true,
+                              "type": "text",
+                              "required": false,
                               "readonly": false,
                               "labelStyle": "table-heading",
                               "name": "PhoneArea",
                               "model": "SPRTELE_PHONE_AREA",
                               "style": "",
-                              "label": "Area Code",
-                              "loadInitially": true,
-                              "type": "text",
                               "parameters": {},
-                              "required": false,
+                              "onUpdate": "$AreaNumber = $(\"#pbid-PhoneArea-0\").val();\n//validate only digits\nvar isNumber = /^[0-9]+$/.test($AreaNumber);\nif(!isNumber) {\nalert(\"Area Code must not contain non-numeric values\", {type:\"error\", flash:true}); \n}",
                               "validation": {}
                            },
                            {
                               "valueStyle": "",
+                              "label": "Phone Number",
+                              "loadInitially": true,
+                              "type": "text",
+                              "required": true,
                               "readonly": false,
                               "labelStyle": "table-heading",
                               "name": "PhoneNumber",
                               "model": "SPRTELE_PHONE_NUMBER",
                               "style": "",
-                              "label": "Phone Number",
-                              "loadInitially": true,
-                              "type": "text",
                               "parameters": {},
-                              "required": false,
+                              "onUpdate": "$PhoneNumber = $(\"#pbid-PhoneNumber-0\").val();\n//validate only digits\nvar isNumber = /^[0-9]+$/.test($PhoneNumber);\nif(!isNumber) {\nalert(\"Phone Number must not contain non numeric values\", {type:\"error\", flash:true}); \n}",
                               "validation": {}
                            },
                            {
                               "valueStyle": "",
+                              "booleanFalseValue": "N",
+                              "label": "Primary",
+                              "loadInitially": true,
+                              "type": "boolean",
                               "readonly": false,
                               "booleanTrueValue": "Y",
-                              "booleanFalseValue": "N",
                               "labelStyle": "table-heading",
                               "name": "PhonePrimaryInd",
                               "model": "SPRTELE_PRIMARY_IND",
                               "style": "",
-                              "label": "Primary",
-                              "loadInitially": true,
-                              "type": "boolean"
+                              "value": "",
+                              "onUpdate": "// We want to ensure that if this primary indicator is selected, that we de-select other records. I.e. there can only be one primary.\nif ($PhoneNumbersGridDS.currentRecord.SPRTELE_PRIMARY_IND == 'Y') {\n    var currentRowId = $PhoneNumbersGridDS.currentRecord.id ? $PhoneNumbersGridDS.currentRecord.id : $PhoneNumbersGridDS.currentRecord.\\$\\$hashKey;\n    var evalRowId = null;\n\n    // Set all but the current row to 'N' - unchecked.\n    for( var i=0; i < $PhoneNumbersGridDS.data.length; i++) {\n        // Note, new rows do not have an \"id\" value set. They instead get a '$$hashKey' variable set for them\n        evalRowId = $PhoneNumbersGridDS.data[i].id ? $PhoneNumbersGridDS.data[i].id : $PhoneNumbersGridDS.data[i].\\$\\$hashKey;\n\n        if (evalRowId != currentRowId ) {\n            $PhoneNumbersGridDS.data[i].SPRTELE_PRIMARY_IND = 'N';\n        }\n    }\n}"
                            },
                            {
                               "name": "PhoneSeqNo",
@@ -241,7 +246,7 @@
                },
                {
                   "valueStyle": "btn btn-primary pull-left",
-                  "onClick": "if($(\"#pbid-ContactDetailsAgree-radio-0-0:checked\").val()){\n$EmailAddressGrid.$save();\n$PhoneNumbersGrid.$save();\n$ContactDetailsConfirmation.$save();\n}\nelse{\nalert(\"Please confirm contact details are correct\", {type:\"error\", flash:true}); \n}",
+                  "onClick": "if($(\"#pbid-ContactDetailsAgree-radio-0-0:checked\").val()){\nif (!$EmailAddressGrid.GOREMAL_EMAIL_ADDRESS){\nalert(\"Please add an email address\", {type:\"error\", flash:true}); \n}\nif (!$PhoneNumbersGrid.SPRTELE_PHONE_NUMBER){\nalert(\"Please add a phone number\", {type:\"error\", flash:true}); \n}\nelse{\n$EmailAddressGrid.$save();\n$PhoneNumbersGrid.$save();\n$ContactDetailsConfirmation.$save();\n}\n}\nelse{\nalert(\"Please confirm contact details are correct\", {type:\"error\", flash:true}); \n}",
                   "name": "ContactDetailsSave",
                   "style": "",
                   "label": "Confirm",

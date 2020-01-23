@@ -11,7 +11,7 @@
          "allowGet": true
       }
    ],
-   "codeGet": "SELECT GTVCCPD_CODE, GTVCCPD_DESC\r\nFROM\r\nGTVCCPD",
+   "codeGet": "SELECT GTVCCPD_CODE, GTVCCPD_DESC\r\nFROM\r\nGTVCCPD\r\nORDER BY GTVCCPD_DESC ASC",
    "typeOfCode": "S",
    "fileTimestamp": null,
    "serviceName": "AIPConsentOptionsEUR",
