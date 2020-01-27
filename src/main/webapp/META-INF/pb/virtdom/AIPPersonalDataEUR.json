@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "BEGIN\r\nUPDATE SPRIDEN SET SPRIDEN_MI=:SPRIDEN_MI\r\nWHERE SPRIDEN_PIDM = :parm_user_pidm;\r\n\r\nUPDATE SPBPERS SET SPBPERS_PREF_FIRST_NAME=:SPBPERS_PREF_FIRST_NAME,\r\nSPBPERS_PPRN_CODE=:SPBPERS_PPRN_CODE ,SPBPERS_GNDR_CODE=:SPBPERS_GNDR_CODE  WHERE SPBPERS_PIDM = :parm_user_pidm;\r\n\r\nEND;",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT SPRIDEN_ID \"ID\",SPRIDEN_LAST_NAME, SPRIDEN_FIRST_NAME ,SPRIDEN_MI,SPBPERS_PREF_FIRST_NAME, to_char(SPBPERS_BIRTH_DATE, 'DD/MM/YYYY') AS BIRTH_DATE,\r\nCASE WHEN SPBPERS_SEX = 'M' THEN 'Male'\r\nWHEN SPBPERS_SEX = 'F' THEN 'Female'\r\nELSE 'Not Available' END AS GENDER,\r\nSPBPERS_PPRN_CODE ,SPBPERS_GNDR_CODE,\r\nGOREMAL_EMAIL_ADDRESS\r\nFROM SPRIDEN  \r\nLEFT JOIN SPBPERS ON SPRIDEN_PIDM=SPBPERS_PIDM\r\nLEFT JOIN GOREMAL ON GOREMAL_PIDM=SPRIDEN_PIDM\r\n                  AND GOREMAL_STATUS_IND='A'\r\n                  AND GOREMAL_PREFERRED_IND='Y' \r\nWHERE SPRIDEN_PIDM = :parm_user_pidm\r\nAND   SPRIDEN_CHANGE_IND IS NULL",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPPersonalDataEUR",
+   "codePost": null,
+   "developerSecurity": []
+}

@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "BEGIN\r\nUPDATE SKBSPIN\r\nSET SKBSPIN_CARER = :SKBSPIN_CARER,\r\nSKBSPIN_CARELEAVER = :SKBSPIN_CARELEAVER,\r\nSKBSPIN_SNAME16 = :SKBSPIN_SNAME16,\r\nSKBSPIN_NATN_CODE_LEGAl = :SKBSPIN_NATN_CODE_LEGAL,\r\nSKBSPIN_SEXORT = :SKBSPIN_SEXORT,\r\nSKBSPIN_DEPENDENTS = :SKBSPIN_DEPENDENTS\r\nWHERE SKBSPIN_PIDM = :parm_user_pidm;\r\n\r\nUPDATE SPBPERS\r\nSET SPBPERS_ETHN_CODE = :SPBPERS_ETHN_CODE,\r\nSPBPERS_RELG_CODE = :SPBPERS_RELG_CODE\r\nWHERE SPBPERS_PIDM = :parm_user_pidm;\r\n\r\nEND;",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT \r\nSKBSPIN_PIDM AS ID,\r\nSKBSPIN_CARER,\r\nSKBSPIN_CARELEAVER,\r\nSKBSPIN_SNAME16,\r\nSPBPERS_ETHN_CODE,\r\nSKBSPIN_NATN_CODE_LEGAL,\r\nSPBPERS_RELG_CODE,\r\nSKBSPIN_SEXORT,\r\nSKBSPIN_DEPENDENTS\r\nFROM SKBSPIN\r\nINNER JOIN SPBPERS ON SKBSPIN_PIDM = SPBPERS_PIDM\r\nWHERE SKBSPIN_PIDM = :parm_user_pidm",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPHESAPerson",
+   "codePost": null,
+   "developerSecurity": []
+}

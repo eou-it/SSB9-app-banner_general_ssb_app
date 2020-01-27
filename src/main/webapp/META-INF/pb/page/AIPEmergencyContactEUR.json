@@ -1,0 +1,525 @@
+{
+   "constantName": "AIPEmergencyContactEUR",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-01-22T14:32:55Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.AIPEmergentContactsEUR",
+            "name": "EmergencyContactModel",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPEmergencyContactRelEUR",
+            "name": "EmergencyContactRelModel",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPNationsEur",
+            "name": "NationsModel",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPAddressEUR",
+            "name": "HomeAddressModel",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemStatus",
+            "name": "ActionItemStatus",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemContent",
+            "name": "ActionItemUpdate",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "allowDelete": false,
+                        "components": [
+                           {
+                              "readonly": false,
+                              "name": "HomeAddressLine1",
+                              "model": "SPRADDR_STREET_LINE1",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "HomeAddressLine2",
+                              "model": "SPRADDR_STREET_LINE2",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "HomeAddressCity",
+                              "model": "SPRADDR_CITY",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "HomeAddressPostcode",
+                              "model": "SPRADDR_ZIP",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "HomeAddressCountry",
+                              "model": "SPRADDR_NATN_CODE",
+                              "sourceModel": "NationsModel",
+                              "loadInitially": true,
+                              "labelKey": "STVNATN_NATION",
+                              "type": "select",
+                              "valueKey": "STVNATN_CODE",
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "HomeAddressCountryHidden",
+                              "style": "hidden",
+                              "model": "SPRADDR_NATN_CODE",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           }
+                        ],
+                        "allowNew": false,
+                        "onSaveSuccess": "",
+                        "pageSize": 1,
+                        "loadInitially": true,
+                        "type": "detail",
+                        "name": "HomeAddress",
+                        "allowModify": false,
+                        "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n\n$(\"#pbid-PrimaryEmergencyContact-save-button\").hide();\n$(\"#pbid-SecondaryEmergencyContact-save-button\").hide();\n$(\"#pbid-PrimaryEmergencyContact-new-button\").addClass(\"btn btn-primary\");\n$(\"#pbid-SecondaryEmergencyContact-new-button\").addClass(\"btn btn-primary\");\n$(\"#pbid-PrimaryEmergencyContact-new-button\").button().click(function(){\n$(\"#pbid-PrimaryEmergencyContact-new-button\").hide();\n })\n$(\"#pbid-SecondaryEmergencyContact-new-button\").button().click(function(){\n$(\"#pbid-SecondaryEmergencyContact-new-button\").hide();\n })\nif ($PrimaryEmergencyContact.SPREMRG_FIRST_NAME.length>0) {\n$(\"#pbid-PrimaryEmergencyContactHomeAddress-container-0\").hide();\n}\nif ($SecondaryEmergencyContact.SPREMRG_FIRST_NAME.length>0) {\n$(\"#pbid-SecondaryEmergencyContactHomeAddress-container-0\").hide();\n}",
+                        "model": "HomeAddressModel",
+                        "allowReload": false,
+                        "parameters": {}
+                     }
+                  ],
+                  "nextButtonLabel": "Next",
+                  "name": "HomeAddressForm",
+                  "showInitially": false,
+                  "type": "form"
+               },
+               {
+                  "components": [
+                     {
+                        "allowDelete": false,
+                        "components": [
+                           {
+                              "name": "PrimaryEmergencyPriority",
+                              "model": "SPREMRG_PRIORITY",
+                              "loadInitially": true,
+                              "type": "hidden",
+                              "value": "1"
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactPrimaryFirstName",
+                              "onLoad": "",
+                              "model": "SPREMRG_FIRST_NAME",
+                              "label": "First Name *",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": true,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactPrimaryLastName",
+                              "model": "SPREMRG_LAST_NAME",
+                              "label": "Last Name *",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": true,
+                              "validation": {}
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "EmergencyContactPrimaryRel",
+                              "model": "SPREMRG_RELT_CODE",
+                              "sourceModel": "EmergencyContactRelModel",
+                              "label": "Relationship *",
+                              "loadInitially": true,
+                              "labelKey": "STVRELT_DESC",
+                              "type": "select",
+                              "valueKey": "STVRELT_CODE",
+                              "required": true
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactPrimaryPhone",
+                              "model": "SPREMRG_PHONE_NUMBER",
+                              "label": "Phone Number *",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": true,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "PrimaryEmergencyContactHomeAddress",
+                              "label": "Use Home Address",
+                              "loadInitially": true,
+                              "type": "boolean",
+                              "onUpdate": "if($('#pbid-PrimaryEmergencyContactHomeAddress-0').prop('checked')){\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd1-0\").value = document.getElementById(\"pbid-HomeAddressLine1-0\").value;\n$('#pbid-EmergencyContactPrimaryAdd1-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryAdd1-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd2-0\").value = document.getElementById(\"pbid-HomeAddressLine2-0\").value;\n$('#pbid-EmergencyContactPrimaryAdd2-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryAdd2-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCity-0\").value = document.getElementById(\"pbid-HomeAddressCity-0\").value;\n$('#pbid-EmergencyContactPrimaryCity-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryCity-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactPrimaryPostcode-0\").value = document.getElementById(\"pbid-HomeAddressPostcode-0\").value;\n$('#pbid-EmergencyContactPrimaryPostcode-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryPostcode-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCountry-0\").value = document.getElementById(\"pbid-HomeAddressCountry-0\").value;\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCountryHidden-0\").value = document.getElementById(\"pbid-HomeAddressCountryHidden-0\").value;\n$('#pbid-EmergencyContactPrimaryCountryHiddene-0').trigger('input');\n$('#pbid-EmergencyContactPrimaryCountryHidden-0').trigger('change');\n}else {\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd1-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactPrimaryAdd2-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCity-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactPrimaryPostcode-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactPrimaryCountry-0\").value = ''; \n}"
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactPrimaryAdd1",
+                              "model": "SPREMRG_STREET_LINE1",
+                              "label": "Address Line 1",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactPrimaryAdd2",
+                              "model": "SPREMRG_STREET_LINE2",
+                              "label": "Address Line 2",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactPrimaryAdd3",
+                              "model": "SPREMRG_STREET_LINE3",
+                              "label": "Address Line 3",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactPrimaryCity",
+                              "model": "SPREMRG_CITY",
+                              "label": "City",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactPrimaryPostcode",
+                              "model": "SPREMRG_ZIP",
+                              "label": "Postcode",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "EmergencyContactPrimaryCountry",
+                              "model": "SPREMRG_NATN_CODE",
+                              "sourceModel": "NationsModel",
+                              "label": "Country",
+                              "loadInitially": true,
+                              "labelKey": "STVNATN_NATION",
+                              "type": "select",
+                              "valueKey": "STVNATN_CODE",
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactPrimaryCountryHidden",
+                              "style": "hidden",
+                              "model": "SPREMRG_NATN_CODE",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           }
+                        ],
+                        "allowNew": true,
+                        "onSaveSuccess": "$PrimaryEmergencyContact.$load();\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                        "pageSize": 1,
+                        "label": "",
+                        "loadInitially": true,
+                        "type": "detail",
+                        "newRecordLabel": "Add Emergency Contact",
+                        "name": "PrimaryEmergencyContact",
+                        "allowModify": true,
+                        "onLoad": "if ($PrimaryEmergencyContact.SPREMRG_FIRST_NAME.length>0) {\n$(\"#pbid-PrimaryEmergencyContact-new-button\").hide();\n}",
+                        "model": "EmergencyContactModel",
+                        "allowReload": false,
+                        "parameters": {
+                           "SPREMRG_PRIORITY": "1"
+                        }
+                     }
+                  ],
+                  "nextButtonLabel": "Next",
+                  "name": "PrimaryEmergencyContactForm",
+                  "showInitially": true,
+                  "style": "",
+                  "label": "Primary Emergency Contact",
+                  "type": "form"
+               },
+               {
+                  "components": [
+                     {
+                        "allowDelete": false,
+                        "components": [
+                           {
+                              "name": "SecondaryEmergencyPriority",
+                              "model": "SPREMRG_PRIORITY",
+                              "loadInitially": true,
+                              "type": "hidden",
+                              "value": "2"
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactSecondaryFirstName",
+                              "onLoad": "",
+                              "model": "SPREMRG_FIRST_NAME",
+                              "label": "First Name *",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": true,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactSecondaryLastName",
+                              "model": "SPREMRG_LAST_NAME",
+                              "label": "Last Name*",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": true,
+                              "validation": {}
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "EmergencyContactSecondaryRel",
+                              "model": "SPREMRG_RELT_CODE",
+                              "sourceModel": "EmergencyContactRelModel",
+                              "label": "Relationship *",
+                              "loadInitially": true,
+                              "labelKey": "STVRELT_DESC",
+                              "type": "select",
+                              "valueKey": "STVRELT_CODE",
+                              "required": true
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactSecondaryPhone",
+                              "model": "SPREMRG_PHONE_NUMBER",
+                              "label": "Phone Number *",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": true,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "SecondaryEmergencyContactHomeAddress",
+                              "label": "Use Home Address",
+                              "loadInitially": true,
+                              "type": "boolean",
+                              "onUpdate": "if($('#pbid-SecondaryEmergencyContactHomeAddress-0').prop('checked')){\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd1-0\").value = document.getElementById(\"pbid-HomeAddressLine1-0\").value;\n$('#pbid-EmergencyContactSecondaryAdd1-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryAdd1-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd2-0\").value = document.getElementById(\"pbid-HomeAddressLine2-0\").value;\n$('#pbid-EmergencyContactSecondaryAdd2-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryAdd2-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactSecondaryCity-0\").value = document.getElementById(\"pbid-HomeAddressCity-0\").value;\n$('#pbid-EmergencyContactSecondaryCity-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryCity-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactSecondaryPostcode-0\").value = document.getElementById(\"pbid-HomeAddressPostcode-0\").value;\n$('#pbid-EmergencyContactSecondaryPostcode-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryPostcode-0').trigger('change');\ndocument.getElementById(\"pbid-EmergencyContactSecondaryCountry-0\").value = document.getElementById(\"pbid-HomeAddressCountry-0\").value;\ndocument.getElementById(\"pbid-EmergencyContactSecondaryCountryHidden-0\").value = document.getElementById(\"pbid-HomeAddressCountryHidden-0\").value;\n$('#pbid-EmergencyContactSecondaryCountryHiddene-0').trigger('input');\n$('#pbid-EmergencyContactSecondaryCountryHidden-0').trigger('change');\n}else {\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd1-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactSecondaryAdd2-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactSecondaryCity-0\").value = '';\ndocument.getElementById(\"pbid-EmergencyContactSecondaryPostcode-0\").value = '';\n document.getElementById(\"pbid-EmergencyContactSecondaryCountry-0\").value = ''; \n}"
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactSecondaryAdd1",
+                              "model": "SPREMRG_STREET_LINE1",
+                              "label": "Address Line 1",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactSecondaryAdd2",
+                              "model": "SPREMRG_STREET_LINE2",
+                              "label": "Address Line 2",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactSecondaryAdd3",
+                              "model": "SPREMRG_STREET_LINE3",
+                              "label": "Address Line 3",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactSecondaryCity",
+                              "model": "SPREMRG_CITY",
+                              "label": "City",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactSecondaryPostcode",
+                              "model": "SPREMRG_ZIP",
+                              "label": "Postcode",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "required": false,
+                              "validation": {}
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "EmergencyContactSecondaryCountry",
+                              "model": "SPREMRG_NATN_CODE",
+                              "sourceModel": "NationsModel",
+                              "label": "Country",
+                              "loadInitially": true,
+                              "labelKey": "STVNATN_NATION",
+                              "type": "select",
+                              "valueKey": "STVNATN_CODE",
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergencyContactSecondaryCountryHidden",
+                              "style": "hidden",
+                              "model": "SPREMRG_NATN_CODE",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           }
+                        ],
+                        "allowNew": true,
+                        "onSaveSuccess": "$SecondaryEmergencyContact.$load();\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                        "pageSize": 5,
+                        "loadInitially": true,
+                        "type": "detail",
+                        "newRecordLabel": "Add Emergency Contact",
+                        "name": "SecondaryEmergencyContact",
+                        "allowModify": true,
+                        "onLoad": "if ($SecondaryEmergencyContact.SPREMRG_FIRST_NAME.length>0) {\n$(\"#pbid-SecondaryEmergencyContact-new-button\").hide();\n}",
+                        "model": "EmergencyContactModel",
+                        "allowReload": false,
+                        "parameters": {
+                           "SPREMRG_PRIORITY": "2"
+                        }
+                     }
+                  ],
+                  "nextButtonLabel": "Next",
+                  "name": "SecondaryEmergencyContactForm",
+                  "showInitially": true,
+                  "label": "Secondary Emergency Contact",
+                  "type": "form"
+               }
+            ],
+            "name": "EmergencyContacTitle",
+            "showInitially": true,
+            "label": "Emergency Contacts",
+            "type": "block"
+         },
+         {
+            "allowDelete": false,
+            "components": [
+               {
+                  "sourceParameters": {
+                     "actionitemid": "$$params.actionItemId"
+                  },
+                  "name": "EmergencyContactAgree",
+                  "model": "STATUS_RULE_ID",
+                  "sourceModel": "ActionItemStatus",
+                  "loadInitially": true,
+                  "labelKey": "STATUS_RULE_LABEL_TEXT",
+                  "type": "radio",
+                  "valueKey": "STATUS_RULE_ID",
+                  "onUpdate": "params.isResponseModified = true;",
+                  "required": false
+               }
+            ],
+            "allowNew": false,
+            "onSaveSuccess": "$EmergencyContactConfirmation.$load();\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+            "pageSize": 5,
+            "loadInitially": true,
+            "type": "detail",
+            "name": "EmergencyContactConfirmation",
+            "allowModify": false,
+            "onLoad": "",
+            "model": "ActionItemUpdate",
+            "allowReload": false,
+            "parameters": {
+               "actionitemid": "$$params.actionItemId",
+               "pageid": "$$params.id"
+            }
+         },
+         {
+            "valueStyle": "btn btn-primary",
+            "onClick": "if($(\"#pbid-EmergencyContactAgree-radio-0-0:checked\").val()){\nif ($PrimaryEmergencyContactForm.\\$dirty) {\nif(!$PrimaryEmergencyContact.SPREMRG_FIRST_NAME )\n{\nalert(\"First Name is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$PrimaryEmergencyContact.SPREMRG_LAST_NAME )\n{\nalert(\"Last Name is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$PrimaryEmergencyContact.SPREMRG_RELT_CODE )\n{\nalert(\"Relationship is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$PrimaryEmergencyContact.SPREMRG_PHONE_NUMBER )\n{\nalert(\"Phone Number is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\n$PrimaryEmergencyContact.$save();\n}\nif ($SecondaryEmergencyContactForm.\\$dirty) {\nif(!$SecondaryEmergencyContact.SPREMRG_FIRST_NAME )\n{\nalert(\"First Name is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$SecondaryEmergencyContact.SPREMRG_LAST_NAME )\n{\nalert(\"Last Name is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$SecondaryEmergencyContact.SPREMRG_RELT_CODE )\n{\nalert(\"Relationship is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\nif(!$SecondaryEmergencyContact.SPREMRG_PHONE_NUMBER )\n{\nalert(\"Phone Number is required\", {type:\"error\", flash:true}); \nwindow.params.saved=false;\nreturn;\n}\n$SecondaryEmergencyContact.$save();\n}\n$EmergencyContactConfirmation.$save();\n$(\"#pbid-EmergencyContactSave\").addClass(\"disabled\");\n}\nelse{\nalert(\"Please confirm emergency contact details are correct\", {type:\"error\", flash:true}); \n}",
+            "name": "EmergencyContactSave",
+            "label": "Confirm",
+            "type": "button"
+         }
+      ],
+      "name": "AIPEmergencyContactEUR",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

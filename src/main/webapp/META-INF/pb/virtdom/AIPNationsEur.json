@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select stvnatn_code, stvnatn_nation\r\nfrom stvnatn\r\nwhere stvnatn_code between '1' and '500'\r\norder by stvnatn_nation",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPNationsEur",
+   "codePost": null,
+   "developerSecurity": []
+}

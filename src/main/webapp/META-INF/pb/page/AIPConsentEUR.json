@@ -1,0 +1,173 @@
+{
+   "constantName": "AIPConsentEUR",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-01-22T14:30:50Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.AIPConsentOptionsEUR",
+            "name": "ConsentOptions",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPConsentEUR",
+            "name": "Consent",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.SecondayConsent",
+            "name": "SecondaryConsent",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.SecondaryConsentOptions",
+            "name": "SecondaryConsentOptions",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemContent",
+            "name": "ActionItemUpdate",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemStatus",
+            "name": "ActionItemStatus",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "name": "ConsentText",
+                        "type": "literal",
+                        "value": "<p>As part of Online Enrolment we will collect some personal information about you such as your name and address details to be able to contact you in needed.</p>\n<p>We respect your trust and protect your privacy and therefore we will never sell or share data with any third parties without your consent</p>\n<p>Please provide consent for the university to process your data in line with university's privacy policy</p>"
+                     },
+                     {
+                        "allowDelete": false,
+                        "components": [
+                           {
+                              "sourceParameters": {},
+                              "name": "ConsentSelect",
+                              "model": "GURCCPR_CCPD_CODE",
+                              "sourceModel": "ConsentOptions",
+                              "label": "Consent to process personal data *",
+                              "loadInitially": true,
+                              "labelKey": "GTVCCPD_DESC",
+                              "type": "select",
+                              "valueKey": "GTVCCPD_CODE",
+                              "required": true
+                           }
+                        ],
+                        "allowNew": true,
+                        "onSaveSuccess": "$ConsentDetail.$load();\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                        "pageSize": 1,
+                        "loadInitially": true,
+                        "type": "detail",
+                        "name": "ConsentDetail",
+                        "allowModify": true,
+                        "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n\nthis.AIPGetControllerId = function (id) {\nvar rootScope = angular.element(document.querySelector('#pbid-AdditionalInformation')).injector().get('\\$rootScope');\n    \n     var scope = rootScope.\\$\\$childHead;\n    //traverse children of root scope to find the id matching _controllerId\n    for (; scope && scope._controllerId !== id; scope = scope.\\$\\$nextSibling){}\n    return scope;\n};\n\nthis.AIPCreateNewRecord = function (detailName) {\n   setTimeout(function () {\n       var scope = AIPGetControllerId(controllerId);\n       console.log(\"scope[detailName + 'DS'] : \" + scope[detailName + 'DS']);\n       if (scope[detailName + 'DS'].data.length === 0) {\n           scope[detailName + 'DS'].add(scope['pbNew_' + detailName]());\n           scope[detailName + 'DS'].setCurrentRecord(scope[detailName + 'DS'].data[0]);\n           scope.$apply();\n       }\n   });\n};\nAIPCreateNewRecord('ConsentDetail');\n$(\"#pbid-ConsentDetail-new-button\").hide();\n$(\"#pbid-ConsentDetail-save-button\").hide();\n$(\"#pbid-SecondaryConsentDetail-new-button\").hide();\n$(\"#pbid-SecondaryConsentDetail-save-button\").hide();",
+                        "model": "Consent",
+                        "allowReload": false,
+                        "parameters": {}
+                     },
+                     {
+                        "allowDelete": false,
+                        "components": [
+                           {
+                              "sourceParameters": {},
+                              "name": "SecondaryConsentDetailSelect",
+                              "sourceModel": "SecondaryConsentOptions",
+                              "model": "GORPSID_SEID_VALUE",
+                              "label": "Secondary Consent",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "GORSEID_SEID_VALUE_DESC",
+                              "valueKey": "GORSEID_SEID_VALUE",
+                              "required": false
+                           }
+                        ],
+                        "allowNew": true,
+                        "pageSize": 1,
+                        "onSaveSuccess": "$SecondaryConsentDetail.$load();\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                        "loadInitially": true,
+                        "type": "detail",
+                        "name": "SecondaryConsentDetail",
+                        "allowModify": true,
+                        "onLoad": "AIPCreateNewRecord('SecondaryConsentDetail');",
+                        "model": "SecondaryConsent",
+                        "allowReload": false,
+                        "parameters": {}
+                     },
+                     {
+                        "allowDelete": false,
+                        "components": [
+                           {
+                              "sourceParameters": {
+                                 "actionitemid": "$$params.actionItemId"
+                              },
+                              "name": "ConsentlInfoAgree",
+                              "model": "STATUS_RULE_ID",
+                              "sourceModel": "ActionItemStatus",
+                              "loadInitially": true,
+                              "labelKey": "STATUS_RULE_LABEL_TEXT",
+                              "type": "radio",
+                              "valueKey": "STATUS_RULE_ID",
+                              "onUpdate": "params.isResponseModified = true;",
+                              "required": false
+                           }
+                        ],
+                        "allowNew": false,
+                        "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;\n$ConsentInfoConfirmation.$load();",
+                        "pageSize": 5,
+                        "loadInitially": true,
+                        "type": "detail",
+                        "name": "ConsentInfoConfirmation",
+                        "allowModify": false,
+                        "onLoad": "",
+                        "model": "ActionItemUpdate",
+                        "allowReload": false,
+                        "parameters": {
+                           "actionitemid": "$$params.actionItemId",
+                           "pageid": "$$params.id"
+                        }
+                     }
+                  ],
+                  "nextButtonLabel": "Next",
+                  "name": "ConsentForm",
+                  "showInitially": true,
+                  "label": "",
+                  "type": "form"
+               },
+               {
+                  "valueStyle": "btn btn-primary",
+                  "onClick": "if($(\"#pbid-ConsentlInfoAgree-radio-0-0:checked\").val()){\n$ConsentDetail.$save();\n$SecondaryConsentDetail.$save();\n$ConsentInfoConfirmation.$save();\n}\nelse{\nalert(\"Please confirm consent for the university to process your personal data\", {type:\"error\", flash:true}); \n}",
+                  "name": "ConsentInfoSave",
+                  "label": "Confirm",
+                  "type": "button"
+               }
+            ],
+            "name": "AdditionalInformation",
+            "showInitially": true,
+            "label": "Capture and Process Personal Data",
+            "type": "block"
+         }
+      ],
+      "name": "AIPConsentEUR",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

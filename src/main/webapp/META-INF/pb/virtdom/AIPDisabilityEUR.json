@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "update sgrdisa\r\nset sgrdisa_disa_code = :SGRDISA_DISA_CODE\r\nwhere sgrdisa_pidm = :parm_user_pidm\r\n",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select 1 as id, sgrdisa_disa_code\r\nfrom sgrdisa\r\nleft join stvdisa on sgrdisa_disa_code = stvdisa_code\r\nwhere sgrdisa_pidm = :parm_user_pidm",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPDisabilityEUR",
+   "codePost": null,
+   "developerSecurity": []
+}

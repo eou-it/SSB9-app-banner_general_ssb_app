@@ -1,0 +1,18 @@
+{
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT\r\n        CASE\r\n            WHEN SKRECAF_HELP_TYPE = 'H' THEN 'Commonwealth Support and HECS-HELP'\r\n            WHEN SKRECAF_HELP_TYPE = 'F' THEN 'FEE-HELP'\r\n            WHEN SKRECAF_HELP_TYPE = 'O' THEN 'OS-HELP'\r\n            WHEN SKRECAF_HELP_TYPE = 'S' THEN 'SA-HELP'\r\n            ELSE SKRECAF_HELP_TYPE\r\n        END\r\n    AS HELP_TYPE    \r\nFROM\r\n    SKRECAF\r\nWHERE\r\n        SKRECAF_CURRENT_IND = 'Y'\r\n    AND\r\n        SKRECAF_PIDM = :parm_user_pidm\r\n    AND SKRECAF_PROGRAM = :program",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "EcafExistingCommonweathAssistance",
+   "codePost": null
+}

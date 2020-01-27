@@ -1,0 +1,18 @@
+{
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT stvterm_code, stvterm_desc\r\n   FROM stvterm, sobptrm, sorrtrm\r\n   WHERE     stvterm_code = sobptrm_term_code\r\n         AND stvterm_code = sorrtrm_term_code\r\n         AND sobptrm_ptrm_code = '1'\r\n         AND sobptrm_census_date > SYSDATE\r\n         AND sobptrm_census_date IS NOT NULL\r\n         AND sorrtrm_start_date <= SYSDATE\r\n         AND sorrtrm_end_date >= SYSDATE\r\n   ORDER BY stvterm_code",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "EcafStvterm",
+   "codePost": null
+}

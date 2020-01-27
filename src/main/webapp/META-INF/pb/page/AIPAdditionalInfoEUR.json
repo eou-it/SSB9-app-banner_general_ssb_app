@@ -1,0 +1,414 @@
+{
+   "constantName": "AIPAdditionalInfoEUR",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-01-22T14:30:50Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.AIPDisabilityOptionsEUR",
+            "name": "DisabilityOptions",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPDisabilityEUR",
+            "name": "Disability",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPNewEntrantOptions",
+            "name": "NewEntrantOptions",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHESAInstance",
+            "name": "InstanceResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHESAPerson",
+            "name": "PersonResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHesaCareleaver",
+            "name": "CareLeaverResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHesaCarer",
+            "name": "CarerResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHesaNationality",
+            "name": "NationalityResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHesaEthnicity",
+            "name": "EthnicityResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHesaReligion",
+            "name": "ReligionResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHesaSexOrt",
+            "name": "SexOrtResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHesaDependents",
+            "name": "DependentsResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHesaDSA",
+            "name": "DSAResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHESAParentHEI",
+            "name": "ParentHEIResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHESAHighestQualEntry",
+            "name": "HighestQualEntryResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHesaDomicile",
+            "name": "DomicileResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPHesaPrevInst",
+            "name": "PreviousInstitutionResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemContent",
+            "name": "ActionItemUpdate",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemStatus",
+            "name": "ActionItemStatus",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "allowDelete": false,
+                        "components": [
+                           {
+                              "sourceParameters": {},
+                              "name": "DisabilitySelect",
+                              "model": "SGRDISA_DISA_CODE",
+                              "sourceModel": "DisabilityOptions",
+                              "label": "Disability *",
+                              "loadInitially": true,
+                              "labelKey": "STVDISA_DESC",
+                              "type": "select",
+                              "valueKey": "STVDISA_CODE",
+                              "required": true
+                           }
+                        ],
+                        "allowNew": false,
+                        "onSaveSuccess": "$DisabilityDetail.$load();\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                        "pageSize": 1,
+                        "loadInitially": true,
+                        "type": "detail",
+                        "name": "DisabilityDetail",
+                        "allowModify": true,
+                        "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n$(\"#pbid-DisabilityDetail-save-button\").hide();\n$(\"#pbid-PersonDetail-save-button\").hide();\n$(\"#pbid-InstanceDetail-save-button\").hide();",
+                        "model": "Disability",
+                        "allowReload": false,
+                        "parameters": {}
+                     },
+                     {
+                        "allowDelete": false,
+                        "components": [
+                           {
+                              "sourceParameters": {},
+                              "name": "Carer",
+                              "sourceModel": "CarerResource",
+                              "model": "SKBSPIN_CARER",
+                              "label": "Carer*",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "SKVSSDT_SHORT_TITLE",
+                              "valueKey": "SKVSSDT_SDAT_CODE_OPT_1",
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "CareLeaver",
+                              "sourceModel": "CareLeaverResource",
+                              "model": "SKBSPIN_CARELEAVER",
+                              "label": "Care Leaver*",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "SKVSSDT_SHORT_TITLE",
+                              "valueKey": "SKVSSDT_SDAT_CODE_OPT_1",
+                              "required": true
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Name16",
+                              "model": "SKBSPIN_SNAME16",
+                              "label": "Name at 16*",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "Ethnicity",
+                              "sourceModel": "EthnicityResource",
+                              "model": "SPBPERS_ETHN_CODE",
+                              "label": "Ethnicity*",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "STVETHN_DESC",
+                              "valueKey": "STVETHN_CODE",
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "Nationality",
+                              "sourceModel": "NationalityResource",
+                              "model": "SKBSPIN_NATN_CODE_LEGAL",
+                              "label": "Nationality*",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "STVNATN_NATION",
+                              "valueKey": "STVNATN_CODE",
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "Religion",
+                              "sourceModel": "ReligionResource",
+                              "model": "SPBPERS_RELG_CODE",
+                              "label": "Religion*",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "STVRELG_DESC",
+                              "valueKey": "STVRELG_CODE",
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "SexualOrientation",
+                              "sourceModel": "SexOrtResource",
+                              "model": "SKBSPIN_SEXORT",
+                              "label": "Sexual Orientation*",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "SKVSSDT_SHORT_TITLE",
+                              "valueKey": "SKVSSDT_SDAT_CODE_OPT_1",
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "Dependents",
+                              "sourceModel": "DependentsResource",
+                              "model": "SKBSPIN_DEPENDENTS",
+                              "loadInitially": true,
+                              "label": "Dependents*",
+                              "type": "select",
+                              "labelKey": "SKVSSDT_TITLE",
+                              "valueKey": "SKVSSDT_SDAT_CODE_OPT_1",
+                              "required": true
+                           }
+                        ],
+                        "allowNew": false,
+                        "name": "PersonDetail",
+                        "allowModify": true,
+                        "pageSize": 1,
+                        "onSaveSuccess": "$PersonDetail.$load();\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                        "model": "PersonResource",
+                        "allowReload": false,
+                        "loadInitially": true,
+                        "type": "detail",
+                        "parameters": {}
+                     },
+                     {
+                        "allowDelete": false,
+                        "components": [
+                           {
+                              "sourceParameters": {},
+                              "name": "NewEntrant",
+                              "sourceModel": "NewEntrantOptions",
+                              "model": "SKBHINS_SSDT_CODE_NEWENT",
+                              "label": "New Entrant*",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "SKVSSDT_SHORT_TITLE",
+                              "valueKey": "SKVSSDT_SDAT_CODE_OPT_1",
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "DSA",
+                              "sourceModel": "DSAResource",
+                              "model": "SKBHINS_SSDT_CODE_DISALL",
+                              "label": "In Receipt of DSA*",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "SKVSSDT_TITLE",
+                              "valueKey": "SKVSSDT_SDAT_CODE_OPT_1",
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "ParentHEI",
+                              "sourceModel": "ParentHEIResource",
+                              "model": "SKBHINS_SSDT_CODE_PARED",
+                              "label": "Parental Education*",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "SKVSSDT_TITLE",
+                              "valueKey": "SKVSSDT_SDAT_CODE_OPT_1",
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "HighestQualEntry",
+                              "sourceModel": "HighestQualEntryResource",
+                              "model": "SKBHINS_SSDT_CODE_QUALENT3",
+                              "label": "Highest Qualification on Entry*",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "SKVSSDT_TITLE",
+                              "valueKey": "SKVSSDT_SDAT_CODE_OPT_1",
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "Domicile",
+                              "sourceModel": "DomicileResource",
+                              "model": "SKBHINS_SSDT_CODE_DOMICILE",
+                              "label": "Country of Birth*",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "SKVSSDT_TITLE",
+                              "valueKey": "SKVSSDT_SDAT_CODE_OPT_1",
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {},
+                              "name": "PreviousInstitution",
+                              "sourceModel": "PreviousInstitutionResource",
+                              "model": "SKBHINS_SSDT_CODE_PREVINST",
+                              "label": "Previous Institution",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "SKVSSDT_TITLE",
+                              "valueKey": "SKVSSDT_SDAT_CODE_OPT_1",
+                              "required": false
+                           }
+                        ],
+                        "allowNew": false,
+                        "name": "InstanceDetail",
+                        "allowModify": true,
+                        "pageSize": 1,
+                        "onSaveSuccess": "$InstanceDetail.$load();\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                        "model": "InstanceResource",
+                        "allowReload": false,
+                        "loadInitially": true,
+                        "type": "detail",
+                        "parameters": {}
+                     },
+                     {
+                        "allowDelete": false,
+                        "components": [
+                           {
+                              "sourceParameters": {
+                                 "actionitemid": "$$params.actionItemId"
+                              },
+                              "name": "AdditionalInfoAgree",
+                              "model": "STATUS_RULE_ID",
+                              "sourceModel": "ActionItemStatus",
+                              "loadInitially": true,
+                              "labelKey": "STATUS_RULE_LABEL_TEXT",
+                              "type": "radio",
+                              "valueKey": "STATUS_RULE_ID",
+                              "onUpdate": "params.isResponseModified = true;",
+                              "required": false
+                           }
+                        ],
+                        "allowNew": false,
+                        "name": "AdditionalInfoConfirmation",
+                        "allowModify": false,
+                        "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;\n$AdditionalInfoConfirmation.$load();",
+                        "pageSize": 5,
+                        "model": "ActionItemUpdate",
+                        "allowReload": false,
+                        "loadInitially": true,
+                        "type": "detail",
+                        "parameters": {
+                           "actionitemid": "$$params.actionItemId",
+                           "pageid": "$$params.id"
+                        }
+                     }
+                  ],
+                  "nextButtonLabel": "Next",
+                  "name": "AdditionalInfoForm",
+                  "showInitially": true,
+                  "label": "",
+                  "type": "form"
+               },
+               {
+                  "valueStyle": "btn btn-primary",
+                  "onClick": "if($(\"#pbid-AdditionalInfoAgree-radio-0-0:checked\").val()){\n$DisabilityDetail.$save();\n$PersonDetail.$save();\n$InstanceDetail.$save();\n$AdditionalInfoConfirmation.$save();\n}\nelse{\nalert(\"Please confirm you have provided the required additional information\", {type:\"error\", flash:true}); \n}",
+                  "name": "AdditionalInfoSave",
+                  "label": "Confirm",
+                  "type": "button"
+               }
+            ],
+            "name": "AdditionalInformation",
+            "showInitially": true,
+            "label": "Additional Information",
+            "type": "block"
+         }
+      ],
+      "name": "AIPAdditionalInfoEUR",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}
