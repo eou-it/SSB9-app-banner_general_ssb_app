@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "UPDATE GORPSID\r\nSET GORPSID_SEID_VALUE = :GORPSID_SEID_VALUE,\r\nGORPSID_DATA_ORIGIN = 'OENR',\r\nGORPSID_USER_ID = F_GetSpridenID(:parm_user_pidm),\r\nGORPSID_ACTIVITY_DATE = SYSDATE\r\nWHERE GORPSID_PIDM = :parm_user_pidm\r\nAND GORPSID_SEID_CODE = 'CONSENT2'\r\nAND GORPSID_SEQ_NO = :id\r\n",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT GORPSID_SEQ_NO as ID, GORPSID_PIDM, GORPSID_SEIR_CODE, GORPSID_ACTIVITY_DATE, GORPSID_SEID_VALUE \r\nFROM GORPSID\r\nWHERE GORPSID_SEID_CODE = 'CONSENT2' \r\nAND GORPSID_PIDM = :parm_user_pidm\r\n",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "SecondayConsent",
+   "codePost": "BEGIN\r\nIF :GORPSID_SEID_VALUE IS NOT NULL\r\nTHEN\r\nINSERT INTO GORPSID\r\n(GORPSID_PIDM,\r\nGORPSID_SEIR_CODE,\r\nGORPSID_SEID_CODE,\r\nGORPSID_SEQ_NO,\r\nGORPSID_DATA_ORIGIN,\r\nGORPSID_USER_ID,\r\nGORPSID_ACTIVITY_DATE,\r\nGORPSID_SEID_VALUE)\r\nVALUES\r\n(:parm_user_pidm,\r\n'HESA_ENGLAND',\r\n'CONSENT2',\r\n(SELECT COALESCE (MAX(GORPSID_SEQ_NO)+1, 1) \r\n FROM GORPSID\r\n WHERE GORPSID_PIDM = :parm_user_pidm),\r\n 'OENR',\r\n F_GetSpridenID(:parm_user_pidm),\r\n SYSDATE,\r\n :GORPSID_SEID_VALUE);\r\n END IF;\r\n END;",
+   "developerSecurity": []
+}
