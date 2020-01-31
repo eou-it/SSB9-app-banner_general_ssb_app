@@ -1,6 +1,6 @@
 {
    "owner": null,
-   "codePut": "declare\r\nl_status_ind spraddr.spraddr_status_ind%TYPE; \r\nl_atype_code VARCHAR2(30);\r\n\r\nbegin\r\nselect nvl(to_char(gurocfg_value), 'TT') as address_type\r\ninto l_atype_code\r\nfrom gurocfg\r\nwhere gurocfg_name = 'aip.term.address.type';\r\n\r\ngb_address.p_update(\r\n    p_pidm             => :parm_user_pidm,\r\n    p_atyp_code        => l_atype_code,\r\n    p_seqno            => :SPRADDR_SEQNO,\r\n    p_street_line1     => :SPRADDR_STREET_LINE1,\r\n    p_street_line2     => :SPRADDR_STREET_LINE2,\r\n    p_city             => :SPRADDR_CITY,\r\n    p_zip              => :SPRADDR_ZIP,\r\n    p_natn_code        => :SPRADDR_NATN_CODE,\r\n    p_status_ind       => l_status_ind);\r\nend;",
+   "codePut": "declare\r\nl_status_ind spraddr.spraddr_status_ind%TYPE; \r\nl_atype_code VARCHAR2(30);\r\n\r\nbegin\r\nselect nvl(to_char(gurocfg_value), 'TT') as address_type\r\ninto l_atype_code\r\nfrom gurocfg\r\nwhere gurocfg_name = 'aip.term.address.type';\r\n\r\ngb_address.p_update(\r\n    p_pidm             => :parm_user_pidm,\r\n    p_atyp_code        => l_atype_code,\r\n    p_seqno            => :SPRADDR_SEQNO,\r\n    p_street_line1     => :SPRADDR_STREET_LINE1,\r\n    p_street_line2     => :SPRADDR_STREET_LINE2,\r\n    p_city             => :SPRADDR_CITY,\r\n    p_zip              => :SPRADDR_ZIP,\r\n    p_natn_code        => :SPRADDR_NATN_CODE,\r\n    p_user             => F_GetSpridenID(:parm_user_pidm), \r\n    p_status_ind       => l_status_ind);\r\nend;",
    "codeDelete": null,
    "virtualDomainRoles": [
       {
