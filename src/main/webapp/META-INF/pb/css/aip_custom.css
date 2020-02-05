@@ -33,6 +33,11 @@ input.pb-item:focus {
 input.pb-item.hasDatepicker{
  height:inherit
 }
+textarea, textarea:focus{
+margin-left:12px!important;
+width:18.75em;
+color:darkSlateGray;
+}
 h2.pb-block-label,
 h2.pb-form-label {
  color:#4f585f;
@@ -127,9 +132,10 @@ position:relative;
 .aip-item-detail-container .detail-content{
 padding: 0px 5px 5px 5px;
 }
-#pbid-TermAddress-new-button{
+#pbid-PermAddress-new-button, #pbid-TermAddress-new-button{
 padding: .75em .75em;
 margin-left: 15px;
+margin-top:10px;
 font-size:14px;
 }
 .pb-radio {
@@ -139,6 +145,13 @@ font-size:14px;
 .pb-detail.pb-item.pb-radiolabel{
 margin-bottom:5px!important;
 }
+#pbid-LiveTermTimeRadio-0 .pb-detail.pb-item.pb-radiolabel, #pbid-TravelToCampusRadio-0 .pb-detail.pb-item.pb-radiolabel{
+margin-bottom:0px!important;
+}
+#pbid-TravelToCampusDetailcontainer-0 .pb-radio{
+margin-top:0px;
+}
+
 #pbid-PaymentOptionsLinks-container a{
     background-color: #3276b1;
     color: #fff;
@@ -223,6 +236,10 @@ padding:0px;
 margin-top:-20px;
 padding-left:.75em;
 }
+#pbid-LiveTermTimeRadio-0 label, #pbid-TravelToCampusRadio-0 label{
+font-weight:normal;
+}
+
 @-moz-document url-prefix() {
 #pbid-ActionItemContentDisplay-container-0 p{
 margin-top:-20px;
