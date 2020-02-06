@@ -46,6 +46,7 @@
  *******************************************************************************/
 ssbEnabled = true
 ssbOracleUsersProxied = true
+guestAuthenticationEnabled = false //Set to true if enabling the Proxy Access
 
 
 /******************************************************************************
