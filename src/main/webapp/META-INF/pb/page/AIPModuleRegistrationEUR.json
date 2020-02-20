@@ -29,7 +29,7 @@
             "name": "Redirect",
             "allowModify": false,
             "onLoad": "window.open('https://s001-xe.cloud.elluciandemo.com/StudentRegistrationSsb/ssb/term/termSelection?mode=registration', \"_newtab\");",
-            "pageSize": 5,
+            "pageSize": 0,
             "model": "RedirectModel",
             "allowReload": false,
             "loadInitially": true,
