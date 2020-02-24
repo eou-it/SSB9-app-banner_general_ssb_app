@@ -126,6 +126,10 @@ grails {
                     grails.plugin.springsecurity.useSessionFixationPrevention = false
                 }
             }
+            logout {
+                afterLogoutUrl    = 'https://cas-server/logout?url=http://myportal/main_page.html'
+                mepErrorLogoutUrl = '/logout/logoutPage'
+            }
         }
     }
 }
