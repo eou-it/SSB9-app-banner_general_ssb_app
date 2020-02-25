@@ -2,7 +2,7 @@
    "constantName": "AIPDocUploadEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-01-22T14:30:50Z",
+   "fileTimestamp": "2020-02-19T06:44:14Z",
    "modelView": {
       "components": [
          {
@@ -134,7 +134,7 @@
                   "newRecordLabel": "",
                   "name": "ActionItemContentDetail",
                   "allowModify": true,
-                  "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n$(\"#pbid-ActionItemContentDetail-save-button\").hide();\nsetTimeout( function(){ \n    console.log(\"status count \" + $ActionItemContentDetail.STATUS_COUNT);\n    $ActionItemStatusAgree.$load();\n}, \n300);",
+                  "onLoad": "$(\"#pbid-ActionItemContentDetail-save-button\").hide();\nsetTimeout( function(){ \n    console.log(\"status count \" + $ActionItemContentDetail.STATUS_COUNT);\n    $ActionItemStatusAgree.$load();\n}, \n300);",
                   "model": "ActionItemContent",
                   "allowReload": false,
                   "parameters": {

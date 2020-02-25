@@ -2,7 +2,7 @@
    "constantName": "AIPConfirmEnrolmentEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-01-22T14:30:50Z",
+   "fileTimestamp": "2020-02-19T06:51:44Z",
    "modelView": {
       "components": [
          {
@@ -36,7 +36,7 @@
                   "allowNew": false,
                   "name": "SelectedResponses",
                   "allowModify": false,
-                  "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\ndocument.getElementById(\"pbid-ConfirmEnrolment-label\").scrollIntoView(true);",
+                  "onLoad": "document.getElementById(\"pbid-ConfirmEnrolment-label\").scrollIntoView(true);",
                   "pageSize": 5,
                   "model": "GetResponseStatusName",
                   "allowReload": false,
@@ -85,7 +85,7 @@
                },
                {
                   "valueStyle": "btn btn-primary pull-left",
-                  "onClick": "var responsesLength=$SelectedResponses.$data.length;\nvar count=0;\nfor (var k=0;k<responsesLength;k++)\n{\nif ($SelectedResponses.$data[k].STATUS_NAME ===  'Completed')\n{\ncount++;\n}\n}\nif (responsesLength===count){\n$ConfirmEnrolmentConfirmation.$save()\n}\nelse{\nalert(\"Please complete all action items before confirming your Enrolment\", {type:\"error\", flash:true}); \n}",
+                  "onClick": "var responsesLength=$SelectedResponses.$data.length;\nvar count=0;\nfor (var k=0;k<responsesLength;k++)\n{\nif ($SelectedResponses.$data[k].STATUS_NAME ===  'Completed')\n{\ncount++;\n}\n}\nif (responsesLength===count){\n$ConfirmEnrolmentConfirmation.$save();\n}\nelse{\nalert(\"Please complete all action items before confirming your Enrolment\", {type:\"error\", flash:true}); \n}",
                   "name": "ConfirmEnrolmentComplete",
                   "label": "Confirm Enrolment",
                   "type": "button"

@@ -2,7 +2,7 @@
    "constantName": "AIPContactDetailsEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-01-22T14:30:50Z",
+   "fileTimestamp": "2020-02-19T06:44:14Z",
    "modelView": {
       "components": [
          {
@@ -100,7 +100,7 @@
                         "newRecordLabel": "Add Email Address",
                         "name": "EmailAddressGrid",
                         "allowModify": true,
-                        "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n\n\nthis.AIPGetControllerId = function (id) {\nvar rootScope = angular.element(document.querySelector('#pbid-ContactInformation')).injector().get('\\$rootScope');\n    \n     var scope = rootScope.\\$\\$childHead;\n    //traverse children of root scope to find the id matching _controllerId\n    for (; scope && scope._controllerId !== id; scope = scope.\\$\\$nextSibling){}\n    return scope;\n};\n\nthis.AIPCreateNewRecord = function (detailName) {\n   setTimeout(function () {\n       var scope = AIPGetControllerId(controllerId);\n       console.log(\"scope[detailName + 'DS'] : \" + scope[detailName + 'DS']);\n       if (scope[detailName + 'DS'].data.length === 0) {\n           scope[detailName + 'DS'].add(scope['pbNew_' + detailName]());\n           scope[detailName + 'DS'].setCurrentRecord(scope[detailName + 'DS'].data[0]);\n           scope.$apply();\n       }\n   });\n};\n$(\"#pbid-EmailAddressGrid-save-button\").hide();\n$(\"#pbid-PhoneNumbersGrid-save-button\").hide();\nAIPCreateNewRecord('EmailAddressGrid');\nAIPCreateNewRecord('PhoneNumbersGrid');",
+                        "onLoad": "this.AIPGetControllerId = function (id) {\nvar rootScope = angular.element(document.querySelector('#pbid-ContactInformation')).injector().get('\\$rootScope');\n    \n     var scope = rootScope.\\$\\$childHead;\n    //traverse children of root scope to find the id matching _controllerId\n    for (; scope && scope._controllerId !== id; scope = scope.\\$\\$nextSibling){}\n    return scope;\n};\n\nthis.AIPCreateNewRecord = function (detailName) {\n   setTimeout(function () {\n       var scope = AIPGetControllerId(controllerId);\n       console.log(\"scope[detailName + 'DS'] : \" + scope[detailName + 'DS']);\n       if (scope[detailName + 'DS'].data.length === 0) {\n           scope[detailName + 'DS'].add(scope['pbNew_' + detailName]());\n           scope[detailName + 'DS'].setCurrentRecord(scope[detailName + 'DS'].data[0]);\n           scope.$apply();\n       }\n   });\n};\n$(\"#pbid-EmailAddressGrid-save-button\").hide();\n$(\"#pbid-PhoneNumbersGrid-save-button\").hide();\nAIPCreateNewRecord('EmailAddressGrid');\nAIPCreateNewRecord('PhoneNumbersGrid');",
                         "model": "EmailAddressModel",
                         "style": "table-condensed table-responsive",
                         "allowReload": false,
@@ -131,6 +131,7 @@
                            },
                            {
                               "valueStyle": "",
+                              "onError": "",
                               "label": "Area Code",
                               "loadInitially": true,
                               "type": "text",
@@ -141,7 +142,7 @@
                               "model": "SPRTELE_PHONE_AREA",
                               "style": "",
                               "parameters": {},
-                              "onUpdate": "$AreaNumber = $(\"#pbid-PhoneArea-0\").val();\n//validate only digits\nvar isNumber = /^[0-9]+$/.test($AreaNumber);\nif(!isNumber) {\nalert(\"Area Code must not contain non-numeric values\", {type:\"error\", flash:true}); \n}",
+                              "onUpdate": "",
                               "validation": {}
                            },
                            {
@@ -156,7 +157,7 @@
                               "model": "SPRTELE_PHONE_NUMBER",
                               "style": "",
                               "parameters": {},
-                              "onUpdate": "$PhoneNumber = $(\"#pbid-PhoneNumber-0\").val();\n//validate only digits\nvar isNumber = /^[0-9]+$/.test($PhoneNumber);\nif(!isNumber) {\nalert(\"Phone Number must not contain non numeric values\", {type:\"error\", flash:true}); \n}",
+                              "onUpdate": "",
                               "validation": {}
                            },
                            {
@@ -246,7 +247,7 @@
                },
                {
                   "valueStyle": "btn btn-primary pull-left",
-                  "onClick": "if($(\"#pbid-ContactDetailsAgree-radio-0-0:checked\").val()){\nif (!$EmailAddressGrid.GOREMAL_EMAIL_ADDRESS){\nalert(\"Please add an email address\", {type:\"error\", flash:true}); \n}\nif (!$PhoneNumbersGrid.SPRTELE_PHONE_NUMBER){\nalert(\"Please add a phone number\", {type:\"error\", flash:true}); \n}\nelse{\n$EmailAddressGrid.$save();\n$PhoneNumbersGrid.$save();\n$ContactDetailsConfirmation.$save();\n}\n}\nelse{\nalert(\"Please confirm contact details are correct\", {type:\"error\", flash:true}); \n}",
+                  "onClick": "if($(\"#pbid-ContactDetailsAgree-radio-0-0:checked\").val()){\nvar isValid = 'Y';\nif (!$EmailAddressGrid.GOREMAL_EMAIL_ADDRESS){\nalert(\"Please add an Email Address\", {type:\"error\", flash:true});\n}\n$(\"input[id^=pbid-PhoneArea]\").each(function() {\n        pa = $(this);\n\t\tif(pa.val().length>0){\n\t\t\tvar isNumber = /^[0-9]+$/.test(pa.val());\n\t\t\tif(!isNumber){\n\t\t\t\talert(\"Area Code must not contain non numeric values\", {type:\"error\", flash:true});\n\t\t\t\tisValid = 'N';\n\t\t\t}\n\t\t}\n});\n$(\"input[id^=pbid-PhoneNumber-]\").each(function() {\n        pn = $(this);\n\t\tif(pn.val().length>0){\n\t\t\t\tvar isNumber2 = /^[0-9]+$/.test(pn.val());\n\t\t\t\tif(!isNumber2){\n\t\t\t\t\talert(\"Phone Number must not contain non numeric values\", {type:\"error\", flash:true});\n\t\t\t\t\tisValid = 'N';\n\t\t\t\t}\n\t\t}else {\n\t\t\talert(\"Please add a Phone Number\", {type:\"error\", flash:true});\n\t\t\tisValid = 'N';\n\t\t}\n});\nif (isValid == 'Y'){\n\t$EmailAddressGrid.$save();\n\t$PhoneNumbersGrid.$save();\n\t$ContactDetailsConfirmation.$save();\n}\n}\nelse{\nalert(\"Please confirm contact details are correct\", {type:\"error\", flash:true}); \n}",
                   "name": "ContactDetailsSave",
                   "style": "",
                   "label": "Confirm",

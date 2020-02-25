@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015-2019 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2020 Ellucian Company L.P. and its affiliates.
  *********************************************************************************/
 
 /******************************************************************************
@@ -46,6 +46,7 @@
  *******************************************************************************/
 ssbEnabled = true
 ssbOracleUsersProxied = true
+guestAuthenticationEnabled = false //Set to true if enabling the Proxy Access
 
 
 /******************************************************************************
@@ -92,9 +93,10 @@ banner {
         authenticationAssertionAttribute = 'UDC_IDENTIFIER'
     }
 }
-    if (banner.sso.authenticationProvider == 'cas' || banner.sso.authenticationProvider == 'saml' ) {
-       grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/error'
-    }
+
+if (banner.sso.authenticationProvider == 'cas' || banner.sso.authenticationProvider == 'saml' ) {
+    grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/error'
+}
 
 
 /*******************************************************************************
@@ -124,6 +126,10 @@ grails {
                 if (active && useSingleSignout) {
                     grails.plugin.springsecurity.useSessionFixationPrevention = false
                 }
+            }
+            logout {
+                afterLogoutUrl    = 'https://cas-server/logout?url=http://myportal/main_page.html'
+                mepErrorLogoutUrl = '/logout/logoutPage'
             }
         }
     }

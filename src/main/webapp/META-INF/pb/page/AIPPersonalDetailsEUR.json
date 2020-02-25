@@ -2,7 +2,7 @@
    "constantName": "AIPPersonalDetailsEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-01-22T14:30:50Z",
+   "fileTimestamp": "2020-02-19T06:44:14Z",
    "modelView": {
       "components": [
          {
@@ -170,7 +170,7 @@
                         "type": "detail",
                         "name": "PersonalInfo",
                         "allowModify": true,
-                        "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n\n\nthis.AIPGetControllerId = function (id) {\nvar rootScope = angular.element(document.querySelector('#pbid-PersonalInformation')).injector().get('\\$rootScope');\n    \n     var scope = rootScope.\\$\\$childHead;\n    //traverse children of root scope to find the id matching _controllerId\n    for (; scope && scope._controllerId !== id; scope = scope.\\$\\$nextSibling){}\n    return scope;\n};\n\nthis.AIPCreateNewRecord = function (detailName) {\n   setTimeout(function () {\n       var scope = AIPGetControllerId(controllerId);\n       console.log(\"scope[detailName + 'DS'] : \" + scope[detailName + 'DS']);\n       if (scope[detailName + 'DS'].data.length === 0) {\n           scope[detailName + 'DS'].add(scope['pbNew_' + detailName]());\n           scope[detailName + 'DS'].setCurrentRecord(scope[detailName + 'DS'].data[0]);\n           scope.$apply();\n       }\n   });\n};\n$(\"#pbid-PersonalInfo-save-button\").hide();\n$(\"#pbid-PhoneNumbersGrid-save-button\").hide();",
+                        "onLoad": "this.AIPGetControllerId = function (id) {\nvar rootScope = angular.element(document.querySelector('#pbid-PersonalInformation')).injector().get('\\$rootScope');\n    \n     var scope = rootScope.\\$\\$childHead;\n    //traverse children of root scope to find the id matching _controllerId\n    for (; scope && scope._controllerId !== id; scope = scope.\\$\\$nextSibling){}\n    return scope;\n};\n\nthis.AIPCreateNewRecord = function (detailName) {\n   setTimeout(function () {\n       var scope = AIPGetControllerId(controllerId);\n       console.log(\"scope[detailName + 'DS'] : \" + scope[detailName + 'DS']);\n       if (scope[detailName + 'DS'].data.length === 0) {\n           scope[detailName + 'DS'].add(scope['pbNew_' + detailName]());\n           scope[detailName + 'DS'].setCurrentRecord(scope[detailName + 'DS'].data[0]);\n           scope.$apply();\n       }\n   });\n};\n$(\"#pbid-PersonalInfo-save-button\").hide();\n$(\"#pbid-PhoneNumbersGrid-save-button\").hide();",
                         "model": "PersonalData",
                         "style": "",
                         "allowReload": false,

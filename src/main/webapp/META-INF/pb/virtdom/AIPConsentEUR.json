@@ -1,6 +1,6 @@
 {
    "owner": null,
-   "codePut": "UPDATE GURCCPR\r\nSET GURCCPR_CCPD_CODE=:GURCCPR_CCPD_CODE\r\nWHERE GURCCPR_PIDM = :parm_user_pidm",
+   "codePut": "UPDATE GURCCPR\r\nSET GURCCPR_CCPD_CODE=:GURCCPR_CCPD_CODE,\r\nGURCCPR_CONSENT_DATE = SYSDATE,\r\nGURCCPR_USER_ID=F_GetSpridenID(:parm_user_pidm),\r\nGURCCPR_DATA_ORIGIN ='OENR',\r\nGURCCPR_ACTIVITY_DATE = SYSDATE\r\nWHERE GURCCPR_PIDM = :parm_user_pidm",
    "codeDelete": null,
    "virtualDomainRoles": [
       {
