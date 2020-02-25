@@ -2,7 +2,7 @@
    "constantName": "AIPAdditionalInfoEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-02-04T11:12:40Z",
+   "fileTimestamp": "2020-02-19T06:44:14Z",
    "modelView": {
       "components": [
          {
@@ -146,7 +146,7 @@
                         "type": "detail",
                         "name": "DisabilityDetail",
                         "allowModify": true,
-                        "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n$(\"#pbid-DisabilityDetail-save-button\").hide();\n$(\"#pbid-PersonDetail-save-button\").hide();\n$(\"#pbid-InstanceDetail-save-button\").hide();",
+                        "onLoad": "$(\"#pbid-DisabilityDetail-save-button\").hide();\n$(\"#pbid-PersonDetail-save-button\").hide();\n$(\"#pbid-InstanceDetail-save-button\").hide();",
                         "model": "Disability",
                         "allowReload": false,
                         "parameters": {}

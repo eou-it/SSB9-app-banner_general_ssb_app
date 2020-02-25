@@ -2,7 +2,7 @@
    "constantName": "AIPModuleRegistrationEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-02-04T11:12:41Z",
+   "fileTimestamp": "2020-02-19T06:44:14Z",
    "modelView": {
       "components": [
          {
@@ -28,8 +28,8 @@
             "allowNew": false,
             "name": "Redirect",
             "allowModify": false,
-            "onLoad": "window.open('https://s001-xe.cloud.elluciandemo.com/StudentRegistrationSsb/ssb/term/termSelection?mode=registration', \"_newtab\");",
-            "pageSize": 5,
+            "onLoad": "window.open('UPDATE ME', \"_newtab\");",
+            "pageSize": 0,
             "model": "RedirectModel",
             "allowReload": false,
             "loadInitially": true,

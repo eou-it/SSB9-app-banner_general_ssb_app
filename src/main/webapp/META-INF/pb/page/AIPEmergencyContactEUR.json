@@ -2,7 +2,7 @@
    "constantName": "AIPEmergencyContactEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-02-04T11:13:11Z",
+   "fileTimestamp": "2020-02-19T06:44:14Z",
    "modelView": {
       "components": [
          {
@@ -118,7 +118,7 @@
                         "type": "detail",
                         "name": "HomeAddress",
                         "allowModify": false,
-                        "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\n\n$(\"#pbid-PrimaryEmergencyContact-save-button\").hide();\n$(\"#pbid-SecondaryEmergencyContact-save-button\").hide();\n$(\"#pbid-PrimaryEmergencyContact-new-button\").addClass(\"btn btn-primary\");\n$(\"#pbid-SecondaryEmergencyContact-new-button\").addClass(\"btn btn-primary\");\n$(\"#pbid-PrimaryEmergencyContact-new-button\").button().click(function(){\n$(\"#pbid-PrimaryEmergencyContact-new-button\").hide();\n })\n$(\"#pbid-SecondaryEmergencyContact-new-button\").button().click(function(){\n$(\"#pbid-SecondaryEmergencyContact-new-button\").hide();\n })\nif ($PrimaryEmergencyContact.SPREMRG_FIRST_NAME.length>0) {\n$(\"#pbid-PrimaryEmergencyContactHomeAddress-container-0\").hide();\n}\nif ($SecondaryEmergencyContact.SPREMRG_FIRST_NAME.length>0) {\n$(\"#pbid-SecondaryEmergencyContactHomeAddress-container-0\").hide();\n}",
+                        "onLoad": "$(\"#pbid-PrimaryEmergencyContact-save-button\").hide();\n$(\"#pbid-SecondaryEmergencyContact-save-button\").hide();\n$(\"#pbid-PrimaryEmergencyContact-new-button\").addClass(\"btn btn-primary\");\n$(\"#pbid-SecondaryEmergencyContact-new-button\").addClass(\"btn btn-primary\");\n$(\"#pbid-PrimaryEmergencyContact-new-button\").button().click(function(){\n$(\"#pbid-PrimaryEmergencyContact-new-button\").hide();\n })\n$(\"#pbid-SecondaryEmergencyContact-new-button\").button().click(function(){\n$(\"#pbid-SecondaryEmergencyContact-new-button\").hide();\n })\nif ($PrimaryEmergencyContact.SPREMRG_FIRST_NAME.length>0) {\n$(\"#pbid-PrimaryEmergencyContactHomeAddress-container-0\").hide();\n}\nif ($SecondaryEmergencyContact.SPREMRG_FIRST_NAME.length>0) {\n$(\"#pbid-SecondaryEmergencyContactHomeAddress-container-0\").hide();\n}",
                         "model": "HomeAddressModel",
                         "allowReload": false,
                         "parameters": {}

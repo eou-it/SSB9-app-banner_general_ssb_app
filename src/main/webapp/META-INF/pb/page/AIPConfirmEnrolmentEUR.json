@@ -2,7 +2,7 @@
    "constantName": "AIPConfirmEnrolmentEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-02-04T11:12:40Z",
+   "fileTimestamp": "2020-02-19T06:51:44Z",
    "modelView": {
       "components": [
          {
@@ -36,7 +36,7 @@
                   "allowNew": false,
                   "name": "SelectedResponses",
                   "allowModify": false,
-                  "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');\ndocument.getElementById(\"pbid-ConfirmEnrolment-label\").scrollIntoView(true);",
+                  "onLoad": "document.getElementById(\"pbid-ConfirmEnrolment-label\").scrollIntoView(true);",
                   "pageSize": 5,
                   "model": "GetResponseStatusName",
                   "allowReload": false,

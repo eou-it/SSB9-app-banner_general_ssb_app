@@ -2,7 +2,7 @@
    "constantName": "AIPProgrammeDetailsEUR",
    "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2020-02-04T11:12:41Z",
+   "fileTimestamp": "2020-02-19T06:49:06Z",
    "modelView": {
       "components": [
          {
@@ -87,7 +87,7 @@
                   "type": "htable",
                   "name": "ProgrammeDetailsTable",
                   "allowModify": false,
-                  "onLoad": "$('head').append('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://s001-xe.cloud.elluciandemo.com/aip_custom.css\">');",
+                  "onLoad": "",
                   "model": "AIPProgrammeDetailsModel",
                   "style": "table table-field",
                   "allowReload": false,
