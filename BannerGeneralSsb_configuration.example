@@ -19,6 +19,7 @@
  * Self Service Support
  * Commmgr User DataSource Configuration
  * Supplemental Data Support Enablement
+ * Application name to refer to this app for name display rules
  * Authentication Provider Configuration
  * CAS Configuration - SSO (supporting administrative and self service users)
  * SAML Configuration - SSO (supporting administrative and self service users)
@@ -74,6 +75,14 @@ grails.plugin.xframeoptions.deny = true
  *******************************************************************************/
 // Default is false for self-service applications.
 sdeEnabled = false
+
+
+/********************************************************************************
+ *                                                                              *
+ *         Application name to refer to this app for name display rules         *
+ *                                                                              *
+ ********************************************************************************/
+banner.applicationName = "GeneralSsb"
 
 
 /*******************************************************************************
