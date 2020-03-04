@@ -19,6 +19,7 @@
  * Self Service Support
  * Commmgr User DataSource Configuration
  * Supplemental Data Support Enablement
+ * Application name to refer to this app for name display rules
  * Authentication Provider Configuration
  * CAS Configuration - SSO (supporting administrative and self service users)
  * SAML Configuration - SSO (supporting administrative and self service users)
@@ -29,7 +30,6 @@
  * Eliminate Access to the WEB-INF Folder
  * Page Builder Artifact File Location Configuration
  * Configuration for AIP application
- * BDM Configuration
  * ClamAV Antivirus Scanner Configurations
  * Config Job Configurations
  * Migrating the SeedData Keys Configuration to the Database
@@ -75,6 +75,14 @@ grails.plugin.xframeoptions.deny = true
  *******************************************************************************/
 // Default is false for self-service applications.
 sdeEnabled = false
+
+
+/********************************************************************************
+ *                                                                              *
+ *         Application name to refer to this app for name display rules         *
+ *                                                                              *
+ ********************************************************************************/
+banner.applicationName = "GeneralSsb"
 
 
 /*******************************************************************************
@@ -143,8 +151,8 @@ grails {
  *                                                                             *
  *******************************************************************************/
 // Set active = true when authentication provider section configured for SAML
-/*
-grails.plugin.springsecurity.saml.active = false
+
+/*grails.plugin.springsecurity.saml.active = false
 grails.plugin.springsecurity.auth.loginFormUrl = '/saml/login'
 grails.plugin.springsecurity.saml.afterLogoutUrl ='/logout/customLogout'
 banner.sso.authentication.saml.localLogout='false'                                                    // To disable single logout set this to true,default 'false'.
@@ -167,8 +175,8 @@ grails.plugin.springsecurity.saml.metadata.sp.defaults = [
         requireArtifactResolveSigned: false,
         requireLogoutRequestSigned: false,
         requireLogoutResponseSigned: false
-]
-*/
+]*/
+
 
 
 /****************************************************************************
@@ -256,17 +264,6 @@ BANNER_AIP_EXCLUDE_LIST='aipActionItemPosting|aipAdmin|aip|aipPageBuilder|BCM|ab
 // in case of new controller which needs to be ignored, can be added here.
 
 
-/*******************************************************************************************************
- * AIP Configuration for restricted attachment type, allowed attachment size and file storage location *
- *******************************************************************************************************/
-
-/**********************************************************
- *                                                        *
- *                  BDM Configuration                     *
- *                                                        *
- **********************************************************/
-
-
 
 /*******************************************************************************
  *                                                                             *
@@ -288,36 +285,6 @@ BANNER_AIP_EXCLUDE_LIST='aipActionItemPosting|aipAdmin|aip|aipPageBuilder|BCM|ab
 configJob.delay = 60000
 configJob.interval = 120000
 configJob.actualCount = -1
-
-
-/*******************************************************************************
- *                                                                             *
- *         Migrating the SeedData Keys Configuration to the Database           *
- *                                                                             *
- *******************************************************************************/
-/* Here are 3 patterns to use to configure the SeedData keys
-
-Pattern 1 - With key and value
-Syntax:
-ssconfig.app.seeddata.keys = [
-['<Key1>': <Boolean value>], ['<Key2>': <Boolean Value2>], ['<Key3>': '<String Value>'], ['<Key4>':<Numeric value>]
-]
-
-Pattern 2 - With key only (value derived from configuration files)
-Syntax:
-ssconfig.app.seeddata.keys = [
-['<Key1>'], ['<Key2>'], ['<Key3>'], ['<Key4>']
-]
-
-Pattern 3 - Combination of Pattern 1 and 2 - With key only and key/value pairs.
-Syntax:
-ssconfig.app.seeddata.keys = [
-['<Key1>': <Boolean value>], ['<Key2>'], ['<Key3>': '<String Value>'], ['<Key4>']
-]
-
-*/
-//Below are keys configured using pattern 2
-
 
 
 /*******************************************************************************
