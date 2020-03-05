@@ -1155,20 +1155,20 @@ xe-simple-text-box {
   background-image: none !important;
   filter: none !important; }
 
-.ui-select-container.select2-allowclear .select2-choice abbr.ui-select-clear {
+.ui-select-container.select2-allowclear abbr.ui-select-clear {
   background: url(images/ui-select/close-single-select.svg) center no-repeat !important;
   margin: auto 8px;
-  height: inherit;
   width: 10px;
   background-size: 14px !important;
   top: 0;
-  bottom: 0; }
+  bottom: 0;
+  right: 24px; }
 
-.ui-select-container.select2-allowclear .select2-choice abbr.ui-select-clear:focus {
+.ui-select-container.select2-allowclear abbr.ui-select-clear:focus {
   outline: 0;
   outline: thin dotted #026BC8;
-  outline: #026BC8 auto 2px;
-  outline-offset: 1px; }
+  outline: #026BC8 solid 1px;
+  outline-offset: 2px; }
 
 .ui-select-container .select2-choice .select2-arrow b {
   background-image: none !important; }
