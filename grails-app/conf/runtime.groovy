@@ -41,6 +41,72 @@ sspb.apiPath = 'internalPb'
 // ******************************************************************************
 
 restfulApiConfig = {
+    marshallerGroups {
+        group 'json_date' marshallers {
+            marshaller {
+                instance = new org.grails.web.converters.marshaller.ClosureObjectMarshaller<grails.converters.JSON>(
+                        java.util.Date, {return it?.format( "yyyy-MM-dd" )} )
+            }
+        }
+
+        group 'xml_date' marshallers {
+            marshaller {
+                instance = new org.grails.web.converters.marshaller.ClosureObjectMarshaller<grails.converters.XML>(
+                        java.util.Date, {return it?.format( "yyyy-MM-dd" )} )
+            }
+        }
+    }
+
+    resource 'jobsub-pending-print' config {
+        serviceName = 'jobsubOutputCompositeService'
+        methods = ['list', 'show', 'update']
+        representation {
+            mediaTypes = ["application/json"]
+            marshallers {
+                marshallerGroup 'json_date'             //for date related fields
+                jsonBeanMarshaller {
+                    supports net.hedtech.banner.general.jobsub.JobsubExternalPrinter
+                    includesFields {
+                        field 'id'
+                        field 'version'
+                        field 'job'
+                        field 'oneUpNo'
+                        field 'fileName'
+                        field 'printer'
+                        field 'printForm'
+                        field 'printDate'
+                        field 'creatorId'
+                        field 'printerCommand'
+                        field 'mime'
+                    }
+                }
+                jsonBeanMarshaller {
+                    supports net.hedtech.banner.general.jobsub.JobsubSavedOutput
+                    includesFields {
+                        field 'id'
+                        field 'version'
+                        field 'job'
+                        field 'fileName'
+                        field 'printer'
+                        field 'printForm'
+                        field 'printDate'
+                        field 'jobsubOutput'
+                    }
+                }
+            }
+            jsonExtractor {
+                property 'job' name 'job'
+                property 'id' name 'id'
+                property 'printer' name 'printer'
+                property 'jobsubOutput' name 'jobsubOutput'
+            }
+        }
+        representation {
+            mediaTypes = ["application/octet-stream"]
+            marshallerFramework = 'jobsubOutputMarshaller'
+        }
+    }
+
     // Pagebuilder resources
 
     // generic resource for virtual domains
