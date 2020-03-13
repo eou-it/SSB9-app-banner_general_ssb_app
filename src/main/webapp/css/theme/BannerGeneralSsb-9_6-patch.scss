@@ -1,0 +1,93 @@
+/*!
+ * ******************************************************************************
+ *  Copyright 2020 Ellucian Company L.P. and its affiliates.
+ *  ******************************************************************************
+ */
+
+/* Personal Information*/
+.pi-desktop-contents {
+    background: #EFF4F8;
+}
+
+path#Phone-Icon-2 {
+    stroke: $themecolor3; /*#206E9F*/
+}
+
+path#Shape-Copy-Copy-4 {
+    fill: $themecolor3; /*#206E9F*/
+}
+
+path#Path {
+    fill: $themecolor3; /*#206E9F*/
+}
+
+.overview-line.addr > .pi-icon-align {
+    color: $themecolor3; /*#206E9F*/
+}
+
+.icon-email-CO {
+    color: $themecolor3;
+}
+
+.ui-select-choices .select2-highlighted {
+    background-color: $themecolor3; /*#026BC8*/
+    border-color: #EEEEEF;
+    color: #FFFFFF;
+}
+
+a.add-item-link  {
+    color: $themecolor3;
+}
+
+a.pi-icon-link,
+a.pi-icon-link:hover,
+a.pi-icon-link:focus {
+    color: $themecolor3;
+}
+
+.pi-link {
+    color: $themecolor3;
+}
+
+input[type=checkbox]:checked+.lbl::before,input[type=radio]:checked+.lbl::before {
+    background-color: $themecolor3;
+}
+
+.dialog-btn-cancel {
+  border-top-color: $themecolor3-2;
+  color: $themecolor3;
+}
+
+.dialog-btn-cancel:hover {
+    background: $themecolor3-2;
+}
+
+.dialog-btn-cancel:focus {
+    background: $themecolor3-2;
+}
+
+.overview-footer {
+  background-color: $themecolor3;
+}
+
+/*Proxy Management*/
+a.proxy-icon-link, a.proxy-icon-link, a.proxy-icon-link {
+  color: $themecolor3;
+}
+
+a.proxy-icon-link, a.proxy-icon-link:hover, a.proxy-icon-link:focus {
+  color: $themecolor3;
+}
+
+.select2-results .select2-highlighted .select2-result-label {
+  color: inherit !important;
+}
+
+/*Direct Deposit*/
+.addAcct .dialog-btn {
+  color: $themecolor3;
+}
+
+th:hover  {
+  background-color: #ffffff;
+}
