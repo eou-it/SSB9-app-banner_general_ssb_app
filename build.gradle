@@ -138,17 +138,17 @@ tasks.withType(Test) {
     systemProperty "webdriver.gecko.driver", System.getProperty('webdriver.gecko.driver')
 }
 
-assets {
-    minifyJs = false
-    minifyCss = false
-    enableSourceMaps = false
-    //minfyOptions are to be provided when application has javascript code written in ES6.
-    minifyOptions= [
-            languageMode: 'ES6',
-            targetLanguage: 'ES5', //Can go from ES6 to ES5 for those bleeding edgers
-            optimizationLevel: 'SIMPLE' //Or ADVANCED or WHITESPACE_ONLY
-    ]
-}
+//assets {
+//    minifyJs = false
+//    minifyCss = false
+//    enableSourceMaps = false
+//    // minifyOptions are to be provided when application has JavaScript code written in ES6.
+//    minifyOptions= [
+//            languageMode: 'ES6',
+//            targetLanguage: 'ES5', //Can go from ES6 to ES5 for those bleeding edgers
+//            optimizationLevel: 'SIMPLE' //Or ADVANCED or WHITESPACE_ONLY
+//    ]
+//}
 
 grails {
     plugins {
