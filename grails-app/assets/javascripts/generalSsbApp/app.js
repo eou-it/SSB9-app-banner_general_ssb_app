@@ -72,12 +72,12 @@ generalSsbApp.config(['$stateProvider', '$urlRouterProvider',
                 templateUrl: '../assets/generalSsbApp/landingPage/gssLandingPage.html',
                 controller: 'gssLandingPageController',
                 resolve: {
-                    piConfigResolve: function (generalSsbService) {
+                    piConfigResolve: ['generalSsbService', function (generalSsbService) {
                         return generalSsbService.getFromPersonalInfo('PiConfig').$promise;
-                    },
-                    generalConfigResolve: function (generalSsbService) {
+                    }],
+                    generalConfigResolve: ['generalSsbService', function (generalSsbService) {
                         return generalSsbService.getGeneralConfig().$promise;
-                    }
+                    }]
                 },
                 data: {
                     breadcrumbs: []
