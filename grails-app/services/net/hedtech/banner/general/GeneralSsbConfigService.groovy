@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2018 Ellucian Company L.P. and its affiliates.
+ Copyright 2018-2020 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 package net.hedtech.banner.general
 
@@ -18,7 +18,8 @@ class GeneralSsbConfigService extends BasePersonConfigService {
     static final String ENABLE_PERSONAL_INFORMATION = 'ENABLE.PERSONAL.INFORMATION'
     static final String ENABLE_ACTION_ITEM = 'ENABLE.ACTION.ITEMS'
     static final String ENABLE_PROXY_MANAGMENT = 'ENABLE.PROXY.MANAGEMENT'
-    static final int PROXY_MGMT_NOT_FOUND = -1
+    static final String ENABLE_CANADA_YEAR_END_TAX = 'ENABLE.CANADA.YEAR.END.TAX'
+    static final int URL_NOT_FOUND = -1
     def actionItemProcessingConfigService
     def selfServiceMenuService
 
@@ -44,12 +45,14 @@ class GeneralSsbConfigService extends BasePersonConfigService {
      * @return
      */
     def getGeneralConfig() {
-        [isDirectDepositEnabled      : getParamFromSession( ENABLE_DIRECT_DEPOSIT, 'Y' ) == 'Y' && isDirectDepositAuthorizedForUser(),
-         isPersonalInformationEnabled: getParamFromSession( ENABLE_PERSONAL_INFORMATION, 'Y' ) == 'Y',
-         isActionItemEnabledAndAvailable         : getParamFromSession( ENABLE_ACTION_ITEM, 'Y' ) == 'Y' && actionItemProcessingConfigService?.isActionItemPresentForUser(),
-         isActionItemEnabled :  getParamFromSession( ENABLE_ACTION_ITEM, 'Y' ) == 'Y',
-         isProxyManagementEnabled : getParamFromSession( ENABLE_PROXY_MANAGMENT, 'Y' ) == 'Y',
-         proxyManagementUrl : getParamFromSession( ENABLE_PROXY_MANAGMENT, 'Y' ) == 'Y' ? get8xProxyManagementUrl() : PROXY_MGMT_NOT_FOUND]
+        [isDirectDepositEnabled         : getParamFromSession(ENABLE_DIRECT_DEPOSIT, 'Y') == 'Y' && isDirectDepositAuthorizedForUser(),
+         isPersonalInformationEnabled   : getParamFromSession(ENABLE_PERSONAL_INFORMATION, 'Y') == 'Y',
+         isActionItemEnabledAndAvailable: getParamFromSession(ENABLE_ACTION_ITEM, 'Y') == 'Y' && actionItemProcessingConfigService?.isActionItemPresentForUser(),
+         isActionItemEnabled            : getParamFromSession(ENABLE_ACTION_ITEM, 'Y') == 'Y',
+         isProxyManagementEnabled       : getParamFromSession(ENABLE_PROXY_MANAGMENT, 'Y') == 'Y',
+         proxyManagementUrl             : getParamFromSession(ENABLE_PROXY_MANAGMENT, 'Y') == 'Y' ? get8xUrl('proxyManagementUrl', 'bwgkprxy.P_ManageProxy') : URL_NOT_FOUND,
+         isCanadaYearEndTaxEnabled      : getParamFromSession(ENABLE_CANADA_YEAR_END_TAX, 'N') == 'Y',
+         canadaYearEndTaxUrl            : getParamFromSession(ENABLE_CANADA_YEAR_END_TAX, 'N') == 'Y' ? get8xUrl('canadianYearEndTaxUrl', 'bwvkgtax.P_SelectAdminOption') : URL_NOT_FOUND]
     }
 
     private boolean isDirectDepositAuthorizedForUser() {
@@ -85,29 +88,29 @@ class GeneralSsbConfigService extends BasePersonConfigService {
                 AccessDecisionVoter.ACCESS_GRANTED == voter.vote(SecurityContextHolder?.context?.authentication, '/ssb/accountListing/**', viewList)
     }
 
-    private def get8xProxyManagementUrl() {
+    private def get8xUrl(String urlSessionStorageName, String menuName) {
         def session = RequestContextHolder.currentRequestAttributes().request.session
-        if(session['proxyManagementUrl'] == null) {
+        if(session[urlSessionStorageName] == null) {
             def pidm = PersonalInformationControllerUtility.getPrincipalPidm()
             def menus = selfServiceMenuService.bannerMenu(null, null, pidm)
             Set menusChecked = new HashSet()
             menusChecked.add("bmenu.P_MainMnu")
-            def url = findProxyMgmtUrl(menus, pidm, menusChecked)
+            def url = findUrl(menuName, menus, pidm, menusChecked)
             // cache -1 to prevent future futile searches
-            session['proxyManagementUrl'] = url ? url : PROXY_MGMT_NOT_FOUND
+            session[urlSessionStorageName] = url ? url : URL_NOT_FOUND
         }
-        return session['proxyManagementUrl']
+        return session[urlSessionStorageName]
     }
 
-    private String findProxyMgmtUrl(menus, pidm, menusChecked) {
+    private String findUrl(String menuName, menus, pidm, menusChecked) {
         for(int i = 0; i < menus.size(); i++) {
             def it = menus[i]
-            if(it.type.equals('FORM') && it.formName.equals('bwgkprxy.P_ManageProxy')) {
+            if(it.type.equals('FORM') && it.formName.equals(menuName)) {
                 return it.url
             }
             else if(it.type.equals('MENU')) {
                 if(menusChecked.add(it.formName)) {
-                    String url = findProxyMgmtUrl(selfServiceMenuService.bannerMenu(it.formName, null, pidm), pidm, menusChecked)
+                    String url = findUrl(menuName, selfServiceMenuService.bannerMenu(it.formName, null, pidm), pidm, menusChecked)
                     if(url != null) {
                         return url
                     }
