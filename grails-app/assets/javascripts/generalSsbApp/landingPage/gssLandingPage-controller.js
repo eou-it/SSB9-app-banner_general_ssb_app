@@ -1,5 +1,5 @@
 /********************************************************************************
-  Copyright 2019 Ellucian Company L.P. and its affiliates.
+  Copyright 2019-2020 Ellucian Company L.P. and its affiliates.
 ********************************************************************************/
 generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$rootScope', '$location', 'generalSsbService', 'piConfigResolve', '$filter', 'generalConfigResolve',
     function ($scope, $rootScope, $location, generalSsbService, piConfigResolve, $filter, generalConfigResolve) {
@@ -9,6 +9,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
         var STUDENT = 0,
             EMPLOYEE = 1,
             AIPADMIN =2,
+            FACULTY = 3;
 
 
         // LOCAL FUNCTIONS
@@ -21,7 +22,8 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                     if (tile.roles) {
                         if (($scope.isStudent && _.contains(tile.roles, STUDENT)) ||
                             ($scope.isEmployee && _.contains(tile.roles, EMPLOYEE))||
-                            ($scope.isAipAdmin && _.contains(tile.roles, AIPADMIN))) {
+                            ($scope.isAipAdmin && _.contains(tile.roles, AIPADMIN)) ||
+                            ($scope.isFaculty && _.contains(tile.roles, FACULTY))) {
 
                             tilesForRole.push(tile);
                         }
@@ -95,10 +97,23 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                     );
                 }
 
+                if(generalConfigResolve.isCanadaYearEndTaxEnabled && generalConfigResolve.canadaYearEndTaxUrl !== -1){
+                    $scope.appTiles.push(
+                        {
+                            title: 'banner.generalssb.landingpage.canadaYearEndTax.title',
+                            desc: 'banner.generalssb.landingpage.canadaYearEndTax.description',
+                            url: generalConfigResolve.canadaYearEndTaxUrl,
+                            icon: '../assets/canada_tax_non_payroll_year.svg',
+                            roles: [FACULTY, STUDENT]
+                        }
+                    );
+                }
+
                 generalSsbService.getRoles().$promise.then(function (response) {
                     $scope.isStudent = response.isStudent;
                     $scope.isEmployee = response.isEmployee;
                     $scope.isAipAdmin = response.isAipAdmin;
+                    $scope.isFaculty = response.isFaculty;
                     $scope.appTilesForRole = getAppTilesForRole($scope.appTiles);
                     $scope.isSingleTile = $scope.appTilesForRole.length === 1;
                 });
@@ -124,6 +139,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
         $scope.proxyTiles = [];
         $scope.isStudent;
         $scope.isEmployee;
+        $scope.isFaculty;
         $scope.appTilesForRole;
         $scope.isSingleTile;
         $scope.landingPageGreetingName = '';
