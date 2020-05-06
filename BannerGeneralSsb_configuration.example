@@ -77,14 +77,6 @@ grails.plugin.xframeoptions.deny = true
 sdeEnabled = false
 
 
-/********************************************************************************
- *                                                                              *
- *         Application name to refer to this app for name display rules         *
- *                                                                              *
- ********************************************************************************/
-banner.applicationName = "GeneralSsb"
-
-
 /*******************************************************************************
  *                                                                             *
  *                Authentication Provider Configuration                        *
@@ -365,3 +357,14 @@ quartz {
 
     println "Quartz Scheduler properties are initialized!"
 }
+
+/** *******************************************************************************
+ *                      enableNLS (Platform 9.29.1)                               *
+ * Setting it to true will set National Language support in the Oracle database   *
+ * to the user specific language, that is the error messages from Oracle database *
+ * will be in the user specific language, while setting it to false would disable *
+ * the Nation Language support for the error messages from Oracle database and    *
+ * improves the performance of the application.                                   *
+ ******************************************************************************* **/
+enableNLS = true
+
