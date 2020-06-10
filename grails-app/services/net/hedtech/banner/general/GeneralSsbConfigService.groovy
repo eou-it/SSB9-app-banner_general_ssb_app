@@ -52,7 +52,8 @@ class GeneralSsbConfigService extends BasePersonConfigService {
          isProxyManagementEnabled       : getParamFromSession(ENABLE_PROXY_MANAGMENT, 'Y') == 'Y',
          proxyManagementUrl             : getParamFromSession(ENABLE_PROXY_MANAGMENT, 'Y') == 'Y' ? get8xUrl('proxyManagementUrl', 'bwgkprxy.P_ManageProxy') : URL_NOT_FOUND,
          isCanadaYearEndTaxEnabled      : getParamFromSession(ENABLE_CANADA_YEAR_END_TAX, 'N') == 'Y',
-         canadaYearEndTaxUrl            : getParamFromSession(ENABLE_CANADA_YEAR_END_TAX, 'N') == 'Y' ? get8xUrl('canadianYearEndTaxUrl', 'bwvkgtax.P_SelectAdminOption') : URL_NOT_FOUND]
+         canadaYearEndTaxUrl            : getParamFromSession(ENABLE_CANADA_YEAR_END_TAX, 'N') == 'Y' ? get8xUrl('canadianYearEndTaxUrl', 'bwvkgtax.P_SelectAdminOption') : URL_NOT_FOUND,
+         globalProxytUrl                : get8xUrl('globalProxytUrl', 'bwgkprxy.P_GlobalProxyAccess') ?:  URL_NOT_FOUND]
     }
 
     private boolean isDirectDepositAuthorizedForUser() {

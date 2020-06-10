@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2017-2018 Ellucian Company L.P. and its affiliates.
+ Copyright 2017-2020 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 package net.hedtech.banner.general
 
@@ -67,9 +67,10 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         PersonUtility.setPersonConfigInSession(personConfigInSession)
         def config = generalSsbConfigService.getGeneralConfig()
         assertTrue config.isActionItemEnabled
-        assertFalse config.isDirectDepositEnabled
+        assertTrue config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertTrue config.isProxyManagementEnabled
+        assertFalse config.isCanadaYearEndTaxEnabled
         assertEquals(-1, config.proxyManagementUrl)
     }
 
@@ -95,7 +96,7 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
     }
 
     @Test
-    void testGet8xProxyManagmentUrl() {
+    void testGet8xUrl() {
         mockRequest()
         SSBSetUp('GDP000005', '111111')
 
@@ -105,14 +106,15 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         def config = generalSsbConfigService.getGeneralConfig()
 
         assertTrue config.isActionItemEnabled
-        assertFalse config.isDirectDepositEnabled
+        assertTrue config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertTrue config.isProxyManagementEnabled
+        assertFalse config.isCanadaYearEndTaxEnabled
         //assertEquals 'http://<host_name>:<port_number>/<banner8>/enUS/bwgkprxy.P_ManageProxy', config.proxyManagementUrl
     }
 
     @Test
-    void testGet8xProxyManagmentUrlDisabled() {
+    void testGet8xUrlDisabled() {
         mockRequest()
         SSBSetUp('GDP000005', '111111')
 
@@ -122,14 +124,15 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         def config = generalSsbConfigService.getGeneralConfig()
 
         assertTrue config.isActionItemEnabled
-        assertFalse config.isDirectDepositEnabled
+        assertTrue config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertFalse config.isProxyManagementEnabled
-        //assertEquals(-1, config.proxyManagementUrl)
+        assertFalse config.isCanadaYearEndTaxEnabled
+        assertEquals(-1, config.proxyManagementUrl)
     }
 
-    //@Test
-    void testGet8xProxyManagmentUrlInfiniteLoop() {
+    @Test
+    void testGet8xUrlInfiniteLoop() {
         // Alumni user, has access to self-referential Mailing List menu
         SSBSetUp('HOSP0001', '111111')
 
@@ -142,7 +145,7 @@ class GeneralSsbConfigServiceIntegrationTests extends BaseIntegrationTestCase {
         assertTrue config.isDirectDepositEnabled
         assertTrue config.isPersonalInformationEnabled
         assertTrue config.isProxyManagementEnabled
-        //assertEquals(-1, config.proxyManagementUrl)
+        assertEquals(-1, config.proxyManagementUrl)
     }
 
     public GrailsWebRequest mockRequest() {

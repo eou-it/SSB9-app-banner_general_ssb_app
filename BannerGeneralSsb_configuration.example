@@ -77,14 +77,6 @@ grails.plugin.xframeoptions.deny = true
 sdeEnabled = false
 
 
-/********************************************************************************
- *                                                                              *
- *         Application name to refer to this app for name display rules         *
- *                                                                              *
- ********************************************************************************/
-banner.applicationName = "GeneralSsb"
-
-
 /*******************************************************************************
  *                                                                             *
  *                Authentication Provider Configuration                        *
@@ -277,12 +269,20 @@ BANNER_AIP_EXCLUDE_LIST='aipActionItemPosting|aipAdmin|aip|aipPageBuilder|BCM|ab
    clamav.connectionTimeout = 5000 	  /* Connection timeout to connect to clamd process.Time in milliseconds. Default is 5000*/
 
 
-/*******************************************************************************
- *                                                                             *
- *                       Config Job Configurations                             *
- *                                                                             *
- *******************************************************************************/
-configJob.delay = 60000
+/*********************************************************************************
+ *                                                                               *
+ *                        Config Job Configurations                              *
+ *                                                                               *
+ *     The job scheduled to update the configuration properties                  *
+ *     from DB runs at Application start and consecutive job runs at             *
+ *     the interval configured (in milliseconds)                                 *
+ *                                                                               *
+ *     actualCount - Actual count the number of times the config job would run   *
+ *     If the value is -1, the job will run indefinitely.                        *
+ *     If the value is 0, the job will not run.                                  *
+ *     If not configured, the default value is -1.                               *
+ *                                                                               *
+ *********************************************************************************/
 configJob.interval = 120000
 configJob.actualCount = -1
 
@@ -365,3 +365,14 @@ quartz {
 
     println "Quartz Scheduler properties are initialized!"
 }
+
+/** *******************************************************************************
+ *                      enableNLS (Platform 9.29.1)                               *
+ * Setting it to true will set National Language support in the Oracle database   *
+ * to the user specific language, that is the error messages from Oracle database *
+ * will be in the user specific language, while setting it to false would disable *
+ * the Nation Language support for the error messages from Oracle database and    *
+ * improves the performance of the application.                                   *
+ ******************************************************************************* **/
+enableNLS = true
+
