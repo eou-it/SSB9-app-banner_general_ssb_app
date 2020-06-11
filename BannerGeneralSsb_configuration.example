@@ -269,12 +269,20 @@ BANNER_AIP_EXCLUDE_LIST='aipActionItemPosting|aipAdmin|aip|aipPageBuilder|BCM|ab
    clamav.connectionTimeout = 5000 	  /* Connection timeout to connect to clamd process.Time in milliseconds. Default is 5000*/
 
 
-/*******************************************************************************
- *                                                                             *
- *                       Config Job Configurations                             *
- *                                                                             *
- *******************************************************************************/
-configJob.delay = 60000
+/*********************************************************************************
+ *                                                                               *
+ *                        Config Job Configurations                              *
+ *                                                                               *
+ *     The job scheduled to update the configuration properties                  *
+ *     from DB runs at Application start and consecutive job runs at             *
+ *     the interval configured (in milliseconds)                                 *
+ *                                                                               *
+ *     actualCount - Actual count the number of times the config job would run   *
+ *     If the value is -1, the job will run indefinitely.                        *
+ *     If the value is 0, the job will not run.                                  *
+ *     If not configured, the default value is -1.                               *
+ *                                                                               *
+ *********************************************************************************/
 configJob.interval = 120000
 configJob.actualCount = -1
 
