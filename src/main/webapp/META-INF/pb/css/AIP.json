@@ -1,0 +1,8 @@
+{
+   "constantName": "AIP",
+   "css": ".stelabel{\ncolor:red !important;  \ndisplay:block;\n}\n#pbid-AddresslDetailsSave{\nmargin: 8px 14px;\n}",
+   "description": "AIP Stylesheet",
+   "fileTimestamp": null,
+   "developerSecurity": [],
+   "owner": null
+}

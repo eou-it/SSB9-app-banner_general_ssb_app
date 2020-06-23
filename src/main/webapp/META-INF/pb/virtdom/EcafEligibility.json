@@ -1,0 +1,18 @@
+{
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT skkecaf.f_ecaf_eligibility (:parm_user_pidm, :term, :program) AS eligibility\r\n  FROM DUAL\r\n",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "EcafEligibility",
+   "codePost": null
+}

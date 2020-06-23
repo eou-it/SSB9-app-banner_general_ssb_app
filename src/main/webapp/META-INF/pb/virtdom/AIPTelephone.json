@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "DECLARE\r\nTELEPRIMARY VARCHAR2(1);\r\nBEGIN\r\nSELECT DECODE(:SPRTELE_PRIMARY_IND, 'Y', 'Y', NULL)\r\nINTO TELEPRIMARY\r\nFROM DUAL;\r\nIF :SPRTELE_PRIMARY_IND = 'Y' THEN \r\nUPDATE SPRTELE \r\nSET SPRTELE_PRIMARY_IND = NULL\r\nWHERE SPRTELE_PIDM = :parm_user_pidm;\r\nEND IF;\r\nGB_TELEPHONE.p_update(\r\n     p_pidm  => :parm_user_pidm,\r\n     p_seqno => :SPRTELE_SEQNO, \r\n     p_tele_code  => :SPRTELE_TELE_CODE,\r\n     p_phone_area => :SPRTELE_PHONE_AREA,\r\n     p_phone_number => :SPRTELE_PHONE_NUMBER,       \r\n     p_primary_ind  => TELEPRIMARY,\r\n     p_data_origin  => 'OENR',\r\n     p_user_id  => F_GetSpridenID(:parm_user_pidm),\r\n     p_rowid  => :id   );\r\n\r\nEND;",
+   "codeDelete": "begin\r\nupdate sprtele \r\nset sprtele_activity_date = sysdate,\r\n    sprtele_status_ind = 'I',\r\n    sprtele_data_origin = 'OENR',\r\n    sprtele_user_id = :parm_user_pidm\r\nwhere rowid = :id\r\nand sprtele_pidm = :parm_user_pidm\r\n     ;\r\nend;",
+   "virtualDomainRoles": [
+      {
+         "allowDelete": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT rowidtochar(T1.ROWID) \"id\",\r\n  :parm_user_pidm as pidm, \r\n  T1.SPRTELE_SEQNO,\r\n  T1.SPRTELE_TELE_CODE,\r\n  STVTELE_DESC, \r\n  T1.SPRTELE_PHONE_AREA, \r\n  T1.SPRTELE_PHONE_NUMBER, \r\n  T1.SPRTELE_PRIMARY_IND\r\nFROM SPRTELE T1\r\nLEFT JOIN STVTELE ON STVTELE_CODE = T1.SPRTELE_TELE_CODE \r\nWHERE T1.SPRTELE_PIDM = :parm_user_pidm\r\nAND T1.SPRTELE_STATUS_IND IS NULL\r\nORDER BY T1.SPRTELE_PRIMARY_IND ASC",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPTelephone",
+   "codePost": "DECLARE \r\nTELEPRIMARY VARCHAR2(1);\r\nseqno_out  sprtele.sprtele_seqno%TYPE:=NULL;\r\nrowid_out  gb_common.internal_record_id_type:=NULL;\r\nBEGIN\r\nSELECT DECODE(:SPRTELE_PRIMARY_IND, 'Y', 'Y', NULL)\r\nINTO TELEPRIMARY\r\nFROM DUAL;\r\nIF :SPRTELE_PRIMARY_IND = 'Y' THEN \r\nUPDATE SPRTELE \r\nSET SPRTELE_PRIMARY_IND = NULL\r\nWHERE SPRTELE_PIDM = :parm_user_pidm;\r\nEND IF;\r\nGB_TELEPHONE.p_create(\r\n     p_pidm  =>   :parm_user_pidm,\r\n     p_tele_code => :SPRTELE_TELE_CODE,\r\n     p_phone_area => :SPRTELE_PHONE_AREA,\r\n     p_phone_number  =>:SPRTELE_PHONE_NUMBER,\r\n     p_phone_ext => NULL,    \r\n     p_status_ind => NULL,         \r\n     p_atyp_code => NULL,    \r\n     p_addr_seqno   => NULL,   \r\n     p_primary_ind  => TELEPRIMARY,    \r\n     p_unlist_ind   => NULL,    \r\n     p_comment    => NULL,    \r\n     p_intl_access  => NULL,     \r\n     p_data_origin => 'OENR',   \r\n     p_user_id  =>  F_GetSpridenID(:parm_user_pidm),    \r\n     p_ctry_code_phone => NULL,  \r\n     p_seqno_out  =>  seqno_out,\r\n     p_rowid_out => rowid_out);\r\n     \r\n END;",
+   "developerSecurity": []
+}

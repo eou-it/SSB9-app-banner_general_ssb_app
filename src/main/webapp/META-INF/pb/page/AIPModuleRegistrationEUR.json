@@ -1,0 +1,101 @@
+{
+   "constantName": "AIPModuleRegistrationEUR",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-02-19T06:44:14Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.BannerPronounData",
+            "name": "RedirectModel",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemContent",
+            "name": "ActionItemUpdate",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemStatus",
+            "name": "ActionItemStatus",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "allowDelete": false,
+            "allowNew": false,
+            "name": "Redirect",
+            "allowModify": false,
+            "onLoad": "window.open('UPDATE ME', \"_newtab\");",
+            "pageSize": 0,
+            "model": "RedirectModel",
+            "allowReload": false,
+            "loadInitially": true,
+            "type": "detail",
+            "parameters": {}
+         },
+         {
+            "name": "ModuleRegistrationText",
+            "type": "literal",
+            "value": "<h2>Module Selection</h2>\n\n<p> Please confirm whether you have completed your module selection</p>"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "sourceParameters": {
+                           "actionitemid": "$$params.actionItemId"
+                        },
+                        "name": "ModuleRegistrationAgree",
+                        "model": "STATUS_RULE_ID",
+                        "sourceModel": "ActionItemStatus",
+                        "loadInitially": true,
+                        "labelKey": "STATUS_RULE_LABEL_TEXT",
+                        "type": "radio",
+                        "valueKey": "STATUS_RULE_ID",
+                        "onUpdate": "params.isResponseModified = true;",
+                        "required": false
+                     }
+                  ],
+                  "allowNew": false,
+                  "name": "ModuleConfirmation",
+                  "allowModify": false,
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;\n$ModuleConfirmation.$load();",
+                  "pageSize": 5,
+                  "model": "ActionItemUpdate",
+                  "allowReload": false,
+                  "loadInitially": true,
+                  "type": "detail",
+                  "parameters": {
+                     "actionitemid": "$$params.actionItemId",
+                     "pageid": "$$params.id"
+                  }
+               },
+               {
+                  "valueStyle": "btn btn-primary",
+                  "onClick": "if($(\"#pbid-ModuleRegistrationAgree-radio-0-0:checked\").val()){\n$ModuleConfirmation.$save();\n}\nelse{\nalert(\"Please confirm you have chosen your optional modules\", {type:\"error\", flash:true}); \n}",
+                  "name": "ModuleRegistrationSave",
+                  "label": "Confirm",
+                  "type": "button"
+               }
+            ],
+            "name": "ModuleRegistrationConfirmation",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "name": "AIPModuleRegistrationEUR",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

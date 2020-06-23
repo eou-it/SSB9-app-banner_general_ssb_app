@@ -1,0 +1,18 @@
+{
+   "codePut": "UPDATE SKRECAF\r\nSET SKRECAF_CURRENT_IND=:SKRECAF_CURRENT_IND\r\nWHERE SKRECAF_PIDM=:parm_user_pidm\r\nAND SKRECAF_PROGRAM=:program\r\nAND SKRECAF_HELP_TYPE<>:helptype",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT\r\n     SKRECAF_SEQNO AS ID,   \r\n     CASE\r\n            WHEN SKRECAF_HELP_TYPE = 'H' THEN 'Commonwealth Support and HECS-HELP effective from'||' '||STVTERM_DESC\r\n            WHEN SKRECAF_HELP_TYPE = 'F' THEN 'FEE-HELP effective from'||' '||STVTERM_DESC\r\n            WHEN SKRECAF_HELP_TYPE = 'O' THEN 'OS-HELP effective from'||' '||STVTERM_DESC\r\n            WHEN SKRECAF_HELP_TYPE = 'S' THEN 'SA-HELP effective from'||' '||STVTERM_DESC\r\n            ELSE SKRECAF_HELP_TYPE\r\n        END\r\n    AS HELP_UPDATE,\r\n    SKRECAF_CURRENT_IND\r\nFROM\r\n    SKRECAF\r\n    INNER JOIN STVTERM ON SKRECAF_TERM_CODE = STVTERM_CODE\r\nWHERE\r\n        SKRECAF_CURRENT_IND = 'Y'\r\n    AND\r\n        SKRECAF_PIDM = :parm_user_pidm\r\n    AND SKRECAF_PROGRAM = :program\r\n    AND SKRECAF_HELP_TYPE <> :helptype",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "EcafExistingCommonweathAssistanceUpdate",
+   "codePost": null
+}

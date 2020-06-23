@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT \r\nSMRPRLE_PROGRAM_DESC||' ('||SMRPRLE_PROGRAM||')' AS PROGRAMME,\r\nSTVMAJR_DESC AS STUDY_MODE,\r\nto_char(SOVLCUR_START_DATE, 'DD/MM/YYYY') AS START_DATE,\r\nSTVCAMP_DESC AS CAMPUS,\r\nSTVATTS_DESC AS PROG_YEAR\r\nFROM SOVLCUR s1\r\nINNER JOIN SMRPRLE ON s1.SOVLCUR_PROGRAM = SMRPRLE_PROGRAM\r\nLEFT JOIN SOVLFOS ON s1.SOVLCUR_PIDM = SOVLFOS_PIDM \r\n                   AND s1.SOVLCUR_TERM_CODE = SOVLFOS_TERM_CODE \r\n                   AND s1.SOVLCUR_SEQNO = SOVLFOS_LCUR_SEQNO\r\n                   AND SOVLFOS_LFST_CODE = 'CONCENTRATION'\r\nLEFT JOIN STVMAJR ON SOVLFOS_MAJR_CODE = STVMAJR_CODE\r\nLEFT JOIN STVCAMP ON SOVLCUR_CAMP_CODE = STVCAMP_CODE\r\nLEFT JOIN SGRSATT ON SOVLCUR_KEY_SEQNO = SGRSATT_STSP_KEY_SEQUENCE \r\n                  AND SOVLCUR_PIDM = SGRSATT_PIDM\r\n                  AND SOVLCUR_TERM_CODE = SGRSATT_TERM_CODE_EFF\r\nLEFT JOIN STVATTS ON SGRSATT_ATTS_CODE = STVATTS_CODE\r\nWHERE s1.SOVLCUR_PIDM = :parm_user_pidm\r\nAND s1.SOVLCUR_LMOD_CODE = 'LEARNER'\r\nAND s1.SOVLCUR_CACT_CODE = 'ACTIVE'\r\nAND s1.SOVLCUR_CURRENT_IND = 'Y'",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPProgrammeDetailsEUR",
+   "codePost": null,
+   "developerSecurity": []
+}

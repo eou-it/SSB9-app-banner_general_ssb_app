@@ -40,10 +40,10 @@ grails.databinding.useSpringBinder=true
 // DO NOT EDIT THIS UUID UNLESS YOU ARE AUTHORIZED TO DO SO AND KNOW WHAT YOU ARE DOING
 //
 build.number.uuid = "7f8235d8-2a51-4f2f-8516-47d913caf346" // specific UUID for general ssb solution
-build.number.base.url = "http://m039198.ellucian.com:8080/BuildNumberServer/buildNumber?method=getNextBuildNumber&uuid="
+build.number.base.url = "http://m037169:8081/BuildNumberServer/buildNumber?method=getNextBuildNumber&uuid="
 app.name="GeneralSelfService"
 app.appId="GENERAL_SS"
-app.platform.version="9.32.3"
+app.platform.version="9.33.1.2"
 
 defaultResponseHeadersMap = [
     "X-Content-Type-Options": "nosniff",

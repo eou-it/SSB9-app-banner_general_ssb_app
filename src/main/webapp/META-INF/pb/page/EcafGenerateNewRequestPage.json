@@ -1,0 +1,2168 @@
+{
+   "constantName": "EcafGenerateNewRequestPage",
+   "extendsPage": null,
+   "fileTimestamp": "2019-12-19T20:08:39Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "EcafStvtermResource",
+            "resource": "virtualDomains.EcafStvterm",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "EcafSovlcurResource",
+            "resource": "virtualDomains.EcafSovlcur",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "EcafEligibilityResource",
+            "resource": "virtualDomains.EcafEligibility",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "EcafRequestResource",
+            "resource": "virtualDomains.EcafRequestHelp",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "EcafAsianLanguageResource",
+            "staticData": [
+               {
+                  "code": "MA",
+                  "desc": "Chinese Mandarin"
+               },
+               {
+                  "code": "VN",
+                  "desc": "Vietnamese"
+               }
+            ],
+            "type": "resource"
+         },
+         {
+            "name": "EcafExistingCheckResource",
+            "resource": "virtualDomains.EcafExistingCommonweathAssistanceCheck",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "EcafExistingResource",
+            "resource": "virtualDomains.EcafExistingCommonweathAssistance",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "EcafUpdateExistingResource",
+            "resource": "virtualDomains.EcafExistingCommonweathAssistanceUpdate",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "EcafUpdateExistingYesNo",
+            "staticData": [
+               {
+                  "code": "N",
+                  "desc": "Replace"
+               },
+               {
+                  "code": "Y",
+                  "desc": "Keep"
+               }
+            ],
+            "type": "resource"
+         },
+         {
+            "name": "EcafSummaryResource",
+            "resource": "virtualDomains.EcafSummary",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "Anchor",
+            "type": "literal",
+            "value": "<a name=\"start\"></a>"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "EcafMessageDisplay",
+                  "type": "display",
+                  "value": "<p>Commonwealth assistance is available to eligible students via the Higher Education Loan Program (HELP). The HELP program is an Australian Government loan program to help\neligible students pay their overseas study expenses (OS-HELP), student services and amenities fees (SA-HELP), student contributions (HECS-HELP) or tuition fees (FEE-HELP\nand VET FEE-HELP). These loans are repaid through the tax system.</p>\n\n<p>Select Continue to assess your eligibility for HELP and to submit a request for Commonwealth assistance.</p>"
+               },
+               {
+                  "label": "Continue",
+                  "name": "ContinueButtonEcaf",
+                  "onClick": "$EcafBlock.$visible=false;\n$ChoicesBlock.$visible=true;",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               }
+            ],
+            "label": "Commonwealth Assistance",
+            "name": "EcafBlock",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "label": "",
+                  "name": "PageTitle",
+                  "type": "literal",
+                  "value": "To generate a new request for Commonwealth Assistance (eCAF), select  a curriculum and the term from when this new request will be effective, then select Continue."
+               },
+               {
+                  "components": [
+                     {
+                        "label": "<BR>Term :",
+                        "labelKey": "STVTERM_DESC",
+                        "loadInitially": true,
+                        "model": "STVTERM_CODE",
+                        "name": "Term",
+                        "onUpdate": "$Program.$load()\n$ProgramForm.$visible=true;",
+                        "placeholder": "Select a Term",
+                        "required": true,
+                        "sourceModel": "EcafStvtermResource",
+                        "sourceParameters": {},
+                        "type": "select",
+                        "value": "",
+                        "valueKey": "STVTERM_CODE"
+                     }
+                  ],
+                  "label": "",
+                  "name": "TermForm",
+                  "nextButtonLabel": "",
+                  "showInitially": true,
+                  "submit": "",
+                  "submitLabel": "",
+                  "type": "form"
+               },
+               {
+                  "components": [
+                     {
+                        "label": "",
+                        "labelKey": "SMRPRLE_PROGRAM_DESC",
+                        "loadInitially": false,
+                        "model": "SELECTEDPROGRAM",
+                        "name": "Program",
+                        "onUpdate": "$DetailProgramData.$load();\n$DetailProgramBlock.$visible=true;\nconsole.log(\"Program1=\"+$Program);",
+                        "required": false,
+                        "sourceModel": "EcafSovlcurResource",
+                        "sourceParameters": {},
+                        "type": "radio",
+                        "value": "",
+                        "valueKey": "SMRPRLE_PROGRAM"
+                     }
+                  ],
+                  "label": "Select a Program",
+                  "name": "ProgramForm",
+                  "nextButtonLabel": "",
+                  "showInitially": false,
+                  "type": "form"
+               }
+            ],
+            "label": "Generate New Request for Commonwealth Assistance",
+            "name": "ChoicesBlock",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "label": "Program:",
+                        "loadInitially": true,
+                        "model": "SMRPRLE_PROGRAM_DESC",
+                        "name": "ProgramData",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Degree:",
+                        "loadInitially": true,
+                        "model": "STVDEGC_DESC",
+                        "name": "DegreeData",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Major:",
+                        "loadInitially": true,
+                        "model": "STVMAJR_DESC",
+                        "name": "MajorData",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Study Path:",
+                        "loadInitially": true,
+                        "model": "STVRATE_DESC",
+                        "name": "StudyPathData",
+                        "type": "display"
+                     }
+                  ],
+                  "label": "",
+                  "loadInitially": false,
+                  "model": "EcafSovlcurResource",
+                  "name": "DetailProgramData",
+                  "onLoad": "$Today = $.datepicker.formatDate('dd M yy', new Date());\n\nconsole.log(\"Date=\"+$Today);",
+                  "pageSize": 1,
+                  "parameters": {
+                     "program": "$Program"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "label": "Continue",
+                  "name": "ProgrammeContinueButton",
+                  "onClick": "$EcafEligibilityDetail.$load();\n$ExistingEcafDetail.$load();\n$ChoicesBlock.$visible=false;\n$DetailProgramBlock.$visible=false;\n$SelectAssistanceTypeBlock.$visible=true;",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               }
+            ],
+            "label": "<h3>Program Details:</h3>",
+            "name": "DetailProgramBlock",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "loadInitially": false,
+                        "model": "ELIGIBILITY",
+                        "name": "EligibilityText",
+                        "parameters": {},
+                        "readonly": false,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafEligibilityResource",
+                  "name": "EcafEligibilityDetail",
+                  "onLoad": "var eligibility= $EcafEligibilityDetail.ELIGIBILITY;\n\nconsole.debug(\"The current user's ECAF eligibility categories are: \" + eligibility);\n\nif (eligibility) {    \n    // Show the intro text\n    $IntroTextWithOptionsBlock.$visible=true;\n\n    if(eligibility.includes('H')) {        \n        // The user is eligible for HECS HELP, let's show that option\n        console.debug(\"Showing the HECS-HELP block.\");\n        $HECSOptionBlock.$visible=true;\n    }\n    if(eligibility.includes('F')) {        \n        // The user is eligible for FEE HELP, let's show that option\n        console.debug(\"Showing the FEE-HELP block.\");\n        $FEEOptionBlock.$visible=true;\n    }\n    if(eligibility.includes('O')) {        \n        // The user is eligible for OSHELP, let's show that option\n        console.debug(\"Showing the OS-HELP block.\");\n        $OSOptionBlock.$visible=true;\n    }\n    if(eligibility.includes('S')) {        \n        // The user is eligible for SA HELP, let's show that option\n        console.debug(\"Showing the SA-HELP block.\");\n        $SAOptionBlock.$visible=true;\n    }\n}\nelse {\n    // Show the intro text\n    $IntroTextWithNoOptionsBlock.$visible=true;\n}",
+                  "pageSize": 1,
+                  "parameters": {
+                     "program": "$Program",
+                     "term": "$Term"
+                  },
+                  "type": "detail"
+               }
+            ],
+            "name": "HiddenBlockEcafEligibility",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "label": "Existing Request",
+                        "loadInitially": false,
+                        "model": "EXISTING_REQUESTS",
+                        "name": "ExistingCommonwealthAssistanceText",
+                        "parameters": {},
+                        "readonly": false,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafExistingCheckResource",
+                  "name": "ExistingEcafDetail",
+                  "onLoad": "setTimeout(function(){ \n$existingassistance= $ExistingEcafDetail.EXISTING_REQUESTS;\nconsole.debug(\"The current user's existing assitance is \" +$existingassistance);\n}, 1500);",
+                  "pageSize": 1,
+                  "parameters": {
+                     "program": "$Program"
+                  },
+                  "type": "detail"
+               }
+            ],
+            "name": "HiddenBlockEcafExisting",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "loadInitially": true,
+                        "name": "IntroTextWithOptionsDisplay",
+                        "type": "display",
+                        "value": "Select the type of Commonwealth Assistance you wish to request for this curriculum, and then select 'Continue'.",
+                        "valueStyle": ""
+                     }
+                  ],
+                  "name": "IntroTextWithOptionsBlock",
+                  "showInitially": false,
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "loadInitially": true,
+                        "name": "IntroTextWithNoOptionsDisplay",
+                        "type": "display",
+                        "value": "You are not eligible for any Commonwealth assistance for this year.  This may be because of your citizenship, your residence status of your course. Please contact your Student Administration Office.",
+                        "valueStyle": ""
+                     }
+                  ],
+                  "name": "IntroTextWithNoOptionsBlock",
+                  "showInitially": false,
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "label": "Commonwealth Support and HECS-HELP",
+                        "loadInitially": true,
+                        "name": "HECSOptionBoolean",
+                        "onUpdate": "console.debug(\"The HECS option is \" + $HECSOptionBoolean);\n\nif( $HECSOptionBoolean) {\n    $FEEOptionBoolean=false;\n    $OSOptionBoolean=false;\n    $SAOptionBoolean=false;\n\n    $ECAFSelectedAssistanceType = 'H';\n}",
+                        "readonly": false,
+                        "type": "boolean"
+                     },
+                     {
+                        "asHtml": false,
+                        "loadInitially": true,
+                        "name": "HECSOptionDisplay",
+                        "type": "display",
+                        "value": "HECS-HELP is a scheme that includes a discount for up-front payment and loans to help eligible Commonwealth supported students pay their student contributions."
+                     }
+                  ],
+                  "name": "HECSOptionBlock",
+                  "showInitially": false,
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "label": "FEE-HELP",
+                        "loadInitially": true,
+                        "name": "FEEOptionBoolean",
+                        "onUpdate": "console.debug(\"The FEE option is \" + $FEEOptionBoolean);\n\nif( $FEEOptionBoolean) {\n    $HECSOptionBoolean=false;\n    $OSOptionBoolean=false;\n    $SAOptionBoolean=false;\n\n    $ECAFSelectedAssistanceType = 'F';\n}",
+                        "readonly": false,
+                        "type": "boolean"
+                     },
+                     {
+                        "asHtml": false,
+                        "loadInitially": true,
+                        "name": "FeeOptionDisplay",
+                        "type": "display",
+                        "value": "FEE-HELP is a loan scheme to help eligible non-Commonwealth supported (fee-paying) students pay their tuition fees."
+                     }
+                  ],
+                  "name": "FEEOptionBlock",
+                  "showInitially": false,
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "label": "OS-HELP",
+                        "loadInitially": true,
+                        "name": "OSOptionBoolean",
+                        "onUpdate": "console.debug(\"The OS option is \" + $OSOptionBoolean);\n\nif( $OSOptionBoolean) {\n    $HECSOptionBoolean=false;\n    $FEEOptionBoolean=false;\n    $SAOptionBoolean=false;\n\n    $ECAFSelectedAssistanceType = 'O';\n}",
+                        "readonly": false,
+                        "type": "boolean"
+                     },
+                     {
+                        "asHtml": false,
+                        "loadInitially": true,
+                        "name": "OSOptionDisplay",
+                        "type": "display",
+                        "value": "OS-HELP is a loan available to eligible students who undertake some of their course overseas."
+                     }
+                  ],
+                  "name": "OSOptionBlock",
+                  "showInitially": false,
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "label": "SA-HELP",
+                        "loadInitially": true,
+                        "name": "SAOptionBoolean",
+                        "onUpdate": "console.debug(\"The SA option is \" + $SAOptionBoolean);\n\nif( $SAOptionBoolean) {\n    $HECSOptionBoolean=false;\n    $OSOptionBoolean=false;\n    $FEEOptionBoolean=false;\n\n    $ECAFSelectedAssistanceType = 'S';\n}",
+                        "readonly": false,
+                        "type": "boolean"
+                     },
+                     {
+                        "asHtml": false,
+                        "loadInitially": true,
+                        "name": "SAOptionText",
+                        "type": "display",
+                        "value": "SA-HELP is a loan available to students pay their student services and amenities fee."
+                     }
+                  ],
+                  "name": "SAOptionBlock",
+                  "showInitially": false,
+                  "type": "block"
+               },
+               {
+                  "label": "Continue",
+                  "name": "SelectAssistanceContinueButton",
+                  "onClick": "//Validate that at least one option is selected if options are available\nif($EcafEligibilityDetail.ELIGIBILITY &&\n        !$HECSOptionBoolean &&\n        !$FEEOptionBoolean &&\n        !$OSOptionBoolean &&\n        !$SAOptionBoolean) {\n    alert('Please select at least one option before clicking Continue', {type:\"error\",flash: false});\n}\nelse if($existingassistance=='Y') {\n$SelectAssistanceTypeBlock.$visible=false;\n$ExistingEcafProgramData.$load();\n$ExistingEcafList.$load();\n$ExistingEcafUpdateRequest.$load()\n$ExistingEcafBlock.$visible=true;   \n}\nelse{\n$SelectAssistanceTypeBlock.$visible=false;\n$TFNMessageBlock.$visible=true;\n}",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               },
+               {
+                  "label": "Cancel",
+                  "name": "SelectAssistanceCancelButton",
+                  "onClick": "//updateme",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               }
+            ],
+            "label": "Select Commonwealth Assistance Type",
+            "name": "SelectAssistanceTypeBlock",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "label": "Program:",
+                        "loadInitially": true,
+                        "model": "SMRPRLE_PROGRAM_DESC",
+                        "name": "ProgramDataECA",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Major:",
+                        "loadInitially": true,
+                        "model": "STVMAJR_DESC",
+                        "name": "MajorDataECA",
+                        "type": "display"
+                     }
+                  ],
+                  "label": "",
+                  "loadInitially": false,
+                  "model": "EcafSovlcurResource",
+                  "name": "ExistingEcafProgramData",
+                  "pageSize": 1,
+                  "parameters": {
+                     "program": "$Program"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "ExistingEcafStartTextDisplay",
+                  "type": "display",
+                  "value": "<p>For this program, you currently have the following Commonwealth Assistance:</p>"
+               },
+               {
+                  "allowReload": false,
+                  "loadInitially": false,
+                  "model": "EcafExistingResource",
+                  "name": "ExistingEcafList",
+                  "pageSize": 5,
+                  "parameters": {
+                     "program": "$Program"
+                  },
+                  "required": false,
+                  "type": "list",
+                  "value": "HELP_TYPE"
+               },
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "ExistingEcafEndTextDisplay",
+                  "type": "display",
+                  "value": "<p>You have now selected to submit a new request for Commonwealth Support and HECS-HELP</p>\n\n<p>This new request will replace your current Commonwealth Support and HECS-HELP record, but you will need to decide whether your other records should remain active or be replaced by this single new request for Commonwealth Assistance.</p>\n\nPlease select an action for each record below, and then click the Continue button. If you wish to exit from this process, without making any changes, click the Cancel button to return to the menu.</p>"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": true,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "loadInitially": false,
+                        "model": "HELP_UPDATE",
+                        "name": "ExistingEcafUpdateDisplay",
+                        "style": "",
+                        "type": "display"
+                     },
+                     {
+                        "labelKey": "desc",
+                        "loadInitially": true,
+                        "model": "SKRECAF_CURRENT_IND",
+                        "name": "EcafUpdateExistingSelect",
+                        "required": false,
+                        "sourceModel": "EcafUpdateExistingYesNo",
+                        "sourceParameters": {},
+                        "type": "select",
+                        "valueKey": "code"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafUpdateExistingResource",
+                  "name": "ExistingEcafUpdateRequest",
+                  "onLoad": "$(\"#pbid-ExistingEcafUpdateRequest-save-button\").hide();\n$('#pbid-EcafUpdateExistingSelect-0').addClass('ng-dirty');",
+                  "onSave": "$ExistingEcafUpdateRequest.program=$Program;\n$ExistingEcafUpdateRequest.helptype=$ECAFSelectedAssistanceType;",
+                  "onSaveSuccess": "$ExistingEcafUpdateRequest.$load();",
+                  "pageSize": 5,
+                  "parameters": {
+                     "helptype": "$ECAFSelectedAssistanceType",
+                     "program": "$Program"
+                  },
+                  "style": "",
+                  "type": "htable"
+               },
+               {
+                  "label": "Continue",
+                  "name": "ExistingEcafUpdateButton",
+                  "onClick": "$ExistingEcafBlock.$visible=false;\n$TFNMessageBlock.$visible=true;\n$ExistingEcafUpdateRequest.$save();",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               }
+            ],
+            "label": "Existing Commonwealth Assistance",
+            "name": "ExistingEcafBlock",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "TFNTextDisplay",
+                  "type": "display",
+                  "value": "<p>If you are requesting FEE-HELP, VET FEE-HELP, SA-HELP or OS-HELP, you cannot complete the electronic form without providing either a valid Tax File Number (TFN) or confirming that you have a Certificate of Application for a TFN.</p>\n<p>If you are eligible for HECS-HELP and are submitting a request for HECS-HELP, you may complete the electronic Request for Commonwealth Support and HECS-HELP form. However, if you do not provide either a valid Tax File Number (TFN) or confirm that you have a Certificate of Application for a TFN, you will be required to pay your student contribution amount on or before the census date or your enrolment will be cancelled.</p>\n<p>If you need to provide a valid Certificate of Application for a TFN or a valid (TFN), but do not have one, please click the Cancel button to return to the menu and then contact your local Student Administration office to get more information.</p>\n<p>If you do have a valid Certificate of Application for a TFN or a valid Tax File Number (TFN), or if you know that you will not need one to complete the electronic form, please click the Continue button.</p>"
+               },
+               {
+                  "label": "Continue",
+                  "name": "ContinueButtonTFN",
+                  "onClick": "if($ECAFSelectedAssistanceType == 'H') {\n$TFNMessageBlock.$visible=false;\n$StudentInfoDetailHECS.$load();\n$RequestDetailHECS.$load();\n$RequestBlockHECS.$visible=true;\n};\nif($ECAFSelectedAssistanceType == 'F') {\n$TFNMessageBlock.$visible=false;\n$StudentInfoDetailFee.$load();\n$RequestDetailFee.$load();\n$RequestBlockFee.$visible=true;\n};\nif($ECAFSelectedAssistanceType == 'O') {\n$TFNMessageBlock.$visible=false;\n$RequestDetailOS.$load();\n$RequestBlockOS.$visible=true;\n};\nif($ECAFSelectedAssistanceType == 'S') {\n$TFNMessageBlock.$visible=false;\n$StudentInfoDetailSA.$load();\n$RequestDetailSA.$load();\n$RequestBlockSA.$visible=true;\n};",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               }
+            ],
+            "label": "Do you have a valid Tax File Number?",
+            "name": "TFNMessageBlock",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "IntroTextDisplayHECS",
+                  "type": "display",
+                  "value": "<p><b>NOTE:</b> Before completing this form you must read the HECS-HELP and Commonwealth supported places information booklet, available at <a href=\"https://www.studyassist.gov.au/\" target=\"_blank\">www.studyassist.gov.au</a>.</p>\n<p>You must:\n<ul>\n<li>complete this form if you are a <b>Commonwealth supported student</b>;</li>\n<li><b>complete each question</b> that is relevant to you. Your form will <b>not be valid</b> unless each question is completed correctly; and</li>\n<li>submit the completed form <b>on or before the census date</b> for your unit(s) of study.</li>\n</ul>\n</p>\n<p>You will be able to print a copy of the information you have provided on this form, for your records.</p>\n<p><b>IMPORTANT</b>:\n <ul>       \n<li>The government-issued duplicate form is the only valid paper version of this form. For example, PDF printouts are not valid and you will not be eligible for Commonwealth assistance if you submit a PDF printout of this form.<l/i>\n<li> your institution may set an <b>earlier date</b> for the submission of this form - check with your institution.</li>\n</ul>\n</p>"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "label": "1. Family Name:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_LAST_NAME",
+                        "name": "FamilyNameDisplayHECS",
+                        "style": "",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Given Names:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_FIRST_NAME",
+                        "name": "GivenNamesDisplayHECS",
+                        "style": "indent",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "2. Date of Birth:",
+                        "loadInitially": true,
+                        "model": "BIRTH_DATE",
+                        "name": "DateOfBirthDisplayHECS",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "3. Gender:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPBPERS_SEX",
+                        "name": "GenderDisplayHECS",
+                        "style": "",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "4. Name of approved institution:",
+                        "loadInitially": true,
+                        "model": "INSTITUTE_NAME",
+                        "name": "InstitutionDisplayHECS",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Campus:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "STVCAMP_DESC",
+                        "name": "CampusDisplayHECS",
+                        "style": "indent",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "5. Student Identification Number:",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_ID",
+                        "name": "StudentIdDisplayHECS",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "6. Name of Course of Study:",
+                        "loadInitially": true,
+                        "model": "SKRDRCO_CRS_STUDY_NAME",
+                        "name": "CourseOfStudyDisplayHECS",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "7. Citizenship Status:",
+                        "loadInitially": true,
+                        "model": "STVCITZ_DESC",
+                        "name": "CitizenshipDisplayHECS",
+                        "type": "display"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafRequestResource",
+                  "name": "StudentInfoDetailHECS",
+                  "onLoad": "$(\"#pbid-RequestDetailHECS-save-button\").hide();",
+                  "pageSize": 1,
+                  "parameters": {
+                     "program": "$Program",
+                     "term": "$Term"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "MiddleTextDisplayHECS",
+                  "type": "display",
+                  "value": "<p><b>NOTE</b>: Permanent non-humanitarian visa holders and New Zealand citizens who do not meet the special category visa and long term residency requirements are only eligible for a Commonwealth supported place. You are not eligible for HECS-HELP assistance and must pay your student contribution upfront and in full, on or before the census date, otherwise your enrolment as a Commonwealth supported student will be cancelled.</p>\n\n<p><b>8. Complete ONLY if you are an Australian citizen or the holder of a permanent humanitarian visa or a New Zealand citizen who meets the NZ SCV long-term residency requirements.</b></p>\n\n<p>HECS-HELP assistance allows you to obtain a loan from the Commonwealth to pay your student contributions. It also includes a 10% discount on full or partial upfront student contribution payments of $500 or more. This upfront discount will not apply to any units of study that have a census date on or after 1 January 2017. In order to obtain a HECS-HELP loan, you will need to supply your valid tax file number below.</p>"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": true,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "label": "8A. Tax file number(TFN)",
+                        "loadInitially": true,
+                        "model": "TFN",
+                        "name": "TFNTextHECS",
+                        "onUpdate": "$TFN = $(\"#pbid-TFNTextHECS-0\").val();\n\n//remove spaces and update\ntfn = $TFN.replace(/\\s+/g, '');\n$('#pbid-TFNTextHECS-0').val(tfn);\n\n//remove hyphens and update\ntfn = $TFN.replace(/[-]/g, '');\n$('#pbid-TFNTextHECS-0').val(tfn);\n\n//validate only digits\nvar isNumber = /^[0-9]+$/.test(tfn);\n\n\nif(!isNumber) {\n    document.getElementById('pbid-TFNValidationHECS-label-0').innerHTML = \"<span style='color: red;'>Invalid TFN! Only numbers are allowed.</span>\";\n    \n}\n\nelse {\n\t\tvar length =  $TFN.length;\n\t\tif(length != 9) {\n            document.getElementById('pbid-TFNValidationHECS-label-0').innerHTML = \"<span style='color: orange;'>Invalid TFN! Must have 9 digits.</span>\";\n\t\t}\n\t\telse {\n            var digits =  $TFN.split('');\n\t\t\tvar sum = (digits[0]*1)\n\t\t\t+ (digits[1]*4)\n\t\t\t+ (digits[2]*3)\n\t\t\t+ (digits[3]*7)\n\t\t\t+ (digits[4]*5)\n\t\t\t+ (digits[5]*8)\n\t\t\t+ (digits[6]*6)\n\t\t\t+ (digits[7]*9)\n\t\t\t+ (digits[8]*10);\n\n\t\t\tvar remainder = sum % 11;\n\t\t\t\tif(remainder == 0) {\n                    document.getElementById('pbid-TFNValidationHECS-label-0').innerHTML = \"<span style='color: green;'>Valid TFN.</span>\";\n\t\t\t\t} else {\n                    document.getElementById('pbid-TFNValidationHECS-label-0').innerHTML = \"<span style='color: red;'>Not a valid TFN number!</span>\";\n\t\t\t\t}\n        }\n}",
+                        "parameters": {},
+                        "readonly": false,
+                        "required": false,
+                        "style": "",
+                        "type": "text",
+                        "validation": {}
+                     },
+                     {
+                        "asHtml": false,
+                        "label": ".",
+                        "loadInitially": true,
+                        "name": "TFNValidationHECS",
+                        "type": "display"
+                     },
+                     {
+                        "booleanFalseValue": "N",
+                        "booleanTrueValue": "Y",
+                        "label": "I have a Certificate of application for a TFN (you will need to supply this to your institution on or before the census date).",
+                        "loadInitially": true,
+                        "model": "TFN_REQUESTED",
+                        "name": "TFNRequestedBooleanHECS",
+                        "onUpdate": "$('#pbid-TFNRequestedBooleanHECS-0').change(function()\n{\n    if ($('#pbid-TFNRequestedBooleanHECS-0').is(':checked') == true)\n\t{\n\t\t$('#pbid-TFNTextHECS-0').val('').prop('disabled', true);\n\t\t$TFN = '';\n                $('#pbid-TFNValidationHECS-label-0').hide().\nconsole.log('checked');\n\t} \n\telse \n\t{\n\t\t$('#pbid-TFNTextHECS-0').val('').prop('disabled', false);\n                $('#pbid-TFNValidationHECS-label-0').show();\n\t\tconsole.log('unchecked');\n   }\n\n}\n);",
+                        "readonly": false,
+                        "type": "boolean"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafRequestResource",
+                  "name": "RequestDetailHECS",
+                  "onLoad": "$TFN = '';",
+                  "onSave": "$RequestDetailHECS.term=$Term;\n$RequestDetailHECS.program=$Program;\n$RequestDetailHECS.helptype='H';\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); \nwindow.params.saved=true;",
+                  "pageSize": 5,
+                  "parameters": {
+                     "program": "$Program",
+                     "term": "$Term"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "EndTextDisplayHECS",
+                  "type": "display",
+                  "value": "<p>Your institution is authorised under the Higher Education Support Act 2003 (the Act) to collect your TFN. You will not be able to obtain a HECS-HELP loan for the amount of your student contribution that remains unpaid on the census date unless you give your institution, on or before the census date, either your TFN or the certificate from the Australian Taxation Office (ATO), stating that you have applied for a TFN.</p>\n<p>You will also need to provide your TFN if you want to obtain a HECS-HELP loan if you fail to make a full up front payment of your student contribution on or before the census date.\nIt is not an offence to decline to quote your TFN. Your institution is authorised to retain your TFN only for the purpose of reporting details of your HECS-HELP loan to the ATO. Privacy and taxation laws protect your TFN information. There may be severe penalties if these laws are broken.</p>\n\n\n<p><b>NOTE:</b> as TFNs are usually provided within 28 days of application, it is essential that you apply early to ensure you have your TFN on or before the census date. For more information on requesting a TFN, visit the ATO website at <a href=\"https://www.ato.gov.au\" target=\"_blank\">www.ato.gov.au</a> or phone 13 28 61 between 8.00am and 6.00pm (EST), Monday to Friday.\n\n<p><b>8B. By signing this form, you declare that you agree to ALL of the statements in this section</b>.</p>\n\n<p><b>Repayment of a HECS-HELP loan:</b><br>\nI understand that I will repay to the ATO the amount that the Commonwealth has loaned to me. These repayments will be made in accordance with Chapter 4 of the Act, when my income reaches a certain level including if i am residing overseas, even if I have not completed my studies. I understand my HELP debt will be indexed annually in line with the Act.</p>\n\n<p><b>Refund of HECS-HELP loan amounts:</b><br>\nI understand that my debt with the Commonwealth will remain if I withdraw or cancel my enrolment after the census date, but that my debt may be removed by my institution in special circumstances.</p>\n\n<p><b>Cancellation of enrolment as a Commonwealth supported student:</b><br>\nI understand that I MUST either make a full up-front payment or provide my TFN (or the certificate from the ATO) to my institution on or before the census date otherwise my enrolment as a Commonwealth supported student in the unit(s) of study will be cancelled.</p>\n<p><b>9. Your obligations</b>\n<ul>\n<li>I have read the Commonwealth supported places and HECS-HELP information booklet and I am aware of my obligations as a Commonwealth supported student.</li>\n<li>I understand the statement in <b>item 8B</b> relating to cancellation of enrolment as a Commonwealth supported student.</li>\n<li>I understand the statements in <b>item 8B</b> relating to repayments and refunds of HECS-HELP loan amounts (only applicable to Australian citizens, permanent humanitarian visa holders and eligible New Zealand Special Category Visa holders). </li>\n</ul>\n</p>\n<p><b>10. By submitting this form you also</b>:\n<ul>\n<li>declare that:<l/i>\n<ul>\n<li>the information on this form is complete and correct and you can produce documents to verify this if required.</li>\n</ul>\n<li>request that:</li>\n<ul>\n<li>if you satisfy all of the applicable HECS-HELP eligibility criteria, the Commonwealth lend you the student contribution amount for units in your course of study outstanding at the census date (unless full upfront payment of your student contribution amount is made) and to pay the outstanding amount to your provider on your behalf.</li>\n</ul>\n<li>understand that:</li>\n<ul>\n<li>if your eligibility for a Commonwealth supported place and/or a HECS-HELP loan changes, you must notify your institution;</li?\n<li>the Department of Education and Training (the department) collects your information in accordance with the Australian Privacy Principles for the purpose of administering Commonwealth assistance, including verifying eligibility for a CSP and/or a HELP loan and overseas HELP debt recovery.</li>\n<li>It is also collected for the purpose of research, statistics and programme assurance. If you do not provide the information required on this form you may not be eligible for Commonwealth assistance;</li>\n<li>the authority to collect and share this information with other government agencies including, but not limited to, the ATO and the Department of Immigration and Border Protection for the purpose of verifying your eligibility is contained in Part 5-4 Division 179-20 of the Act.Under the Government's overseas debt recovery measure, there will also be the potential for information to be shared with overseas agencies involved in HELP debt collection;</li>\n<li>the information may not otherwise be disclosed without your consent unless authorised or required by law;</li>\n<li>full details of how the department handles personal information for the purpose of the Higher Education Loan Programme can be found at <a href=\"https://www.studyassist.gov.au\" target=\"_blank\">www.studyassist.gov.au</a>;</li>\n<li>the department's Privacy Policy, including information on access and how to make a complaint can be found at <a href=\"https://www.education.gov.au/condensed-privacy-policy\" target=\"_blank\">www.education.gov.au</a>. Should you wish to correct the personal information you provided on this form please contact your institution directly; and</li>\n<li><b>giving false or misleading information is a serious offence under the Criminal Code Act 1995.</b></li>\n</ul>\n</ul>\n</p>"
+               },
+               {
+                  "label": "I agree",
+                  "loadInitially": true,
+                  "name": "AgreeBooleanHECS",
+                  "onError": "",
+                  "onUpdate": "$(\"#pbid-SubmitButtonHECS\").removeClass(\"disabled\");\n$('#pbid-AgreeBooleanHECS').click(function () {\n//check if I AGREE checkbox is checked\nif ($(this).is(':checked')) {   \n$('#pbid-SubmitButtonHECS').removeAttr('disabled'); //enable SUBMIT button\n } \nelse {\n$('#pbid-SubmitButtonHECS').attr('disabled', true); //disable SUBMIT button \n}\n});",
+                  "readonly": false,
+                  "type": "boolean"
+               },
+               {
+                  "label": "Submit",
+                  "name": "SubmitButtonHECS",
+                  "onClick": "var length = $TFN.length;\nvar digits = $TFN.split('');\nvar sum = (digits[0]*1)\n        + (digits[1]*4)\n        + (digits[2]*3)\n        + (digits[3]*7)\n        + (digits[4]*5)\n        + (digits[5]*8)\n        + (digits[6]*6)\n        + (digits[7]*9)\n        + (digits[8]*10);\n\nvar remainder = sum % 11;\nif($TFN==''&&$('#pbid-TFNRequestedBooleanHECS-0').is(':checked') == false){\n$('#pbid-AgreeBooleanHECS').prop(\"checked\", false);\nalert('Please enter a TFN or confirm you have a certificate of application for a TFN ', {type:\"error\",flash: false});\n}\n//validate length\nelse if(length != 9&&$('#pbid-TFNRequestedBooleanHECS-0').is(':checked') == false) {\n    alert(\"Invalid TFN number, must have 9 digits\", {type:\"error\"});\n}\n//validate check digit\nelse if(remainder !== 0&&$('#pbid-TFNRequestedBooleanHECS-0').is(':checked') == false) {\nalert(\"Invalid TFN number, check the digits\", {type:\"error\"});\n} \nelse{\n$RequestBlockHECS.$visible=false;\n$StudentInfoDetailHECSConf.$load();\n$RequestBlockHECSConf.$visible=true;\nwindow.location.href = \"#start\";\n}",
+                  "style": "",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary disabled"
+               }
+            ],
+            "label": "Request for Commonwealth Support and HECS-HELP",
+            "name": "RequestBlockHECS",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "IntroTextDisplayHECSConf",
+                  "type": "display",
+                  "value": "<p>This is the Request for Commonwealth Assistance data that you have just saved.</p>\n\n<p>If the data is not correct, it can be edited using the 'Make Changes' button.</p>\n<p>If the data is correct, please select the 'Confirm' button. Requests for Commonwealth Assistance that have been confirmed cannot be changed.</p>\n<p>If you decide to make changes after confirmation, you will need to submit a new Request for Commonwealth Assistance form.</p>"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "label": "1. Family Name:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_LAST_NAME",
+                        "name": "FamilyNameDisplayHECSConf",
+                        "style": "",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Given Names:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_FIRST_NAME",
+                        "name": "GivenNamesDisplayHECSConf",
+                        "style": "indent",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "2. Date of Birth:",
+                        "loadInitially": true,
+                        "model": "BIRTH_DATE",
+                        "name": "DateOfBirthDisplayHECSConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "3. Gender:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPBPERS_SEX",
+                        "name": "GenderDisplayHECSConf",
+                        "style": "",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "4. Name of approved institution:",
+                        "loadInitially": true,
+                        "model": "INSTITUTE_NAME",
+                        "name": "InstitutionDisplayHECSConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Campus:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "STVCAMP_DESC",
+                        "name": "CampusDisplayHECSConf",
+                        "style": "indent",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "5. Student Identification Number:",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_ID",
+                        "name": "StudentIdDisplayHECSConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "6. Name of Course of Study:",
+                        "loadInitially": true,
+                        "model": "SKRDRCO_CRS_STUDY_NAME",
+                        "name": "CourseOfStudyDisplayHECSConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "7. Citizenship Status:",
+                        "loadInitially": true,
+                        "model": "STVCITZ_DESC",
+                        "name": "CitizenshipDisplayHECSConf",
+                        "type": "display"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafRequestResource",
+                  "name": "StudentInfoDetailHECSConf",
+                  "onLoad": "$(\"#pbid-RequestDetailHECSConf-save-button\").hide();",
+                  "pageSize": 1,
+                  "parameters": {
+                     "program": "$Program",
+                     "term": "$Term"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "asHtml": false,
+                  "label": "8. TFN",
+                  "loadInitially": true,
+                  "name": "TFNDisplayHECSConf",
+                  "type": "display",
+                  "value": "$TFN"
+               },
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "EndTextDisplayHECSConf",
+                  "type": "display",
+                  "value": "<p>You have agreed to the following obligations and declarations: </p>\n<p><b>9. Your obligations</b>\n<ul>\n<li>I have read the Commonwealth supported places and HECS-HELP information booklet and I am aware of my obligations as a Commonwealth supported student.</li>\n<li>I understand the statement in <b>item 8B</b> relating to cancellation of enrolment as a Commonwealth supported student.</li>\n<li>I understand the statements in <b>item 8B</b> relating to repayments and refunds of HECS-HELP loan amounts (only applicable to Australian citizens, permanent humanitarian visa holders and eligible New Zealand Special Category Visa holders). </li>\n</ul>\n</p>\n<p><b>10. By submitting this form you also</b>:\n<ul>\n<li>declare that:</li>\n<ul>\n<li>the information on this form is complete and correct and you can produce documents to verify this if required.</li>\n</ul>\n<li>request that:</li>\n<ul>\n<li>if you satisfy all of the applicable HECS-HELP eligibility criteria, the Commonwealth lend you the student contribution amount for units in your course of study outstanding at the census date (unless full upfront payment of your student contribution amount is made) and to pay the outstanding amount to your provider on your behalf.</li>\n</ul>\n<li>understand that:</li>\n<ul>\n<li>if your eligibility for a Commonwealth supported place and/or a HECS-HELP loan changes, you must notify your institution;</li>\n<li>the Department of Education and Training (the department) collects your information in accordance with the Australian Privacy Principles for the purpose of administering Commonwealth assistance, including verifying eligibility for a CSP and/or a HELP loan and overseas HELP debt recovery.</li>\n<li>It is also collected for the purpose of research, statistics and programme assurance. If you do not provide the information required on this form you may not be eligible for Commonwealth assistance;</li>\n<li>the authority to collect and share this information with other government agencies including, but not limited to, the ATO and the Department of Immigration and Border Protection for the purpose of verifying your eligibility is contained in Part 5-4 Division 179-20 of the Act.Under the Government's overseas debt recovery measure, there will also be the potential for information to be shared with overseas agencies involved in HELP debt collection;</li>\n<li>the information may not otherwise be disclosed without your consent unless authorised or required by law;</li>\n<li>full details of how the department handles personal information for the purpose of the Higher Education Loan Programme can be found at <a href=\"https://www.studyassist.gov.au\" target=\"_blank\">www.studyassist.gov.au</a>;</li>\n<li>the department's Privacy Policy, including information on access and how to make a complaint can be found at <a href=\"https://www.education.gov.au/condensed-privacy-policy\" target=\"_blank\">www.education.gov.au</a>. Should you wish to correct the personal information you provided on this form please contact your institution directly; and</li>\n<li><b>giving false or misleading information is a serious offence under the Criminal Code Act 1995.</b></li>\n</ul>\n</ul>\n</p>"
+               },
+               {
+                  "label": "Confirm",
+                  "name": "SubmitButtonHECSConf",
+                  "onClick": "$RequestDetailHECS.$save();\n$RequestBlockHECSConf.$visible=false;\n$EcafReceiptStudentInfoDetail.$load();\n$EcafReceiptProgramInfoDetail.$load();\n$EcafReceiptBlock.$visible=true;",
+                  "style": "",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               },
+               {
+                  "label": "Make Changes",
+                  "name": "BackButtonHECSConf",
+                  "onClick": "$RequestBlockHECSConf.$visible=false;\n$RequestBlockHECS.$visible=true;\nwindow.location.href = \"#start\";",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               }
+            ],
+            "label": "Confirm Request for Commonwealth Support and HECS-HELP",
+            "name": "RequestBlockHECSConf",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "IntroTextDisplayFee",
+                  "type": "display",
+                  "value": "<p> <b>NOTE:</b> Before completing this form you <u>must</u> read the FEE-HELP and Commonwealth supported places information booklet, available at <a href=\"www.studyassist.gov.au\">www.studyassist.gov.au</a>. </p><p>You must:\t<ul>\t\t<li>complete this form if you are requesting FEE-HELP assistance for some or all of your tution fees for your units of study;</li>\t\t<li><b>complete each question</b> that is relevant to you. Your form will <b>not be valid</b> unless each question is completed correctly; and</li>\t\t<li>submit the completed form <b>on or before the census date</b> for your unit(s) of study for which you are requesting FEE-HELP assistance.</li>\t</ul></p><p>You will be able to print a copy of the information you have provided on this form, for your records.</p> <p>\t<b>IMPORTANT</b>: \t<ul>\t\t<li>you will be entitled to FEE-HELP assistance for a particular unit of study only if you remain eligible and have sufficient FEE-HELP balance to cover your tuition fees;</li><li>it is your responsibility to be aware of your FEE-HELP balance and you must advise your institution if you do not have enough FEE-HELP balance to cover your tuition fees;</li>\t\t\t\t<li> your institution may set an <b>earlier date</b> for the submission of this form - check with your institution; and\t\t\t\t<li>the government-issued duplicate form is the only valid paper version of this form. For example, PDF printouts are not valid and you will not be eligible for Commonwealth assistance if you submit a PDF printout of this form.</li>\t</ul></p>"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "label": "1. Family Name:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_LAST_NAME",
+                        "name": "FamilyNameDisplayFee",
+                        "style": "",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Given Names:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_FIRST_NAME",
+                        "name": "GivenNamesDisplayFee",
+                        "style": "indent",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "2. Date of Birth:",
+                        "loadInitially": true,
+                        "model": "BIRTH_DATE",
+                        "name": "DateOfBirthDisplayFee",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "3. Gender:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPBPERS_SEX",
+                        "name": "GenderDisplayFee",
+                        "style": "",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "4. Name of approved institution:",
+                        "loadInitially": true,
+                        "model": "INSTITUTE_NAME",
+                        "name": "InstitutionDisplayFee",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Campus:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "STVCAMP_DESC",
+                        "name": "CampusDisplayFee",
+                        "style": "indent",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "5. Student Identification Number:",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_ID",
+                        "name": "StudentIdDisplayFee",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "6. Name of Course of Study:",
+                        "loadInitially": true,
+                        "model": "SKRDRCO_CRS_STUDY_NAME",
+                        "name": "CourseOfStudyDisplayFee",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "7. Citizenship Status:",
+                        "loadInitially": true,
+                        "model": "STVCITZ_DESC",
+                        "name": "CitizenshipDisplayFee",
+                        "type": "display"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafRequestResource",
+                  "name": "StudentInfoDetailFee",
+                  "onLoad": "",
+                  "pageSize": 5,
+                  "parameters": {
+                     "program": "$Program",
+                     "term": "$Term"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "components": [
+                     {
+                        "allowDelete": false,
+                        "allowModify": true,
+                        "allowNew": false,
+                        "allowReload": false,
+                        "components": [
+                           {
+                              "label": "8. Tax file number(TFN)",
+                              "loadInitially": true,
+                              "model": "TFN",
+                              "name": "TFNTextFee",
+                              "onUpdate": "$TFN = $(\"#pbid-TFNTextFee-0\").val();\n\n//remove spaces and update\ntfn = $TFN.replace(/\\s+/g, '');\n$('#pbid-TFNTextFee-0').val(tfn);\n\n//remove hyphens and update\ntfn = $TFN.replace(/[-]/g, '');\n$('#pbid-TFNTextFee-0').val(tfn);\n\n//validate only digits\nvar isNumber = /^[0-9]+$/.test(tfn);\n\n\nif(!isNumber) {\n    document.getElementById('pbid-TFNValidationFee-label-0').innerHTML = \"<span style='color: red;'>Invalid TFN! Only numbers are allowed.</span>\";\n    \n}\n\nelse {\n\t\tvar length =  $TFN.length;\n\t\tif(length != 9) {\n            document.getElementById('pbid-TFNValidationFee-label-0').innerHTML = \"<span style='color: orange;'>Invalid TFN! Must have 9 digits.</span>\";\n\t\t}\n\t\telse {\n            var digits =  $TFN.split('');\n\t\t\tvar sum = (digits[0]*1)\n\t\t\t+ (digits[1]*4)\n\t\t\t+ (digits[2]*3)\n\t\t\t+ (digits[3]*7)\n\t\t\t+ (digits[4]*5)\n\t\t\t+ (digits[5]*8)\n\t\t\t+ (digits[6]*6)\n\t\t\t+ (digits[7]*9)\n\t\t\t+ (digits[8]*10);\n\n\t\t\tvar remainder = sum % 11;\n\t\t\t\tif(remainder == 0) {\n                    document.getElementById('pbid-TFNValidationFee-label-0').innerHTML = \"<span style='color: green;'>Valid TFN.</span>\";\n\t\t\t\t} else {\n                    document.getElementById('pbid-TFNValidationFee-label-0').innerHTML = \"<span style='color: red;'>Not a valid TFN number!</span>\";\n\t\t\t\t}\n        }\n}",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "asHtml": false,
+                              "label": ".",
+                              "loadInitially": true,
+                              "name": "TFNValidationFee",
+                              "type": "display"
+                           },
+                           {
+                              "booleanFalseValue": "N",
+                              "booleanTrueValue": "Y",
+                              "label": "I have a Certificate of application for a TFN (you will need to supply this to your institution on or before the census date).",
+                              "loadInitially": true,
+                              "model": "TFN_REQUESTED",
+                              "name": "TFNRequestedBooleanFee",
+                              "onUpdate": "$('#pbid-TFNRequestedBooleanFee-0').change(function()\n{\n    if ($('#pbid-TFNRequestedBooleanFee-0').is(':checked') == true)\n\t{\n\t\t$('#pbid-TFNTextFee-0').val('').prop('disabled', true);\n\t\t$TFN = '';\n                 $('#pbid-TFNValidationFee-label-0').hide();\n\t} \n\telse \n\t{\n\t\t$('#pbid-TFNTextFee-0').val('').prop('disabled', false);\n                 $('#pbid-TFNValidationFee-label-0').show();\n\t\tconsole.log('unchecked');\n   }\n\n}\n);",
+                              "readonly": false,
+                              "type": "boolean",
+                              "value": ""
+                           }
+                        ],
+                        "loadInitially": false,
+                        "model": "EcafRequestResource",
+                        "name": "RequestDetailFee",
+                        "onLoad": "$(\"#pbid-RequestDetailFee-save-button\").hide();\n$TFN = '';",
+                        "onSave": "$RequestDetailFee.term=$Term;\n$RequestDetailFee.program=$Program;\n$RequestDetailFee.helptype='F';\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;",
+                        "pageSize": 5,
+                        "parameters": {
+                           "program": "$Program",
+                           "term": "$Term"
+                        },
+                        "type": "detail"
+                     }
+                  ],
+                  "name": "RequestFormFee",
+                  "nextButtonLabel": "",
+                  "showInitially": true,
+                  "type": "form"
+               },
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "EndTextDisplayFee",
+                  "type": "display",
+                  "value": "<p>Your institution is authorised under the Higher Education Support Act 2003 (the Act) to collect your TFN. You will not be able to obtain FEE-HELP assistance for the amount of your tuition fees that remain unpaid on the census date unless you give your institution, on or before the census date, either your TFN or the certificate from the Australian Taxation Office (ATO), stating that you have applied for a TFN.</p><p>It is not an offence to decline to quote your TFN. Your institution is authorised to retain your TFN only for the purpose of reporting details of your FEE-HELP loan to the ATO. Privacy and taxation laws protect your TFN information. There may be severe penalties if these laws are broken.</P></p><p><b>NOTE:</b> as TFNs are usually provided within 28 days of application, it is essential that you apply early to ensure you have your TFN on or before the census date. For more information on requesting a TFN, visit the ATO website at <a href\"www.ato.gov.au\">www.ato.gov.au</a> or phone 13 28 61 between 8.00am and 6.00pm (EST), Monday to Friday.<p><p><b>9. Your obligations</b><ul><li>I have read the FEE-HELP information booklet and I am aware of my obligations if I receive FEE-HELP assistance.</li><p><li>I understand, over my lifetime, the amount of FEE-HELP assistance (and VET FEE-HELP assistance) that I access must not exceed the FEE-HELP limit.<p> </li><li>I understand that it is my responsibility to be aware of my FEE-HELP balance and to advise my institution/s (and VET FEE-HELP providers if applicable) if I am approaching the FEE-HELP limit and may not have enough FEE-HELP balance to cover my tuition fees. In this situation, I will advise each relevant institution of how much FEE-HELP (or VET FEE-HELP) assistance I wish to access for my units of study. <p></li><li>I understand the statements in item 10 relating to repayments of FEE-HELP debts (and refunds under special circumstances).</li><p><li>I understand that under the Act, the term 'Commonwealth supported student' refers to a student who is enrolled in a 'Commonwealth supported place' - a subsidised higher education place (visit www.studyassist.gov.au for more information). A student accessing FEE-HELP (or VET FEE-HELP) is not a 'Commonwealth supported student'.</li></ul></p><p><b>10. By submitting this form you</b>:<ul><li>declare that:<ul><li>you have read the FEE-HELP information booklet and are aware of your obligations if you receive FEE-HELP assistance; </li><li>the information on this form is complete and correct and you can produce documents to verify this if required.</li></ul><li>request that:</li><ul><li>the Commonwealth lend you the amount of the tuition fees for units in your course of study outstanding at the census date and to use the amount to pay your institution on your behalf.</li></ul><li>understand that:</li><ul><li>a 25% loan fee will be applied to the amount of FEE-HELP assistance if it relates to an undergraduate course of study, and that this loan fee will be included in your FEE-HELP debt; </li><li>you will repay to the ATO the amount that the Commonwealth has loaned to you (plus the loan fee if applicable). These repayments will be made in accordance with Chapter 4 of the Act when your income reaches a certain level, including if you are residing overseas, even if you have not completed your studies;</li><li>your HELP debt will be indexed annually in line with the Act;</li><li>you will not be able to obtain FEE-HELP assistance if you do not meet the TFN requirements;</li><li>you will no longer be able to obtain FEE-HELP assistance (or VET FEE-HELP assistance) when the total amount of FEE-HELP assistance you have obtained reaches the FEE-HELP limit as set out in the Act;</li><li>you are able to cancel this request, in writing, at any time, with your institution, and that it will no longer apply from that time. However this must be done by the census date, otherwise you will have a debt to the Australian Government that you are legally required to repay;</li><li>if your eligibility for FEE-HELP assistance changes, you must notify your institution;</li><li>the Department of Education and Training (the department) collects your information in accordance with the Australian Privacy Principles for the purpose of administering Commonwealth assistance, including verifying eligibility for a HELP loan and overseas HELP debt recovery. It is also collected for the purpose of research, statistics and programme assurance. If you do not provide the information required on this form you may not be eligible for Commonwealth assistance;</li><li>the authority to collect and share this information with other government agencies including, but not limited to, the ATO and the Department of Immigration and Border Protection for the purpose of verifying your eligibility is contained in Part 5-4 Division 179-20 of the Act. Under the Government's overseas debt recovery measure, there will also be the potential for information to be shared with overseas agencies involved in HELP debt collection;</li><li>the information may not otherwise be disclosed without your consent unless authorised or required by law;</li><li>full details of how the department handles personal information for the purpose of the Higher Education Loan Programme can be found at www.studyassist.gov.au;</li><li>the department's Privacy Policy, including information on access and how to make a complaint can be found at www.education.gov.au/condensed-privacy-policy. Should you wish to correct the personal information you provided on this form please contact your institution directly; and</li><li><b>giving false or misleading information is a serious offence under the Criminal Code Act 1995.</b></li></ul></ul></p>"
+               },
+               {
+                  "label": "I agree",
+                  "loadInitially": true,
+                  "name": "AgreeBooleanFee",
+                  "onUpdate": "$(\"#pbid-SubmitButtonFee\").removeClass(\"disabled\");\n$('#pbid-AgreeBooleanFee').click(function () {\n//check if I AGREE checkbox is checked\nif ($(this).is(':checked')) {   \n$('#pbid-SubmitButtonFee').removeAttr('disabled'); //enable SUBMIT button\n } \nelse {\n$('#pbid-SubmitButtonFee').attr('disabled', true); //disable SUBMIT button \n}\n});",
+                  "readonly": false,
+                  "type": "boolean"
+               },
+               {
+                  "label": "Submit",
+                  "name": "SubmitButtonFee",
+                  "onClick": "var length = $TFN.length;\nvar digits = $TFN.split('');\nvar sum = (digits[0]*1)\n        + (digits[1]*4)\n        + (digits[2]*3)\n        + (digits[3]*7)\n        + (digits[4]*5)\n        + (digits[5]*8)\n        + (digits[6]*6)\n        + (digits[7]*9)\n        + (digits[8]*10);\n\nvar remainder = sum % 11;\nif($TFN==''&&$('#pbid-TFNRequestedBooleanFee-0').is(':checked') == false){\n$('#pbid-AgreeBooleanFee').prop(\"checked\", false);\nalert('Please enter a TFN or confirm you have a certificate of application for a TFN ', {type:\"error\",flash: false});\n}\n//validate length\nelse if(length != 9&&$('#pbid-TFNRequestedBooleanFee-0').is(':checked') == false) {\n    alert(\"Invalid TFN number, must have 9 digits\", {type:\"error\"});\n}\n//validate check digit\nelse if(remainder !== 0&&$('#pbid-TFNRequestedBooleanFee-0').is(':checked') == false) {\nalert(\"Invalid TFN number, check the digits\", {type:\"error\"});\n} \nelse{\n$RequestBlockFee.$visible=false;\n$StudentInfoDetailFeeConf.$load();\n$RequestBlockFeeConf.$visible=true;\nwindow.location.href = \"#start\";\n}",
+                  "style": "",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary disabled"
+               }
+            ],
+            "label": "Request for FEE-HELP Assistance",
+            "name": "RequestBlockFee",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "IntroTextDisplayFeeConf",
+                  "type": "display",
+                  "value": "<p>This is the Request for Commonwealth Assistance data that you have just saved.</p>\n<p>If the data is not correct, it can be edited using the 'Make Changes' button.</p>\n<p>If the data is correct, please select the 'Confirm' button. Requests for Commonwealth Assistance that have been confirmed cannot be changed. If you decide to make changes after confirmation, you will need to submit a new Request for Commonwealth Assistance form. </p>"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "label": "1. Family Name:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_LAST_NAME",
+                        "name": "FamilyNameDisplayFeeConf",
+                        "style": "",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Given Names:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_FIRST_NAME",
+                        "name": "GivenNamesDisplayFeeConf",
+                        "style": "indent",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "2. Date of Birth:",
+                        "loadInitially": true,
+                        "model": "BIRTH_DATE",
+                        "name": "DateOfBirthDisplayFeeConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "3. Gender:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPBPERS_SEX",
+                        "name": "GenderDisplayFeeConf",
+                        "style": "",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "4. Name of approved institution:",
+                        "loadInitially": true,
+                        "model": "INSTITUTE_NAME",
+                        "name": "InstitutionDisplayFeeConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Campus:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "STVCAMP_DESC",
+                        "name": "CampusDisplayFeeConf",
+                        "style": "indent",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "5. Student Identification Number:",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_ID",
+                        "name": "StudentIdDisplayFeeConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "6. Name of Course of Study:",
+                        "loadInitially": true,
+                        "model": "SKRDRCO_CRS_STUDY_NAME",
+                        "name": "CourseOfStudyDisplayFeeConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "7. Citizenship Status:",
+                        "loadInitially": true,
+                        "model": "STVCITZ_DESC",
+                        "name": "CitizenshipDisplayFeeConf",
+                        "type": "display"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafRequestResource",
+                  "name": "StudentInfoDetailFeeConf",
+                  "onLoad": "",
+                  "pageSize": 5,
+                  "parameters": {
+                     "program": "$Program",
+                     "term": "$Term"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "asHtml": false,
+                  "label": "8. TFN",
+                  "loadInitially": true,
+                  "name": "TFNDisplayFeeConf",
+                  "type": "display",
+                  "value": "$TFN"
+               },
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "EndTextDisplayFeeConf",
+                  "type": "display",
+                  "value": "<b>9. Your obligations</b><ul><li>I have read the FEE-HELP information booklet and I am aware of my obligations if I receive FEE-HELP assistance.</li><p><li>I understand, over my lifetime, the amount of FEE-HELP assistance (and VET FEE-HELP assistance) that I access must not exceed the FEE-HELP limit.<p> </li><li>I understand that it is my responsibility to be aware of my FEE-HELP balance and to advise my institution/s (and VET FEE-HELP providers if applicable) if I am approaching the FEE-HELP limit and may not have enough FEE-HELP balance to cover my tuition fees. In this situation, I will advise each relevant institution of how much FEE-HELP (or VET FEE-HELP) assistance I wish to access for my units of study. <p></li><li>I understand the statements in item 10 relating to repayments of FEE-HELP debts (and refunds under special circumstances).</li><p><li>I understand that under the Act, the term 'Commonwealth supported student' refers to a student who is enrolled in a 'Commonwealth supported place' - a subsidised higher education place (visit www.studyassist.gov.au for more information). A student accessing FEE-HELP (or VET FEE-HELP) is not a 'Commonwealth supported student'.</li></ul></p><p><b>10. By submitting this form you</b>:<ul><li>declare that:<ul><li>you have read the FEE-HELP information booklet and are aware of your obligations if you receive FEE-HELP assistance; </li><li>the information on this form is complete and correct and you can produce documents to verify this if required.</li></ul><li>request that:</li><ul><li>the Commonwealth lend you the amount of the tuition fees for units in your course of study outstanding at the census date and to use the amount to pay your institution on your behalf.</li></ul><li>understand that:</li><ul><li>a 25% loan fee will be applied to the amount of FEE-HELP assistance if it relates to an undergraduate course of study, and that this loan fee will be included in your FEE-HELP debt; </li><li>you will repay to the ATO the amount that the Commonwealth has loaned to you (plus the loan fee if applicable). These repayments will be made in accordance with Chapter 4 of the Act when your income reaches a certain level, including if you are residing overseas, even if you have not completed your studies;</li><li>your HELP debt will be indexed annually in line with the Act;</li><li>you will not be able to obtain FEE-HELP assistance if you do not meet the TFN requirements;</li><li>you will no longer be able to obtain FEE-HELP assistance (or VET FEE-HELP assistance) when the total amount of FEE-HELP assistance you have obtained reaches the FEE-HELP limit as set out in the Act;</li><li>you are able to cancel this request, in writing, at any time, with your institution, and that it will no longer apply from that time. However this must be done by the census date, otherwise you will have a debt to the Australian Government that you are legally required to repay;</li><li>if your eligibility for FEE-HELP assistance changes, you must notify your institution;</li><li>the Department of Education and Training (the department) collects your information in accordance with the Australian Privacy Principles for the purpose of administering Commonwealth assistance, including verifying eligibility for a HELP loan and overseas HELP debt recovery. It is also collected for the purpose of research, statistics and programme assurance. If you do not provide the information required on this form you may not be eligible for Commonwealth assistance;</li><li>the authority to collect and share this information with other government agencies including, but not limited to, the ATO and the Department of Immigration and Border Protection for the purpose of verifying your eligibility is contained in Part 5-4 Division 179-20 of the Act. Under the Government's overseas debt recovery measure, there will also be the potential for information to be shared with overseas agencies involved in HELP debt collection;</li><li>the information may not otherwise be disclosed without your consent unless authorised or required by law;</li><li>full details of how the department handles personal information for the purpose of the Higher Education Loan Programme can be found at www.studyassist.gov.au;</li><li>the department's Privacy Policy, including information on access and how to make a complaint can be found at www.education.gov.au/condensed-privacy-policy. Should you wish to correct the personal information you provided on this form please contact your institution directly; and</li><li><b>giving false or misleading information is a serious offence under the Criminal Code Act 1995.</b></li></ul></ul></p>"
+               },
+               {
+                  "label": "Submit",
+                  "name": "SubmitButtonFeeConf",
+                  "onClick": "$RequestDetailFee.$save();\n$RequestBlockFeeConf.$visible=false;\n$EcafReceiptStudentInfoDetail.$load();\n$EcafReceiptProgramInfoDetail.$load();\n$EcafReceiptBlock.$visible=true;",
+                  "style": "",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               },
+               {
+                  "label": "Make Changes",
+                  "name": "BackButtonFeeConf",
+                  "onClick": "$RequestBlockFeeConf.$visible=false;\n$RequestBlockFee.$visible=true;\nwindow.location.href = \"#start\";",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               }
+            ],
+            "label": "Confirm Request for FEE-HELP Assistance",
+            "name": "RequestBlockFeeConf",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "IntroTextDisplayOS",
+                  "type": "display",
+                  "value": "<p><b>NOTE:</b> Before completing this form you must read the OS-HELP and Commonwealth supported places information booklet, available at <a href=\"www.studyassist.gov.au\">www.studyassist.gov.au</a>.</p>\n<p>You must:\n<ul>\n<li>complete this form if you want to receive an OS-HELP loan;</li>\n<li>ensure that <b>you complete each question</b>. Your form <b>will not be valid</b> unless each question is completed correctly; and</li>\n<li>submit the completed form. Print a copy of the form for your records.</li>\n</ul>\n</p>\n<p></p>"
+               },
+               {
+                  "components": [
+                     {
+                        "allowDelete": false,
+                        "allowModify": true,
+                        "allowNew": false,
+                        "allowReload": false,
+                        "components": [
+                           {
+                              "name": "RequestDetail",
+                              "type": "literal",
+                              "value": "<b>1. Under the provisions in the Higher Education Support Act 2003, I, Shane Lowry request that the Commonwealth lend me the following OS-HELP assistance:</b>"
+                           },
+                           {
+                              "documentation": "doc",
+                              "label": "<li>An amount for overseas study not in Asia:",
+                              "loadInitially": true,
+                              "name": "AmountOneDollars",
+                              "parameters": {},
+                              "placeholder": "",
+                              "readonly": false,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "name": "AmountOneDollarsInfo",
+                              "style": "indentliteral",
+                              "type": "literal",
+                              "value": "<p>(Enter an amount in whole dollars only. Do not use cents.)</p>"
+                           },
+                           {
+                              "label": "<li>Amount in words:",
+                              "loadInitially": true,
+                              "name": "AmountOneWords",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "name": "SeparatorOne",
+                              "style": "indentliteral",
+                              "type": "literal",
+                              "value": "<b>OR</b>"
+                           },
+                           {
+                              "label": "<li>An amount for overseas study in Asia:",
+                              "loadInitially": true,
+                              "name": "AmountTwoDollars",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "name": "AmountTwoDollarsInfo",
+                              "style": "indentliteral",
+                              "type": "literal",
+                              "value": "<p>(Enter an amount in whole dollars only. Do not use cents.)</p>"
+                           },
+                           {
+                              "label": "<li>Amount in words:",
+                              "loadInitially": true,
+                              "name": "AmountTwoWords",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "label": "<li>and a supplementary amount for Asian language Study:",
+                              "loadInitially": true,
+                              "name": "AmountThreeDollars",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "name": "AmountThreeDollarsInfo",
+                              "style": "indentliteral",
+                              "type": "literal",
+                              "value": "<p>(Enter an amount in whole dollars only. Do not use cents.)</p>"
+                           },
+                           {
+                              "name": "SpearatorTwo",
+                              "style": "indentliteral",
+                              "type": "literal",
+                              "value": "<b>OR</b>"
+                           },
+                           {
+                              "label": "<li>I have already requested OS-HELP assistance for\toverseas study in Asia and am now requesting the following supplementary amount for Asian language study to support my overseas study:",
+                              "loadInitially": true,
+                              "name": "AmountFourDollars",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "label": "",
+                              "name": "AmountFourDollarsInfo",
+                              "style": "indentliteral",
+                              "type": "literal",
+                              "value": "<p>(Enter an amount in whole dollars only. Do not use cents.)</p>"
+                           },
+                           {
+                              "label": "<li>Amount in dollars",
+                              "loadInitially": true,
+                              "name": "AmountFourWords",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": false,
+                              "type": "text",
+                              "validation": {},
+                              "value": "<li>Amount in words:"
+                           },
+                           {
+                              "label": "<li>The Asian language I will study is:",
+                              "labelKey": "desc",
+                              "loadInitially": true,
+                              "name": "AsianLanguage",
+                              "required": false,
+                              "sourceModel": "EcafAsianLanguageResource",
+                              "sourceParameters": {},
+                              "type": "select",
+                              "valueKey": "code"
+                           },
+                           {
+                              "name": "SeparatorThree",
+                              "type": "literal",
+                              "value": "<br>"
+                           },
+                           {
+                              "asHtml": false,
+                              "label": "<br>2. Name of approved institution:",
+                              "loadInitially": true,
+                              "model": "INSTITUTE_NAME",
+                              "name": "InstitutionDisplay",
+                              "type": "display"
+                           },
+                           {
+                              "asHtml": false,
+                              "label": "<br>3. Student Identification Number:",
+                              "loadInitially": true,
+                              "model": "SPRIDEN_ID",
+                              "name": "StudentIdDisplay",
+                              "type": "display"
+                           },
+                           {
+                              "asHtml": false,
+                              "label": "<br>4. Name of Course of Study:",
+                              "loadInitially": true,
+                              "model": "SKRDRCO_CRS_STUDY_NAME",
+                              "name": "CourseOfStudyDisplay",
+                              "type": "display"
+                           },
+                           {
+                              "label": "<br>5. This OS-HELP loan is for a six month period that commences on:",
+                              "loadInitially": true,
+                              "name": "OSCommencementDate",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": false,
+                              "type": "datetime",
+                              "validation": {},
+                              "value": ""
+                           },
+                           {
+                              "name": "OSCommencementDateInfo",
+                              "type": "literal",
+                              "value": "(Enter a date in format DD/MM/YYYY or use the calendar.)    Note: The commencement date may affect eligibility for any subsequent OS-HELP loan."
+                           },
+                           {
+                              "label": "The Asian language study (where applicable) commences on:",
+                              "loadInitially": true,
+                              "name": "AsianLanguageCommencementDate",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": false,
+                              "type": "datetime",
+                              "validation": {}
+                           },
+                           {
+                              "label": "<br>6. Tax file number(TFN):",
+                              "loadInitially": true,
+                              "model": "TFN",
+                              "name": "TFNTextOS",
+                              "onLoad": "",
+                              "onUpdate": "$TFN = $(\"#pbid-TFNTextOS-0\").val();\n\n//remove spaces and update\ntfn = $TFN.replace(/\\s+/g, '');\n$('#pbid-TFNTextOS-0').val(tfn);\n\n//remove hyphens and update\ntfn = $TFN.replace(/[-]/g, '');\n$('#pbid-TFNTextOS-0').val(tfn);\n\n//validate only digits\nvar isNumber = /^[0-9]+$/.test(tfn);\n\n\nif(!isNumber) {\n    document.getElementById('pbid-TFNValidationOS-label-0').innerHTML = \"<span style='color: red;'>Invalid TFN! Only numbers are allowed.</span>\";\n    \n}\n\nelse {\n\t\tvar length =  $TFN.length;\n\t\tif(length != 9) {\n            document.getElementById('pbid-TFNValidationOS-label-0').innerHTML = \"<span style='color: orange;'>Invalid TFN! Must have 9 digits.</span>\";\n\t\t}\n\t\telse {\n            var digits =  $TFN.split('');\n\t\t\tvar sum = (digits[0]*1)\n\t\t\t+ (digits[1]*4)\n\t\t\t+ (digits[2]*3)\n\t\t\t+ (digits[3]*7)\n\t\t\t+ (digits[4]*5)\n\t\t\t+ (digits[5]*8)\n\t\t\t+ (digits[6]*6)\n\t\t\t+ (digits[7]*9)\n\t\t\t+ (digits[8]*10);\n\n\t\t\tvar remainder = sum % 11;\n\t\t\t\tif(remainder == 0) {\n                    document.getElementById('pbid-TFNValidationOS-label-0').innerHTML = \"<span style='color: green;'>Valid TFN.</span>\";\n\t\t\t\t} else {\n                    document.getElementById('pbid-TFNValidationOS-label-0').innerHTML = \"<span style='color: red;'>Not a valid TFN number!</span>\";\n\t\t\t\t}\n        }\n}",
+                              "parameters": {},
+                              "placeholder": "",
+                              "readonly": false,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "asHtml": false,
+                              "label": ".",
+                              "loadInitially": true,
+                              "name": "TFNValidationOS",
+                              "type": "display"
+                           },
+                           {
+                              "booleanFalseValue": "N",
+                              "booleanTrueValue": "Y",
+                              "label": "I have a Certificate of application for a TFN (you will need to supply this to your institution on or before the census date).",
+                              "loadInitially": true,
+                              "model": "TFN_REQUESTED",
+                              "name": "TFNRequestedBooleanOS",
+                              "onUpdate": "$('#pbid-TFNRequestedBooleanOS-0').change(function()\n{\n    if ($('#pbid-TFNRequestedBooleanOS-0').is(':checked') == true)\n\t{\n\t\t$('#pbid-TFNTextOS-0').val('').prop('disabled', true);\n\t\t$TFN = '';\n                    $('#pbid-TFNValidationOS-label-0').hide();\n\t} \n\telse \n\t{\n\t\t$('#pbid-TFNTextOS-0').val('').prop('disabled', false);\n                $('#pbid-TFNValidationOS-label-0').show();\n\t\tconsole.log('unchecked');\n   }\n\n}\n);",
+                              "readonly": false,
+                              "type": "boolean"
+                           }
+                        ],
+                        "loadInitially": false,
+                        "model": "EcafRequestResource",
+                        "name": "RequestDetailOS",
+                        "onError": "",
+                        "onLoad": "$(\"#pbid-RequestDetailOS-save-button\").hide();\n$TFN = '';",
+                        "onSave": "$RequestDetailOS.term=$Term;\n$RequestDetailOS.program=$Program;\n$RequestDetailOS.helptype='O';\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); \nwindow.params.saved=true;",
+                        "pageSize": 5,
+                        "parameters": {
+                           "program": "$Program",
+                           "term": "$Term"
+                        },
+                        "type": "detail"
+                     }
+                  ],
+                  "name": "RequestFormOS",
+                  "nextButtonLabel": "",
+                  "showInitially": true,
+                  "type": "form"
+               },
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "EndTextDisplayOS",
+                  "type": "display",
+                  "value": "<br><p>Your provider is authorised under the Higher Education Support Act 2003 (the Act) to collect your TFN. You will not be able to obtain an OS-HELP loan unless you give your provider either your TFN or the certificate from the Australian Taxation Office(ATO), stating that you have applied for a TFN.</p><p><b>NOTE:</b> as TFNs are usually provided within 28 days of application, it is essential that you apply early to ensure you have your TFN on or before the census date. For more information on requesting a TFN, visit the ATO website at <a href\"www.ato.gov.au\">www.ato.gov.au</a> or phone 13 28 61 between 8.00am and 6.00pm (EST), Monday to Friday.</p><p>Your provider is authorised to retain your TFN information only for the purpose of reporting details of your OS-HELP loan to the ATO. Privacy and taxation laws protect your TFN information. There may be severe penalties if these laws are broken.</p><p><b>7. By signing this form, you :</b>.</p><ul><li>declare that:<l/i><ul><li>you have read the OS-HELP statement of terms and conditions booklet and are aware of your obligations as the recipient of an OS-HELP loan;</li><li>you will undertake the overseas study approved by your provider;</li><li>if receiving a supplementary amount for Asian language study, you will undertake the language study approved by your provider;</li><li>on completion of your study outside Australia, you will have units to the value of at least 0.125 EFTSL remaining to complete your course; and</li><li>the information on this form is complete and correct and you can produce documents to verify this if required.</li></ul><li>understand that:</li><ul><li>you will repay to the ATO the amount that the Commonwealth has loaned to you. These repayments will be made in accordance with Chapter 4 of the Act, when your income reaches a certain level, even if you have not completed your studies;or due to unforeseen circumstances you did not undertake or complete the overseas study approved by your provider;</li><li>your HELP debt will be indexed annually in line with the Act;</li><li>your personal information will be collected and stored by the Australian government in order to administer your Commonwealth assistance and may be shared for this purpose with the ATO;</li><li>the authority to collect the information on this form is contained in the Act;</li><li>the information may not otherwise be disclosed without your consent unless authorised or required by law;</li><li><b>giving false or misleading information is a serious offence under the Criminal Code Act 1995.</b></li></ul></ul></p>"
+               },
+               {
+                  "label": "I agree",
+                  "loadInitially": true,
+                  "name": "AgreeBooleanOS",
+                  "onUpdate": "$(\"#pbid-SubmitButtonOS\").removeClass(\"disabled\");\n$('#pbid-AgreeBooleanOS').click(function () {\n//check if I AGREE checkbox is checked\nif ($(this).is(':checked')) {   \n$('#pbid-SubmitButtonOS').removeAttr('disabled'); //enable SUBMIT button\n } \nelse {\n$('#pbid-SubmitButtonOS').attr('disabled', true); //disable SUBMIT button \n}\n});",
+                  "readonly": false,
+                  "type": "boolean"
+               },
+               {
+                  "label": "Submit",
+                  "name": "SubmitButtonOS",
+                  "onClick": "var length = $TFN.length;\nvar digits = $TFN.split('');\nvar sum = (digits[0]*1)\n        + (digits[1]*4)\n        + (digits[2]*3)\n        + (digits[3]*7)\n        + (digits[4]*5)\n        + (digits[5]*8)\n        + (digits[6]*6)\n        + (digits[7]*9)\n        + (digits[8]*10);\n\nvar remainder = sum % 11;\nif($TFN==''&&$('#pbid-TFNRequestedBooleanOS-0').is(':checked') == false){\n$('#pbid-AgreeBooleanOS').prop(\"checked\", false);\nalert('Please enter a TFN or confirm you have a certificate of application for a TFN ', {type:\"error\",flash: false});\n}\n//validate length\nelse if(length != 9&&$('#pbid-TFNRequestedBooleanOS-0').is(':checked') == false) {\n    alert(\"Invalid TFN number, must have 9 digits\", {type:\"error\"});\n}\n//validate check digit\nelse if(remainder !== 0&&$('#pbid-TFNRequestedBooleanOS-0').is(':checked') == false) {\nalert(\"Invalid TFN number, check the digits\", {type:\"error\"});\n} \nelse{\n$RequestBlockOS.$visible=false;\n$RequestBlockOSConf.$visible=true;\nwindow.location.href = \"#start\";\n}",
+                  "style": "",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary disabled"
+               }
+            ],
+            "label": "OS-HELP debt confirmation",
+            "name": "RequestBlockOS",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "IntroTextDisplayOSConf",
+                  "type": "display",
+                  "value": "<p>This is the Request for Commonwealth Assistance data that you have just saved.</p>\n<p>If the data is not correct, it can be edited using the 'Make Changes' button.</p>\n<p>If the data is correct, please select the 'Confirm' button. Requests for Commonwealth Assistance that have been confirmed cannot be changed. If you decide to make changes after confirmation, you will need to submit a new Request for Commonwealth Assistance form. </p>"
+               },
+               {
+                  "label": "Submit",
+                  "name": "SubmitButtonOSConf",
+                  "onClick": "$RequestDetailOS.$save();\n$RequestBlockOSConf.$visible=false;\n$EcafReceiptStudentInfoDetail.$load();\n$EcafReceiptProgramInfoDetail.$load();\n$EcafReceiptBlock.$visible=true;",
+                  "style": "",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               },
+               {
+                  "label": "Make Changes",
+                  "name": "BackButtonOSConf",
+                  "onClick": "$RequestBlockOSConf.$visible=false;\n$RequestBlockOS.$visible=true;\nwindow.location.href = \"#start\";",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               }
+            ],
+            "label": "Confirm Request for OS-HELP",
+            "name": "RequestBlockOSConf",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "IntroTextDisplaySA",
+                  "type": "display",
+                  "value": "<P></BR>You must:</BR><ul>\n<li style=disc>complete this form if you are requesting SA-HELP assistance to pay your student services and amenities fee;</li>\n<li style=disc><B>complete each question </B>correctly, otherwise your form <B>will not be valid</B>; and </li>\n<li style=disc>submit the completed form by the date advised by your institution.</li></ul>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You will be able to print a copy of the information you have provided on this form, for your records.\n</P>\n<P><B>IMPORTANT:</B>\n<ul>\n<li style=disc>if you submit this form by the required date you will be entitled to SA-HELP assistance for all student services and amenities fees that are payable to your institution for the duration of your course of study (or bridging course for </br>overseas-trained professionals);</li>\n<li style=disc>you can still pay some or all of the fee by the date payable;</li>\n<li style=disc>you will only receive a loan for any unpaid amount;</li>\n<li style=disc>you will need to submit a new form if you change your course or institution, or are enrolled in a course of study with more than one institution; and</li>\n<li style=disc>the government-issued duplicate form is the only valid paper version of this form.\n</BR>For example, PDF printouts are not valid and you will not be eligible for Commonwealth assistance if you submit a PDF printout of this form.</li>\n</ul></P>"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "label": "1. Family Name:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_LAST_NAME",
+                        "name": "FamilyNameDisplaySA",
+                        "style": "",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Given Names:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_FIRST_NAME",
+                        "name": "GivenNamesDisplaySA",
+                        "style": "indent",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "2. Date of Birth:",
+                        "loadInitially": true,
+                        "model": "BIRTH_DATE",
+                        "name": "DateOfBirthDisplaySA",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "3. Gender:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPBPERS_SEX",
+                        "name": "GenderDisplaySA",
+                        "style": "",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "4. Name of approved institution:",
+                        "loadInitially": true,
+                        "model": "INSTITUTE_NAME",
+                        "name": "InstitutionDisplaySA",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Campus:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "STVCAMP_DESC",
+                        "name": "CampusDisplaySA",
+                        "style": "indent",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "5. Student Identification Number:",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_ID",
+                        "name": "StudentIdDisplaySA",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "6. Name of Course of Study:",
+                        "loadInitially": true,
+                        "model": "SKRDRCO_CRS_STUDY_NAME",
+                        "name": "CourseOfStudyDisplaySA",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "7. Citizenship Status:",
+                        "loadInitially": true,
+                        "model": "STVCITZ_DESC",
+                        "name": "CitizenshipDisplaySA",
+                        "type": "display"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafRequestResource",
+                  "name": "StudentInfoDetailSA",
+                  "onLoad": "",
+                  "pageSize": 5,
+                  "parameters": {
+                     "program": "$Program",
+                     "term": "$Term"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "components": [
+                     {
+                        "allowDelete": false,
+                        "allowModify": true,
+                        "allowNew": false,
+                        "allowReload": false,
+                        "components": [
+                           {
+                              "label": "8A. Tax file number(TFN)",
+                              "loadInitially": true,
+                              "model": "TFN",
+                              "name": "TFNTextSA",
+                              "onUpdate": "$TFN = $(\"#pbid-TFNTextSA-0\").val();\n\n//remove spaces and update\ntfn = $TFN.replace(/\\s+/g, '');\n$('#pbid-TFNTextSA-0').val(tfn);\n\n//remove hyphens and update\ntfn = $TFN.replace(/[-]/g, '');\n$('#pbid-TFNTextSA-0').val(tfn);\n\n//validate only digits\nvar isNumber = /^[0-9]+$/.test(tfn);\n\n\nif(!isNumber) {\n    document.getElementById('pbid-TFNValidationSA-label-0').innerHTML = \"<span style='color: red;'>Invalid TFN! Only numbers are allowed.</span>\";\n    \n}\n\nelse {\n\t\tvar length =  $TFN.length;\n\t\tif(length != 9) {\n            document.getElementById('pbid-TFNValidationSA-label-0').innerHTML = \"<span style='color: orange;'>Invalid TFN! Must have 9 digits.</span>\";\n\t\t}\n\t\telse {\n            var digits =  $TFN.split('');\n\t\t\tvar sum = (digits[0]*1)\n\t\t\t+ (digits[1]*4)\n\t\t\t+ (digits[2]*3)\n\t\t\t+ (digits[3]*7)\n\t\t\t+ (digits[4]*5)\n\t\t\t+ (digits[5]*8)\n\t\t\t+ (digits[6]*6)\n\t\t\t+ (digits[7]*9)\n\t\t\t+ (digits[8]*10);\n\n\t\t\tvar remainder = sum % 11;\n\t\t\t\tif(remainder == 0) {\n                    document.getElementById('pbid-TFNValidationSA-label-0').innerHTML = \"<span style='color: green;'>Valid TFN.</span>\";\n\t\t\t\t} else {\n                    document.getElementById('pbid-TFNValidationSA-label-0').innerHTML = \"<span style='color: red;'>Not a valid TFN number!</span>\";\n\t\t\t\t}\n        }\n}",
+                              "parameters": {},
+                              "readonly": false,
+                              "required": false,
+                              "type": "text",
+                              "validation": {}
+                           },
+                           {
+                              "asHtml": false,
+                              "label": ".",
+                              "loadInitially": true,
+                              "name": "TFNValidationSA",
+                              "type": "display"
+                           },
+                           {
+                              "booleanFalseValue": "N",
+                              "booleanTrueValue": "Y",
+                              "label": "I have a Certificate of application for a TFN (you will need to supply this to your institution on or before the census date).",
+                              "loadInitially": true,
+                              "model": "TFN_REQUESTED",
+                              "name": "TFNRequestedBooleanSA",
+                              "onUpdate": "$('#pbid-TFNRequestedBooleanSA-0').change(function()\n{\n    if ($('#pbid-TFNRequestedBooleanSA-0').is(':checked') == true)\n\t{\n\t\t$('#pbid-TFNTextSA-0').val('').prop('disabled', true);\n\t\t$TFN = '';\n                  $('#pbid-TFNValidationSA-label-0').hide();\n\t} \n\telse \n\t{\n\t\t$('#pbid-TFNTextSA-0').val('').prop('disabled', false);\n                 $('#pbid-TFNValidationSA-label-0').show();\n\t\tconsole.log('unchecked');\n   }\n\n}\n);",
+                              "readonly": false,
+                              "type": "boolean"
+                           }
+                        ],
+                        "loadInitially": true,
+                        "model": "EcafRequestResource",
+                        "name": "RequestDetailSA",
+                        "onLoad": "$(\"#pbid-RequestDetailSA-save-button\").hide();\n$TFN = '';",
+                        "onSave": "$RequestDetailSA.term=$Term;\n$RequestDetailSA.program=$Program;\n$RequestDetailSA.helptype='S';\n\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); \nwindow.params.saved=true;",
+                        "pageSize": 5,
+                        "parameters": {
+                           "program": "$Program",
+                           "term": "$Term"
+                        },
+                        "type": "detail"
+                     }
+                  ],
+                  "name": "RequestFormSA",
+                  "nextButtonLabel": "",
+                  "showInitially": true,
+                  "type": "form"
+               },
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "EndTextDisplaySA",
+                  "type": "display",
+                  "value": "<tr>\n<td CLASS=\"dedefault\"><SPAN class=infotext>\n<P>Your institution is authorised under the <I>Higher Education Support Act 2003</I> (the Act) to collect your TFN. You will not be able to obtain SA-HELP assistance for the amount of your student services and amenities fee (the fee) that remains unpaid on the day the fee is payable unless you give your institution, on or before that day, either your TFN or the certificate from the Australian Taxation Office (ATO), stating that you have applied for a TFN.</P>\n<P>It is not an offence to decline to quote your TFN. Your institution is authorised to retain your TFN only for the purpose of reporting details of your SA-HELP loan to the ATO. Privacy and taxation laws\nprotect your TFN information. There may be severe penalties if these laws are broken.</P>\n<P><B>Note:</B> as TFNs are usually provided within 28 days of application, it is essential that you apply early to ensure you have your TFN on or before the date on which the fee is payable.</P> \n<P>For more information on requesting a TFN visit the ATO website at<B> www.ato.gov.au</B> or phone <B>13 28 61 </B>between 8.00am and 6.00pm (EST), Monday to Friday.</P>\n<BR></BR></SPAN>\n<b></b></td>\n</tr>\n<tr>\n<td CLASS=\"dedefault\"><SPAN class=infotext>\n<B>9.  By submitting this form, you:</B>\n<ul>\n<P><li type=disc><B>declare that:</B></li>\n<ul>\n<li>you have read the <I>SA-HELP information</I> booklet and are aware of your obligations if you receive SA-HELP;</li>\n<li>the information on this form is complete and correct and you can produce documents to verify this if required.</li>\n</ul>\n<P><li type=disc><B>request that:</B></li>\n<ul>\n<li>the Commonwealth lend to you the amount of the fee outstanding on the date on which the fee is payable and to use the amount to pay your institution on your behalf.</li>\n</ul></P>\n<P><li type=disc><B>understand that:</B></li>\n<ul>\n<li>you will repay to the ATO the amount that the Commonwealth has loaned to you when your income reaches a certain level, including if you are residing overseas, even if you have not\ncompleted your studies;</li>\n<li>your HELP debt will be indexed annually in line with the Act;</li>\n<li>you will not be able to obtain a SA-HELP loan if you do not meet the TFN requirements;</li>\n<li>you are able to cancel this request, in writing, at any time, with your institution, and that it will no longer apply from that time. However, this must be done before the day on which the fee is payable to your institution, otherwise you will have a debt to the Australian Government that you are legally required to repay;</li>\n<li>if your eligibility for SA-HELP changes you must notify your institution;</li>\n<li>the Department of Education and Training (the department) collects your information in accordance with the Australian Privacy Principles for the purpose of administering Commonwealth assistance, including verifying eligibility for a HELP loan and overseas HELP debt recovery. It is also collected for the purpose of research, statistics and programme assurance. If you do not provide the information required on this form you may not be eligible for Commonwealth assistance;</li>\n<li>the authority to collect and share this information with other government agencies including, but not limited to, the ATO and the Department of Immigration and Border Protection for the purpose of verifying your eligibility is contained in\nPart 5-4 Division 179-20 of the Act. Under the Government's overseas debt recovery measure, there will also be the potential for information to be shared with overseas agencies involved in HELP debt collection;</li>\n<li>the information may not otherwise be disclosed without your consent unless authorised or required by law;</li>\n<li>full details of how the department handles personal information for the purpose of the Higher Education Loan Programme can be found at <B>www.studyassist.gov.au</B>;</li>\n<li>the department's Privacy Policy, including information on access and how to make a complaint can be found at <B>www.education.gov.au/condensed-privacy-policy</B>. Should you wish to correct the personal information you provided\non this form please contact your institution directly; and</li>\n<li><B>giving false or misleading information is a serious offence under the <I>Criminal Code Act 1995</I>.</B></li>\n</ul></P></BR></ul></SPAN><b></b></td>\n</tr>"
+               },
+               {
+                  "label": "I  Agree",
+                  "loadInitially": true,
+                  "name": "AgreeBooleanSA",
+                  "onLoad": "",
+                  "onUpdate": "$(\"#pbid-SubmitButtonSA\").removeClass(\"disabled\");\n$('#pbid-AgreeBooleanSA').click(function () {\n//check if I AGREE checkbox is checked\nif ($(this).is(':checked')) {   \n$('#pbid-SubmitButtonSA').removeAttr('disabled'); //enable SUBMIT button\n } \nelse {\n$('#pbid-SubmitButtonSA').attr('disabled', true); //disable SUBMIT button \n}\n});",
+                  "readonly": false,
+                  "type": "boolean"
+               },
+               {
+                  "label": "Submit",
+                  "name": "SubmitButtonSA",
+                  "onClick": "var length = $TFN.length;\nvar digits = $TFN.split('');\nvar sum = (digits[0]*1)\n        + (digits[1]*4)\n        + (digits[2]*3)\n        + (digits[3]*7)\n        + (digits[4]*5)\n        + (digits[5]*8)\n        + (digits[6]*6)\n        + (digits[7]*9)\n        + (digits[8]*10);\n\nvar remainder = sum % 11;\nif($TFN==''&&$('#pbid-TFNRequestedBooleanSA-0').is(':checked') == false){\n$('#pbid-AgreeBooleanSA').prop(\"checked\", false);\nalert('Please enter a TFN or confirm you have a certificate of application for a TFN ', {type:\"error\",flash: false});\n}\n//validate length\nelse if(length != 9&&$('#pbid-TFNRequestedBooleanSA-0').is(':checked') == false) {\n    alert(\"Invalid TFN number, must have 9 digits\", {type:\"error\"});\n}\n//validate check digit\nelse if(remainder !== 0&&$('#pbid-TFNRequestedBooleanSA-0').is(':checked') == false) {\nalert(\"Invalid TFN number, check the digits\", {type:\"error\"});\n} \nelse{\n$RequestBlockSA.$visible=false;\n$StudentInfoDetailSAConf.$load();\n$RequestBlockSAConf.$visible=true;\nwindow.location.href = \"#start\";\n}",
+                  "style": "",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary disabled"
+               }
+            ],
+            "label": "Request for SA-HELP Assistance",
+            "name": "RequestBlockSA",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "IntroTextDisplaySAConf",
+                  "type": "display",
+                  "value": "<p>This is the Request for Commonwealth Assistance data that you have just saved.</p>\n<p>If the data is not correct, it can be edited using the 'Make Changes' button.</p>\n<p>If the data is correct, please select the 'Confirm' button. Requests for Commonwealth Assistance that have been confirmed cannot be changed. If you decide to make changes after confirmation, you will need to submit a new Request for Commonwealth Assistance form. </p>"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "label": "1. Family Name:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_LAST_NAME",
+                        "name": "FamilyNameDisplaySAConf",
+                        "style": "",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Given Names:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_FIRST_NAME",
+                        "name": "GivenNamesDisplaySAConf",
+                        "style": "indent",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "2. Date of Birth:",
+                        "loadInitially": true,
+                        "model": "BIRTH_DATE",
+                        "name": "DateOfBirthDisplaySAConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "3. Gender:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPBPERS_SEX",
+                        "name": "GenderDisplaySAConf",
+                        "style": "",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "4. Name of approved institution:",
+                        "loadInitially": true,
+                        "model": "INSTITUTE_NAME",
+                        "name": "InstitutionDisplaySAConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Campus:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "STVCAMP_DESC",
+                        "name": "CampusDisplaySAConf",
+                        "style": "indent",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "5. Student Identification Number:",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_ID",
+                        "name": "StudentIdDisplaySAConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "6. Name of Course of Study:",
+                        "loadInitially": true,
+                        "model": "SKRDRCO_CRS_STUDY_NAME",
+                        "name": "CourseOfStudyDisplaySAConf",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "7. Citizenship Status:",
+                        "loadInitially": true,
+                        "model": "STVCITZ_DESC",
+                        "name": "CitizenshipDisplaySAConf",
+                        "type": "display"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafRequestResource",
+                  "name": "StudentInfoDetailSAConf",
+                  "onLoad": "",
+                  "pageSize": 5,
+                  "parameters": {
+                     "program": "$Program",
+                     "term": "$Term"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "asHtml": false,
+                  "label": "8. TFN",
+                  "loadInitially": true,
+                  "name": "TFNDisplaySAConf",
+                  "type": "display",
+                  "value": "$TFN"
+               },
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "EndTextDisplaySAConf",
+                  "type": "display",
+                  "value": "<p>You have agreed to the following declarations:</p>\n<B>9.  Declarations:</B>\n<ul>\n<P><li type=disc><B>declare that:</B></li>\n<ul>\n<li>you have read the <I>SA-HELP information</I> booklet and are aware of your obligations if you receive SA-HELP;</li>\n<li>the information on this form is complete and correct and you can produce documents to verify this if required.</li>\n</ul>\n<P><li type=disc><B>request that:</B></li>\n<ul>\n<li>the Commonwealth lend to you the amount of the fee outstanding on the date on which the fee is payable and to use the amount to pay your institution on your behalf.</li>\n</ul></P>\n<P><li type=disc><B>understand that:</B></li>\n<ul>\n<li>you will repay to the ATO the amount that the Commonwealth has loaned to you when your income reaches a certain level, including if you are residing overseas, even if you have not\ncompleted your studies;</li>\n<li>your HELP debt will be indexed annually in line with the Act;</li>\n<li>you will not be able to obtain a SA-HELP loan if you do not meet the TFN requirements;</li>\n<li>you are able to cancel this request, in writing, at any time, with your institution, and that it will no longer apply from that time. However, this must be done before the day on which the fee is payable to your institution, otherwise you will have a debt to the Australian Government that you are legally required to repay;</li>\n<li>if your eligibility for SA-HELP changes you must notify your institution;</li>\n<li>the Department of Education and Training (the department) collects your information in accordance with the Australian Privacy Principles for the purpose of administering Commonwealth assistance, including verifying eligibility for a HELP loan and overseas HELP debt recovery. It is also collected for the purpose of research, statistics and programme assurance. If you do not provide the information required on this form you may not be eligible for Commonwealth assistance;</li>\n<li>the authority to collect and share this information with other government agencies including, but not limited to, the ATO and the Department of Immigration and Border Protection for the purpose of verifying your eligibility is contained in\nPart 5-4 Division 179-20 of the Act. Under the Government's overseas debt recovery measure, there will also be the potential for information to be shared with overseas agencies involved in HELP debt collection;</li>\n<li>the information may not otherwise be disclosed without your consent unless authorised or required by law;</li>\n<li>full details of how the department handles personal information for the purpose of the Higher Education Loan Programme can be found at <B>www.studyassist.gov.au</B>;</li>\n<li>the department's Privacy Policy, including information on access and how to make a complaint can be found at <B>www.education.gov.au/condensed-privacy-policy</B>. Should you wish to correct the personal information you provided\non this form please contact your institution directly; and</li>\n<li><B>giving false or misleading information is a serious offence under the <I>Criminal Code Act 1995</I>.</B></li>\n</ul></P></BR></ul></SPAN><b></b></td>\n</tr>"
+               },
+               {
+                  "label": "Submit",
+                  "name": "SubmitButtonSAConf",
+                  "onClick": "$RequestDetailSA.$save();\n$RequestBlockSAConf.$visible=false;\n$EcafReceiptStudentInfoDetail.$load();\n$EcafReceiptProgramInfoDetail.$load();\n$EcafReceiptBlock.$visible=true;",
+                  "style": "",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               },
+               {
+                  "label": "Make Changes",
+                  "name": "BackButtonSAConf",
+                  "onClick": "$RequestBlockSAConf.$visible=false;\n$RequestBlockSA.$visible=true;\nwindow.location.href = \"#start\";",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               }
+            ],
+            "label": "Confirm Request for SA-HELP Assistance",
+            "name": "RequestBlockSAConf",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "EcafReceiptStartTextDisplay",
+                  "type": "display",
+                  "value": "<p>Congratulations. You have confirmed the following request for Commonwealth Assistance.\nPlease print a copy for your records.</p>"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "label": "Commonwealth Assistance",
+                        "loadInitially": true,
+                        "model": "ASSISTANCE",
+                        "name": "AssistanceReceipt",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Family Name:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_LAST_NAME",
+                        "name": "FamilyNameDisplayReceipt",
+                        "style": "",
+                        "type": "display",
+                        "valueStyle": ""
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Given Names:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_FIRST_NAME",
+                        "name": "GivenNamesDisplayReceipt",
+                        "style": "",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Date of Birth:",
+                        "loadInitially": true,
+                        "model": "BIRTH_DATE",
+                        "name": "DateOfBirthDisplayReceipt",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Gender:",
+                        "labelStyle": "",
+                        "loadInitially": true,
+                        "model": "SPBPERS_SEX",
+                        "name": "GenderDisplayReceipt",
+                        "style": "",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Student ID:",
+                        "loadInitially": true,
+                        "model": "SPRIDEN_ID",
+                        "name": "StudentIdDisplayReceipt",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Citizenship Status:",
+                        "loadInitially": true,
+                        "model": "STVCITZ_DESC",
+                        "name": "CitizenshipDisplayReceipt",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Course of Study:",
+                        "loadInitially": true,
+                        "model": "SKRDRCO_CRS_STUDY_NAME",
+                        "name": "CourseOfStudyDisplayReceipt",
+                        "type": "display"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafRequestResource",
+                  "name": "EcafReceiptStudentInfoDetail",
+                  "onLoad": "$(\"#pbid-RequestDetailHECS-save-button\").hide();",
+                  "pageSize": 1,
+                  "parameters": {
+                     "helptype": "$ECAFSelectedAssistanceType",
+                     "program": "$Program",
+                     "term": "$Term"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "label": "Program:",
+                        "loadInitially": false,
+                        "model": "SMRPRLE_PROGRAM_DESC",
+                        "name": "ProgramDataReceipt",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Major:",
+                        "loadInitially": false,
+                        "model": "STVMAJR_DESC",
+                        "name": "MajorDataReceipt",
+                        "type": "display"
+                     }
+                  ],
+                  "label": "",
+                  "loadInitially": false,
+                  "model": "EcafSovlcurResource",
+                  "name": "EcafReceiptProgramInfoDetail",
+                  "onLoad": "",
+                  "pageSize": 1,
+                  "parameters": {
+                     "program": "$Program"
+                  },
+                  "type": "detail"
+               },
+               {
+                  "asHtml": false,
+                  "label": "TFN",
+                  "loadInitially": true,
+                  "name": "TFNDisplayReceipt",
+                  "type": "display",
+                  "value": "$TFN"
+               },
+               {
+                  "asHtml": false,
+                  "label": "Date Submitted",
+                  "loadInitially": true,
+                  "name": "DataSubmittedReceipt",
+                  "type": "display",
+                  "value": "$Today"
+               },
+               {
+                  "label": "View Commonwealth Assistance Summary",
+                  "name": "EcafReceiptButton",
+                  "onClick": "$EcafReceiptBlock.$visible=false;\n$EcafSummaryBlock.$visible=true;\n$EcafSummaryDetail.$load();",
+                  "type": "button",
+                  "valueStyle": "btn btn-primary"
+               }
+            ],
+            "label": "Receipt of Request for Commonwealth Assistance",
+            "name": "EcafReceiptBlock",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "loadInitially": true,
+                  "name": "EcafSummaryTextDisplay",
+                  "type": "display",
+                  "value": "<p>This is a summary of your current Commonwealth Assistance details.\nYour Commonwealth Higher Education Student Support Number (CHESSN): </p>"
+               },
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "loadInitially": true,
+                        "model": "STUDY_PATH",
+                        "name": "EcafSummaryProgrammeDisplay",
+                        "style": "progtitle",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Study Path:",
+                        "loadInitially": true,
+                        "model": "STUDY_PATH",
+                        "name": "EcafSummaryStudyPathDisplay",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Program:",
+                        "loadInitially": true,
+                        "model": "SMRPRLE_PROGRAM",
+                        "name": "EcafSummaryProgCodeDisplay",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Major:",
+                        "loadInitially": true,
+                        "model": "STVMAJR_DESC",
+                        "name": "EcafSummaryMajorDisplay",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Campus:",
+                        "loadInitially": true,
+                        "model": "STVCAMP_DESC",
+                        "name": "EcafSummaryCampusDisplay",
+                        "type": "display"
+                     },
+                     {
+                        "asHtml": false,
+                        "label": "Commonwealth Assistance:",
+                        "loadInitially": true,
+                        "model": "ASSISTANCE",
+                        "name": "EcafSummaryAssitanceDisaply",
+                        "type": "display"
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "EcafSummaryResource",
+                  "name": "EcafSummaryDetail",
+                  "pageSize": 5,
+                  "parameters": {},
+                  "type": "detail"
+               }
+            ],
+            "label": "Current Commonwealth Assistance Summary",
+            "name": "EcafSummaryBlock",
+            "showInitially": false,
+            "type": "block"
+         }
+      ],
+      "importCSS": "ecaf",
+      "label": "",
+      "name": "EcafGenerateNewRequestPage",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

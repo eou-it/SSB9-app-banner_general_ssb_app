@@ -1,8 +1,8 @@
 /*
  * component-library
- * 
+ *
 
- * Version: 11.0.0 - 2019-06-28
+ * Version: 12.1.0 - 2020-03-03
  * License: Copyright 2018 Ellucian Company L.P. and its affiliates.
  */
 angular.module("xe-ui-components", ['badge','button','checkbox','dropdown','label','radiobutton','simpleTextbox','statusLabel','switch','textarea','textbox','ui.select','xeUISelect','external-resouces','utils','columnFilter','pagination','search','xebarmodule','dataTableModule','aboutModal','pieChartModule','popupModal','tabnav','timePicker','xe-ui-components-tpls']);
@@ -15,12 +15,12 @@ angular.module("templates/badge.html", []).run(["$templateCache", function ($tem
 
 angular.module("templates/button.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/button.html",
-    "<button class=\"{{xeType +' '+ xeBtnClass}}\" ng-disabled=\"xeDisabled\" aria-label=\"{{xeAriaLabel}}\" ng-click=\"xeBtnClick()\" ng-bind=\"xeLabel\"></button>");
+    "<button xe-data id=\"{{::xeId}}\" class=\"{{xeType +' '+ xeBtnClass}}\" ng-disabled=\"xeDisabled\" aria-label=\"{{xeAriaLabel}}\" ng-click=\"xeBtnClick()\" ng-bind=\"xeLabel\"></button>");
 }]);
 
 angular.module("templates/checkbox.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/checkbox.html",
-    "<div xe-section=\"{{::xeId}}\"><label class=\"xe-container\"><span data-ng-if=\"!xeLabelHidden\">{{::xeLabel}}</span> <input id=\"{{::'ckbox-' + xeId}}\" type=\"checkbox\" aria-checked=\"{{xeModel}}\" ng-click=\"cbClicked($event)\" ng-checked=\"xeModel\" aria-live=\"assertive\" aria-disabled=\"{{xeDisabled? true:false}}\" ng-disabled=\"xeDisabled == true\" name=\"{{xeName}}\" tabindex=\"{{!xeDisabled ? 0 : -1}}\"> <span class=\"xe-checkmark\" tabindex=\"-1\"></span></label></div>");
+    "<div class=\"xe-container\" aria-checked=\"{{xeModel}}\" tabindex=\"{{!xeDisabled ? 0 : -1}}\" role=\"checkbox\" aria-live=\"assertive\" aria-label=\"{{xeAriaLabel}}\"><input id=\"{{::xeId}}\" xe-data type=\"checkbox\" aria-checked=\"{{xeModel}}\" aria-label=\"{{xeAriaLabel}}\" ng-click=\"cbClicked($event)\" ng-model=\"xeModel\" value=\"{{xeValue}}\" ng-checked=\"xeModel\" aria-live=\"assertive\" aria-disabled=\"{{xeDisabled? true:false}}\" ng-disabled=\"xeDisabled == true\" name=\"{{xeName}}\" tabindex=\"-1\"> <span class=\"xe-checkmark\" tabindex=\"-1\"></span><label class=\"checkbox-label\" xe-for=\"{{::xeId}}\">{{xeLabel}}</label></div>");
 }]);
 
 angular.module("templates/dropdown.html", []).run(["$templateCache", function ($templateCache) {
@@ -55,30 +55,30 @@ angular.module("templates/switch.html", []).run(["$templateCache", function ($te
 
 angular.module("templates/text-area-counter.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/text-area-counter.html",
-    "<div class=\"textarea-container\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><textarea ng-model=\"ngModel\" class=\"comments-field\" ng-class=\"{readonly:xeReadonly}\" id=\"{{xeId}}\" placeholder=\"{{xePlaceholder}}\" ng-required=\"xeRequired\" aria-multiline=\"true\" ng-readonly=\"xeReadonly\" maxlength=\"{{xeCharCounter}}\" ng-trim=\"false\">\n" +
+    "<div class=\"textarea-container\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><textarea xe-data ng-model=\"ngModel\" class=\"comments-field\" ng-class=\"{readonly:xeReadonly}\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-required=\"xeRequired\" aria-multiline=\"true\" ng-readonly=\"xeReadonly\" maxlength=\"{{xeCharCounter}}\" ng-trim=\"false\">\n" +
     "\n" +
     "    </textarea><div id=\"xe-id-characters-count\"><span>{{::'xe.text.chars.left' | xei18n}} : {{ charRemaining }}</span></div></div>");
 }]);
 
 angular.module("templates/text-area.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/text-area.html",
-    "<div class=\"textarea-container\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><textarea ng-model=\"ngModel\" class=\"comments-field\" ng-class=\"{readonly:xeReadonly}\" id=\"{{xeId}}\" placeholder=\"{{xePlaceholder}}\" ng-required=\"xeRequired\" aria-multiline=\"true\" ng-readonly=\"xeReadonly\">\n" +
+    "<div class=\"textarea-container\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><textarea xe-data ng-model=\"ngModel\" class=\"comments-field\" ng-class=\"{readonly:xeReadonly}\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-required=\"xeRequired\" aria-multiline=\"true\" ng-readonly=\"xeReadonly\">\n" +
     "    </textarea></div>");
 }]);
 
 angular.module("templates/text-box-char-limit.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/text-box-char-limit.html",
-    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><span id=\"xe-id-max-characters\">{{ xeMaxlength }} {{::'xe.text.max.chars' | xei18n}}</span><div class=\"xe-labeltext-margin\"></div><input ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-labelledby=\"{{xeId}}\" aria-describedby=\"xe-id-max-characters\" aria-required=\"{{xeRequired? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
+    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><span id=\"xe-id-max-characters\">{{ xeMaxlength }} {{::'xe.text.max.chars' | xei18n}}</span><div class=\"xe-labeltext-margin\"></div><input xe-data ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-labelledby=\"{{xeId}}\" aria-describedby=\"xe-id-max-characters\" aria-required=\"{{xeRequired? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
 }]);
 
 angular.module("templates/text-box-password.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/text-box-password.html",
-    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><input ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" type=\"password\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-describedby=\"{{xeId}}\" aria-required=\"{{xeRequired? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
+    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><input xe-data ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" type=\"password\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-describedby=\"{{xeId}}\" aria-required=\"{{xeRequired? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
 }]);
 
 angular.module("templates/text-box.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/text-box.html",
-    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><input ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-describedby=\"{{xeId}}\" aria-required=\"{{xeRequired ? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
+    "<div class=\"textbox-container\" aria-live=\"assertive\"><xe-label xe-value=\"{{xeLabel}}\" xe-for=\"{{xeId}}\" xe-required=\"xeRequired\"></xe-label><div class=\"xe-labeltext-margin\"></div><input xe-data ng-class=\"{readonly:xeReadonly}\" ng-model=\"ngModel\" ng-form=\"ngForm\" class=\"{{xeType}}-field\" id=\"{{xeId}}\" name=\"{{xeName}}\" placeholder=\"{{xePlaceholder}}\" ng-pattern=\"xePattern\" ng-required=\"xeRequired\" ng-maxlength=\"xeMaxlength\" ng-minlength=\"xeMinlength\" ng-readonly=\"xeReadonly\" aria-describedby=\"{{xeId}}\" aria-required=\"{{xeRequired ? true : false}}\"><br><div class=\"error-messages\" id=\"{{xeId+'label'}}\" ng-messages=\"\" ng-show=\"{{!xeNotification}}\"><div ng-message=\"required\">{{::'textbox.validation.required' | xei18n}}</div><div ng-message=\"maxlength\">{{::'textbox.validation.maxlength' | xei18n}} {{xeMaxlength}}</div></div></div>");
 }]);
 
 angular.module("templates/column-filter.html", []).run(["$templateCache", function ($templateCache) {
@@ -98,7 +98,7 @@ angular.module("templates/search.html", []).run(["$templateCache", function ($te
 
 angular.module("templates/dataTable.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/dataTable.html",
-    "<div id=\"{{tableId}}\" class=\"table-container\" ng-class=\"{'fixed-height': !!height, 'noToolbar': noCaptionAndToolbar, 'no-data': !resultsFound, 'empty': emptyTableMsg}\" browser-detect role=\"grid\" aria-labelledby=\"gridCaption\" ng-cloak><div class=\"trMobile\" ng-if=\"totalRow && isMobileView  \"><div ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\"><span class=\"total-row\" total-label=\"{{heading.totalDisplayName}}\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></div><div class=\"caption\" ng-if=\"::!noCaptionBar\" xe-section=\"{{xeSection + 'CaptionBar'}}\"><table class=\"data-table datatable_spacing\" role=\"heading\" aria-level=\"1\"><caption ng-class=\"{'search-opened': hideContainer}\"><span id=\"gridCaption\" class=\"caption-container font-semibold\" ng-if=\"::!nocaption\" ng-bind=\"::caption\" xe-field=\"caption\"></span><div class=\"toolbar\" ng-if=\"toolbar\"><xe-toolbar></xe-toolbar><xe-column-filter header=\"header\"></xe-column-filter><span role=\"search\" title=\"{{'search.title' | xei18n}}\" ng-if=\"::!nosearch\"><xe-search value=\"searchConfig.searchString\" place-holder=\"{{'search.label' | xei18n}}\" on-change=\"fetchSpecial(query)\" on-focus=\"onSearchFocus({event: event})\" on-blur=\"onSearchBlur({event: event})\" search-config=\"searchConfig\" xe-focus loading-data=\"loadingData\"></xe-search></span></div></caption></table></div><div class=\"hr-scrollable-content\"><div class=\"thead\"><table class=\"data-table\" ng-style=\"headerPadding\" role=\"presentaion\"><thead role=\"rowgroup\"><tr role=\"row\"><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" ng-click=\"onSort({heading: heading}); sortOnHeading(heading, $index);\" role=\"columnheader\" aria-sort=\"{{sortArray[heading.name].ascending ? ('dataTable.sort.ascending.label' | xei18n) : (sortArray[heading.name].decending ? ('dataTable.sort.descending.label' | xei18n) : 'none')}}\" aria-describedby=\"{{'headingAria' + $index}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name}}\" xe-heading-injector xe-focus xe-click-grid><div class=\"data\" title=\"{{heading.label}}\"><span ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"::heading.title\"></span><label id=\"${{'headingAria' + $index}}\" class=\"sr-only\" ng-bind=\"heading.ariaLabel + (heading.options.sortable ? ('dataTable.sortable.label' | xei18n) : '')\"></label></div></th></tr></thead></table></div><div class=\"tbody\" ng-style=\"::{'height': height}\" continuous-scroll=\"nextPage()\" scroll-parent=\"{{::continuousScrollParent}}\" aria-labelledby=\"msg\" tabindex=\"{{(!resultsFound || emptyTableMsg) ? 0 : ''}}\" resize><div id=\"msg\" ng-bind=\"emptyTableMsg? emptyTableMsg : ((!resultsFound && !loadingData) ? noDataMsg : '')\"></div><table class=\"data-table\" ng-class=\"::mobileLayout ? 'mobileLayout' : 'noMobileLayout'\" role=\"presentaion\"><thead role=\"presentaion\" aria-hidden=\"true\"><tr><th class=\"font-semibold {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" xe-field=\"{{::heading.name}}\" xe-heading-injector tabindex=\"0\"><div class=\"data\"><span ng-show=\"::heading.options.titleVisible !== false\" ng-bind=\"::heading.title\"></span></div></th></tr></thead><tbody role=\"rowgroup\"><tr ng-repeat=\"row in content\" ng-click=\"onRowClick({data:row,index:$index})\" ng-dblclick=\"onRowDoubleClick({data:row,index:$index})\" xe-row-injector tabindex=\"-1\" role=\"row\"><td class=\"width-animate\" ng-repeat=\"heading in header\" ng-class=\"{'align-right': heading.options.actionOrStatus, 'sortable': heading.options.sortable}\" ng-if=\"heading.options.visible === true\" data-name=\"{{::heading.name}}\" data-title=\"{{::(heading.title && heading.options.titleVisible !== false) ? heading.title + ':' : ''}}\" attain-mobile-layout=\"{{mobileLayout[heading.name]}}\" xe-field=\"{{::heading.name}}\" xe-cell-injector xe-focus xe-click-grid role=\"gridcell\" ng-cloak><div ng-if=\"!isExtendedField(row, heading.name)\"><span ng-bind=\"getObjectValue(row, heading.name)\" tabindex=\"0\"></span></div><div ng-if=\"isExtendedField(row, heading.name)\"><div ng-if=\"isEditable\"><div ng-if=\"dataType === 'DATE'\"><input date-picker=\"\" value=\"{{::extensionValue}}\" class=\"datePicker\" aria-labelledby=\"\"></div><div ng-if=\"dataType === 'VARCHAR2'\"><xe-simple-text-box value=\"::extensionValue\"></xe-simple-text-box></div><div ng-if=\"dataType === 'NUMBER'\"><decimal-input ng-model=\"::extensionValue\" decimals=\"0\"></decimal-input></div></div><div ng-if=\"!isEditable\"><span ng-bind=\"::extensionValue\"></span></div></div></td></tr></tbody></table></div><div class=\"trDesktop\" ng-if=\"totalRow && !isMobileView\" xe-section=\"totalRow\"><table class=\"data-table\" ng-style=\"headerPadding\"><thead><tr><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name+'Total'}}\" xe-focus xe-click-grid><div class=\"aggregateRow data\" ng-class=\"{'align-right': heading.options.actionOrStatus}\" title=\"{{heading.label}}\"><label ng-if=\"heading.totalLabel\" id=\"{{::heading.name+'Total'}}\" for=\"{{::heading.name+'Total'}}\">{{getTotalValue(heading)}}</label><span ng-if=\"!heading.totalLabel\" class=\"total-display\" ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></th></tr></thead></table></div></div><div class=\"tfoot\" ng-transclude></div><xe-pagination model=\"content\" results-found=\"resultsFound\" ng-show=\"showPagination\" xe-grid-pagination-control search-string=\"searchConfig.searchString\"></xe-pagination><div ng-show=\"loadingData\" class=\"load-indicator\"><div class=\"spinner\"><div class=\"bounce1\"></div><div class=\"bounce2\"></div><div class=\"bounce3\"></div></div></div></div>");
+    "<div id=\"{{tableId}}\" class=\"table-container\" ng-class=\"{'fixed-height': !!height, 'noToolbar': noCaptionAndToolbar, 'no-data': !resultsFound, 'empty': emptyTableMsg}\" browser-detect role=\"grid\" aria-labelledby=\"gridCaption\" ng-cloak><div class=\"trMobile\" ng-if=\"totalRow && isMobileView  \"><div ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\"><span class=\"total-row\" total-label=\"{{heading.totalDisplayName}}\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></div><div class=\"caption\" ng-if=\"::!noCaptionBar\" xe-section=\"{{xeSection + 'CaptionBar'}}\"><table class=\"data-table datatable_spacing\" role=\"heading\" aria-level=\"1\"><caption ng-class=\"{'search-opened': hideContainer}\"><span id=\"gridCaption\" class=\"caption-container font-semibold\" ng-if=\"::!nocaption\" ng-bind=\"::caption\" xe-field=\"caption\"></span><div class=\"toolbar\" ng-if=\"toolbar\"><xe-toolbar></xe-toolbar><xe-column-filter header=\"header\"></xe-column-filter><span role=\"search\" title=\"{{'search.title' | xei18n}}\" ng-if=\"::!nosearch\"><xe-search value=\"searchConfig.searchString\" place-holder=\"{{'search.label' | xei18n}}\" on-change=\"fetchSpecial(query)\" on-focus=\"onSearchFocus({event: event})\" on-blur=\"onSearchBlur({event: event})\" search-config=\"searchConfig\" xe-focus loading-data=\"loadingData\"></xe-search></span></div></caption></table></div><div class=\"hr-scrollable-content\"><div class=\"thead\"><table class=\"data-table\" ng-style=\"headerPadding\" role=\"presentation\"><thead role=\"rowgroup\"><tr role=\"row\"><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" ng-click=\"onSort({heading: heading}); sortOnHeading(heading, $index);\" role=\"columnheader\" aria-sort=\"{{sortArray[heading.name].ascending ? ('dataTable.sort.ascending.label' | xei18n) : (sortArray[heading.name].decending ? ('dataTable.sort.descending.label' | xei18n) : 'none')}}\" aria-describedby=\"{{'headingAria' + $index}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name}}\" xe-heading-injector xe-focus xe-click-grid><div class=\"data\" title=\"{{heading.label}}\"><span ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"::heading.title\"></span><label id=\"${{'headingAria' + $index}}\" class=\"sr-only\" ng-bind=\"heading.ariaLabel + (heading.options.sortable ? ('dataTable.sortable.label' | xei18n) : '')\"></label></div></th></tr></thead></table></div><div class=\"tbody\" ng-style=\"::{'height': height}\" continuous-scroll=\"nextPage()\" scroll-parent=\"{{::continuousScrollParent}}\" aria-labelledby=\"msg\" tabindex=\"{{(!resultsFound || emptyTableMsg) ? 0 : ''}}\" resize><div id=\"msg\" ng-bind=\"emptyTableMsg? emptyTableMsg : ((!resultsFound && !loadingData) ? noDataMsg : '')\"></div><table class=\"data-table\" ng-class=\"::mobileLayout ? 'mobileLayout' : 'noMobileLayout'\" role=\"presentation\"><thead role=\"presentation\" aria-hidden=\"true\"><tr><th class=\"font-semibold {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" xe-field=\"{{::heading.name}}\" xe-heading-injector tabindex=\"0\"><div class=\"data\"><span ng-show=\"::heading.options.titleVisible !== false\" ng-bind=\"::heading.title\"></span></div></th></tr></thead><tbody role=\"rowgroup\"><tr ng-repeat=\"row in content\" ng-click=\"onRowClick({data:row,index:$index})\" ng-dblclick=\"onRowDoubleClick({data:row,index:$index})\" xe-row-injector tabindex=\"-1\" role=\"row\"><td class=\"width-animate\" ng-repeat=\"heading in header\" ng-class=\"{'align-right': heading.options.actionOrStatus, 'sortable': heading.options.sortable}\" ng-if=\"heading.options.visible === true\" data-name=\"{{::heading.name}}\" data-title=\"{{::(heading.title && heading.options.titleVisible !== false) ? heading.title + ':' : ''}}\" attain-mobile-layout=\"{{mobileLayout[heading.name]}}\" xe-field=\"{{::heading.name}}\" xe-cell-injector xe-focus xe-click-grid role=\"gridcell\" ng-cloak><div ng-if=\"!isExtendedField(row, heading.name)\"><span ng-bind=\"getObjectValue(row, heading.name)\" tabindex=\"0\"></span></div><div ng-if=\"isExtendedField(row, heading.name)\"><div ng-if=\"isEditable\"><div ng-if=\"dataType === 'DATE'\"><input date-picker=\"\" value=\"{{::extensionValue}}\" class=\"datePicker\" aria-labelledby=\"\"></div><div ng-if=\"dataType === 'VARCHAR2'\"><xe-simple-text-box value=\"::extensionValue\"></xe-simple-text-box></div><div ng-if=\"dataType === 'NUMBER'\"><decimal-input ng-model=\"::extensionValue\" decimals=\"0\"></decimal-input></div></div><div ng-if=\"!isEditable\"><span ng-bind=\"::extensionValue\"></span></div></div></td></tr></tbody></table></div><div class=\"trDesktop\" ng-if=\"totalRow && !isMobileView\" xe-section=\"totalRow\"><table class=\"data-table\" ng-style=\"headerPadding\"><thead><tr><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name+'Total'}}\" xe-focus xe-click-grid><div class=\"aggregateRow data\" ng-class=\"{'align-right': heading.options.actionOrStatus}\" title=\"{{heading.label}}\"><label ng-if=\"heading.totalLabel\" id=\"{{::heading.name+'Total'}}\" for=\"{{::heading.name+'Total'}}\">{{getTotalValue(heading)}}</label><span ng-if=\"!heading.totalLabel\" class=\"total-display\" ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></th></tr></thead></table></div></div><div class=\"tfoot\" ng-transclude></div><xe-pagination model=\"content\" results-found=\"resultsFound\" ng-show=\"showPagination\" xe-grid-pagination-control search-string=\"searchConfig.searchString\"></xe-pagination><div ng-show=\"loadingData\" class=\"load-indicator\"><div class=\"spinner\"><div class=\"bounce1\"></div><div class=\"bounce2\"></div><div class=\"bounce3\"></div></div></div></div>");
 }]);
 
 angular.module("templates/dialog.html", []).run(["$templateCache", function ($templateCache) {
@@ -113,7 +113,7 @@ angular.module("templates/dialog_default.html", []).run(["$templateCache", funct
 
 angular.module("templates/modal.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/modal.html",
-    "<div id=\"xeModalMask\" class=\"xe-popup-mask\" ng-show=\"show\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"xePopTitle\"><div class=\"xe-popup-wrapper\"><div class=\"xe-popup-container\"><div id=\"xeModalHeader\" class=\"xe-popup-header\"><h5 id=\"xePopTitle\" class=\"xe-app-title\" role=\"heading\" data-ng-bind=\"popupTitle\"></h5><span id=\"xePopupClose\" class=\"xe-popup-close\" ng-click=\"hide()\" tabindex=\"0\" role=\"button\" aria-label=\"{{'userpreference.popup.language.close' | xei18n}}\" alt=\"{{'userpreference.popup.language.close' | xei18n}}\" title=\"{{'userpreference.popup.language.close' | xei18n}}\"></span></div><div id=\"xePopupContent\" class=\"xe-pop-content\" ng-transclude=\"popupContent\"></div><div id=\"buttonContainer\" class=\"buttonContainer\" ng-transclude=\"popupButtons\"></div><div tabindex=\"0\" id=\"tabOrdering\"></div></div></div></div>");
+    "<div class=\"xe-popup-mask\" ng-show=\"show\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"xePopTitle\"><div class=\"xe-popup-wrapper\"><div class=\"xe-popup-container\"><div id=\"xeModalHeader\" class=\"xe-popup-header\"><h5 id=\"xePopTitle\" class=\"xe-app-title\" role=\"heading\"><label ng-bind=\"popupTitle\"></label></h5><span id=\"xePopupClose\" class=\"xe-popup-close\" ng-click=\"hide()\" tabindex=\"0\" role=\"button\" aria-label=\"{{'userpreference.popup.language.close' | xei18n}}\" alt=\"{{'userpreference.popup.language.close' | xei18n}}\" title=\"{{'userpreference.popup.language.close' | xei18n}}\"></span></div><div id=\"xePopupContent\" class=\"xe-pop-content\" ng-transclude=\"popupContent\"></div><div id=\"buttonContainer\" class=\"buttonContainer\" ng-transclude=\"popupButtons\"></div><div tabindex=\"0\" id=\"tabOrdering\"></div></div></div></div>");
 }]);
 
 angular.module("templates/tabNav.html", []).run(["$templateCache", function ($templateCache) {
@@ -156,6 +156,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
         return {
             restrict: 'E',
             scope: {
+                xeId : '@',
                 xeType : '@',
                 xeDisabled : '=',
                 xeLabel : '@',
@@ -175,34 +176,45 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
             scope : {
                 xeId : '@',
                 xeValue : '@',
-                xeLabel : '@',
-                xeLabelHidden : '@',
+                xeName : '@?',
+                xeLabel : '@?',
+                xeAriaLabel: '@?',
+                xeLabelHidden : '@?',
                 xeModel : '=',
                 xeOnClick : '&',
-                xeDisabled : '=',
-                ariaRole : '@'
+                xeDisabled : '=?',
+                ariaRole : '@?'
             },
             restrict : 'E',
             replace : true,
             templateUrl : 'templates/checkbox.html',
-            link : function (scope, element, attrs) {
+            link : function (scope, element) {
                 scope.cbClicked = function (event) {
                     if (scope.xeDisabled) { return; }
 
                     scope.xeModel = !scope.xeModel;
                     $timeout(function () {
                         scope.xeOnClick({checked: scope.xeModel, event: event});
+                        angular.element(element.find('input')).controller('ngModel').$setDirty();
                     });
                 };
 
                 element.on('keydown', function (event) {
-                    if (event.keyCode === keyCodes.ENTER) {
+                    if (event.keyCode === keyCodes.ENTER || event.keyCode === keyCodes.SPACEBAR) {
                         event.preventDefault();
                         event.stopPropagation();
                         scope.cbClicked(event);
                         scope.$apply();
                     }
                 });
+
+                element.on('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    scope.cbClicked(event);
+                    scope.$apply();
+                });
+
             }
         };
     }]);
@@ -253,6 +265,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
         return {
         restrict: 'E',
             scope : {
+            xeId: '@',
             xeValue: '@',
             xeHidden: '@?',
             xeRequired: '=?',
@@ -358,7 +371,8 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                 xeOnChange: '&',
                 xePlaceholder: '@',
                 xeLabel: '=',
-                xeId: '=',
+                xeId: '@',
+                xeName: '@?',
                 xeRequired: '=',
                 xeReadonly: '=',
                 xeCharCounter: '@'
@@ -741,19 +755,34 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
 
                             $compile(element, transcludeFn)(scope); //Passing current transcludeFn to be able to append elements correctly from uisTranscludeAppend
 
-                            scope.$watch('$select.search', function (newValue) {
+                            scope.$watch('$select.search', function(newValue) {
                                 if (newValue && !$select.open && $select.multiple) {
                                     $select.activate(false, true);
                                     $select.activeIndex = $select.tagging.isActivated ? -1 : 0;
-                                }if (!attrs.minimumInputLength || $select.search.length >= attrs.minimumInputLength) {
+                                }if ((!attrs.minimumInputLength || $select.search.length >= attrs.minimumInputLength) && !$select.disabled) {
                                     $select.refresh(attrs.refresh);
                                     $select.showMinMsg = false;
-                                } else {
+                                } else if (!$select.disabled) {
                                     $select.minimumInputLength = attrs.minimumInputLength;
                                     $select.showMinMsg = true;
                                     $select.items = [];
                                 }
                             });
+
+                            scope.$watch($select.disabled, function(newValue, oldValue) {
+                                if (!newValue && newValue !== oldValue && !$select.items.length) {
+                                    $select.refresh(attrs.refresh);
+                                }
+                            });
+
+                            if ($select.refreshOnChange) {
+                                scope.$watch($select.refreshOnChange, function(newValue) {
+                                    if (newValue) {
+                                        $select.refresh(attrs.refresh);
+                                    }
+                                });
+                            }
+
                             attrs.$observe('refreshDelay', function() {
                                 // $eval() is needed otherwise we get a string instead of a number
                                 var refreshDelay = scope.$eval(attrs.refreshDelay);
@@ -1022,6 +1051,9 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                     }
 
                     ctrl.refreshItems = function (data) {
+                        if (angular.isArray(data) && attrs.refresh && angular.isArray(ctrl.items) && (typeof ctrl.items[0] === 'object') && ctrl.items[0].isTag) {
+                            data.unshift(ctrl.items[0]);
+                        }
                         data = data || ctrl.parserResult.source($scope);
                         var selectedItems = ctrl.selected;
                         //TODO should implement for single mode removeSelected
@@ -1142,6 +1174,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                 // When the user selects an item with ENTER or clicks the dropdown
                 ctrl.select = function(item, skipFocusser, $event) {
                     if (item === undefined || !item._uiSelectChoiceDisabled) {
+                        var removedChoice = ctrl.selected;
 
                         if ( ! ctrl.items && ! ctrl.search && ! ctrl.tagging.isActivated) return;
 
@@ -1150,7 +1183,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                                 // if taggingLabel is disabled, we pull from ctrl.search val
                                 if ( ctrl.taggingLabel === false ) {
                                     if ( ctrl.activeIndex < 0 ) {
-                                        item = ctrl.tagging.fct !== undefined ? ctrl.tagging.fct(ctrl.search) : ctrl.search;
+                                        item = ctrl.tagging.fct !== undefined ? ctrl.tagging.fct({tag: ctrl.search, taggingKey: ctrl.taggingKey}) : ctrl.search;
                                         if (!item || angular.equals( ctrl.items[0], item ) ) {
                                             return;
                                         }
@@ -1161,18 +1194,22 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                                 } else {
                                     // tagging always operates at index zero, taggingLabel === false pushes
                                     // the ctrl.search value without having it injected
-                                    if ( ctrl.activeIndex === 0 ) {
+                                    if ( item ) {
                                         // ctrl.tagging pushes items to ctrl.items, so we only have empty val
                                         // for `item` if it is a detected duplicate
-                                        if ( item === undefined ) return;
+                                        // if ( item === undefined ) return;
 
                                         // create new item on the fly if we don't already have one;
                                         // use tagging function if we have one
-                                        if ( ctrl.tagging.fct !== undefined && typeof item === 'string' ) {
-                                            item = ctrl.tagging.fct(item);
+                                        if ( ctrl.tagging.fct !== undefined && typeof item === 'object' && item.isTag) {
+                                            item = ctrl.tagging.fct({tag: ctrl.search, taggingKey: ctrl.taggingKey, onSelect: true});
                                             if (!item) return;
                                             // if item type is 'string', apply the tagging label
-                                        } else if ( typeof item === 'string' ) {
+                                        } else if ( ctrl.tagging.fct !== undefined && typeof item === 'string' && item.indexOf(ctrl.taggingLabel) !== -1) {
+                                            item = ctrl.tagging.fct({tag: item, taggingKey: ctrl.taggingKey, onSelect: true});
+                                            if (!item) return;
+                                            // if item type is 'string', apply the tagging label
+                                        } else if ( typeof item === 'string' && item.indexOf(ctrl.taggingLabel) !== -1) {
                                             // trim the trailing space
                                             item = item.replace(ctrl.taggingLabel,'').trim();
                                         }
@@ -1186,25 +1223,37 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                             }
                             ctrl.search = "";
                             var ariaOptionSelected;
-                            $('.uiselect-choice-status-hidden-accessible').text("");
-                            if(undefined != ctrl.selectedValue){
-                                ariaOptionSelected = $filter('xei18n')('uiselect.option.selected',item[ctrl.selectedValue]);
-                            }else{
-                                ariaOptionSelected = $filter('xei18n')('uiselect.option.selected',item.name);
+                            if (item) {
+                                $('.uiselect-choice-status-hidden-accessible').text("");
+                                if(undefined != ctrl.selectedValue){
+                                    ariaOptionSelected = $filter('xei18n')('uiselect.option.selected',item[ctrl.selectedValue]);
+                                }else{
+                                    ariaOptionSelected = $filter('xei18n')('uiselect.option.selected',item.name);
+                                }
+                                $('.uiselect-choice-status-hidden-accessible').text(ariaOptionSelected);
+                                $('.uiselect-choice-status-hidden-accessible').innerText = ariaOptionSelected;
                             }
-                            $('.uiselect-choice-status-hidden-accessible').text(ariaOptionSelected);
-                            $('.uiselect-choice-status-hidden-accessible').innerText = ariaOptionSelected;
 
                             $scope.$broadcast('uis:select', item);
 
                             var locals = {};
                             locals[ctrl.parserResult.itemName] = item;
 
-                            $timeout(function(){
-                                ctrl.onSelectCallback($scope, {
-                                    $item: item,
-                                    $model: ctrl.parserResult.modelMapper($scope, locals)
-                                });
+                            var locals1 = {};
+                            locals1[ctrl.parserResult.itemName] = removedChoice;
+
+                            $timeout(function() {
+                                if (angular.isUndefined(item)) {
+                                    ctrl.onRemoveCallback($scope, {
+                                        $item: removedChoice,
+                                        $model: ctrl.parserResult.modelMapper($scope, locals1)
+                                    });
+                                } else {
+                                    ctrl.onSelectCallback($scope, {
+                                        $item: item,
+                                        $model: ctrl.parserResult.modelMapper($scope, locals)
+                                    });
+                                }
                             });
 
                             //To set focus on current element When user selects an item with clicks the dropdown
@@ -1344,7 +1393,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                         e.stopPropagation();
                     }
 
-                    if (~[KEY.ESC , KEY.TAB].indexOf(key)) {
+                    if (~[KEY.ESC].indexOf(key)) {
                         ctrl.close();
                     }
 
@@ -1352,6 +1401,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                     //   //TODO: SEGURO?
                     //   ctrl.close();
                     // }
+
 
                     //When the select component searchEnabled is false shouldn't allow user to search ; Hence restricting the user to search here.
                     if (!~[KEY.ENTER, KEY.ESC].indexOf(key) && !KEY.isVerticalMovement(key) && ctrl.searchEnabled === false) {
@@ -1380,7 +1430,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                                         ctrl.searchInput.triggerHandler('tagged');
                                         var newItem = ctrl.search.replace(KEY.MAP[e.keyCode], '').trim();
                                         if (ctrl.tagging.fct) {
-                                            newItem = ctrl.tagging.fct(newItem);
+                                            newItem = ctrl.tagging.fct({tag: newItem, taggingKey: ctrl.taggingKey});
                                         }
                                         if (newItem) ctrl.select(newItem, true);
                                     });
@@ -1431,7 +1481,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                             if (items && items.length > 0) {
                                 var oldsearch = ctrl.search;
                                 angular.forEach(items, function (item) {
-                                    var newItem = ctrl.tagging.fct ? ctrl.tagging.fct(item) : item;
+                                    var newItem = ctrl.tagging.fct ? ctrl.tagging.fct({tag: item, taggingKey: ctrl.taggingKey}) : item;
                                     if (newItem) {
                                         ctrl.select(newItem, true);
                                     }
@@ -1538,15 +1588,17 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                             var $select = ctrls[0];
                             var ngModel = ctrls[1];
                             $select.selectedValue = attrs.textSelected;
+                            $select.refreshOnChange = attrs.refreshOnChange !== undefined ? attrs.refreshOnChange : '';
+                            $select.disabled = attrs.hasOwnProperty('ngDisabled') ? true : false;
                             $select.generatedId = uiSelectConfig.generateId();
                             $select.baseTitle = attrs.title || 'Select box';
                             $select.focusserId = 'focusser-' + $select.generatedId;
 
-                            if(attrs.searchEnabled == "false"){
-                                $select.focusserTitle = $select.baseTitle + ' focus, Single Select Search Unavailable.';
+                            if (attrs.searchEnabled === 'false') {
+                                $select.focusserTitle = $select.baseTitle + (attrs.ngRequired === 'true' ? ', required' : '') + ', focus, Single Select Search Unavailable';
 
                             }else{
-                                $select.focusserTitle = $select.baseTitle + ' focus';
+                                $select.focusserTitle = $select.baseTitle + (attrs.ngRequired === 'true' ? ', required' : '') + ', focus';
                             }
 
                             $select.closeOnSelect = function() {
@@ -1632,6 +1684,12 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                                     {
                                         $select.taggingLabel = attrs.taggingLabel !== undefined ? attrs.taggingLabel : '(new)';
                                     }
+                                }
+                            });
+
+                            attrs.$observe('taggingKey', function() {
+                                if (attrs.tagging !== undefined ) {
+                                    $select.taggingKey = attrs.taggingKey !== undefined ? attrs.taggingKey : '';
                                 }
                             });
 
@@ -2233,11 +2291,11 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                                 items = items.slice(1,items.length);
                                 stashArr = stashArr.slice(1,stashArr.length);
                             }
-                            newItem = $select.tagging.fct($select.search);
+                            newItem = $select.tagging.fct({tag: $select.search, taggingKey: $select.taggingKey});
                             // verify the new tag doesn't match the value of a possible selection choice or an already selected item.
                             if (
                                 stashArr.some(function (origItem) {
-                                    return angular.equals(origItem, $select.tagging.fct($select.search));
+                                    return angular.equals(origItem, $select.tagging.fct({tag: $select.search, taggingKey: $select.taggingKey}));
                                 }) ||
                                 $select.selected.some(function (origItem) {
                                     return angular.equals(origItem, newItem);
@@ -2413,6 +2471,9 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
 
                 scope.$on('uis:close', function (event, skipFocusser) {
                     $timeout(function(){
+                        if ( $select.tagging.isActivated ) {
+                            $select.refreshItems();
+                        }
                         $select.focusser.prop('disabled', false);
                         if (!skipFocusser) $select.focusser[0].focus();
                     },0,false);
@@ -2423,7 +2484,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                 });
 
                 //Idea from: https://github.com/ivaynberg/select2/blob/79b5bf6db918d7560bdd959109b7bcfb47edaf43/select2.js#L1954
-                var focusser = angular.element("<input ng-disabled='$select.disabled' class='ui-select-focusser ui-select-offscreen' type='text' id='{{ $select.focusserId }}' aria-label='{{ $select.focusserTitle }}' aria-haspopup='true' role='button'/>");
+                var focusser = angular.element("<input ng-disabled='$select.disabled' class='ui-select-focusser ui-select-offscreen' type='text' id='{{ $select.focusserId }}' aria-label='{{ $select.focusserTitle }}' aria-haspopup='true' role='button'/><abbr ng-if=\"$select.allowClear && !$select.isEmpty()\" class=\"select2-search-choice-close ui-select-clear\" tabindex=\"0\" ng-click=\"$select.clear($event)\" key-enter><span class=\"ui-select-offscreen\">Clear</span></abbr>");
 
                 $compile(focusser)(scope);
                 $select.focusser = focusser;
@@ -2467,6 +2528,118 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
 
                     scope.$digest();
                 });
+
+                $select.searchInput.on('keyup', function(e) {
+                    // Push a "create new" item into array if there is a search string
+                    if ( $select.tagging.isActivated && $select.search.length > 0 ) {
+
+                        // return early with these keys
+                        if (e.which === KEY.TAB || KEY.isControl(e) || KEY.isFunctionKey(e) || e.which === KEY.ESC || KEY.isVerticalMovement(e.which) ) {
+                            return;
+                        }
+                        // always reset the activeIndex to the first item when tagging
+                        $select.activeIndex = $select.taggingLabel === false ? -1 : 0;
+                        // taggingLabel === false bypasses all of this
+                        if ($select.taggingLabel === false) return;
+
+                        var items = angular.copy( $select.items );
+                        var stashArr = angular.copy( $select.items );
+                        var newItem;
+                        var item;
+                        var hasTag = false;
+                        var tagItems;
+                        var tagItem;
+
+                        // case for object tagging via transform `$select.tagging.fct` function
+                        if ( $select.tagging.fct !== undefined ) {
+                            tagItems = $select.$filter('filter')(items,{'isTag': true});
+                            if ( tagItems.length > 0 ) {
+                                tagItem = tagItems[0];
+                            }
+                            // remove the first element, if it has the `isTag` prop we generate a new one with each keyup, shaving the previous
+                            if ( items.length > 0 && tagItem ) {
+                                hasTag = true;
+                                items = items.slice(1,items.length);
+                                stashArr = stashArr.slice(1,stashArr.length);
+
+                                // verify the new tag doesn't match the value of a possible selection choice.
+                                if (
+                                    stashArr.some(function (origItem) {
+                                        return angular.equals(origItem[$select.taggingKey].toLowerCase(), $select.search.toLowerCase());
+                                    })
+                                ) {
+                                    scope.$evalAsync(function () {
+                                        $select.activeIndex = 0;
+                                        $select.items = items;
+                                    });
+                                    return;
+                                }
+                            }
+                            newItem = $select.tagging.fct({tag: $select.search, taggingKey: $select.taggingKey});
+                            newItem.isTag = true;
+                            // handle newItem string and stripping dupes in tagging string context
+                        } else {
+                            // find any tagging items already in the $select.items array and store them
+                            var originItems = $select.parserResult.source(scope, { $select : {search:''}});
+                            tagItem = items.filter(function(item) { return originItems.indexOf(item) < 0; })[0];
+                            item = items[0];
+                            // remove existing tag item if found (should only ever be one tag item)
+                            if ( item !== undefined && items.length > 0 && tagItem ) {
+                                hasTag = true;
+                                items = items.slice(1,items.length);
+                                stashArr = stashArr.slice(1,stashArr.length);
+                            }
+
+                            newItem = $select.search + ($select.taggingLabel ? (' '+$select.taggingLabel) : '');
+
+                            // verify the the tag doesn't match the value of an existing item from
+                            // the searched data set or the items already selected
+                            if ( _findCaseInsensitiveDupe(stashArr.concat($select.selected)) ) {
+                                // if there is a tag from prev iteration, strip it / queue the change
+                                // and return early
+                                if ( hasTag ) {
+                                    items = stashArr;
+                                    scope.$evalAsync( function () {
+                                        $select.activeIndex = 0;
+                                        $select.items = items;
+                                    });
+                                }
+                                return;
+                            }
+                            if ( _findCaseInsensitiveDupe(stashArr) ) {
+                                // if there is a tag from prev iteration, strip it
+                                if ( hasTag ) {
+                                    $select.items = stashArr.slice(1,stashArr.length);
+                                }
+                                return;
+                            }
+                        }
+
+                        items = [];
+                        items.push(newItem);
+                        items = items.concat(stashArr);
+
+                        scope.$evalAsync( function () {
+                            $select.activeIndex = 0;
+                            $select.items = items;
+                        });
+                    } else if ( $select.tagging.isActivated && $select.search.length === 0 && angular.isArray($select.items)) {
+                        $select.refreshItems();
+                    }
+                });
+                function _findCaseInsensitiveDupe(arr) {
+                    if ( arr === undefined || $select.search === undefined ) {
+                        return false;
+                    }
+                    var hasDupe = arr.filter( function (origItem) {
+                        if ( $select.search.toUpperCase() === undefined || origItem === undefined ) {
+                            return false;
+                        }
+                        return origItem.toUpperCase() === $select.search.toUpperCase();
+                    }).length > 0;
+
+                    return hasDupe;
+                }
 
                 focusser.bind("keyup input", function(e){
 
@@ -2714,7 +2887,7 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
 
     $templateCache.put("select2/choices.tpl.html",
         "<ul class=\"ui-select-choices ui-select-choices-content select2-results\" >" +
-        "<li ng-show=\"$select.showMinMsg\" class=\"select2-no-results\" role=\"listbox\" ng-bind=\"'uiselect.minimum.input.text' | xei18n: $select.minimumInputLength\" aria-live=\"polite\" ></li>" +
+        "<li ng-if=\"$select.minimumInputLength\" ng-show=\"$select.showMinMsg\" class=\"select2-no-results\" role=\"listbox\" ng-bind=\"'uiselect.minimum.input.text' | xei18n: $select.minimumInputLength\" aria-live=\"polite\" ></li>" +
         "<li ng-show=\"$select.showNoResultsMsg && !$select.showMinMsg\" role=\"listbox\"  class=\"select2-no-results \"  ng-bind=\"'uiselect.no.results.found.text' | xei18n\" > " +
         "<li class=\"ui-select-choices-group\" ng-class=\"{\'select2-result-with-children\': $select.choiceGrouped($group) }\" role=\"listbox\"  >" +
         "<div ng-show=\"$select.choiceGrouped($group) && !$select.showNoResultsMsg && !$select.showMinMsg\" class=\"ui-select-choices-group-label select2-result-label\" ng-bind=\"$group.name\"></div>" +
@@ -2725,7 +2898,7 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
         "<div class=\"select2-result-label ui-select-choices-row-inner\"></div></li></ul></li></ul>");
 
     $templateCache.put("select2/match-multiple.tpl.html","<span class=\"ui-select-match\"><li class=\"ui-select-match-item select2-search-choice\" ng-repeat=\"$item in $select.selected\" ng-class=\"{\'select2-search-choice-focus\':$selectMultiple.activeMatchIndex === $index, \'select2-locked\':$select.isLocked(this, $index)}\" ui-select-sort=\"$select.selected\"><span uis-transclude-append=\"\"></span> <a class=\"ui-select-match-close select2-search-choice-close\" ng-click=\"$selectMultiple.removeChoice($index)\" tabindex=\"-1\"></a></li></span>");
-    $templateCache.put("select2/match.tpl.html","<a class=\"select2-choice ui-select-match\" ng-class=\"{\'select2-default\': $select.isEmpty()}\" ng-click=\"$select.toggle($event)\" aria-label=\"{{ $select.baseTitle }} select\"><span ng-show=\"$select.isEmpty()\" class=\"select2-chosen\">{{$select.placeholder}}</span> <span ng-hide=\"$select.isEmpty()\" class=\"select2-chosen\" ng-transclude=\"\"></span> <abbr ng-if=\"$select.allowClear && !$select.isEmpty()\" class=\"select2-search-choice-close\" ng-click=\"$select.clear($event)\"></abbr> <span class=\"select2-arrow ui-select-toggle\"><b></b></span></a>");
+    $templateCache.put("select2/match.tpl.html","<a class=\"select2-choice ui-select-match\" ng-class=\"{\'select2-default\': $select.isEmpty()}\" ng-click=\"$select.toggle($event)\" aria-label=\"{{ $select.baseTitle }} select\"><span ng-show=\"$select.isEmpty()\" class=\"select2-chosen\">{{$select.placeholder}}</span> <span ng-hide=\"$select.isEmpty()\" class=\"select2-chosen\" ng-transclude=\"\"></span><span class=\"select2-arrow ui-select-toggle\"><b></b></span></a>");
 
     $templateCache.put("select2/select-multiple.tpl.html",
         "<div class=\"ui-select-container ui-select-multiple select2 select2-container select2-container-multi\" " +
@@ -2763,13 +2936,19 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
                     items.forEach(function(item) {
                         var itemMatches = false;
 
-                        var keys = Object.keys(props);
-                        for (var i = 0; i < keys.length; i++) {
-                            var prop = keys[i];
-                            var text = props[prop].toLowerCase();
-                            if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                        if (typeof item === 'string') {
+                            if (item.toLowerCase().indexOf(props.toLowerCase()) !== -1) {
                                 itemMatches = true;
-                                break;
+                            }
+                        } else if (typeof item === 'object') {
+                            var keys = Object.keys(props);
+                            for (var i = 0; i < keys.length; i++) {
+                                var prop = keys[i];
+                                var text = props[prop].toLowerCase();
+                                if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                                    itemMatches = true;
+                                    break;
+                                }
                             }
                         }
 
@@ -2783,11 +2962,15 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
                 }
 
                 return out;
-            }
+            };
         }).directive('reachInfinity', ['$parse', '$timeout', '$q', function($parse, $timeout, $q) {
             function height(elem) {
+                if (!elem) {
+                    return;
+                }
+
                 elem = elem[0] || elem;
-                if (isNaN(elem.offsetHeight)) {
+                if (isNaN(elem.offsetHeight) && elem.document) {
                     return elem.document.documentElement.clientHeight;
                 } else {
                     return elem.offsetHeight;
@@ -2795,15 +2978,19 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
             }
 
             function offsetTop(elem) {
-                if (!elem[0].getBoundingClientRect || elem.css('none')) {
+                if (!elem || !elem[0] || !elem[0].getBoundingClientRect || elem.css('none')) {
                     return;
                 }
                 return elem[0].getBoundingClientRect().top + pageYOffset(elem);
             }
 
             function pageYOffset(elem) {
+                if (!elem) {
+                    return;
+                }
+
                 elem = elem[0] || elem;
-                if (isNaN(window.pageYOffset)) {
+                if (isNaN(window.pageYOffset) && elem.document) {
                     return elem.document.documentElement.scrollTop;
                 } else {
                     return elem.ownerDocument.defaultView.pageYOffset;
@@ -2866,6 +3053,9 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
                                 containerTopOffset = 0,
                                 elementBottom;
 
+                            rows = elem.querySelectorAll('.ui-select-choices-row');
+                            lastChoice = angular.element(rows[rows.length - 1]);
+
                             if (offsetTop(container) !== void 0) {
                                 containerTopOffset = offsetTop(container);
                             }
@@ -2873,7 +3063,7 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
                             elementBottom = offsetTop(lastChoice) - containerTopOffset + height(lastChoice);
 
                             var remaining = elementBottom - containerBottom,
-                                shouldScroll = remaining <= height(container) * (scrollDistance + 1);
+                                shouldScroll = (height(container) > 0) && (remaining <= height(container) * (scrollDistance + 1));
 
                             if (shouldScroll) {
                                 $q.when($parse(attrs['reachInfinity'])(scope)).then(function() {
@@ -2909,7 +3099,22 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
                     });
                 }
             }
-        }]);
+        }])
+        .directive("keyEnter", function() {
+            return {
+                restrict: 'A',
+                scope: true,
+                link: function (scope, element) {
+                    element.on("keydown", function(event) {
+                        if (event.which === 13) {
+                            element.click();
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                    });
+                }
+            };
+        });
 }());
 angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
 (function () {
@@ -3021,6 +3226,376 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
             $rootScope.isMAC = ($window.navigator.userAgent.indexOf("Mac") !== -1);
             $rootScope.isRtl = Language.isRtl();
             $translate.use(getlocale.getUserLocale());
+        }]);
+}());
+/*
+ File is used to provide i18n support for components.
+ */
+(function () {
+    'use strict';
+    var translations = {
+        en: {
+            "barChart.title": "Bar Chart",
+            "barChart.subtitle": "Demo Bar Slices",
+            "pieChart.title": "Pie Chart",
+            "pieChart.subtitle": "Demo Pie Slices",
+            "pieChart.svg.title": "Pie Chart Title",
+            "donutchart.svg.title":"Donut Chart Title",
+            "donutChart.svg.desc":"Donut Chart Description",
+            "pieChart.svg.desc": "Pie Chart Description",
+            "pieChart.pie.ariaLabel": "Pie Chart",
+            "pieChart.pie.group.main.ariaLabel": "Enter to Main Group",
+            "pieChart.pie.group.other.ariaLabel": "Enter to Other Group",
+            "pieChart.table.label": "label",
+            "pieChart.table.value": "value",
+            "pieChart.table.percentage": "percentage",
+            "pieChart.table.ariaLabel": "A tabular view of the data in the chart.",
+            "pieChart.main.label.other": "Other",
+            "search.label": "Search",
+            "dataTable.columnFilter.label": "Show/Hide Column",
+            "dataTable.columnFilter.selectAll": "Select All",
+            "dataTable.sortable.label": "Sortable",
+            "dataTable.sort.descending.label": "descending",
+            "dataTable.sort.ascending.label": "ascending",
+            "dataTable.no.record.found": "No records found",
+            "pagination.record.found": "Results found",
+            "pagination.first.label": "First page",
+            "pagination.previous.label": "Previous page",
+            "pagination.last.label": "Last page",
+            "pagination.next.label": "Next page",
+            "pagination.per.page.label": "Per Page",
+            "pagination.page.label": "Page",
+            "pagination.page.shortcut.label": "Go To Page (End)",
+            "pagination.page.aria.label": "Go To Page. Short cut is End",
+            "pagination.page.of.label": "of",
+            "search.title": "Search (Alt+Y)",
+            "search.aria.label": "Search text field. Short cut is Alt+Y.",
+            "angular-ui.select.items.group1.label": "From A - M",
+            "angular-ui.select.items.group2.label": "From N - Z",
+            "angular-ui.select.items.without.section.heading": "Items not grouped under section heading",
+            "angular-ui.select.items.with.section.heading": "Items grouped under section",
+            "angular-ui.select.items.with.long.text": "Items grouped here has long text",
+            "angular-ui.select.items.remote.data.placeholder": "Enter a term to search",
+            "angular-ui.select.remote.data":  "Minimum input search, Infinite scroll, Placeholder",
+            "angular-ui-select": "Single Select",
+            "angular-ui-select-search-disabled": "Single Select with search disabled",
+            "angular-ui-select-multiple": "Multiple Select",
+            "uiselect.minimum.input.text": "Please enter {{arg1}} or more characters",
+            "uiselect.no.results.found.text": "No Result Found!",
+            "uiselect.search.results": "Searching ... {{arg1}} results are available, use up and down arrow keys to navigate.",
+            "uiselect.option.selected": "{{arg1}}",
+            "about.component.tab.general" : "General",
+            "about.component.plugin.information" : "Plugin information",
+            "about.component.plugin.other.information" : "Other Plugin information",
+            "popup.component.information" : "Other Plugin information",
+            "popup.preference.locale.heading":"Language Setting ",
+            "userpreference.popup.language.close":"Close",
+            "textbox.validation.required": "This field is required",
+            "textbox.validation.maxlength": "Maximum Character length should be",
+            "xe.text.chars.left": "Remaining Characters",
+            "xe.text.max.chars": "Characters Max",
+            "xe.text.limit.over": "Character Limit of {{arg1}} has been reached",
+            "xe.text.chars.remaining.aria": "Remaining Characters : {{arg1}}",
+            "angular-textarea-label": "Comments Label",
+            "angular-textarea-placeholder-text": "Enter your comments here",
+            "angular-textarea-placeholder-text-readonly": "Read only comments",
+            "description-textarea-label": "Description",
+            "description-textarea-placeholder": "Enter your description here",
+            "textarea-readonly-comments": "This content is secured.",
+            "textInput": "Text Input",
+            "text": "Text",
+            "rtlText": "Switch to LTR",
+            "ltrText": "Switch to RTL",
+            "uiselect.search.disabled.results": "Use up and down arrow keys to navigate.",
+            "js.timepicker.selectText":"Set Time",
+            "js.timepicker.set":"SET",
+            "js.timepicker.cancel":"CANCEL",
+            "default.time.am":"AM",
+            "default.time.pm":"PM",
+            "default.time.format" : "HH:mm",
+            "timepicker.hour.aria.label": "Hours list, press up and down arrow keys to Change Hours.",
+            "timepicker.min.aria.label":"Minutes list, press up and down arrow keys to change Minutes. Press left arrow key to move to Hours list and Right to Move to meridiem list.",
+            "timepicker.am.pm.aria.label":"meridiem list, press up and down arrow keys to change the meridiem and left arrow to move to the minutes list. Press Escape to cancel and Enter to Select Time",
+            "timepicker.shortcuts.aria.label":"Press Escape to cancel and Enter to Select Time.",
+            "timepicker.textbox.aria.label":"The Time Format is",
+            "timepicker.min.aria.24hrs.label":"Minutes list, press up and down arrow keys to change Minutes. Press left arrow key to move to Hours list.",
+            "js.input.timepicker.info":"Press F9 to open the TimePicker",
+            "timepicker.error.format.validation": "Invalid time format",
+            "timepicker.label":"Time Picker",
+            "default.time.watermark.format":"HH:MM",
+            "barchart.viewmore.help.label":"Drag mouse to the left/right or use left/right arrow keys to see more data",
+            "default.percent":"%",
+            "timepicker.24.12.format.label":"Time picker gets 24 hours format from DB, now converted to 12 and returned back in 24 hours format",
+            "timepicker.12.24.format.label":"Time picker gets 12 hours format from DB, now converted to 24 and returned back in 12 hours format",
+            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
+            "timepicker.config.12.based.label":"Time picker gets 12 hours format from DB, now converted to 12 with config step and it will be returned in 12 hours only"
+        },
+        ar: {
+            "search.label": "\u0627\u0644\u0628\u062D\u062B",
+            "dataTable.columnFilter.label": "\u0625\u0638\u0647\u0627\u0631/\u0625\u062E\u0641\u0627\u0621 \u0627\u0644\u0639\u0645\u0648\u062F",
+            "dataTable.columnFilter.selectAll": "\u0627\u062E\u062A\u064A\u0627\u0631 \u0627\u0644\u0643\u0644",
+            "dataTable.sortable.label": "\u0642\u0627\u0628\u0644 \u0644\u0644\u062A\u0631\u062A\u064A\u0628",
+            "dataTable.sort.descending.label": "\u062A\u0646\u0627\u0632\u0644\u064A\u0627",
+            "dataTable.sort.ascending.label": "\u062A\u0635\u0627\u0639\u062F\u064A\u0627",
+            "dataTable.no.record.found": "\u0644\u0645 \u064A\u062A\u0645 \u0627\u0644\u0639\u062B\u0648\u0631 \u0639\u0644\u0649 \u0633\u062C\u0644\u0627\u062A",
+            "pagination.record.found": "\u0627\u0644\u0646\u062A\u0627\u0626\u062C \u0627\u0644\u062A\u064A \u062A\u0645 \u0627\u0644\u0639\u062B\u0648\u0631 \u0639\u0644\u064A\u0647\u0627",
+            "pagination.first.label": "\u0627\u0644\u0635\u0641\u062D\u0629 \u0627\u0644\u0623\u0648\u0644\u0649",
+            "pagination.previous.label": "\u0627\u0644\u0635\u0641\u062D\u0629 \u0627\u0644\u0633\u0627\u0628\u0642\u0629",
+            "pagination.last.label": "\u0627\u0644\u0635\u0641\u062D\u0629 \u0627\u0644\u0623\u062E\u064A\u0631\u0629",
+            "pagination.next.label": "\u0627\u0644\u0635\u0641\u062D\u0629 \u0627\u0644\u062A\u0627\u0644\u064A\u0629",
+            "pagination.per.page.label": "\u0641\u064A \u0643\u0644 \u0635\u0641\u062D\u0629",
+            "pagination.page.label": "\u0627\u0644\u0635\u0641\u062D\u0629",
+            "pagination.page.shortcut.label": "\u0627\u0644\u0630\u0647\u0627\u0628 \u0644\u0644\u0635\u0641\u062D\u0629 (End)",
+            "pagination.page.aria.label": "\u0627\u0644\u0630\u0647\u0627\u0628 \u0625\u0644\u0649 \u0627\u0644\u0635\u0641\u062D\u0629. \u0627\u0644\u0627\u062E\u062A\u0635\u0627\u0631 \u0647\u0648 End",
+            "pagination.page.of.label": "\u0645\u0646",
+            "search.title": "\u0627\u0644\u0628\u062D\u062B (Alt+Y)",
+            "search.aria.label": "\u0627\u0644\u0628\u062D\u062B \u0641\u064A \u062D\u0642\u0644 \u0627\u0644\u0646\u0635. \u0645\u0641\u062A\u0627\u062D \u0627\u0644\u0627\u062E\u062A\u0635\u0627\u0631 Alt+Y.",
+            "default.time.am":"\u0635\u0628\u0627\u062D\u0627",
+            "default.time.pm":"\u0645\u0633\u0627\u0621\u064B",
+            "default.time.format": "HH\:mm",
+            "default.timepicker.time.format": "HH\:mm",
+            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
+            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
+            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
+            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
+        },
+        en_AU: {
+            "search.label": "Search",
+            "dataTable.columnFilter.label": "Show/Hide Column",
+            "dataTable.columnFilter.selectAll": "Select All",
+            "dataTable.sortable.label": "Sortable",
+            "dataTable.sort.descending.label": "descending",
+            "dataTable.sort.ascending.label": "ascending",
+            "dataTable.no.record.found": "No records found",
+            "pagination.record.found": "Results found",
+            "pagination.first.label": "First page",
+            "pagination.previous.label": "Previous page",
+            "pagination.last.label": "Last page",
+            "pagination.next.label": "Next page",
+            "pagination.per.page.label": "Per Page",
+            "pagination.page.label": "Page",
+            "pagination.page.shortcut.label": "Go To Page (End)",
+            "pagination.page.aria.label": "Go To Page. Short cut is End",
+            "pagination.page.of.label": "of",
+            "search.title": "Search (Alt+Y)",
+            "search.aria.label": "Search text field. Short cut is Alt+Y.",
+            "default.time.watermark.format":"HH:MM am",
+            "timepicker.shortcuts.aria.label":"Press Escape to cancel and Enter to Select Time",
+            "default.time.format" : "HH:mm a",
+            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
+            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
+            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
+            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
+
+        },
+        en_GB: {
+            "search.label": "Search",
+            "dataTable.columnFilter.label": "Show/Hide Column",
+            "dataTable.columnFilter.selectAll": "Select All",
+            "dataTable.sortable.label": "Sortable",
+            "dataTable.sort.descending.label": "descending",
+            "dataTable.sort.ascending.label": "ascending",
+            "dataTable.no.record.found": "No records found",
+            "donutchart.svg.title":"Donut Chart Title",
+            "donutchart.svg.desc":"Donut Chart Description",
+            "pagination.record.found": "Results found",
+            "pagination.first.label": "First page",
+            "pagination.previous.label": "Previous page",
+            "pagination.last.label": "Last page",
+            "pagination.next.label": "Next page",
+            "pagination.per.page.label": "Per Page",
+            "pagination.page.label": "Page",
+            "pagination.page.shortcut.label": "Go To Page (End)",
+            "pagination.page.aria.label": "Go To Page. Short cut is End",
+            "pagination.page.of.label": "of",
+            "search.title": "Search (Alt+Y)",
+            "search.aria.label": "Search text field. Short cut is Alt+Y.",
+            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
+            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
+            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
+            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
+        },
+        en_IE: {
+            "search.label": "Search",
+            "dataTable.columnFilter.label": "Show/Hide Column",
+            "dataTable.columnFilter.selectAll": "Select All",
+            "dataTable.sortable.label": "Sortable",
+            "dataTable.sort.descending.label": "descending",
+            "dataTable.sort.ascending.label": "ascending",
+            "dataTable.no.record.found": "No records found",
+            "pagination.record.found": "Results found",
+            "pagination.first.label": "First page",
+            "pagination.previous.label": "Previous page",
+            "pagination.last.label": "Last page",
+            "pagination.next.label": "Next page",
+            "pagination.per.page.label": "Per Page",
+            "pagination.page.label": "Page",
+            "pagination.page.shortcut.label": "Go To Page (End)",
+            "pagination.page.aria.label": "Go To Page. Short cut is End",
+            "pagination.page.of.label": "of",
+            "search.title": "Search (Alt+Y)",
+            "search.aria.label": "Search text field. Short cut is Alt+Y.",
+            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
+            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
+            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
+            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
+        },
+        en_IN: {
+            "search.label": "Search",
+            "dataTable.columnFilter.label": "Show/Hide Column",
+            "dataTable.columnFilter.selectAll": "Select All",
+            "dataTable.sortable.label": "Sortable",
+            "dataTable.sort.descending.label": "descending",
+            "dataTable.sort.ascending.label": "ascending",
+            "dataTable.no.record.found": "No records found",
+            "pagination.record.found": "Results found",
+            "pagination.first.label": "First page",
+            "pagination.previous.label": "Previous page",
+            "pagination.last.label": "Last page",
+            "pagination.next.label": "Next page",
+            "pagination.per.page.label": "Per Page",
+            "pagination.page.label": "Page",
+            "pagination.page.shortcut.label": "Go To Page (End)",
+            "pagination.page.aria.label": "Go To Page. Short cut is End",
+            "pagination.page.of.label": "of",
+            "search.title": "Search (Alt+Y)",
+            "search.aria.label": "Search text field. Short cut is Alt+Y.",
+            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
+            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
+            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
+            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
+        },
+        es: {
+            "search.label": "Buscar",
+            "dataTable.columnFilter.label": "Mostrar/Ocultar columna",
+            "dataTable.columnFilter.selectAll": "Seleccionar todo",
+            "dataTable.sortable.label": "Que pueda ordenarse",
+            "dataTable.sort.descending.label": "descendente",
+            "dataTable.sort.ascending.label": "ascendente",
+            "dataTable.no.record.found": "No se encontraron registros.",
+            "donutchart.svg.desc":"Descripci\u00F3n de gr\u00E1fica de anillos",
+            "donutchart.svg.title":"T\u00EDtulo de gr\u00E1fica de anillos",
+            "pagination.record.found": "Resultados encontrados",
+            "pagination.first.label": "Primera p\u00E1gina",
+            "pagination.previous.label": "P\u00E1gina anterior",
+            "pagination.last.label": "\u00DAltima p\u00E1gina",
+            "pagination.next.label": "P\u00E1gina siguiente",
+            "pagination.per.page.label": "Por p\u00E1gina",
+            "pagination.page.label": "P\u00E1gina",
+            "pagination.page.shortcut.label": "Ir a la p\u00E1gina (Fin)",
+            "pagination.page.aria.label": "Ir a p\u00E1gina. Atajo es Fin",
+            "pagination.page.of.label": "de",
+            "search.title": "Buscar (Alt+Y)",
+            "search.aria.label": "Campo de b\u00FAsqueda de texto. El atajo es Alt+Y.",
+            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
+            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
+            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
+            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
+        },
+        fr: {
+            "search.label": "Rechercher",
+            "dataTable.columnFilter.label": "Afficher/cacher colonne",
+            "dataTable.columnFilter.selectAll": "Tout s\u00E9lectionner",
+            "dataTable.sortable.label": "Peut \u00EAtre tri\u00E9",
+            "dataTable.sort.descending.label": "descendant",
+            "dataTable.sort.ascending.label": "ascendant",
+            "dataTable.no.record.found": "Aucun enregistrement trouv\u00E9",
+            "pagination.record.found": "R\u00E9sultats trouv\u00E9s",
+            "pagination.first.label": "Premi\u00E8re page",
+            "pagination.previous.label": "Page pr\u00E9c\u00E9dente",
+            "pagination.last.label": "Derni\u00E8re page",
+            "pagination.next.label": "Page suivante",
+            "pagination.per.page.label": "Par page",
+            "donutchart.svg.desc":"Description du graphique en anneau",
+            "donutchart.svg.title":"Titre du graphique en anneau",
+            "pagination.page.label": "Page",
+            "pagination.page.shortcut.label": "Aller \u00E0 page (Fin)",
+            "pagination.page.aria.label": "Aller \u00E0 la page. Le raccourci est Fin.",
+            "pagination.page.of.label": "de",
+            "search.title": "Rechercher (Alt+Y)",
+            "search.aria.label": "Recherche de champ de texte. Raccourci Alt+Y.",
+            "default.time.am":"matin",
+            "default.time.pm":"apr\u00E8s-midi",
+            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
+            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
+            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
+            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
+        },
+        fr_CA: {
+            "search.label": "Rechercher",
+            "dataTable.columnFilter.label": "Afficher/cacher colonne",
+            "dataTable.columnFilter.selectAll": "Tout s\u00E9lectionner",
+            "dataTable.sortable.label": "Peut \u00EAtre tri\u00E9",
+            "dataTable.sort.descending.label": "descendant",
+            "dataTable.sort.ascending.label": "ascendant",
+            "donutchart.svg.desc":"Description du graphique en anneau",
+            "donutchart.svg.title":"Titre du graphique en anneau",
+            "dataTable.no.record.found": "Aucun enregistrement trouv\u00E9",
+            "pagination.record.found": "R\u00E9sultats trouv\u00E9s",
+            "pagination.first.label": "Premi\u00E8re page",
+            "pagination.previous.label": "Page pr\u00E9c\u00E9dente",
+            "pagination.last.label": "Derni\u00E8re page",
+            "pagination.next.label": "Page suivante",
+            "pagination.per.page.label": "Par page",
+            "pagination.page.label": "Page",
+            "pagination.page.shortcut.label": "Aller \u00E0 page (Fin)",
+            "pagination.page.aria.label": "Aller \u00E0 la page. Le raccourci est Fin.",
+            "pagination.page.of.label": "de",
+            "search.title": "Rechercher (Alt+Y)",
+            "search.aria.label": "Recherche de champ de texte. Raccourci Alt+Y.",
+            "default.time.am":"matin",
+            "default.time.pm":"apr\u00E8s-midi",
+            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
+            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
+            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
+            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
+        },
+        pt: {
+            "search.label": "Pesquisar",
+            "dataTable.columnFilter.label": "Exibir/ocultar coluna",
+            "dataTable.columnFilter.selectAll": "Selecionar todos",
+            "dataTable.sortable.label": "Classific\u00E1vel",
+            "donutchart.svg.desc":"Descri\u00E7\u00E3o do gr\u00E1fico de rosca",
+            "donutchart.svg.title":"T\u00EDtulo do gr\u00E1fico de rosca",
+            "dataTable.sort.descending.label": "decrescente",
+            "dataTable.sort.ascending.label": "crescente",
+            "dataTable.no.record.found": "N\u00E3o foram encontrados registros",
+            "pagination.record.found": "Resultados encontrados",
+            "pagination.first.label": "Primeira p\u00E1gina",
+            "pagination.previous.label": "P\u00E1gina anterior",
+            "pagination.last.label": "\u00DAltima p\u00E1gina",
+            "pagination.next.label": "pagination.next.label=Pr\u00F3xima p\u00E1gina",
+            "pagination.per.page.label": "Por p\u00E1gina",
+            "pagination.page.label": "P\u00E1gina",
+            "pagination.page.shortcut.label": "V\u00E1 para p\u00E1gina (End)",
+            "pagination.page.aria.label": "V\u00E1 para P\u00E1gina. A tecla de atalho \u00E9 End",
+            "pagination.page.of.label": "de",
+            "search.title": "Pesquisar (Alt+Y)",
+            "search.aria.label": "Campo para texto de busca. A tecla de atalho \u00E9 Alt+Y.",
+            "default.time.format" : "HH:MM a",
+            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
+            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
+            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
+            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
+        }
+    };
+
+    angular.module("xe-ui-components")
+        .config(['$translateProvider', function ($translateProvider) {
+            $translateProvider
+                .translations('en', translations.en)
+                .translations('ar', translations.ar)
+                .translations('en_AU', translations.en_AU)
+                .translations('en_GB', translations.en_GB)
+                .translations('en_IE', translations.en_IE)
+                .translations('en_IN', translations.en_IN)
+                .translations('es', translations.es)
+                .translations('fr', translations.fr)
+                .translations('fr_CA', translations.fr_CA)
+                .translations('pt', translations.pt)
+                .determinePreferredLanguage() // Determines user local by checking different local variable from the browser.
+                .fallbackLanguage('en')
+                .useSanitizeValueStrategy('escape');
         }]);
 }());
 (function () {
@@ -3593,15 +4168,15 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
 angular.module('pagination', [])
 .directive('xePagination', ["$http", "$q", function($http, $q) {
     var fetch = function(query) {
-        var deferred = $q.defer();          
-        
+        var deferred = $q.defer();
+
         url = query.endPoint + "?"
             + "searchString=" + (query.searchString ? query.searchString : "")
             + "&sortColumnName=" + (query.sortColumnName ? query.sortColumnName : "")
             + "&ascending=" + query.ascending
             + "&offset=" + (query.offset ? query.offset : "")
             + "&max=" + (query.max ? query.max : "");
-        
+
         $http.get(url).then(function onSuccess(data){
                 deferred.resolve(data);
             }).catch(function () {
@@ -3622,7 +4197,7 @@ angular.module('pagination', [])
         replace: true,
         require: "?^xeTableGrid",
         scope: {
-            model: "=",         
+            model: "=",
             endPoint: "=?",
             paginationConfig: "=?",
             resultsFound: "=",
@@ -3633,8 +4208,8 @@ angular.module('pagination', [])
         },
         templateUrl: "templates/pagination.html",
         controller: ['$scope', '$attrs', "$timeout", function($scope, $attrs, $timeout) {
-            var oldPageValue = 1;   
-            
+            var oldPageValue = 1;
+
             $scope.firstPrev = false;
             $scope.nextLast = false;
             $scope.onPage = 1;
@@ -3655,14 +4230,14 @@ angular.module('pagination', [])
                 $scope.pageOffsets.push($scope.offset);
                 $scope.pageOffsets.sort(function(a, b){ return a-b; });
             }
-            
-            $scope.offsetChanged = function(doFetch) {                              
+
+            $scope.offsetChanged = function(doFetch) {
                 calculateNumberOfPages();
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 if (doFetch) {
                     $scope.fetchData($scope.onPage, $scope.offset);
                 }
-            };      
+            };
 
             $scope.first = function() {
                 if ($scope.firstPrev) {
@@ -3670,7 +4245,7 @@ angular.module('pagination', [])
                 }
 
                 setPageValue(1);
-                
+
                 $scope.fetchData($scope.onPage, $scope.offset);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 focusPageInput();
@@ -3684,7 +4259,7 @@ angular.module('pagination', [])
                 var onPage = parseInt($scope.onPage);
                 onPage--;
                 setPageValue(onPage);
-                
+
                 $scope.fetchData($scope.onPage, $scope.offset, append);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 if ($scope.firstPrev) {
@@ -3692,15 +4267,15 @@ angular.module('pagination', [])
                 }
             };
 
-            $scope.next = function(append) {    
+            $scope.next = function(append) {
                 if ($scope.nextLast) {
                     return;
-                }   
+                }
 
                 var onPage = parseInt($scope.onPage);
                 onPage++;
                 setPageValue(onPage);
-                
+
                 $scope.fetchData($scope.onPage, $scope.offset, append);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 if ($scope.nextLast) {
@@ -3714,7 +4289,7 @@ angular.module('pagination', [])
                 }
 
                 setPageValue($scope.numberOfPages);
-                
+
                 $scope.fetchData($scope.onPage, $scope.offset);
                 disableButtons($scope.onPage, $scope.numberOfPages);
                 focusPageInput();
@@ -3740,7 +4315,7 @@ angular.module('pagination', [])
                 angular.element(event.target).val(oldPageValue);
             };
 
-            $scope.$watch("resultsFound", function(newValue, oldValue) {              
+            $scope.$watch("resultsFound", function(newValue, oldValue) {
                 $timeout(function() {
                     if (newValue === 0) {
                         setPageValue(0);
@@ -3750,7 +4325,7 @@ angular.module('pagination', [])
 
                     calculateNumberOfPages();
                     disableButtons($scope.onPage, $scope.numberOfPages);
-                });             
+                });
             });
 
             // Private functions
@@ -3770,14 +4345,14 @@ angular.module('pagination', [])
 
             var calculateNumberOfPages = function() {
                 $scope.numberOfPages = Math.ceil($scope.resultsFound / $scope.offset);
-                $scope.numberOfPages = $scope.numberOfPages < 1 ? 0 : $scope.numberOfPages;             
+                $scope.numberOfPages = $scope.numberOfPages < 1 ? 0 : $scope.numberOfPages;
 
                 if ($scope.onPage > $scope.numberOfPages) {
-                    setPageValue($scope.numberOfPages);              
+                    setPageValue($scope.numberOfPages);
                 }
             };
 
-            var disableButtons = function(pageNumber, numberOfPages) {              
+            var disableButtons = function(pageNumber, numberOfPages) {
                 pageNumber = parseInt(pageNumber);
                 numberOfPages = parseInt(numberOfPages);
                 var reminder = numberOfPages / pageNumber;
@@ -3793,27 +4368,27 @@ angular.module('pagination', [])
                     $scope.nextLast = false;
                 } else if(pageNumber <= 0 || (pageNumber > numberOfPages)) { // Out of range
                     $scope.firstPrev = true;
-                    $scope.nextLast = true;                 
+                    $scope.nextLast = true;
                 } else { // Between first and last page
                     $scope.nextLast = false;
                     $scope.firstPrev = false;
-                }               
+                }
             };
 
             /*
                 boolean append variable is used to check if we need append to the result set or not.
-                This is because on tablet we will not show the pagination but it components can still use pagination 
+                This is because on tablet we will not show the pagination but it components can still use pagination
                 code to make the continuous scroll happen.
             */
             $scope.fetchData = function(onPage, offset, append) {
-                if (!angular.isNumber(onPage)) {            
+                if (!angular.isNumber(onPage)) {
                     onPage = parseInt(onPage);
                 }
 
                 setPageValue(onPage);
 
                 var range = reassignRange(onPage, offset),
-                    query = {                       
+                    query = {
                         searchString: $scope.searchString,
                         sortColumnName: $scope.sortColumnName,
                         ascending: $scope.ascending,
@@ -3821,7 +4396,7 @@ angular.module('pagination', [])
                         max: range.max,
                         endPoint: $scope.endPoint,
                         onPage: onPage,
-                        pageSize:offset             
+                        pageSize:offset
                     };
 
                 // Show Load indicator
@@ -3863,8 +4438,8 @@ angular.module('pagination', [])
                         });
                 }
             };
-            
-            $scope.offsetChanged(false);            
+
+            $scope.offsetChanged(false);
         }],
         link: function(scope, elem, attributes, parentController) {
             // Assigning values from parentCOntroller to be used later in paginations controller.
@@ -3903,7 +4478,7 @@ angular.module('pagination', [])
 
             parentController.sort = function(sortColumnName, order) {
                 scope.sortColumnName = sortColumnName;
-                scope.ascending = order;        
+                scope.ascending = order;
                 scope.fetchData(scope.onPage, scope.offset);
             };
         }
@@ -4760,7 +5335,7 @@ angular.module('pagination', [])
           "attributes": {"label": {"key": "dataTable.column.term.heading"}}
        }]
     }]}
- 
+
  2. position: This configuration for each heading in $scope.headings array, orders the headings in the specified positions
  ex: position : {
                 desktop: 1, // displays in 1st position for desktop & in 2nd position for mobile
@@ -7028,7 +7603,6 @@ clearFocus = function (e) {
                             return d.data.percentage;
                         });
                     text.on("click", function(d) {
-                       alert("sdad");
                     });
                     text.selectAll("text").append('tspan')
                         .attr('x', '0')
@@ -8530,7 +9104,7 @@ clearFocus = function (e) {
     'use strict';
 
     angular.module('popupModal', ['xe-ui-components'])
-        .directive('xePopupModal', ['$timeout','$compile', function ($timeout, $compile) {
+        .directive('xePopupModal', ['$timeout', function ($timeout) {
             return {
                 restrict: 'EA',
                 scope: {
@@ -8544,55 +9118,69 @@ clearFocus = function (e) {
                     popupButtons:'?popupButtons'
                 }, // we want to insert custom content inside the directive
                 templateUrl: 'templates/modal.html',
-                controller: ['$scope', function ($scope) {
-                    $scope.hide = function () {
+                controller: ['$scope', function($scope) {
+                    $scope.hide = function() {
                         $scope.show = false;
+                        if ($scope.focusBackElement) {
+                            angular.element('#' + $scope.focusBackElement).focus();
+                        }
                     };
                     $scope.popupTitle = $scope.pageheader;
                     $scope.focusBackElement = $scope.focusbackelement;
                 }],
+                link: function(scope, elem, attrs) {
+                    elem.attr('id', attrs.id);
 
-                link: function (scope, ele) {
-                    // Keyboard Navigation
-                    angular.element('#xeModalMask').attr('tabindex', 0).focus();
-                    ele.on('keydown', function (event) {
+                    //Keyboard Navigation
+                    elem.attr('tabindex', 0).focus();
+
+                    if (attrs.pageheaderXeField) {
+                        elem.find('.xe-popup-header .xe-app-title').attr('xe-field', attrs.pageheaderXeField);
+                    }
+
+                    if (attrs.width) {
+                        elem.find('.xe-popup-container').css({
+                            'max-width': attrs.width,
+                            'width': attrs.width
+                        });
+                    }
+
+                    elem.on('keydown', function(e) {
                         //ESC Key and Enter
-                        if (event.keyCode === 27 || (document.activeElement.className === "xe-popup-close" && event.keyCode === 13)) {
+                        if (e.keyCode === 27 || (document.activeElement.className === "xe-popup-close" && e.keyCode === 13)) {
                             scope.show = false;
                             scope.$apply();
-                            if(null!=scope.focusBackElement && undefined!=scope.focusBackElement) {
+                            if(scope.focusBackElement) {
                                 angular.element("#" + scope.focusBackElement).focus();
                             }
+                        } else if (e.keyCode === 9 && e.shiftKey && angular.element(document.activeElement).hasClass('xe-popup-mask')) {
+                            elem.find('#buttonContainer xe-button:last button:not(:disabled):not(:hidden)').focus();
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
                         }
 
                     });
 
-                    $timeout(function () {
-                        angular.element("#tabOrdering").on('focus', function (event) {
-                            angular.element("#xePopupClose").focus();
+                    $timeout(function() {
+                        elem.on('focus', '#tabOrdering', function() {
+                            elem.find('#xePopupClose').focus();
                         });
 
-                        angular.element("#xePopupClose").on('keydown', function (event) {
-                            if (event.shiftKey) {
-                                if (event.keyCode === 9) {
-                                    if (angular.element("#buttonContainer").find('xe-button').length > 1) {
-                                        angular.element("#buttonContainer").find('xe-button:last').closest('xe-button').focus();
-                                    } else {
-                                        angular.element("#buttonContainer").find('xe-button').focus();
-                                    }
-                                }
-                            } else if (event.keyCode === 9) {
+                        elem.on('keydown', '#xePopupClose', function(e) {
+                            if (e.keyCode === 9 && e.shiftKey) {
+                                elem.find('#buttonContainer xe-button:last button:not(:disabled):not(:hidden)').focus();
+                            } else if (e.keyCode === 9) {
                                 return true;
                             }
-                            if (event.keyCode === 27 || (document.activeElement.className === "xe-popup-close" && event.keyCode === 13)) {
+                            if (e.keyCode === 27 || e.keyCode === 13) {
                                 scope.show = false;
                                 scope.$apply();
-                                if(null!=scope.focusBackElement && undefined!=scope.focusBackElement) {
+                                if(scope.focusBackElement) {
                                     angular.element("#" + scope.focusBackElement).focus();
                                 }
                             }
-                            event.preventDefault();
-                            event.stopImmediatePropagation();
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
                         });
 
                     }, 100);
@@ -8840,7 +9428,7 @@ clearFocus = function (e) {
                     $scope.hours = [];
                     $scope.minutes = [];
                     if (!$scope.displayFormat) {
-                        $scope.displayFormat = $filter('xei18n')('default.time.format');
+                        $scope.displayFormat = $filter('xei18n')('default.timepicker.time.format');
                         if ('default.time.watermark.format' != $filter('xei18n')('default.time.watermark.format')) {
                             $scope.xeTimePlaceholder = $filter('xei18n')('default.time.watermark.format');
                         }
@@ -8868,8 +9456,10 @@ clearFocus = function (e) {
                     $scope.formatTimeTo12Hours = function (inputValue, returnTranslated) {
                         var formattedValue;
                         if (inputValue) {
-                            var meridian;
-                            meridian = inputValue.split(" ")[1];
+                            var meridian = inputValue.split(" ")[1];;
+                            if ( inputValue.split ( " " ).length > 2 ) {
+                                meridian = inputValue.split ( " " ) [1] + inputValue.split ( " " ) [2];
+                            }
                             if (returnTranslated) {
                                 if (meridian === "PM") {
                                     meridian = $scope.meridiansList[1];
@@ -9155,6 +9745,7 @@ clearFocus = function (e) {
                                 .length > 0;
                         if (!isClickedElementChildOfPopup) {
                             scope.toggleContainer = false;
+                            ele.removeClass("time-picker-position");
                             scope.enableInput(ele);
                             scope.$digest();
                         }
@@ -9167,6 +9758,7 @@ clearFocus = function (e) {
                         angular.element(ele.find('div.timepickerContainer')).on('keydown', function (event) {
                             if (event.keyCode === keyCodes.F9) {
                                 scope.toggleContainer = false;
+                                ele.removeClass("time-picker-position");
                                 scope.$digest();
                                 scope.enableInput(ele);
                                 ele.find('div.input-container input.input-field').focus();
@@ -9180,7 +9772,9 @@ clearFocus = function (e) {
                             event.cancelBubble = true;
                         };
 
-                        convertTimeOnPageLoad(scope.displayModel);
+                        if(scope.displayModel){
+                            convertTimeOnPageLoad(scope.displayModel);
+                        }
 
                         var browser = scope.getBrowser();
                         var eventtype;
@@ -9206,8 +9800,10 @@ clearFocus = function (e) {
                             scope.showError = false;
                             scope.toggleContainer = scope.toggleContainer ? false : true;
                             if (scope.toggleContainer) {
+                                ele.addClass("time-picker-position");
                                 scope.disableInput(ele);
                             } else {
+                                ele.removeClass("time-picker-position");
                                 scope.enableInput(ele);
                             }
                             var enteredContent = ele.find('input.input-field').val();
@@ -9268,6 +9864,7 @@ clearFocus = function (e) {
                                 scope.enableInput(ele);
                                 scope.showError = false;
                                 scope.toggleContainer = false;
+                                ele.removeClass("time-picker-position");
                                 scope.$digest();
                                 ele.find('div.input-container input.input-field').focus();
                                 stopEventsDefault(event);
@@ -9301,6 +9898,7 @@ clearFocus = function (e) {
                                 scope.showError = false;
                                 var enteredContent = angular.element(ele).find('input.input-field').val();
                                 scope.toggleContainer = true;
+                                ele.addClass("time-picker-position");
                                 validateEnteredContent(enteredContent);
                                 scope.$digest();
                                 scope.disableInput(ele);
@@ -9461,6 +10059,7 @@ clearFocus = function (e) {
                             scope.showError = false;
                             scope.enableInput(ele);
                             scope.toggleContainer = false;
+                            ele.removeClass("time-picker-position");
                             scope.$digest();
                             ele.find('div.input-container input.input-field').focus();
                             stopEventsDefault(event);
@@ -9499,6 +10098,7 @@ clearFocus = function (e) {
                         function setTimePickerValue() {
                             var parentDiv = angular.element("#" + scope.xeId).closest('div').next();
                             scope.toggleContainer = false;
+                            ele.removeClass("time-picker-position");
                             var hrLiSelected = angular.element(parentDiv).find('ul:first li.active-timepicker').text();
                             var minLiSelected = angular.element(parentDiv).find('ul:last li.active-timepicker').text();
                             var meridianValue = angular.element(parentDiv).find('div.pushmeBorder').text();
@@ -9914,7 +10514,7 @@ clearFocus = function (e) {
                             var minFocus = ele.find('.minFocus');
                             var hrsFocus = ele.find('.hrsFocus');
                             var meridianFocus = ele.find('.meridianFocus');
-                            var cancelFocus = ele.find('.footercancelButton')
+                            var cancelFocus = ele.find('.footercancelButton');
                             angular.element(meridianFocus).removeClass('active-timepickerFocus');
                             angular.element(minFocus).removeClass('active-timepickerFocus');
                             angular.element(hrsFocus).removeClass('active-timepickerFocus');

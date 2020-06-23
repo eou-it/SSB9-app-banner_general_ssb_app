@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "UPDATE GURCCPR\r\nSET GURCCPR_CCPD_CODE=:GURCCPR_CCPD_CODE,\r\nGURCCPR_CONSENT_DATE = SYSDATE,\r\nGURCCPR_USER_ID=F_GetSpridenID(:parm_user_pidm),\r\nGURCCPR_DATA_ORIGIN ='OENR',\r\nGURCCPR_ACTIVITY_DATE = SYSDATE\r\nWHERE GURCCPR_PIDM = :parm_user_pidm",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select GURCCPR_PIDM AS ID, GURCCPR_CCPP_CODE, GURCCPR_SCDE_CODE,GURCCPR_CCPD_CODE, GURCCPR_CONSENT_DATE  \r\nfrom GURCCPR\r\nwhere GURCCPR_PIDM = :parm_user_pidm",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPConsentEUR",
+   "codePost": "INSERT INTO GURCCPR \r\n(GURCCPR_PIDM, \r\n GURCCPR_CCPP_CODE, \r\n GURCCPR_SCDE_CODE,\r\n GURCCPR_CCPD_CODE, \r\nGURCCPR_CONSENT_DATE, \r\nGURCCPR_USER_ID,\r\nGURCCPR_DATA_ORIGIN, \r\nGURCCPR_ACTIVITY_DATE)\r\nVALUES \r\n(:parm_user_pidm, \r\n'01', \r\n'01', \r\n:GURCCPR_CCPD_CODE, \r\nSYSDATE, \r\nF_GetSpridenID(:parm_user_pidm),\r\n'OENR',\r\nSYSDATE)",
+   "developerSecurity": []
+}

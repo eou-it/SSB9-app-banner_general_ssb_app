@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "declare\r\nl_status_ind spraddr.spraddr_status_ind%TYPE; \r\nl_atype_code VARCHAR2(30);\r\n\r\nbegin\r\nselect nvl(to_char(gurocfg_value), 'PR') as address_type\r\ninto l_atype_code\r\nfrom gurocfg\r\nwhere gurocfg_name = 'aip.home.address.type';\r\n\r\ngb_address.p_update(\r\n    p_pidm             => :parm_user_pidm,\r\n    p_atyp_code        => l_atype_code,\r\n    p_seqno            => :SPRADDR_SEQNO,\r\n    p_street_line1     => :SPRADDR_STREET_LINE1,\r\n    p_street_line2     => :SPRADDR_STREET_LINE2,\r\n    p_city             => :SPRADDR_CITY,\r\n    p_zip              => :SPRADDR_ZIP,\r\n    p_natn_code        => :SPRADDR_NATN_CODE,\r\n    p_user             => F_GetSpridenID(:parm_user_pidm), \r\n    p_status_ind       => l_status_ind);\r\nend;",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select spraddr_pidm, spraddr_atyp_code, spraddr_seqno, spraddr_status_ind, spraddr_street_line1, spraddr_street_line2, spraddr_city, spraddr_zip, spraddr_natn_code, spraddr_surrogate_id as ID\r\nfrom spraddr a1\r\nwhere a1.spraddr_pidm = :parm_user_pidm\r\nand a1.spraddr_atyp_code = (select nvl(to_char(gurocfg_value), 'PR') as address_type\r\n                            from gurocfg\r\n                            where gurocfg_name = 'aip.home.address.type')\r\nand a1.spraddr_seqno = (select max(a2.spraddr_seqno) \r\n                        from spraddr a2 \r\n                        where a2.spraddr_pidm = a1.spraddr_pidm\r\n                        and a2.spraddr_atyp_code = (select nvl(to_char(gurocfg_value), 'PR') as address_type\r\n                        from gurocfg\r\n                        where gurocfg_name = 'aip.home.address.type')\r\n                        and spraddr_to_date is  null\r\n                        and a2.spraddr_status_ind is null)",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPAddressEUR",
+   "codePost": "declare \r\ncursor pa is\r\nselect spraddr_pidm, spraddr_atyp_code, spraddr_seqno\r\nfrom spraddr\r\nwhere spraddr_pidm = :parm_user_pidm\r\nand spraddr_atyp_code = (select nvl(to_char(gurocfg_value), 'PR') as address_type\r\n                            from gurocfg\r\n                            where gurocfg_name = 'aip.home.address.type')\r\nand SPRADDR_TO_DATE is null\r\nand SPRADDR_STATUS_IND is null;\r\n\r\nl_seqno_inout  spraddr.spraddr_seqno%TYPE;\r\nl_atype_code VARCHAR2(30);\r\nl_rowid_out rowid;\r\n\r\nbegin\r\nselect nvl(to_char(gurocfg_value), 'PR') as address_type\r\ninto l_atype_code\r\nfrom gurocfg\r\nwhere gurocfg_name = 'aip.home.address.type';\r\n\r\nFOR perm_address in pa\r\nLOOP\r\nupdate SPRADDR \r\nset SPRADDR_STATUS_IND = 'I', SPRADDR_TO_DATE = sysdate\r\nWHERE SPRADDR_PIDM = perm_address.SPRADDR_PIDM \r\nAND SPRADDR_ATYP_CODE = perm_address.SPRADDR_ATYP_CODE \r\nAND SPRADDR_SEQNO = perm_address.SPRADDR_SEQNO;\r\nEND LOOP;\r\n\r\ngb_address.p_create(\r\n    p_pidm             => :parm_user_pidm,\r\n    p_atyp_code        => l_atype_code,\r\n    p_seqno_inout      => l_seqno_inout,\r\n    p_street_line1     => :SPRADDR_STREET_LINE1,\r\n    p_street_line2     => :SPRADDR_STREET_LINE2,\r\n    p_city             => :SPRADDR_CITY,\r\n    p_zip              => :SPRADDR_ZIP,\r\n    p_natn_code        => :SPRADDR_NATN_CODE,\r\n    p_from_date        => SYSDATE,\r\n    p_data_origin      => 'OENR',   \r\n    p_user             => F_GetSpridenID(:parm_user_pidm), \r\n    p_rowid_out        => l_rowid_out);\r\nend;",
+   "developerSecurity": []
+}

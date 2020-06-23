@@ -1,5 +1,5 @@
 /********************************************************************************
-  Copyright 2018 Ellucian Company L.P. and its affiliates.
+  Copyright 2019 Ellucian Company L.P. and its affiliates.
 ********************************************************************************/
 generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$rootScope', '$location', 'generalSsbService', 'piConfigResolve', '$filter', 'generalConfigResolve',
     function ($scope, $rootScope, $location, generalSsbService, piConfigResolve, $filter, generalConfigResolve) {
@@ -34,6 +34,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
             },
 
             init = function() {
+                var preferredNameParams = {pageName: 'Home', sectionName: 'My Profile'};
 
                 $scope.piConfig = piConfigResolve;
                 if(generalConfigResolve.isPersonalInformationEnabled) {
@@ -103,19 +104,9 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                 });
 
                 // Get user name for display
-                generalSsbService.getFromPersonalInfo('PersonalDetails').$promise.then(function (response) {
-                    var firstName = response && response.preferenceFirstName;
-
-                    if (firstName) {
-                        $scope.firstName = firstName;
-                    } else {
-                        generalSsbService.getFromPersonalInfo('UserName').$promise.then(function (response) {
-                            firstName = response && response.firstName;
-
-                            if (firstName) {
-                                $scope.firstName = firstName;
-                            }
-                        });
+                generalSsbService.getFromPersonalInfo('PreferredName', preferredNameParams).$promise.then(function (response) {
+                    if (response.preferredName) {
+                        $scope.landingPageGreetingName = response.preferredName;
                     }
                 });
 
@@ -135,7 +126,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
         $scope.isEmployee;
         $scope.appTilesForRole;
         $scope.isSingleTile;
-        $scope.firstName = '';
+        $scope.landingPageGreetingName = '';
         $scope.bannerId;
 
 
