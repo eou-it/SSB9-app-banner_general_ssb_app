@@ -97,6 +97,18 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                     );
                 }
 
+
+                if(generalConfigResolve.globalProxytUrl !== -1) {
+                    $scope.appTiles.push(
+                        {
+                            title: 'banner.generalssb.landingpage.globalProxy.title',
+                            desc: 'banner.generalssb.landingpage.globalProxy.description',
+                            url:  $scope.applicationContextRoot +'/ssb/globalProxy',
+                            icon: '../assets/Proxy_management1.png'
+                        }
+                    );
+                }
+
                 if(generalConfigResolve.isCanadaYearEndTaxEnabled && generalConfigResolve.canadaYearEndTaxUrl !== -1){
                     $scope.appTiles.push(
                         {
