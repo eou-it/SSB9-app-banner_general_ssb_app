@@ -104,7 +104,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                             title: 'banner.generalssb.landingpage.globalProxy.title',
                             desc: 'banner.generalssb.landingpage.globalProxy.description',
                             url:  $scope.applicationContextRoot +'/ssb/globalProxy',
-                            icon: '../assets/Proxy_management1.png'
+                            icon: '../assets/global_proxy_tile.svg'
                         }
                     );
                 }
