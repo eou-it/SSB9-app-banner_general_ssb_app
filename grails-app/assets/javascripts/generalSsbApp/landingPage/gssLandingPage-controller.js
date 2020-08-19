@@ -98,7 +98,7 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                 }
 
 
-                if(generalConfigResolve.globalProxytUrl !== -1) {
+                if(generalConfigResolve.globalProxyUrl !== -1) {
                     $scope.appTiles.push(
                         {
                             title: 'banner.generalssb.landingpage.globalProxy.title',
