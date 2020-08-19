@@ -8,12 +8,12 @@ buildscript {
         classpath "gradle.plugin.com.energizedwork.webdriver-binaries:webdriver-binaries-gradle-plugin:1.1"
         classpath "gradle.plugin.com.energizedwork:idea-gradle-plugins:1.4"
         classpath "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
-        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.6"
-        classpath "net.saliman:gradle-cobertura-plugin:2.6.0"        
+        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.15.1"
+        classpath "net.saliman:gradle-cobertura-plugin:2.6.0"
     }
 }
 
-version "9.5"
+version "9.6"
 group "banner_general_ssb_app"
 
 apply plugin:"eclipse"
@@ -43,7 +43,12 @@ dependencies {
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
     compile "org.springframework.boot:spring-boot-starter-actuator"
-    provided "org.springframework.boot:spring-boot-starter-tomcat"
+    provided ("org.springframework.boot:spring-boot-starter-tomcat") {
+           exclude module:'tomcat-embed-core'
+           exclude module:'tomcat-embed-websocket'
+       }
+   	provided "org.apache.tomcat.embed:tomcat-embed-core:8.5.51"
+    provided "org.apache.tomcat.embed:tomcat-embed-websocket:8.5.51"
     compile "org.grails:grails-web-boot"
     compile "org.grails:grails-logging"
     compile "org.grails:grails-plugin-rest"
@@ -57,13 +62,17 @@ dependencies {
     compile "org.grails.plugins:scaffolding"
     compile "org.grails.plugins:events"
     compile "org.grails.plugins:hibernate5"
-    compile "org.hibernate:hibernate-core:5.1.5.Final"
+    compile "org.hibernate:hibernate-core:5.1.17.Final"
+    compile "org.hibernate:hibernate-ehcache:5.1.17.Final"
     compile "org.grails.plugins:gsp"
     console "org.grails:grails-console"
-    profile "org.grails.profiles:web"
+    profile ("org.grails.profiles:web") {
+        exclude module:'base'
+    }
+    profile "org.grails.profiles:base:4.0.1"
     runtime "org.glassfish.web:el-impl:2.1.2-b03"
     runtime "org.apache.tomcat:tomcat-jdbc"
-    runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.14.6"
+    runtime "com.bertramlabs.plugins:asset-pipeline-grails:3.0.6"
     testCompile "org.grails:grails-gorm-testing-support"
     testCompile "org.grails:grails-web-testing-support"
     testCompile "org.grails.plugins:geb"
@@ -71,16 +80,12 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-firefox-driver:3.6.0"
     testRuntime "org.seleniumhq.selenium:selenium-remote-driver:3.6.0"
     testRuntime "org.seleniumhq.selenium:selenium-api:3.6.0"
-    
-    compile "org.grails.plugins:hibernate5"
-    compile "org.hibernate:hibernate-core:5.1.5.Final"
-    compile "org.hibernate:hibernate-ehcache:5.1.5.Final"
-   
+
 
     compile "org.grails.plugins:ckeditor:4.5.9.0"
 
     compile "javax.jms:jms:1.1"
-    compile "org.springframework:spring-jms:2.5"
+    compile "org.springframework:spring-jms:4.3.25.RELEASE"
 
     compile "org.json:json:20090211"
 
@@ -114,7 +119,7 @@ integrationTest {
         ignoreFailures = true
 }
 
-    
+
 ext {
     grails {
         pathingJar = true
@@ -123,7 +128,7 @@ ext {
 
 bootRun {
     jvmArgs('-Dspring.output.ansi.enabled=always','-Xms1024m', '-Xmx8192m')
-    systemProperties(System.properties)    
+    systemProperties(System.properties)
     addResources = true
 }
 
@@ -138,16 +143,20 @@ tasks.withType(Test) {
     systemProperty "webdriver.gecko.driver", System.getProperty('webdriver.gecko.driver')
 }
 
-assets {
-    minifyJs = false
-    minifyCss = false
-    enableSourceMaps = false
-    //minfyOptions are to be provided when application has javascript code written in ES6.
-    minifyOptions= [
-            languageMode: 'ES6',
-            targetLanguage: 'ES5', //Can go from ES6 to ES5 for those bleeding edgers
-            optimizationLevel: 'SIMPLE' //Or ADVANCED or WHITESPACE_ONLY
-    ]
+//assets {
+//    minifyJs = false
+//    minifyCss = false
+//    enableSourceMaps = false
+//    // minifyOptions are to be provided when application has JavaScript code written in ES6.
+//    minifyOptions= [
+//            languageMode: 'ES6',
+//            targetLanguage: 'ES5', //Can go from ES6 to ES5 for those bleeding edgers
+//            optimizationLevel: 'SIMPLE' //Or ADVANCED or WHITESPACE_ONLY
+//    ]
+//}
+
+configurations {
+    runtime.exclude group: "org.grails", module: "grails-gorm-testing-support"
 }
 
 grails {
@@ -173,16 +182,19 @@ grails {
 def warName;
 
 war {
-    assets.minifyJs = false
-    assets.minifyCss = false
-    assets.enableSourceMaps = false
+  
+    assets.minifyJs = true
+    assets.minifyCss = true   
+    assets.enableSourceMaps = true
+    
 
     assets.minifyOptions= [
             languageMode: 'ES6',
             targetLanguage: 'ES5', //Can go from ES6 to ES5 for those bleeding edgers
-            optimizationLevel: 'SIMPLE' //Or ADVANCED or WHITESPACE_ONLY
+            optimizationLevel: 'SIMPLE', //Or ADVANCED or WHITESPACE_ONLY
+            excludes :["**/modules/aipNonAdminApp-mf.js"] //added for to support PB dynamic generate script minify issue in AIP USER page.
+           
     ]
-
     archiveName = "${rootProject.name}" + "-" + version + ".war"
     warName = archiveName
 
@@ -194,7 +206,7 @@ war {
 }
 
 assemble.doLast {
-    
+
     def packageDir = "build/libs/packaging/" + "${rootProject.name}" + "-" + version
     def releaseDir = "build/libs/Release"
     ant.mkdir(dir: packageDir)
@@ -208,25 +220,23 @@ assemble.doLast {
 
     ant.move(file: packageDir + "/WEB-INF/lib/ojdbc6-11.2.0.1.0.jar", toFile: releaseDir + "/ojdbc6.jar")
     ant.move(file: packageDir + "/WEB-INF/lib/xdb6-11.2.0.4.jar", toFile: releaseDir + "/xdb6.jar")
-
     ant.delete(file: packageDir + "/WEB-INF/lib/stax-api-1.0.1.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/xml-apis-1.4.01.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/xml-apis-1.3.04.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/xmlbeans-2.3.0.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/xmlbeans-2.6.0.jar")
-    ant.delete(file: packageDir + "/WEB-INF/lib/xercesImpl-2.10.0.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/xalan-2.7.1.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/xalan-xalan-2.7.1.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/xalan-2.7.2.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/javassist-3.8.0.GA.jar")
-    ant.delete(file: packageDir + "/WEB-INF/lib/xercesImpl-2.11.0.jar")
+    ant.delete(file: packageDir + "/WEB-INF/lib/xercesImpl-2.12.0.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/stax-api-1.0-2.jar")
-    ant.delete(file: packageDir + "/WEB-INF/lib/xml-apis-ext-1.3.04.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/xmlParserAPIs-2.6.2.jar")
-    ant.delete(file: packageDir + "/WEB-INF/lib/xom-1.1.jar")
+    ant.delete(file: packageDir + "/WEB-INF/lib/xom-1.2.10.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/bcprov-jdk14-138.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/bcprov-jdk14-1.38.jar")
-    
+    ant.delete(file: packageDir + "/WEB-INF/lib/tomcat-embed-logging-log4j-8.5.2.jar")
+
     ant.delete(file: "build/libs/" + "${rootProject.name}" + "-" + version + ".war.original")
     ant.zip(destfile: releaseDir + "/" + "${rootProject.name}" + "-" + version + ".war", basedir: packageDir, encoding: "UTF-8")
     ant.delete(dir: packageDir)

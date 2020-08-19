@@ -269,23 +269,29 @@ BANNER_AIP_EXCLUDE_LIST='aipActionItemPosting|aipAdmin|aip|aipPageBuilder|BCM|ab
    clamav.connectionTimeout = 5000 	  /* Connection timeout to connect to clamd process.Time in milliseconds. Default is 5000*/
 
 
-/*********************************************************************************
- *                                                                               *
- *                        Config Job Configurations                              *
- *                                                                               *
- *     The job scheduled to update the configuration properties                  *
- *     from DB runs at Application start and consecutive job runs at             *
- *     the interval configured (in milliseconds)                                 *
- *                                                                               *
- *     actualCount - Actual count the number of times the config job would run   *
- *     If the value is -1, the job will run indefinitely.                        *
- *     If the value is 0, the job will not run.                                  *
- *     If not configured, the default value is -1.                               *
- *                                                                               *
- *********************************************************************************/
-configJob.interval = 120000
-configJob.actualCount = -1
 
+/** ********************************************************************************
+ *                                                                                 *
+ *                   SS Config Dynamic Loading Job Properties                      *
+ *                                                                                 *
+ * Properties to set the interval and the number of times the config job would run *
+ * for ConfigJob.groovy i.e. the job scheduled to update the configuration 		   *
+ * properties from DB. We recommend configuring interval of the configJob in 	   *
+ * such a way that it does not run as often, to help improve performance.          *
+ *                                                                                 *
+ * interval - in milliseonds, this is to configure the interval at which the       *
+ * quartz scheduler should run. If it is not configured, the default value is 60000*
+ *                                                                                 *
+ * actualCount - the number of times the config job would run. If the value is -1, *
+ * the job will run indefinitely. If the value is 0, the job will not run.         *
+ * If not configured, the default value is -1                                      *
+ *   																			   *
+ ******************************************************************************** **/
+
+configJob {
+    interval = 86400000 // 24 hours
+    actualCount = -1
+}
 
 /*******************************************************************************
  *                                                                             *

@@ -43,12 +43,19 @@ build.number.uuid = "7f8235d8-2a51-4f2f-8516-47d913caf346" // specific UUID for 
 build.number.base.url = "http://m037169:8081/BuildNumberServer/buildNumber?method=getNextBuildNumber&uuid="
 app.name="GeneralSelfService"
 app.appId="GENERAL_SS"
-app.platform.version="9.33.1.2"
+app.platform.version="9.34"
 
 defaultResponseHeadersMap = [
     "X-Content-Type-Options": "nosniff",
     "X-XSS-Protection": "1; mode=block"
 ]
+
+endpoints.enabled= false
+management.contextPath= '/actuator'
+management.security.enabled=false
+endpoints.health.enabled=true
+management.endpoint.health.'show-details'= 'always'
+management.health.diskspace.threshold=1073741824  //1GB
 
 server.'contextPath' = '/BannerGeneralSsb'
 spring.jmx.enabled=false
@@ -234,21 +241,24 @@ grails.plugin.springsecurity.interceptUrlMap = [
         //For now use a page builder dummy page for cas aut
         [pattern:'/customPage/page/pbadm.ssoauth/**' , access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', pageBuilder.adminRoles]],
 
-        [pattern:'/selfServiceMenu/**',           access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/selfServiceMenu/**',       access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/menu**',                   access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/about/**',                 access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/generalSsbApp/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/keepAlive/data**',         access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/dateConverter/**',             access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/ssb/dateConverter/**',         access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/selfServiceMenu/**',                 access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/selfServiceMenu/**',             access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/menu**',                         access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/about/**',                       access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/generalSsbApp/**',                   access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/keepAlive/data**',               access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/dateConverter/**',                   access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/dateConverter/**',               access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/',									access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/login/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/index**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/logout/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/ssb/logout/**',						access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern: '/assets/**',                         access: ['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/ssb/logout/redirect',				access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern: '/assets/**',                         access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/resetPassword/**',					access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern: '/static/js/**',                      access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern: '/static/css/**',                     access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/js/**',								access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/css/**',								access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/images/**',							access:['IS_AUTHENTICATED_ANONYMOUSLY']],
@@ -277,6 +287,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/ssb/userPreference/**',				access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern:'/ssb/studentAttendanceTracking/**',	access:['ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
         [pattern:'/ssb/studentCommonDashboard/**',		access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
+        [pattern:'/actuator/health/**',access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern: '/**',								access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-CLASSLISTADMINISTRATOR_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']]
 ]
 

@@ -142,47 +142,7 @@ banner {
     // defaultPhoto = <Fully qualified path to the photo to use if no user photo is available.>
 }
 
-/********************************************************************************
- *                                                                              *
- *                 Banner 8 SS URLs                                             *
- *                                                                              *
- ***************************************************************************** **/
 
-banner8.SS.locale.url = [
-        default: 'http://<host_name>:<port_number>/<banner8>/DEFAULT/',
-        en     : 'http://<host_name>:<port_number>/<banner8>/EN/',
-        en_US  : 'http://<host_name>:<port_number>/<banner8>/enUS/',
-        en_AU  : 'http://<host_name>:<port_number>/<banner8>/enAU/',
-        en_GB  : 'http://<host_name>:<port_number>/<banner8>/enGB/',
-        en_IE  : 'http://<host_name>:<port_number>/<banner8>/enIE/',
-        en_IN  : 'http://<host_name>:<port_number>/<banner8>/enIN/',
-        fr     : 'http://<host_name>:<port_number>/<banner8>/FR/',
-        fr_CA  : 'http://<host_name>:<port_number>/<banner8>/frCA/',
-        pt     : 'http://<host_name>:<port_number>/<banner8>/PT/',
-        es     : 'http://<host_name>:<port_number>/<banner8>/ES/',
-        ar     : 'http://<host_name>:<port_number>/<banner8>/AR/'
-]
 
-// ********************************************************************************
-//    MEP Setup
-// ********************************************************************************
-//To use MEP context sensitive 8.x SSB URLs in menus uncomment the mep.banner8.locale.SS.url lines
-/***********************************************************************
-mep.banner8.SS.locale.url = [
-        GVU   :
-                [
-                        default: 'sampleUrlDefault ',
-                        "ar"   : 'sampleUrlAR ',
-                        "fr"   : 'sampleUrlfr',
-                        "fr_CA": 'sampleUrlfrca'
-                ],
-        BANNER:
-                [
-                        default: 'sampleUrlDefault',
-                        "ar"   : 'sampleUrlAR',
-                        "fr"   : 'sampleUrlfr ',
-                        "fr_CA": 'sampleUrlfrca'
-                ]
-]
 
 ************************************************************************/

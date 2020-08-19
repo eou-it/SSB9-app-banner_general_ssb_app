@@ -1,7 +1,6 @@
 /********************************************************************************
-  Copyright 2018 Ellucian Company L.P. and its affiliates.
+  Copyright 2018-2020 Ellucian Company L.P. and its affiliates.
  ********************************************************************************/
-import banner.general.ssb.app.GeneralController
 import grails.converters.JSON
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
@@ -15,20 +14,13 @@ import org.grails.web.servlet.mvc.GrailsWebRequest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.context.SecurityContextHolder
-
 import net.hedtech.banner.testing.BaseIntegrationTestCase
-
-import net.hedtech.banner.general.AccountListingController
 
 @Integration
 @Rollback
 class GeneralControllerTests extends BaseIntegrationTestCase {
 
     def controller
-
 
     public GrailsWebRequest mockRequest() {
         GrailsMockHttpServletRequest mockRequest = new GrailsMockHttpServletRequest();
@@ -61,7 +53,7 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
     @Test
     void testLandingPage(){
         SSBSetUp ('HOP510001', '111111')
-        
+
         controller.request.contentType = "text/json"
         controller.landingPage()
         def dataForNullCheck = controller.response.contentAsString
@@ -85,15 +77,15 @@ class GeneralControllerTests extends BaseIntegrationTestCase {
     @Test
     void testGetGeneralConfig(){
         SSBSetUp( 'GDP000005', '111111')
-
         controller.request.contentType = "text/json"
         controller.getGeneralConfig()
         def dataForNullCheck = controller.response.contentAsString
         def data = JSON.parse(dataForNullCheck)
         assertNotNull data
-        assertFalse(data.isDirectDepositEnabled)
+        assertTrue(data.isDirectDepositEnabled)
         assertTrue(data.isPersonalInformationEnabled)
         assertTrue(data.isProxyManagementEnabled)
+        assertFalse (data.isCanadaYearEndTaxEnabled)
         assertEquals(-1, data.proxyManagementUrl)
         assertNotNull data.isActionItemEnabled
     }
