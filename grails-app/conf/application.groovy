@@ -150,6 +150,7 @@ formControllerMap = [
         'general'                   : ['SELFSERVICE'],
         'proxy'                     : ['SELFSERVICE'],
         'proxymanagement'           : ['SELFSERVICE-STUDENT', 'SELFSERVICE-EMPLOYEE'],
+        'globalproxy'               : ['SELFSERVICE'],
         'theme'                     : ['SELFSERVICE'],
         'themeeditor'               : ['SELFSERVICE'],
         'directdeposit'             : ['SELFSERVICE-STUDENT', 'SELFSERVICE-EMPLOYEE'],
