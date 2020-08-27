@@ -141,8 +141,3 @@ banner {
     picturesPath = System.getProperty( 'base.dir' ) + '/test/images'
     // defaultPhoto = <Fully qualified path to the photo to use if no user photo is available.>
 }
-
-
-
-
-************************************************************************/
