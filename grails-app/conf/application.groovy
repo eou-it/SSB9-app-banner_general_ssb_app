@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2013-2019 Ellucian Company L.P. and its affiliates.
+ Copyright 2013-2020 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 //import net.hedtech.banner.configuration.ApplicationConfigurationUtils as ConfigFinder
@@ -177,6 +177,7 @@ formControllerMap = [
         'keepalive'                 : ['SELFSERVICE'],
         'dateconverter'             : ['SELFSERVICE', 'GUAGMNU'],
         'menu'                      : ['SELFSERVICE', 'GUAGMNU'],
+        'answersurvey'              : ['SELFSERVICE'],
 
 
         //PAGEBUILDER///////
@@ -225,6 +226,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/ssb/PersonalInformationDetails/**', access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
         [pattern:'/ssb/PersonalInformationPicture/**', access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
         [pattern:'/ssb/PersonalInformationQA/**',      access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/answerSurvey/**',               access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
 
         [pattern:'/ssb/aipAdmin/**',                   access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
         [pattern:'/ssb/aipReview/**',                  access: ['ROLE_SELFSERVICE-ACTIONITEMREVIEWER_BAN_DEFAULT_M']],
