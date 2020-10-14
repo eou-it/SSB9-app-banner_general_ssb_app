@@ -44,6 +44,7 @@ build.number.base.url = "http://m037169:8081/BuildNumberServer/buildNumber?metho
 app.name="GeneralSelfService"
 app.appId="GENERAL_SS"
 app.platform.version="9.34"
+contextSecurityEnabled = true
 
 defaultResponseHeadersMap = [
     "X-Content-Type-Options": "nosniff",
