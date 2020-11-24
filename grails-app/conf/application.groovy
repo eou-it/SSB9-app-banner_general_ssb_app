@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2013-2019 Ellucian Company L.P. and its affiliates.
+ Copyright 2013-2020 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 //import net.hedtech.banner.configuration.ApplicationConfigurationUtils as ConfigFinder
@@ -43,7 +43,8 @@ build.number.uuid = "7f8235d8-2a51-4f2f-8516-47d913caf346" // specific UUID for 
 build.number.base.url = "http://m037169:8081/BuildNumberServer/buildNumber?method=getNextBuildNumber&uuid="
 app.name="GeneralSelfService"
 app.appId="GENERAL_SS"
-app.platform.version="9.34"
+app.platform.version="9.34.1"
+contextSecurityEnabled = true
 
 defaultResponseHeadersMap = [
     "X-Content-Type-Options": "nosniff",
@@ -177,6 +178,7 @@ formControllerMap = [
         'keepalive'                 : ['SELFSERVICE'],
         'dateconverter'             : ['SELFSERVICE', 'GUAGMNU'],
         'menu'                      : ['SELFSERVICE', 'GUAGMNU'],
+        'answersurvey'              : ['SELFSERVICE'],
 
 
         //PAGEBUILDER///////
@@ -225,6 +227,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/ssb/PersonalInformationDetails/**', access: ['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M', 'ROLE_SELFSERVICE_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALUMNI_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M', 'IS_AUTHENTICATED_FULLY','ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
         [pattern:'/ssb/PersonalInformationPicture/**', access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
         [pattern:'/ssb/PersonalInformationQA/**',      access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
+        [pattern:'/ssb/answerSurvey/**',               access: ['ROLE_SELFSERVICE-ALLROLES_BAN_DEFAULT_M']],
 
         [pattern:'/ssb/aipAdmin/**',                   access: ['ROLE_SELFSERVICE-ACTIONITEMADMIN_BAN_DEFAULT_M']],
         [pattern:'/ssb/aipReview/**',                  access: ['ROLE_SELFSERVICE-ACTIONITEMREVIEWER_BAN_DEFAULT_M']],
