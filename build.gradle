@@ -13,7 +13,7 @@ buildscript {
     }
 }
 
-version "9.7"
+version "9.8"
 group "banner_general_ssb_app"
 
 apply plugin:"eclipse"
@@ -88,6 +88,20 @@ dependencies {
     compile "org.springframework:spring-jms:4.3.25.RELEASE"
 
     compile "org.json:json:20090211"
+    
+    compile ("org.grails:grails-core"){
+       exclude group: 'org.yaml', module:'snakeyaml'
+    }
+    compile group: 'org.yaml', name: 'snakeyaml', version: '1.27'
+    
+    compile("org.springframework.boot:spring-boot-starter-actuator"){
+        exclude module:'jackson-databind'
+        exclude module:'jackson-annotations'
+        exclude module:'jackson-core'
+    }
+    compile "com.fasterxml.jackson.core:jackson-databind:2.9.10.6"
+    compile "com.fasterxml.jackson.core:jackson-annotations:2.9.10"
+    compile "com.fasterxml.jackson.core:jackson-core:2.9.10"
 
 }
 

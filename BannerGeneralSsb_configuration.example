@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015-2020 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2021 Ellucian Company L.P. and its affiliates.
  *********************************************************************************/
 
 /******************************************************************************
@@ -167,7 +167,9 @@ grails.plugin.springsecurity.saml.metadata.sp.defaults = [
         requireArtifactResolveSigned: false,
         requireLogoutRequestSigned: false,
         requireLogoutResponseSigned: false
-]*/
+]
+grails.plugin.springsecurity.saml.maxAuthenticationAge = 1800  //value in seconds
+*/
 
 
 
