@@ -1,5 +1,5 @@
 /********************************************************************************
-  Copyright 2019-2020 Ellucian Company L.P. and its affiliates.
+  Copyright 2019-2021 Ellucian Company L.P. and its affiliates.
 ********************************************************************************/
 generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$rootScope', '$location', 'generalSsbService', 'piConfigResolve', '$filter', 'generalConfigResolve',
     function ($scope, $rootScope, $location, generalSsbService, piConfigResolve, $filter, generalConfigResolve) {
