@@ -48,7 +48,7 @@
                     }
                 }
 
-                if (!isExcluded) {
+                if (!isExcluded && referrerUrl.indexOf("/ssb/") !== -1) {
                     // Track this page
                     sessionStorage.setItem('genMainCallingPage', referrerUrl);
                 }
