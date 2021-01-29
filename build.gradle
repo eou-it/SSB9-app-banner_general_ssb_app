@@ -231,7 +231,7 @@ assemble.doLast {
     println '.....Unzipping ...' + "build/libs/${rootProject.name}" + "-" + version + ".war"
     ant.unzip(src: "build/libs/" + warName, dest: packageDir, overwrite: "true", encoding: "UTF-8")
 
-    ant.move(file: packageDir + "/WEB-INF/lib/ojdbc6-11.2.0.1.0.jar", toFile: releaseDir + "/ojdbc6.jar")
+    ant.move(file: packageDir + "/WEB-INF/lib/ojdbc8.jar", toFile: releaseDir + "/ojdbc8.jar")
     ant.move(file: packageDir + "/WEB-INF/lib/xdb6-11.2.0.4.jar", toFile: releaseDir + "/xdb6.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/stax-api-1.0.1.jar")
     ant.delete(file: packageDir + "/WEB-INF/lib/xml-apis-1.4.01.jar")
