@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015-2020 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2021 Ellucian Company L.P. and its affiliates.
  *********************************************************************************/
 
 /******************************************************************************
@@ -167,7 +167,9 @@ grails.plugin.springsecurity.saml.metadata.sp.defaults = [
         requireArtifactResolveSigned: false,
         requireLogoutRequestSigned: false,
         requireLogoutResponseSigned: false
-]*/
+]
+grails.plugin.springsecurity.saml.maxAuthenticationAge = 1800  //value in seconds
+*/
 
 
 
@@ -295,81 +297,76 @@ configJob {
 
 /*******************************************************************************
  *                                                                             *
- *                  Action Item processing Configurations                      *
+ *                  Action Item processing and  Quartz Configurations          *
  *                                                                             *
  *******************************************************************************/
-aip {
-    weblogicDeployment = false
+general.aip.enabled = false
 
-    actionItemPostMonitor {
-        enabled = false
-        monitorIntervalInSeconds = 10
-    }
+if(general.aip.enabled){
+	aip {
+        actionItemPostMonitor {
+            enabled = true
+            monitorIntervalInSeconds = 10
+        }
 
-    actionItemPostWorkProcessingEngine {
-        enabled = false
-        maxThreads = 1
-        maxQueueSize = 5000
-        continuousPolling = true
-        pollingInterval = 2000
-        deleteSuccessfullyCompleted = false
-    }
+        actionItemPostWorkProcessingEngine {
+            enabled = true
+            maxThreads = 1
+            maxQueueSize = 5000
+            continuousPolling = true
+            pollingInterval = 2000
+            deleteSuccessfullyCompleted = false
+        }
 
-    actionItemJobProcessingEngine {
-        enabled = false
-        maxThreads = 2
-        maxQueueSize = 5000
-        continuousPolling = true
-        pollingInterval = 2000
-        deleteSuccessfullyCompleted = false
-    }
+        actionItemJobProcessingEngine {
+            enabled = true
+            maxThreads = 2
+            maxQueueSize = 5000
+            continuousPolling = true
+            pollingInterval = 2000
+            deleteSuccessfullyCompleted = false
+        }
 
-    scheduler {
-        enabled = false
-        idleWaitTime = 30000
-    }
-}
+        scheduler {
+            enabled = true
+            idleWaitTime = 30000
+            clusterCheckinInterval = 15000
+        }
 
+	}
+	quartz {
+        autoStartup = true
+        jdbcStore =  false
+        scheduler.skipUpdateCheck = true
+        scheduler.instanceName = 'Action Item Quartz Scheduler'
+        scheduler.instanceId = 'AIP'
+        waitForJobsToCompleteOnShutdown=true
+        purgeQuartzTablesOnStartup=false
+        pluginEnabled=true
 
-/*******************************************************************************
- *                                                                             *
- *                  Action Item Processing Quartz Configurations               *
- *                                                                             *
- *******************************************************************************/
-quartz {
-
-     autoStartup = aip.scheduler.enabled ==true ? true: false
-     jdbcStore =  false
-
-       scheduler.skipUpdateCheck = true
-       scheduler.instanceName = 'Action Item Quartz Scheduler'
-       scheduler.instanceId = 'AIP'
-       waitForJobsToCompleteOnShutdown=true
-       purgeQuartzTablesOnStartup=false
-       pluginEnabled=true
-
-       if (aip.scheduler.idleWaitTime) {
+        if (aip.scheduler.idleWaitTime) {
            scheduler.idleWaitTime =aip.scheduler.idleWaitTime
-       }
+        }
 
-       boolean isWebLogic = aip.weblogicDeployment == true
-       if (isWebLogic) {
+        boolean isWebLogic = targetServer == 'weblogic'?true:false
+        if (isWebLogic) {
            println( "Setting driverDelegateClass to org.quartz.impl.jdbcjobstore.oracle.weblogic.WebLogicOracleDelegate" )
            jobStore.driverDelegateClass = 'org.quartz.impl.jdbcjobstore.oracle.weblogic.WebLogicOracleDelegate'
-       } else {
+        } else {
            println( "Setting driverDelegateClass to org.quartz.impl.jdbcjobstore.oracle.OracleDelegate" )
            jobStore.driverDelegateClass = 'org.quartz.impl.jdbcjobstore.oracle.OracleDelegate'
-       }
-       jobStore.class = 'net.hedtech.banner.general.scheduler.quartz.BannerDataSourceJobStoreCMT'
+        }
+        jobStore.class = 'net.hedtech.banner.general.scheduler.quartz.BannerDataSourceJobStoreCMT'
 
-       jobStore.tablePrefix = 'GCRQRTZ_' // Share tables. AIP has own instance
-       jobStore.isClustered = true
-       if (aip.scheduler.clusterCheckinInterval) {
+        jobStore.tablePrefix = 'GCRQRTZ_' // Share tables. AIP has own instance
+        jobStore.isClustered = true
+        if (aip.scheduler.clusterCheckinInterval) {
            jobStore.clusterCheckinInterval = aip.scheduler.clusterCheckinInterval
-       }
-       jobStore.useProperties = false
+        }
+        jobStore.useProperties = false
 
-    println "Quartz Scheduler properties are initialized!"
+        println "Quartz Scheduler properties are initialized!"
+	}
 }
 
 /** *******************************************************************************

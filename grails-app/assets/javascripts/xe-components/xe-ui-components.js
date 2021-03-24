@@ -2,15 +2,15 @@
  * component-library
  *
 
- * Version: 12.1.0 - 2020-03-03
- * License: Copyright 2018 Ellucian Company L.P. and its affiliates.
+ * Version: 13.1.0 - 2021-01-20
+ * License: Copyright 2018-2020 Ellucian Company L.P. and its affiliates.
  */
 angular.module("xe-ui-components", ['badge','button','checkbox','dropdown','label','radiobutton','simpleTextbox','statusLabel','switch','textarea','textbox','ui.select','xeUISelect','external-resouces','utils','columnFilter','pagination','search','xebarmodule','dataTableModule','aboutModal','pieChartModule','popupModal','tabnav','timePicker','xe-ui-components-tpls']);
 angular.module('xe-ui-components-tpls', ['templates/badge.html', 'templates/button.html', 'templates/checkbox.html', 'templates/dropdown.html', 'templates/label.html', 'templates/radio-button.html', 'templates/simple-textbox.html', 'templates/statusLabel.html', 'templates/switch.html', 'templates/text-area-counter.html', 'templates/text-area.html', 'templates/text-box-char-limit.html', 'templates/text-box-password.html', 'templates/text-box.html', 'templates/column-filter.html', 'templates/pagination.html', 'templates/search.html', 'templates/dataTable.html', 'templates/dialog.html', 'templates/dialog_default.html', 'templates/modal.html', 'templates/tabNav.html', 'templates/tabPanel.html', 'templates/timePicker.html', 'templates/timePicker_rtl.html']);
 
 angular.module("templates/badge.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/badge.html",
-    "<span tabindex=\"0\" class=\"xe-badge {{::xeType}}-badge\" aria-label=\"{{xeLabel}}\" ng-bind=\"xeLabel\"></span>");
+    "<span aria-live=\"assertive\" tabindex=\"0\" class=\"xe-badge {{::xeType}}-badge\" ng-bind=\"xeLabel\">{{xeLabel}}</span>");
 }]);
 
 angular.module("templates/button.html", []).run(["$templateCache", function ($templateCache) {
@@ -83,12 +83,12 @@ angular.module("templates/text-box.html", []).run(["$templateCache", function ($
 
 angular.module("templates/column-filter.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/column-filter.html",
-    "<span><div class=\"column-filter-container\" ng-if=\"::!nocolumnFilterMenu\"><button type=\"button\" class=\"column-filter-button\" ng-click=\"bindClickEvent($event)\" aria-haspopup=\"true\" aria-labelledby=\"columnFilter\" xe-field=\"columnFilterMenu\"><span id=\"columnFilter\" class=\"placeholder\" ng-bind=\"'dataTable.columnFilter.label' | xei18n\"></span><div class=\"dropdown-icon\">&nbsp;</div></button><ul class=\"column-setting-menu\" ng-hide=\"hideColumnSettingMenu\" role=\"list\" aria-labelledby=\"columnFilter\"><li role=\"presentation\"><xe-checkbox xe-label=\"{{::'dataTable.columnFilter.selectAll' | xei18n}}\" xe-model=\"selectAll.visible\" xe-on-click=\"onSelectAll(header, event)\" xe-id=\"0\" data-name=\"all\" aria-role=\"listitem\" aria-live=\"assertive\"></xe-checkbox></li><li ng-repeat=\"heading in header\" ng-class=\"{'disabled': heading.options.disable}\" ng-if=\"heading.options.columnShowHide !== false\" data-name=\"{{heading.name}}\" role=\"presentation\"><xe-checkbox xe-id=\"{{heading.name}}\" xe-value=\"{{$index+1}}\" xe-label=\"{{heading.title}}\" xe-model=\"heading.options.visible\" xe-on-click=\"hideUnhideColumn(heading, event)\" xe-disabled=\"heading.options.disable\" aria-role=\"listitem\" aria-live=\"assertive\"></xe-checkbox></li></ul></div></span>");
+    "<span><div class=\"column-filter-container\" ng-if=\"::!nocolumnFilterMenu\"><button type=\"button\" class=\"column-filter-button\" ng-click=\"bindClickEvent($event)\" aria-haspopup=\"true\" aria-labelledby=\"columnFilter\" xe-field=\"columnFilterMenu\"><span id=\"columnFilter\" class=\"placeholder\" ng-bind=\"'dataTable.columnFilter.label' | xei18n\"></span><div class=\"dropdown-icon\">&nbsp;</div></button><ul class=\"column-setting-menu\" ng-hide=\"hideColumnSettingMenu\" role=\"list\" aria-labelledby=\"columnFilter\"><li role=\"presentation\"><xe-checkbox xe-label=\"{{::'dataTable.columnFilter.selectAll' | xei18n}}\" xe-aria-label=\"{{::'dataTable.columnFilter.selectAll' | xei18n}}\" xe-model=\"selectAll.visible\" xe-on-click=\"onSelectAll(header, event)\" xe-id=\"0\" data-name=\"all\" aria-role=\"listitem\" aria-live=\"assertive\"></xe-checkbox></li><li ng-repeat=\"heading in header\" ng-class=\"{'disabled': heading.options.disable}\" ng-if=\"heading.options.columnShowHide !== false\" data-name=\"{{heading.name}}\" role=\"presentation\"><xe-checkbox xe-id=\"{{heading.name}}\" xe-value=\"{{$index+1}}\" xe-label=\"{{heading.title}}\" xe-aria-label=\"{{heading.title}}\" xe-model=\"heading.options.visible\" xe-on-click=\"hideUnhideColumn(heading, event)\" xe-disabled=\"heading.options.disable\" aria-role=\"listitem\" aria-live=\"assertive\"></xe-checkbox></li></ul></div></span>");
 }]);
 
 angular.module("templates/pagination.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/pagination.html",
-    "<div class=\"tfoot pagination-container visible-lg\" role=\"navigation\" ng-cloak><div id=\"resultsFound\" class=\"results-container\" ng-bind=\"('pagination.record.found' | xei18n) + ': ' + resultsFound\"></div><div class=\"pagination-controls\"><xe-button xe-type=\"secondary\" xe-btn-class=\"first\" xe-aria-label=\"{{::'pagination.first.label' | xei18n}}\" xe-btn-click=\"first()\" xe-disabled=\"firstPrev\" ng-cloak></xe-button><xe-button xe-type=\"secondary\" xe-btn-class=\"previous\" xe-aria-label=\"{{::'pagination.previous.label' | xei18n}}\" xe-btn-click=\"prev()\" xe-disabled=\"firstPrev\" ng-cloak></xe-button><xe-label xe-value=\"{{::'pagination.page.label' | xei18n}}\" role=\"presentation\" aria-hidden=\"true\"></xe-label><span title=\"{{::'pagination.page.shortcut.label' | xei18n}}\" role=\"presentation\"><input id=\"pageInput\" type=\"number\" ng-model=\"onPage\" aria-valuenow=\"{{onPage}}\" aria-valuemax=\"{{numberOfPages}}\" aria-valuemin=\"{{!numberOfPages ? 0 : 1}}\" max=\"{{numberOfPages}}\" min=\"{{!numberOfPages ? 0 : 1}}\" ng-model-options=\"{ debounce: {'default': 200, 'blur': 0} }\" ng-change=\"paggeNumberChange()\" ng-blur=\"focusOut($event)\" aria-label=\"{{::'pagination.page.aria.label' | xei18n}}. {{::'pagination.page.label' | xei18n}} {{onPage}} {{::'pagination.page.of.label' | xei18n}} {{numberOfPages}}\" ng-cloak></span><xe-label xe-value=\"{{::'pagination.page.of.label' | xei18n}} {{numberOfPages}}\" role=\"presentation\"></xe-label><xe-button xe-type=\"secondary\" xe-btn-class=\"next\" xe-aria-label=\"{{::'pagination.next.label' | xei18n}}\" xe-btn-click=\"next()\" xe-disabled=\"nextLast\" ng-cloak></xe-button><xe-button xe-type=\"secondary\" xe-btn-class=\"last\" xe-aria-label=\"{{::'pagination.last.label' | xei18n}}\" xe-btn-click=\"last()\" xe-disabled=\"nextLast\" ng-cloak></xe-button><xe-label id=\"perPage\" xe-value=\"{{::'pagination.per.page.label' | xei18n}}\" role=\"presentation\" aria-hidden=\"true\"></xe-label><select class=\"per-page-select\" aria-labelledby=\"perPage\" ng-model=\"offset\" ng-options=\"pageOffset for pageOffset in ::pageOffsets\" ng-change=\"offsetChanged(true)\" ng-disabled=\"resultsFound === 0\"></select></div></div>");
+    "<div class=\"tfoot pagination-container visible-lg\" role=\"navigation\" ng-cloak><div id=\"resultsFound\" aria-live=\"assertive\" class=\"results-container\" ng-bind=\"('pagination.record.found' | xei18n) + ': ' + resultsFound\"></div><div class=\"pagination-controls\"><xe-button xe-type=\"secondary\" xe-btn-class=\"first\" xe-aria-label=\"{{::'pagination.first.label' | xei18n}}\" title=\"{{::'pagination.first.label' | xei18n}}\" xe-btn-click=\"first()\" xe-disabled=\"firstPrev\" ng-cloak></xe-button><xe-button xe-type=\"secondary\" xe-btn-class=\"previous\" xe-aria-label=\"{{::'pagination.previous.label' | xei18n}}\" title=\"{{::'pagination.previous.label' | xei18n}}\" xe-btn-click=\"prev()\" xe-disabled=\"firstPrev\" ng-cloak></xe-button><xe-label xe-value=\"{{::'pagination.page.label' | xei18n}}\" role=\"presentation\" aria-hidden=\"true\"></xe-label><span title=\"{{::'pagination.page.shortcut.label' | xei18n}}\" role=\"presentation\"><input id=\"pageInput\" type=\"number\" ng-model=\"onPage\" aria-valuenow=\"{{onPage}}\" aria-valuemax=\"{{numberOfPages}}\" aria-valuemin=\"{{!numberOfPages ? 0 : 1}}\" max=\"{{numberOfPages}}\" min=\"{{!numberOfPages ? 0 : 1}}\" ng-model-options=\"{ debounce: {'default': 200, 'blur': 0} }\" ng-change=\"paggeNumberChange()\" ng-blur=\"focusOut($event)\" aria-label=\"{{::'pagination.page.aria.label' | xei18n}}. {{::'pagination.page.label' | xei18n}} {{onPage}} {{::'pagination.page.of.label' | xei18n}} {{numberOfPages}}\" ng-cloak></span><xe-label xe-value=\"{{::'pagination.page.of.label' | xei18n}} {{numberOfPages}}\" role=\"presentation\"></xe-label><xe-button xe-type=\"secondary\" xe-btn-class=\"next\" xe-aria-label=\"{{::'pagination.next.label' | xei18n}}\" title=\"{{::'pagination.next.label' | xei18n}}\" xe-btn-click=\"next()\" xe-disabled=\"nextLast\" ng-cloak></xe-button><xe-button xe-type=\"secondary\" xe-btn-class=\"last\" xe-aria-label=\"{{::'pagination.last.label' | xei18n}}\" title=\"{{::'pagination.last.label' | xei18n}}\" xe-btn-click=\"last()\" xe-disabled=\"nextLast\" ng-cloak></xe-button><xe-label id=\"perPage\" xe-value=\"{{::'pagination.per.page.label' | xei18n}}\" role=\"presentation\" aria-hidden=\"true\"></xe-label><select class=\"per-page-select\" aria-labelledby=\"perPage\" ng-model=\"offset\" ng-options=\"pageOffset for pageOffset in ::pageOffsets\" ng-change=\"offsetChanged(true)\" ng-disabled=\"resultsFound === 0\"></select></div></div>");
 }]);
 
 angular.module("templates/search.html", []).run(["$templateCache", function ($templateCache) {
@@ -98,7 +98,7 @@ angular.module("templates/search.html", []).run(["$templateCache", function ($te
 
 angular.module("templates/dataTable.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/dataTable.html",
-    "<div id=\"{{tableId}}\" class=\"table-container\" ng-class=\"{'fixed-height': !!height, 'noToolbar': noCaptionAndToolbar, 'no-data': !resultsFound, 'empty': emptyTableMsg}\" browser-detect role=\"grid\" aria-labelledby=\"gridCaption\" ng-cloak><div class=\"trMobile\" ng-if=\"totalRow && isMobileView  \"><div ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\"><span class=\"total-row\" total-label=\"{{heading.totalDisplayName}}\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></div><div class=\"caption\" ng-if=\"::!noCaptionBar\" xe-section=\"{{xeSection + 'CaptionBar'}}\"><table class=\"data-table datatable_spacing\" role=\"heading\" aria-level=\"1\"><caption ng-class=\"{'search-opened': hideContainer}\"><span id=\"gridCaption\" class=\"caption-container font-semibold\" ng-if=\"::!nocaption\" ng-bind=\"::caption\" xe-field=\"caption\"></span><div class=\"toolbar\" ng-if=\"toolbar\"><xe-toolbar></xe-toolbar><xe-column-filter header=\"header\"></xe-column-filter><span role=\"search\" title=\"{{'search.title' | xei18n}}\" ng-if=\"::!nosearch\"><xe-search value=\"searchConfig.searchString\" place-holder=\"{{'search.label' | xei18n}}\" on-change=\"fetchSpecial(query)\" on-focus=\"onSearchFocus({event: event})\" on-blur=\"onSearchBlur({event: event})\" search-config=\"searchConfig\" xe-focus loading-data=\"loadingData\"></xe-search></span></div></caption></table></div><div class=\"hr-scrollable-content\"><div class=\"thead\"><table class=\"data-table\" ng-style=\"headerPadding\" role=\"presentation\"><thead role=\"rowgroup\"><tr role=\"row\"><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" ng-click=\"onSort({heading: heading}); sortOnHeading(heading, $index);\" role=\"columnheader\" aria-sort=\"{{sortArray[heading.name].ascending ? ('dataTable.sort.ascending.label' | xei18n) : (sortArray[heading.name].decending ? ('dataTable.sort.descending.label' | xei18n) : 'none')}}\" aria-describedby=\"{{'headingAria' + $index}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name}}\" xe-heading-injector xe-focus xe-click-grid><div class=\"data\" title=\"{{heading.label}}\"><span ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"::heading.title\"></span><label id=\"${{'headingAria' + $index}}\" class=\"sr-only\" ng-bind=\"heading.ariaLabel + (heading.options.sortable ? ('dataTable.sortable.label' | xei18n) : '')\"></label></div></th></tr></thead></table></div><div class=\"tbody\" ng-style=\"::{'height': height}\" continuous-scroll=\"nextPage()\" scroll-parent=\"{{::continuousScrollParent}}\" aria-labelledby=\"msg\" tabindex=\"{{(!resultsFound || emptyTableMsg) ? 0 : ''}}\" resize><div id=\"msg\" ng-bind=\"emptyTableMsg? emptyTableMsg : ((!resultsFound && !loadingData) ? noDataMsg : '')\"></div><table class=\"data-table\" ng-class=\"::mobileLayout ? 'mobileLayout' : 'noMobileLayout'\" role=\"presentation\"><thead role=\"presentation\" aria-hidden=\"true\"><tr><th class=\"font-semibold {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" xe-field=\"{{::heading.name}}\" xe-heading-injector tabindex=\"0\"><div class=\"data\"><span ng-show=\"::heading.options.titleVisible !== false\" ng-bind=\"::heading.title\"></span></div></th></tr></thead><tbody role=\"rowgroup\"><tr ng-repeat=\"row in content\" ng-click=\"onRowClick({data:row,index:$index})\" ng-dblclick=\"onRowDoubleClick({data:row,index:$index})\" xe-row-injector tabindex=\"-1\" role=\"row\"><td class=\"width-animate\" ng-repeat=\"heading in header\" ng-class=\"{'align-right': heading.options.actionOrStatus, 'sortable': heading.options.sortable}\" ng-if=\"heading.options.visible === true\" data-name=\"{{::heading.name}}\" data-title=\"{{::(heading.title && heading.options.titleVisible !== false) ? heading.title + ':' : ''}}\" attain-mobile-layout=\"{{mobileLayout[heading.name]}}\" xe-field=\"{{::heading.name}}\" xe-cell-injector xe-focus xe-click-grid role=\"gridcell\" ng-cloak><div ng-if=\"!isExtendedField(row, heading.name)\"><span ng-bind=\"getObjectValue(row, heading.name)\" tabindex=\"0\"></span></div><div ng-if=\"isExtendedField(row, heading.name)\"><div ng-if=\"isEditable\"><div ng-if=\"dataType === 'DATE'\"><input date-picker=\"\" value=\"{{::extensionValue}}\" class=\"datePicker\" aria-labelledby=\"\"></div><div ng-if=\"dataType === 'VARCHAR2'\"><xe-simple-text-box value=\"::extensionValue\"></xe-simple-text-box></div><div ng-if=\"dataType === 'NUMBER'\"><decimal-input ng-model=\"::extensionValue\" decimals=\"0\"></decimal-input></div></div><div ng-if=\"!isEditable\"><span ng-bind=\"::extensionValue\"></span></div></div></td></tr></tbody></table></div><div class=\"trDesktop\" ng-if=\"totalRow && !isMobileView\" xe-section=\"totalRow\"><table class=\"data-table\" ng-style=\"headerPadding\"><thead><tr><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name+'Total'}}\" xe-focus xe-click-grid><div class=\"aggregateRow data\" ng-class=\"{'align-right': heading.options.actionOrStatus}\" title=\"{{heading.label}}\"><label ng-if=\"heading.totalLabel\" id=\"{{::heading.name+'Total'}}\" for=\"{{::heading.name+'Total'}}\">{{getTotalValue(heading)}}</label><span ng-if=\"!heading.totalLabel\" class=\"total-display\" ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></th></tr></thead></table></div></div><div class=\"tfoot\" ng-transclude></div><xe-pagination model=\"content\" results-found=\"resultsFound\" ng-show=\"showPagination\" xe-grid-pagination-control search-string=\"searchConfig.searchString\"></xe-pagination><div ng-show=\"loadingData\" class=\"load-indicator\"><div class=\"spinner\"><div class=\"bounce1\"></div><div class=\"bounce2\"></div><div class=\"bounce3\"></div></div></div></div>");
+    "<div id=\"{{tableId}}\" class=\"table-container\" ng-class=\"{'fixed-height': !!height, 'noToolbar': noCaptionAndToolbar, 'no-data': !resultsFound, 'empty': emptyTableMsg}\" browser-detect role=\"grid\" aria-labelledby=\"gridCaption\" ng-cloak><div class=\"trMobile\" ng-if=\"totalRow && isMobileView  \"><div ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\"><span class=\"total-row\" total-label=\"{{heading.totalDisplayName}}\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></div><div class=\"caption\" ng-if=\"::!noCaptionBar\" xe-section=\"{{xeSection + 'CaptionBar'}}\"><table class=\"data-table datatable_spacing\" role=\"heading\" aria-level=\"1\"><caption ng-class=\"{'search-opened': hideContainer}\"><span id=\"gridCaption\" class=\"caption-container font-semibold\" ng-if=\"::!nocaption\" ng-bind=\"::caption\" xe-field=\"caption\"></span><div class=\"toolbar\" ng-if=\"toolbar\"><xe-toolbar></xe-toolbar><xe-column-filter header=\"header\"></xe-column-filter><span role=\"search\" title=\"{{'search.title' | xei18n}}\" ng-if=\"::!nosearch\"><xe-search value=\"searchConfig.searchString\" place-holder=\"{{'search.label' | xei18n}}\" on-change=\"fetchSpecial(query)\" on-focus=\"onSearchFocus({event: event})\" on-blur=\"onSearchBlur({event: event})\" search-config=\"searchConfig\" xe-focus loading-data=\"loadingData\"></xe-search></span></div></caption></table></div><div class=\"hr-scrollable-content\"><div class=\"thead\"><table class=\"data-table\" ng-style=\"headerPadding\" role=\"presentation\"><thead role=\"rowgroup\"><tr role=\"row\"><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" ng-click=\"onSort({heading: heading}); sortOnHeading(heading, $index);\" role=\"columnheader\" aria-sort=\"{{sortArray[heading.name].ascending ? ('dataTable.sort.ascending.label' | xei18n) : (sortArray[heading.name].decending ? ('dataTable.sort.descending.label' | xei18n) : 'none')}}\" aria-describedby=\"headingAria{{$index}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name}}\" id=\"dataTableHead-{{heading.name}}\" xe-heading-injector xe-focus xe-click-grid><div class=\"data\" title=\"{{heading.label}}\"><span ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"::heading.title\"></span><label id=\"headingAria{{$index}}\" class=\"sr-only\" ng-bind=\"heading.ariaLabel + (heading.options.sortable ? ('dataTable.sortable.label' | xei18n) : '')\"></label></div></th></tr></thead></table></div><div class=\"tbody\" ng-style=\"::{'height': height}\" continuous-scroll=\"nextPage()\" scroll-parent=\"{{::continuousScrollParent}}\" aria-labelledby=\"msg\" tabindex=\"{{(!resultsFound || emptyTableMsg) ? 0 : ''}}\" resize><div id=\"msg\" ng-bind=\"emptyTableMsg? emptyTableMsg : ((!resultsFound && !loadingData) ? noDataMsg : '')\"></div><table class=\"data-table\" ng-class=\"::mobileLayout ? 'mobileLayout' : 'noMobileLayout'\" role=\"presentation\"><thead role=\"presentation\" aria-hidden=\"true\"><tr><th class=\"font-semibold {{::heading.name}}\" ng-repeat=\"heading in header\" ng-class=\"{'sortable': heading.options.sortable, 'ascending': sortArray[heading.name].ascending, 'decending': sortArray[heading.name].decending}\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" xe-field=\"{{::heading.name}}\" xe-heading-injector tabindex=\"0\"><div class=\"data\"><span ng-show=\"::heading.options.titleVisible !== false\" ng-bind=\"::heading.title\"></span></div></th></tr></thead><tbody role=\"rowgroup\"><tr ng-repeat=\"row in content\" ng-click=\"onRowClick({data:row,index:$index})\" ng-dblclick=\"onRowDoubleClick({data:row,index:$index})\" xe-row-injector tabindex=\"-1\" role=\"row\"><td class=\"width-animate\" ng-repeat=\"heading in header\" ng-class=\"{'align-right': heading.options.actionOrStatus, 'sortable': heading.options.sortable}\" ng-if=\"heading.options.visible === true\" data-name=\"{{::heading.name}}\" data-title=\"{{::(heading.title && heading.options.titleVisible !== false) ? heading.title + ':' : ''}}\" attain-mobile-layout=\"{{mobileLayout[heading.name]}}\" xe-field=\"{{::heading.name}}\" xe-cell-injector xe-focus xe-click-grid role=\"gridcell\" ng-cloak headers=\"dataTableHead-{{heading.name}}\"><div ng-if=\"!isExtendedField(row, heading.name)\"><span ng-bind=\"getObjectValue(row, heading.name)\" tabindex=\"0\"></span></div><div ng-if=\"isExtendedField(row, heading.name)\"><div ng-if=\"isEditable\"><div ng-if=\"dataType === 'DATE'\"><input date-picker=\"\" value=\"{{::extensionValue}}\" class=\"datePicker\" aria-labelledby=\"\"></div><div ng-if=\"dataType === 'VARCHAR2'\"><xe-simple-text-box value=\"::extensionValue\"></xe-simple-text-box></div><div ng-if=\"dataType === 'NUMBER'\"><decimal-input ng-model=\"::extensionValue\" decimals=\"0\"></decimal-input></div></div><div ng-if=\"!isEditable\"><span ng-bind=\"::extensionValue\"></span></div></div></td></tr></tbody></table></div><div class=\"trDesktop\" ng-if=\"totalRow && !isMobileView\" xe-section=\"totalRow\"><table class=\"data-table\" ng-style=\"headerPadding\"><thead><tr><th class=\"font-semibold width-animate {{::heading.name}}\" ng-repeat=\"heading in header\" ng-if=\"heading.options.visible === true\" ng-style=\"{'width': heading.dynamicWidth + 'px'}\" data-name=\"{{::heading.name}}\" drag-drop=\"handleDrop\" tabindex=\"0\" xe-field=\"{{::heading.name+'Total'}}\" xe-focus xe-click-grid><div class=\"aggregateRow data\" ng-class=\"{'align-right': heading.options.actionOrStatus}\" title=\"{{heading.label}}\"><label ng-if=\"heading.totalLabel\" id=\"{{::heading.name+'Total'}}\" for=\"{{::heading.name+'Total'}}\">{{getTotalValue(heading)}}</label><span ng-if=\"!heading.totalLabel\" class=\"total-display\" ng-show=\"::heading.options.titleVisible !== false\" aria-hidden=\"false\" ng-bind=\"getTotalValue(heading)\"></span></div></th></tr></thead></table></div></div><div class=\"tfoot\" ng-transclude></div><xe-pagination model=\"content\" results-found=\"resultsFound\" ng-show=\"showPagination\" xe-grid-pagination-control search-string=\"searchConfig.searchString\"></xe-pagination><div ng-show=\"loadingData\" class=\"load-indicator\"><div class=\"spinner\"><div class=\"bounce1\"></div><div class=\"bounce2\"></div><div class=\"bounce3\"></div></div></div></div>");
 }]);
 
 angular.module("templates/dialog.html", []).run(["$templateCache", function ($templateCache) {
@@ -108,7 +108,7 @@ angular.module("templates/dialog.html", []).run(["$templateCache", function ($te
 
 angular.module("templates/dialog_default.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/dialog_default.html",
-    "<div id=\"xeModalMask\" class=\"xe-modal-mask\" ng-show=\"show\" tabindex=\"-1\" aria-labelledby=\"xeModalMask\" role=\"region\"><div class=\"xe-modal-wrapper\" role=\"dialog\" title=\"{{about[api.title]}}\"><div id=\"xeModalContainer\" class=\"xe-modal-container\"><span id=\"xeModalClose\" class=\"xe-modal-close\" ng-click=\"hide()\" tabindex=\"0\" role=\"button\" alt=\"{{about[api.close]}}\" title=\"{{about[api.close]}}\"></span><h4 id=\"xeModalLabel\" hidden>{{about[api.title]}}</h4><div id=\"xeModalHeader\" class=\"xe-modal-header\" tabindex=\"0\"><h5 class=\"xe-app-title\">{{about[api.name]}}</h5><h6 class=\"xe-app-version\">{{about[api.version]}}</h6><h6 ng-if=\"!hidePlatformVersion\" class=\"xe-platform-version\">{{about[api.platformVersion]}}</h6></div><hr><div id=\"xeModalFooter\" class=\"xe-modal-footer\" tabindex=\"0\" role=\"heading\" aria-level=\"1\"><span class=\"xe-modal-footer-copyright\">&copy; {{about[api.copyright]}}</span><br><br><span class=\"xe-modal-footer-copyright-info\">{{about[api.copyrightLegalNotice]}}</span></div></div></div></div>");
+    "<div id=\"xeModalMask\" class=\"xe-modal-mask\" ng-show=\"show\" tabindex=\"-1\" aria-labelledby=\"xeModalMask\" role=\"region\"><div class=\"xe-modal-wrapper\" role=\"dialog\" title=\"{{about[api.title]}}\"><div id=\"xeModalContainer\" class=\"xe-modal-container\" role=\"dialog\" aria-labelledby=\"xeModalLabel xeModalHeaderDialog xeModalFooter\"><span id=\"xeModalClose\" class=\"xe-modal-close\" ng-click=\"hide()\" tabindex=\"0\" role=\"button\" alt=\"{{about[api.close]}}\" title=\"{{about[api.close]}}\"></span><h4 id=\"xeModalLabel\" hidden>{{about[api.title]}}</h4><div id=\"xeModalHeaderDialog\" class=\"xe-modal-header\"><h5 class=\"xe-app-title\">{{about[api.name]}}</h5><h6 class=\"xe-app-version\">{{about[api.version]}}</h6><h6 ng-if=\"!hidePlatformVersion\" class=\"xe-platform-version\">{{about[api.platformVersion]}}</h6></div><hr><div id=\"xeModalFooter\" class=\"xe-modal-footer\" role=\"heading\" aria-level=\"1\"><span class=\"xe-modal-footer-copyright\">&copy; {{about[api.copyright]}}</span><br><br><span class=\"xe-modal-footer-copyright-info\">{{about[api.copyrightLegalNotice]}}</span></div><a id=\"xeModalPrivacyLink\" href=\"{{about[api.ellucianPrivacyNoticeLink]}}\" tabindex=\"0\" role=\"link\" target=\"_blank\" title=\"{{about[api.ellucianPrivacyNotice]}}\">{{about[api.ellucianPrivacyNotice]}}</a></div></div></div>");
 }]);
 
 angular.module("templates/modal.html", []).run(["$templateCache", function ($templateCache) {
@@ -118,7 +118,7 @@ angular.module("templates/modal.html", []).run(["$templateCache", function ($tem
 
 angular.module("templates/tabNav.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/tabNav.html",
-    "<div class=\"xe-tab-container\" role=\"presentation\"><ul class=\"xe-tab-nav\" role=\"tablist\"><li ng-repeat=\"tab in tabnav.tabs\" ng-click=\"tabnav.activate(tab)\" ng-class=\"{active: tab.active}\" ng-repeat-complete role=\"tab\" aria-controls=\"{{'xe-tab-panel'+ ($index+1)}}\" aria-selected=\"{{tab.active}}\"><a href=\"javascript:void(0);\" tabindex=\"0\" id=\"{{'xe-tab'+ ($index+1)}}\" title=\"{{tab.heading}}\" ng-if=\"tab.state\">{{tab.heading}} <span></span> </a><a href=\"#\" id=\"{{'xe-tab'+ ($index+1)}}\" title=\"{{tab.heading}}\" ng-if=\"!tab.state\">{{tab.heading}} <span></span></a></li></ul><div class=\"xe-tab-content\" role=\"presentation\"><ng-transclude></ng-transclude></div></div>");
+    "<div class=\"xe-tab-container\" role=\"presentation\"><ul class=\"xe-tab-nav\" role=\"tablist\"><li ng-repeat=\"tab in tabnav.tabs\" ng-click=\"tabnav.activate(tab)\" ng-class=\"{active: tab.active}\" ng-repeat-complete role=\"tab\" aria-controls=\"{{'xe-tab-panel'+ ($index+1)}}\" aria-selected=\"{{tab.active?tab.active:false}}\"><a href=\"javascript:void(0);\" tabindex=\"0\" id=\"{{'xe-tab'+ ($index+1)}}\" title=\"{{tab.heading}}\" ng-if=\"tab.state\">{{tab.heading}} <span></span> </a><a href=\"#\" id=\"{{'xe-tab'+ ($index+1)}}\" title=\"{{tab.heading}}\" ng-if=\"!tab.state\">{{tab.heading}} <span></span></a></li></ul><div class=\"xe-tab-content\" role=\"presentation\"><ng-transclude></ng-transclude></div></div>");
 }]);
 
 angular.module("templates/tabPanel.html", []).run(["$templateCache", function ($templateCache) {
@@ -358,7 +358,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
     });
 }());
 /*****************************************************
- *  Copyright 2016 Ellucian Company L.P. and its affiliates. *
+ *  Copyright 2016-2020 Ellucian Company L.P. and its affiliates. *
  *****************************************************/
 /*global $*/
 (function () {
@@ -434,7 +434,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
     }]);
 }());
 /*****************************************************
- *  Copyright 2019 Ellucian Company L.P. and its affiliates. *
+ *  Copyright 2019-2020 Ellucian Company L.P. and its affiliates. *
  *****************************************************/
 /*global $*/
 (function () {
@@ -1401,7 +1401,6 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                     //   //TODO: SEGURO?
                     //   ctrl.close();
                     // }
-
 
                     //When the select component searchEnabled is false shouldn't allow user to search ; Hence restricting the user to search here.
                     if (!~[KEY.ENTER, KEY.ESC].indexOf(key) && !KEY.isVerticalMovement(key) && ctrl.searchEnabled === false) {
@@ -2484,7 +2483,7 @@ angular.module("templates/timePicker_rtl.html", []).run(["$templateCache", funct
                 });
 
                 //Idea from: https://github.com/ivaynberg/select2/blob/79b5bf6db918d7560bdd959109b7bcfb47edaf43/select2.js#L1954
-                var focusser = angular.element("<input ng-disabled='$select.disabled' class='ui-select-focusser ui-select-offscreen' type='text' id='{{ $select.focusserId }}' aria-label='{{ $select.focusserTitle }}' aria-haspopup='true' role='button'/><abbr ng-if=\"$select.allowClear && !$select.isEmpty()\" class=\"select2-search-choice-close ui-select-clear\" tabindex=\"0\" ng-click=\"$select.clear($event)\" key-enter><span class=\"ui-select-offscreen\">Clear</span></abbr>");
+                var focusser = angular.element("<input ng-disabled='$select.disabled' class='ui-select-focusser ui-select-offscreen' type='text' id='{{ $select.focusserId }}' aria-label='{{ $select.focusserTitle }}' aria-haspopup='true' role='button'/><abbr ng-if=\"$select.allowClear && !$select.isEmpty()\" class=\"select2-search-choice-close ui-select-clear\" tabindex=\"0\" ng-click=\"$select.clear($event)\" xe-key-enter><span class=\"ui-select-offscreen\">Clear</span></abbr>");
 
                 $compile(focusser)(scope);
                 $select.focusser = focusser;
@@ -2887,13 +2886,13 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
 
     $templateCache.put("select2/choices.tpl.html",
         "<ul class=\"ui-select-choices ui-select-choices-content select2-results\" >" +
-        "<li ng-if=\"$select.minimumInputLength\" ng-show=\"$select.showMinMsg\" class=\"select2-no-results\" role=\"listbox\" ng-bind=\"'uiselect.minimum.input.text' | xei18n: $select.minimumInputLength\" aria-live=\"polite\" ></li>" +
-        "<li ng-show=\"$select.showNoResultsMsg && !$select.showMinMsg\" role=\"listbox\"  class=\"select2-no-results \"  ng-bind=\"'uiselect.no.results.found.text' | xei18n\" > " +
-        "<li class=\"ui-select-choices-group\" ng-class=\"{\'select2-result-with-children\': $select.choiceGrouped($group) }\" role=\"listbox\"  >" +
+        "<li ng-if=\"$select.minimumInputLength\" ng-show=\"$select.showMinMsg\" class=\"select2-no-results\" role=\"option\" ng-bind=\"'uiselect.minimum.input.text' | xei18n: $select.minimumInputLength\" aria-live=\"polite\" ></li>" +
+        "<li ng-show=\"$select.showNoResultsMsg && !$select.showMinMsg\" role=\"option\"  class=\"select2-no-results \"  ng-bind=\"'uiselect.no.results.found.text' | xei18n\" > " +
+        "<li class=\"ui-select-choices-group\" ng-class=\"{\'select2-result-with-children\': $select.choiceGrouped($group) }\" role=\"option\"  >" +
         "<div ng-show=\"$select.choiceGrouped($group) && !$select.showNoResultsMsg && !$select.showMinMsg\" class=\"ui-select-choices-group-label select2-result-label\" ng-bind=\"$group.name\"></div>" +
         "<ul ng-show=\"!$select.showNoResultsMsg && !$select.showMinMsg\" role=\"listbox\" id=\"ui-select-choices-{{ $select.generatedId }}\" " +
         "ng-class=\"{\'select2-result-sub\': $select.choiceGrouped($group), \'select2-result-single\': !$select.choiceGrouped($group) }\">" +
-        "<li role=\"listbox\" id=\"ui-select-choices-row-{{ $select.generatedId }}-{{$index}}\" class=\"ui-select-choices-row\"  " +
+        "<li role=\"option\" id=\"ui-select-choices-row-{{ $select.generatedId }}-{{$index}}\" class=\"ui-select-choices-row\"  " +
         "ng-class=\"{\'select2-highlighted\': $select.isActive(this), \'select2-disabled\': $select.isDisabled(this)}\" >" +
         "<div class=\"select2-result-label ui-select-choices-row-inner\"></div></li></ul></li></ul>");
 
@@ -3100,7 +3099,7 @@ angular.module("ui.select").run(["$templateCache", function($templateCache) {$te
                 }
             }
         }])
-        .directive("keyEnter", function() {
+        .directive("xeKeyEnter", function() {
             return {
                 restrict: 'A',
                 scope: true,
@@ -3226,376 +3225,6 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
             $rootScope.isMAC = ($window.navigator.userAgent.indexOf("Mac") !== -1);
             $rootScope.isRtl = Language.isRtl();
             $translate.use(getlocale.getUserLocale());
-        }]);
-}());
-/*
- File is used to provide i18n support for components.
- */
-(function () {
-    'use strict';
-    var translations = {
-        en: {
-            "barChart.title": "Bar Chart",
-            "barChart.subtitle": "Demo Bar Slices",
-            "pieChart.title": "Pie Chart",
-            "pieChart.subtitle": "Demo Pie Slices",
-            "pieChart.svg.title": "Pie Chart Title",
-            "donutchart.svg.title":"Donut Chart Title",
-            "donutChart.svg.desc":"Donut Chart Description",
-            "pieChart.svg.desc": "Pie Chart Description",
-            "pieChart.pie.ariaLabel": "Pie Chart",
-            "pieChart.pie.group.main.ariaLabel": "Enter to Main Group",
-            "pieChart.pie.group.other.ariaLabel": "Enter to Other Group",
-            "pieChart.table.label": "label",
-            "pieChart.table.value": "value",
-            "pieChart.table.percentage": "percentage",
-            "pieChart.table.ariaLabel": "A tabular view of the data in the chart.",
-            "pieChart.main.label.other": "Other",
-            "search.label": "Search",
-            "dataTable.columnFilter.label": "Show/Hide Column",
-            "dataTable.columnFilter.selectAll": "Select All",
-            "dataTable.sortable.label": "Sortable",
-            "dataTable.sort.descending.label": "descending",
-            "dataTable.sort.ascending.label": "ascending",
-            "dataTable.no.record.found": "No records found",
-            "pagination.record.found": "Results found",
-            "pagination.first.label": "First page",
-            "pagination.previous.label": "Previous page",
-            "pagination.last.label": "Last page",
-            "pagination.next.label": "Next page",
-            "pagination.per.page.label": "Per Page",
-            "pagination.page.label": "Page",
-            "pagination.page.shortcut.label": "Go To Page (End)",
-            "pagination.page.aria.label": "Go To Page. Short cut is End",
-            "pagination.page.of.label": "of",
-            "search.title": "Search (Alt+Y)",
-            "search.aria.label": "Search text field. Short cut is Alt+Y.",
-            "angular-ui.select.items.group1.label": "From A - M",
-            "angular-ui.select.items.group2.label": "From N - Z",
-            "angular-ui.select.items.without.section.heading": "Items not grouped under section heading",
-            "angular-ui.select.items.with.section.heading": "Items grouped under section",
-            "angular-ui.select.items.with.long.text": "Items grouped here has long text",
-            "angular-ui.select.items.remote.data.placeholder": "Enter a term to search",
-            "angular-ui.select.remote.data":  "Minimum input search, Infinite scroll, Placeholder",
-            "angular-ui-select": "Single Select",
-            "angular-ui-select-search-disabled": "Single Select with search disabled",
-            "angular-ui-select-multiple": "Multiple Select",
-            "uiselect.minimum.input.text": "Please enter {{arg1}} or more characters",
-            "uiselect.no.results.found.text": "No Result Found!",
-            "uiselect.search.results": "Searching ... {{arg1}} results are available, use up and down arrow keys to navigate.",
-            "uiselect.option.selected": "{{arg1}}",
-            "about.component.tab.general" : "General",
-            "about.component.plugin.information" : "Plugin information",
-            "about.component.plugin.other.information" : "Other Plugin information",
-            "popup.component.information" : "Other Plugin information",
-            "popup.preference.locale.heading":"Language Setting ",
-            "userpreference.popup.language.close":"Close",
-            "textbox.validation.required": "This field is required",
-            "textbox.validation.maxlength": "Maximum Character length should be",
-            "xe.text.chars.left": "Remaining Characters",
-            "xe.text.max.chars": "Characters Max",
-            "xe.text.limit.over": "Character Limit of {{arg1}} has been reached",
-            "xe.text.chars.remaining.aria": "Remaining Characters : {{arg1}}",
-            "angular-textarea-label": "Comments Label",
-            "angular-textarea-placeholder-text": "Enter your comments here",
-            "angular-textarea-placeholder-text-readonly": "Read only comments",
-            "description-textarea-label": "Description",
-            "description-textarea-placeholder": "Enter your description here",
-            "textarea-readonly-comments": "This content is secured.",
-            "textInput": "Text Input",
-            "text": "Text",
-            "rtlText": "Switch to LTR",
-            "ltrText": "Switch to RTL",
-            "uiselect.search.disabled.results": "Use up and down arrow keys to navigate.",
-            "js.timepicker.selectText":"Set Time",
-            "js.timepicker.set":"SET",
-            "js.timepicker.cancel":"CANCEL",
-            "default.time.am":"AM",
-            "default.time.pm":"PM",
-            "default.time.format" : "HH:mm",
-            "timepicker.hour.aria.label": "Hours list, press up and down arrow keys to Change Hours.",
-            "timepicker.min.aria.label":"Minutes list, press up and down arrow keys to change Minutes. Press left arrow key to move to Hours list and Right to Move to meridiem list.",
-            "timepicker.am.pm.aria.label":"meridiem list, press up and down arrow keys to change the meridiem and left arrow to move to the minutes list. Press Escape to cancel and Enter to Select Time",
-            "timepicker.shortcuts.aria.label":"Press Escape to cancel and Enter to Select Time.",
-            "timepicker.textbox.aria.label":"The Time Format is",
-            "timepicker.min.aria.24hrs.label":"Minutes list, press up and down arrow keys to change Minutes. Press left arrow key to move to Hours list.",
-            "js.input.timepicker.info":"Press F9 to open the TimePicker",
-            "timepicker.error.format.validation": "Invalid time format",
-            "timepicker.label":"Time Picker",
-            "default.time.watermark.format":"HH:MM",
-            "barchart.viewmore.help.label":"Drag mouse to the left/right or use left/right arrow keys to see more data",
-            "default.percent":"%",
-            "timepicker.24.12.format.label":"Time picker gets 24 hours format from DB, now converted to 12 and returned back in 24 hours format",
-            "timepicker.12.24.format.label":"Time picker gets 12 hours format from DB, now converted to 24 and returned back in 12 hours format",
-            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
-            "timepicker.config.12.based.label":"Time picker gets 12 hours format from DB, now converted to 12 with config step and it will be returned in 12 hours only"
-        },
-        ar: {
-            "search.label": "\u0627\u0644\u0628\u062D\u062B",
-            "dataTable.columnFilter.label": "\u0625\u0638\u0647\u0627\u0631/\u0625\u062E\u0641\u0627\u0621 \u0627\u0644\u0639\u0645\u0648\u062F",
-            "dataTable.columnFilter.selectAll": "\u0627\u062E\u062A\u064A\u0627\u0631 \u0627\u0644\u0643\u0644",
-            "dataTable.sortable.label": "\u0642\u0627\u0628\u0644 \u0644\u0644\u062A\u0631\u062A\u064A\u0628",
-            "dataTable.sort.descending.label": "\u062A\u0646\u0627\u0632\u0644\u064A\u0627",
-            "dataTable.sort.ascending.label": "\u062A\u0635\u0627\u0639\u062F\u064A\u0627",
-            "dataTable.no.record.found": "\u0644\u0645 \u064A\u062A\u0645 \u0627\u0644\u0639\u062B\u0648\u0631 \u0639\u0644\u0649 \u0633\u062C\u0644\u0627\u062A",
-            "pagination.record.found": "\u0627\u0644\u0646\u062A\u0627\u0626\u062C \u0627\u0644\u062A\u064A \u062A\u0645 \u0627\u0644\u0639\u062B\u0648\u0631 \u0639\u0644\u064A\u0647\u0627",
-            "pagination.first.label": "\u0627\u0644\u0635\u0641\u062D\u0629 \u0627\u0644\u0623\u0648\u0644\u0649",
-            "pagination.previous.label": "\u0627\u0644\u0635\u0641\u062D\u0629 \u0627\u0644\u0633\u0627\u0628\u0642\u0629",
-            "pagination.last.label": "\u0627\u0644\u0635\u0641\u062D\u0629 \u0627\u0644\u0623\u062E\u064A\u0631\u0629",
-            "pagination.next.label": "\u0627\u0644\u0635\u0641\u062D\u0629 \u0627\u0644\u062A\u0627\u0644\u064A\u0629",
-            "pagination.per.page.label": "\u0641\u064A \u0643\u0644 \u0635\u0641\u062D\u0629",
-            "pagination.page.label": "\u0627\u0644\u0635\u0641\u062D\u0629",
-            "pagination.page.shortcut.label": "\u0627\u0644\u0630\u0647\u0627\u0628 \u0644\u0644\u0635\u0641\u062D\u0629 (End)",
-            "pagination.page.aria.label": "\u0627\u0644\u0630\u0647\u0627\u0628 \u0625\u0644\u0649 \u0627\u0644\u0635\u0641\u062D\u0629. \u0627\u0644\u0627\u062E\u062A\u0635\u0627\u0631 \u0647\u0648 End",
-            "pagination.page.of.label": "\u0645\u0646",
-            "search.title": "\u0627\u0644\u0628\u062D\u062B (Alt+Y)",
-            "search.aria.label": "\u0627\u0644\u0628\u062D\u062B \u0641\u064A \u062D\u0642\u0644 \u0627\u0644\u0646\u0635. \u0645\u0641\u062A\u0627\u062D \u0627\u0644\u0627\u062E\u062A\u0635\u0627\u0631 Alt+Y.",
-            "default.time.am":"\u0635\u0628\u0627\u062D\u0627",
-            "default.time.pm":"\u0645\u0633\u0627\u0621\u064B",
-            "default.time.format": "HH\:mm",
-            "default.timepicker.time.format": "HH\:mm",
-            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
-            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
-            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
-            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
-        },
-        en_AU: {
-            "search.label": "Search",
-            "dataTable.columnFilter.label": "Show/Hide Column",
-            "dataTable.columnFilter.selectAll": "Select All",
-            "dataTable.sortable.label": "Sortable",
-            "dataTable.sort.descending.label": "descending",
-            "dataTable.sort.ascending.label": "ascending",
-            "dataTable.no.record.found": "No records found",
-            "pagination.record.found": "Results found",
-            "pagination.first.label": "First page",
-            "pagination.previous.label": "Previous page",
-            "pagination.last.label": "Last page",
-            "pagination.next.label": "Next page",
-            "pagination.per.page.label": "Per Page",
-            "pagination.page.label": "Page",
-            "pagination.page.shortcut.label": "Go To Page (End)",
-            "pagination.page.aria.label": "Go To Page. Short cut is End",
-            "pagination.page.of.label": "of",
-            "search.title": "Search (Alt+Y)",
-            "search.aria.label": "Search text field. Short cut is Alt+Y.",
-            "default.time.watermark.format":"HH:MM am",
-            "timepicker.shortcuts.aria.label":"Press Escape to cancel and Enter to Select Time",
-            "default.time.format" : "HH:mm a",
-            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
-            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
-            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
-            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
-
-        },
-        en_GB: {
-            "search.label": "Search",
-            "dataTable.columnFilter.label": "Show/Hide Column",
-            "dataTable.columnFilter.selectAll": "Select All",
-            "dataTable.sortable.label": "Sortable",
-            "dataTable.sort.descending.label": "descending",
-            "dataTable.sort.ascending.label": "ascending",
-            "dataTable.no.record.found": "No records found",
-            "donutchart.svg.title":"Donut Chart Title",
-            "donutchart.svg.desc":"Donut Chart Description",
-            "pagination.record.found": "Results found",
-            "pagination.first.label": "First page",
-            "pagination.previous.label": "Previous page",
-            "pagination.last.label": "Last page",
-            "pagination.next.label": "Next page",
-            "pagination.per.page.label": "Per Page",
-            "pagination.page.label": "Page",
-            "pagination.page.shortcut.label": "Go To Page (End)",
-            "pagination.page.aria.label": "Go To Page. Short cut is End",
-            "pagination.page.of.label": "of",
-            "search.title": "Search (Alt+Y)",
-            "search.aria.label": "Search text field. Short cut is Alt+Y.",
-            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
-            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
-            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
-            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
-        },
-        en_IE: {
-            "search.label": "Search",
-            "dataTable.columnFilter.label": "Show/Hide Column",
-            "dataTable.columnFilter.selectAll": "Select All",
-            "dataTable.sortable.label": "Sortable",
-            "dataTable.sort.descending.label": "descending",
-            "dataTable.sort.ascending.label": "ascending",
-            "dataTable.no.record.found": "No records found",
-            "pagination.record.found": "Results found",
-            "pagination.first.label": "First page",
-            "pagination.previous.label": "Previous page",
-            "pagination.last.label": "Last page",
-            "pagination.next.label": "Next page",
-            "pagination.per.page.label": "Per Page",
-            "pagination.page.label": "Page",
-            "pagination.page.shortcut.label": "Go To Page (End)",
-            "pagination.page.aria.label": "Go To Page. Short cut is End",
-            "pagination.page.of.label": "of",
-            "search.title": "Search (Alt+Y)",
-            "search.aria.label": "Search text field. Short cut is Alt+Y.",
-            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
-            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
-            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
-            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
-        },
-        en_IN: {
-            "search.label": "Search",
-            "dataTable.columnFilter.label": "Show/Hide Column",
-            "dataTable.columnFilter.selectAll": "Select All",
-            "dataTable.sortable.label": "Sortable",
-            "dataTable.sort.descending.label": "descending",
-            "dataTable.sort.ascending.label": "ascending",
-            "dataTable.no.record.found": "No records found",
-            "pagination.record.found": "Results found",
-            "pagination.first.label": "First page",
-            "pagination.previous.label": "Previous page",
-            "pagination.last.label": "Last page",
-            "pagination.next.label": "Next page",
-            "pagination.per.page.label": "Per Page",
-            "pagination.page.label": "Page",
-            "pagination.page.shortcut.label": "Go To Page (End)",
-            "pagination.page.aria.label": "Go To Page. Short cut is End",
-            "pagination.page.of.label": "of",
-            "search.title": "Search (Alt+Y)",
-            "search.aria.label": "Search text field. Short cut is Alt+Y.",
-            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
-            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
-            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
-            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
-        },
-        es: {
-            "search.label": "Buscar",
-            "dataTable.columnFilter.label": "Mostrar/Ocultar columna",
-            "dataTable.columnFilter.selectAll": "Seleccionar todo",
-            "dataTable.sortable.label": "Que pueda ordenarse",
-            "dataTable.sort.descending.label": "descendente",
-            "dataTable.sort.ascending.label": "ascendente",
-            "dataTable.no.record.found": "No se encontraron registros.",
-            "donutchart.svg.desc":"Descripci\u00F3n de gr\u00E1fica de anillos",
-            "donutchart.svg.title":"T\u00EDtulo de gr\u00E1fica de anillos",
-            "pagination.record.found": "Resultados encontrados",
-            "pagination.first.label": "Primera p\u00E1gina",
-            "pagination.previous.label": "P\u00E1gina anterior",
-            "pagination.last.label": "\u00DAltima p\u00E1gina",
-            "pagination.next.label": "P\u00E1gina siguiente",
-            "pagination.per.page.label": "Por p\u00E1gina",
-            "pagination.page.label": "P\u00E1gina",
-            "pagination.page.shortcut.label": "Ir a la p\u00E1gina (Fin)",
-            "pagination.page.aria.label": "Ir a p\u00E1gina. Atajo es Fin",
-            "pagination.page.of.label": "de",
-            "search.title": "Buscar (Alt+Y)",
-            "search.aria.label": "Campo de b\u00FAsqueda de texto. El atajo es Alt+Y.",
-            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
-            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
-            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
-            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
-        },
-        fr: {
-            "search.label": "Rechercher",
-            "dataTable.columnFilter.label": "Afficher/cacher colonne",
-            "dataTable.columnFilter.selectAll": "Tout s\u00E9lectionner",
-            "dataTable.sortable.label": "Peut \u00EAtre tri\u00E9",
-            "dataTable.sort.descending.label": "descendant",
-            "dataTable.sort.ascending.label": "ascendant",
-            "dataTable.no.record.found": "Aucun enregistrement trouv\u00E9",
-            "pagination.record.found": "R\u00E9sultats trouv\u00E9s",
-            "pagination.first.label": "Premi\u00E8re page",
-            "pagination.previous.label": "Page pr\u00E9c\u00E9dente",
-            "pagination.last.label": "Derni\u00E8re page",
-            "pagination.next.label": "Page suivante",
-            "pagination.per.page.label": "Par page",
-            "donutchart.svg.desc":"Description du graphique en anneau",
-            "donutchart.svg.title":"Titre du graphique en anneau",
-            "pagination.page.label": "Page",
-            "pagination.page.shortcut.label": "Aller \u00E0 page (Fin)",
-            "pagination.page.aria.label": "Aller \u00E0 la page. Le raccourci est Fin.",
-            "pagination.page.of.label": "de",
-            "search.title": "Rechercher (Alt+Y)",
-            "search.aria.label": "Recherche de champ de texte. Raccourci Alt+Y.",
-            "default.time.am":"matin",
-            "default.time.pm":"apr\u00E8s-midi",
-            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
-            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
-            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
-            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
-        },
-        fr_CA: {
-            "search.label": "Rechercher",
-            "dataTable.columnFilter.label": "Afficher/cacher colonne",
-            "dataTable.columnFilter.selectAll": "Tout s\u00E9lectionner",
-            "dataTable.sortable.label": "Peut \u00EAtre tri\u00E9",
-            "dataTable.sort.descending.label": "descendant",
-            "dataTable.sort.ascending.label": "ascendant",
-            "donutchart.svg.desc":"Description du graphique en anneau",
-            "donutchart.svg.title":"Titre du graphique en anneau",
-            "dataTable.no.record.found": "Aucun enregistrement trouv\u00E9",
-            "pagination.record.found": "R\u00E9sultats trouv\u00E9s",
-            "pagination.first.label": "Premi\u00E8re page",
-            "pagination.previous.label": "Page pr\u00E9c\u00E9dente",
-            "pagination.last.label": "Derni\u00E8re page",
-            "pagination.next.label": "Page suivante",
-            "pagination.per.page.label": "Par page",
-            "pagination.page.label": "Page",
-            "pagination.page.shortcut.label": "Aller \u00E0 page (Fin)",
-            "pagination.page.aria.label": "Aller \u00E0 la page. Le raccourci est Fin.",
-            "pagination.page.of.label": "de",
-            "search.title": "Rechercher (Alt+Y)",
-            "search.aria.label": "Recherche de champ de texte. Raccourci Alt+Y.",
-            "default.time.am":"matin",
-            "default.time.pm":"apr\u00E8s-midi",
-            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
-            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
-            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
-            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
-        },
-        pt: {
-            "search.label": "Pesquisar",
-            "dataTable.columnFilter.label": "Exibir/ocultar coluna",
-            "dataTable.columnFilter.selectAll": "Selecionar todos",
-            "dataTable.sortable.label": "Classific\u00E1vel",
-            "donutchart.svg.desc":"Descri\u00E7\u00E3o do gr\u00E1fico de rosca",
-            "donutchart.svg.title":"T\u00EDtulo do gr\u00E1fico de rosca",
-            "dataTable.sort.descending.label": "decrescente",
-            "dataTable.sort.ascending.label": "crescente",
-            "dataTable.no.record.found": "N\u00E3o foram encontrados registros",
-            "pagination.record.found": "Resultados encontrados",
-            "pagination.first.label": "Primeira p\u00E1gina",
-            "pagination.previous.label": "P\u00E1gina anterior",
-            "pagination.last.label": "\u00DAltima p\u00E1gina",
-            "pagination.next.label": "pagination.next.label=Pr\u00F3xima p\u00E1gina",
-            "pagination.per.page.label": "Por p\u00E1gina",
-            "pagination.page.label": "P\u00E1gina",
-            "pagination.page.shortcut.label": "V\u00E1 para p\u00E1gina (End)",
-            "pagination.page.aria.label": "V\u00E1 para P\u00E1gina. A tecla de atalho \u00E9 End",
-            "pagination.page.of.label": "de",
-            "search.title": "Pesquisar (Alt+Y)",
-            "search.aria.label": "Campo para texto de busca. A tecla de atalho \u00E9 Alt+Y.",
-            "default.time.format" : "HH:MM a",
-            "timepicker.12.24.format.label":"Time picker gets 24 hours format from DB, now converted to 12",
-            "timepicker.24.12.format.label":"Time picker gets 12 hours format from DB, now converted to 24",
-            "timepicker.locale.based.label":"Time Picker loaded based on browser locale",
-            "timepicker.config.24.12.based.label":"Time picker gets 24 hours format from DB, now converted to 12 with config step"
-        }
-    };
-
-    angular.module("xe-ui-components")
-        .config(['$translateProvider', function ($translateProvider) {
-            $translateProvider
-                .translations('en', translations.en)
-                .translations('ar', translations.ar)
-                .translations('en_AU', translations.en_AU)
-                .translations('en_GB', translations.en_GB)
-                .translations('en_IE', translations.en_IE)
-                .translations('en_IN', translations.en_IN)
-                .translations('es', translations.es)
-                .translations('fr', translations.fr)
-                .translations('fr_CA', translations.fr_CA)
-                .translations('pt', translations.pt)
-                .determinePreferredLanguage() // Determines user local by checking different local variable from the browser.
-                .fallbackLanguage('en')
-                .useSanitizeValueStrategy('escape');
         }]);
 }());
 (function () {
@@ -4112,7 +3741,7 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
 
                             // Focusing 1st item on open of dropdown menu
                             $timeout(function () {
-                                element.find('ul.column-setting-menu li:first input').focus();
+                                element.find('ul.column-setting-menu li:first').find('div').focus();
                             }, 10);
                         } else { // On close dropdown menu
                             postMenuClose();
@@ -4134,11 +3763,11 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
                                 if($(event.currentTarget).next().length >0 )
                                 {
                                     var next= $(event.currentTarget).next();
-                                    $(next).find('input').focus();
+                                    $(next).find('div').focus();
                                 }
                                 else
                                 {
-                                    element.find('ul.column-setting-menu li:first input').focus();
+                                    element.find('ul.column-setting-menu li:first').find('div').focus();
                                 }
                                 event.preventDefault();
                                 event.stopPropagation();
@@ -4149,11 +3778,11 @@ angular.module("external-resouces", ['pascalprecht.translate', 'ngSanitize']);
                                 if($(event.currentTarget).prev().length > 0 )
                                 {
                                     var previous= $(event.currentTarget).prev();
-                                    $(previous).find('input').focus();
+                                    $(previous).find('div').focus();
                                 }
                                 else
                                 {
-                                    element.find('ul.column-setting-menu li:last input').focus();
+                                    element.find('ul.column-setting-menu li:last').find('div').focus();
                                 }
                                 event.preventDefault();
                                 event.stopPropagation();
@@ -7066,7 +6695,8 @@ clearFocus = function (e) {
                 restrict: 'EA',
                 scope: {
                     show: '=',
-                    api: '='
+                    api: '=',
+                    focusbackelement:'@'
                 },
                 replace: true, // Replace with the template below
                 transclude: true, // we want to insert custom content inside the directive
@@ -7074,7 +6704,11 @@ clearFocus = function (e) {
                 controller: ['$scope', function ($scope) {
                     $scope.hide = function () {
                         $scope.show = false;
+                        if ($scope.focusBackElement) {
+                            angular.element('#' + $scope.focusBackElement).focus();
+                        }
                     };
+                    $scope.focusBackElement = $scope.focusbackelement;
                     aboutService.aboutInfo()
                         .then(function (response) {
                             $scope.status = response.status;
@@ -7104,25 +6738,28 @@ clearFocus = function (e) {
                         if (event.keyCode === 27 || (document.activeElement.className === "xe-modal-close" && event.keyCode === 13)) {
                             scope.show = false;
                             scope.$apply();
+                            if(scope.focusBackElement) {
+                                angular.element("#" + scope.focusBackElement).focus();
+                            }
                         }
                         if (!event.shiftKey && event.keyCode === 9) {
-                            if ("xe-modal-footer ng-binding" === document.activeElement.className) {
+                            if ("xeModalPrivacyLink" === document.activeElement.id) {
                                 event.preventDefault();
                                 angular.element('#xeModalClose').focus();
                             }
+                            else if ("xe-modal-close" === document.activeElement.className) {
+                                event.preventDefault();
+                                angular.element('#xeModalPrivacyLink').focus();
+                            }
                         }
                         if (event.shiftKey && event.keyCode === 9) {
-                            if ("xe-modal-footer ng-binding" === document.activeElement.className) {
+                            if ("xeModalPrivacyLink" === document.activeElement.id) {
                                 event.preventDefault();
-                                angular.element('#xeModalHeader').focus();
+                                angular.element('#xeModalClose').focus();
                             }
-                            if ("xe-modal-mask ng-isolate-scope" === document.activeElement.className) {
+                            else if ("xe-modal-close" === document.activeElement.className) {
                                 event.preventDefault();
-                                angular.element('#xeModalFooter').focus();
-                            }
-                            if ("xe-modal-close" === document.activeElement.className) {
-                                event.preventDefault();
-                                angular.element('#xeModalFooter').focus();
+                                angular.element('#xeModalPrivacyLink').focus();
                             }
                         }
 

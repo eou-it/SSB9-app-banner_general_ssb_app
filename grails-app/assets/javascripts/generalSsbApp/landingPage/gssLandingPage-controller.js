@@ -1,5 +1,5 @@
 /********************************************************************************
-  Copyright 2019-2020 Ellucian Company L.P. and its affiliates.
+  Copyright 2019-2021 Ellucian Company L.P. and its affiliates.
 ********************************************************************************/
 generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$rootScope', '$location', 'generalSsbService', 'piConfigResolve', '$filter', 'generalConfigResolve',
     function ($scope, $rootScope, $location, generalSsbService, piConfigResolve, $filter, generalConfigResolve) {
@@ -93,6 +93,18 @@ generalSsbAppControllers.controller('gssLandingPageController',['$scope', '$root
                             desc: 'banner.generalssb.landingpage.proxyMgmt.description',
                             url:  $scope.applicationContextRoot +'/ssb/proxyManagement',
                             icon: '../assets/Proxy_management1.png'
+                        }
+                    );
+                }
+
+
+                if(generalConfigResolve.globalProxyUrl !== -1) {
+                    $scope.appTiles.push(
+                        {
+                            title: 'banner.generalssb.landingpage.globalProxy.title',
+                            desc: 'banner.generalssb.landingpage.globalProxy.description',
+                            url:  $scope.applicationContextRoot +'/ssb/globalProxy',
+                            icon: '../assets/global_proxy_tile.svg'
                         }
                     );
                 }

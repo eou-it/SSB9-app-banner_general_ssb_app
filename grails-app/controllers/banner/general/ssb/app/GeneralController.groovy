@@ -21,12 +21,14 @@ class GeneralController {
 
     def generalSsbConfigService
     def userRoleService
+    def springSecurityService
 
 
     def landingPage() {
         try {
+            def pidm = springSecurityService?.getAuthentication()?.user?.pidm
             def p_proxyIDM = SecurityContextHolder?.context?.authentication?.principal?.gidm
-            if(p_proxyIDM){
+            if(p_proxyIDM && !pidm){
                 forward controller: 'proxy', action: 'landingPage'
             }
             else {

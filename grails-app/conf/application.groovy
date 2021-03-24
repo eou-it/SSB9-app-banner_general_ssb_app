@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2013-2020 Ellucian Company L.P. and its affiliates.
+ Copyright 2013-2021 Ellucian Company L.P. and its affiliates.
  *******************************************************************************/
 
 //import net.hedtech.banner.configuration.ApplicationConfigurationUtils as ConfigFinder
@@ -43,18 +43,19 @@ build.number.uuid = "7f8235d8-2a51-4f2f-8516-47d913caf346" // specific UUID for 
 build.number.base.url = "http://m037169:8081/BuildNumberServer/buildNumber?method=getNextBuildNumber&uuid="
 app.name="GeneralSelfService"
 app.appId="GENERAL_SS"
-app.platform.version="9.34.1"
-contextSecurityEnabled = true
+app.platform.version="9.36.1"
+contextSecurityEnabled=true
 
 defaultResponseHeadersMap = [
     "X-Content-Type-Options": "nosniff",
     "X-XSS-Protection": "1; mode=block"
 ]
 
-endpoints.enabled= false
+endpoints.enabled=false
 management.contextPath= '/actuator'
 management.security.enabled=false
 endpoints.health.enabled=true
+endpoints.status.enabled=true
 management.endpoint.health.'show-details'= 'always'
 management.health.diskspace.threshold=1073741824  //1GB
 
@@ -151,6 +152,7 @@ formControllerMap = [
         'general'                   : ['SELFSERVICE'],
         'proxy'                     : ['SELFSERVICE'],
         'proxymanagement'           : ['SELFSERVICE-STUDENT', 'SELFSERVICE-EMPLOYEE'],
+        'globalproxy'               : ['SELFSERVICE'],
         'theme'                     : ['SELFSERVICE'],
         'themeeditor'               : ['SELFSERVICE'],
         'directdeposit'             : ['SELFSERVICE-STUDENT', 'SELFSERVICE-EMPLOYEE'],
@@ -291,6 +293,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/ssb/studentAttendanceTracking/**',	access:['ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
         [pattern:'/ssb/studentCommonDashboard/**',		access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M','ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']],
         [pattern:'/actuator/health/**',access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/actuator/status/**',access:['IS_AUTHENTICATED_ANONYMOUSLY']],
         [pattern: '/**',								access:['ROLE_SELFSERVICE-FACULTY_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-CLASSLISTADMINISTRATOR_BAN_DEFAULT_M', 'ROLE_SELFSERVICE-STUDENT_BAN_DEFAULT_M']]
 ]
 
