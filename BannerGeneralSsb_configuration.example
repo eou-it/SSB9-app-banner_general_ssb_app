@@ -149,6 +149,7 @@ grails.plugin.springsecurity.auth.loginFormUrl = '/saml/login'
 grails.plugin.springsecurity.saml.afterLogoutUrl ='/logout/customLogout'
 banner.sso.authentication.saml.localLogout='false'                                                    // To disable single logout set this to true,default 'false'.
 
+grails.plugin.springsecurity.saml.maxAuthenticationAge = 1800                                         //value in seconds
 grails.plugin.springsecurity.saml.keyManager.storeFile = 'classpath:security/<KEY_NAME>.jks'          // for unix File based Example:- 'file:/home/u02/samlkeystore.jks'
 grails.plugin.springsecurity.saml.keyManager.storePass = 'test1234'
 grails.plugin.springsecurity.saml.keyManager.passwords = [ 'banner-<short-appName>-sp': 'test1234' ]  // banner-<short-appName>-sp is the value set in EIS Service provider setup
@@ -167,9 +168,7 @@ grails.plugin.springsecurity.saml.metadata.sp.defaults = [
         requireArtifactResolveSigned: false,
         requireLogoutRequestSigned: false,
         requireLogoutResponseSigned: false
-]
-grails.plugin.springsecurity.saml.maxAuthenticationAge = 1800  //value in seconds
-*/
+]*/
 
 
 
